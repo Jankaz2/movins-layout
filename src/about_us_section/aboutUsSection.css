@@ -1,0 +1,22 @@
+.about-us-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("images/about_us_background.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 70vh;
+}
+
+
+.about-us-section-text {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    text-align: center;
+    padding: 60px 0;
+    font-size: 110%;
+}
+
+.about-us-section-text h3 {
+    margin-bottom: 20px;
+}

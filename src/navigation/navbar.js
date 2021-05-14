@@ -38,13 +38,12 @@ class Navbar extends Component {
                             <li className="navbarItem font-link"><a href="">Find cinema</a></li>
                         </ul>
                         <ul className="navbar-info">
-                            <li className="navbarItem font-link"><a href="">Home</a></li>
                             <li className="navbarItem font-link"><a href="">Contact</a></li>
                             <li className="navbarItem font-link"><a href="">About us</a></li>
                             <li className="navbarItem font-link"><a href="">Log in</a></li>
                             <li className="navbarItem font-link"><a href="">Sign up</a></li>
                         </ul>
-                        <span><div className="logo"><a href="">cinema</a></div></span>
+                        <span><div className="logo"><a href="#">cinema</a></div></span>
                     </ul>
                 </nav>
                 <div className="webstart-page">
