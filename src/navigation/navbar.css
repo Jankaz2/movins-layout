@@ -47,6 +47,14 @@ h2 {
     height: 60px;
     position: fixed;
     z-index: 100;
+    transition: width, margin .3s;
+}
+
+.sticky {
+    width: 100%;
+    margin: 0 !important;
+    border-bottom: 1px solid #000;
+    transition: width, margin .3s;
 }
 
 .navbarItem {
