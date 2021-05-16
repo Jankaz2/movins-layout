@@ -1,0 +1,41 @@
+.reviews-section {
+    padding: 40px 30px 80px 30px;
+    color: #000;
+}
+
+.reviews-section h2 {
+    text-align: center;
+    text-transform: uppercase;
+    padding: 40px 0;
+    border-bottom: 1px solid #9b0000;
+}
+
+blockquote {
+    padding: 2%;
+    font-style: italic;
+    line-height: 130%;
+    position: relative;
+    margin-top: 40px;
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 400%;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+}
+
+cite {
+    display: block;
+    margin-top: 20px;
+    float: right;
+}
+
+cite img {
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
