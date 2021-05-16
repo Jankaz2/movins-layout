@@ -1,0 +1,56 @@
+.contact-us-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("images/contact_us_background.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+    text-align: center;
+    padding: 40px 0 50px 0 ;
+    font-weight: 400;
+}
+
+.contact-us-section input {
+    margin: auto;
+    width: 70%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #9b0000;
+    padding: 10px 15px 5px 15px;
+    display: block;
+    background-color: #fffafa;
+}
+
+.contact-us-section textarea {
+    width: 60%;
+    padding: 10px 15px;
+    display: block;
+    margin: 20px auto auto;
+}
+
+.send-message-btn {
+    background-color: #9b0000;
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 10px;
+    margin: 20px auto 0 auto;
+    padding: 10px 10px;
+    border: none;
+    width: 30%;
+    text-align: center;
+}
+
+.contact-form {
+    background-color: #fffafa;
+    width: 45%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 0 50px 0;
+    border-radius: 10px;
+}
+
+.contact-form h3{
+    color: #000;
+}
+
