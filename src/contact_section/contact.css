@@ -54,3 +54,6 @@
     color: #000;
 }
 
+.no-outline:focus {
+    outline: none;
+}
