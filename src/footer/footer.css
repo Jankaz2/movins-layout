@@ -1,0 +1,88 @@
+footer {
+    text-align: center;
+    padding-top: 50px;
+    margin: auto;
+}
+
+footer .row h2 {
+    color: #000;
+    text-transform: uppercase;
+    border-bottom: 1px solid #9b0000;
+    margin-bottom: 10px;
+}
+
+.icon {
+    display: inline-block;
+    padding: 20px;
+    font-size: 50px;
+}
+
+.twitter-icon {
+    color: #1da1f2;
+}
+
+.twitter-icon:hover {
+    color: #0ca1e0;
+    cursor: pointer;
+}
+
+.facebook-icon {
+    color: #3b5998;
+}
+
+.facebook-icon:hover {
+    color: #2a4887;
+    cursor: pointer;
+}
+
+.instagram-icon {
+    color: #c13584;
+}
+
+.instagram-icon:hover {
+    color: #b02473;
+    cursor: pointer;
+}
+
+.google-icon {
+    color: #db4a39;
+}
+
+.google-icon:hover {
+    color: #ca3a28;
+    cursor: pointer;
+}
+
+.footer-info {
+    background-color: rgba(41, 41, 41, 255);
+    padding: 40px 30px;
+    color: #fff;
+    width: 100%;
+}
+
+.footer-info ul {
+    list-style-type: none;
+}
+
+.footer-info ul li h4 {
+    margin-bottom: 15px;
+}
+
+.footer-info ul li:hover {
+    color: #e74c3c;
+    cursor: pointer;
+}
+
+.footer-info ul li h4:hover, .footer-contacts li:hover {
+    cursor: auto !important;
+    color: #fff !important;
+}
+
+.footer-number, .footer-email {
+    color: #9b5555;
+}
+
+.copyright-info {
+    float: left;
+    font-size: 85%;
+}
