@@ -28,7 +28,7 @@
     margin: 20px auto auto;
 }
 
-.send-message-btn {
+input[type='submit'] {
     background-color: #9b0000;
     color: #fff;
     text-transform: uppercase;
@@ -38,6 +38,12 @@
     border: none;
     width: 30%;
     text-align: center;
+    transition: background-color .2s;
+}
+
+input[type='submit']:hover {
+    cursor: pointer;
+    background-color: #e74c3c;
 }
 
 .contact-form {
@@ -52,6 +58,7 @@
 
 .contact-form h3{
     color: #000;
+    text-transform: uppercase;
 }
 
 .no-outline:focus {

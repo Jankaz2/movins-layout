@@ -13,11 +13,13 @@ class Contact extends Component {
                     <label htmlFor="name">Surname</label>
                     <input type="text" className='no-outline' id='surname' name='lastname' placeholder='Surname'/>
                     <label htmlFor="name">Email</label>
-                    <input type="email" className='no-outline' id='name' name='userEmail' placeholder='e-mail'/>
+                    <input type="email" className='no-outline' id='name' name='userEmail' placeholder='e-mail' required={true}/>
+                    <label htmlFor="name">Subject</label>
+                    <input type="email" className='no-outline' id='subject' name='subject' placeholder='Subject' required={true}/>
                     <label htmlFor="textarea">Message</label>
                     <textarea name="textarea" id="textarea" cols="30" rows="10"
                               placeholder='Leave us message'></textarea>
-                    <button className='send-message-btn'>Send message</button>
+                    <input type="submit" className='send-message-btn' value="Send message"/>
                 </div>
             </section>
         );

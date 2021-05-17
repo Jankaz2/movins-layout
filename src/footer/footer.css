@@ -54,7 +54,7 @@ footer .row h2 {
 }
 
 .footer-info {
-    background-color: rgba(41, 41, 41, 255);
+    background-color:  #292929;
     padding: 40px 30px;
     color: #fff;
     width: 100%;
@@ -62,6 +62,10 @@ footer .row h2 {
 
 .footer-info ul {
     list-style-type: none;
+}
+
+.footer-info ul li {
+    transition: color .1s;
 }
 
 .footer-info ul li h4 {
