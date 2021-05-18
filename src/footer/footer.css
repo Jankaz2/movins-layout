@@ -2,10 +2,11 @@ footer {
     text-align: center;
     padding-top: 50px;
     margin: auto;
+    background-color: #292929;
 }
 
 footer .row h2 {
-    color: #000;
+    color: #fff;
     text-transform: uppercase;
     border-bottom: 1px solid #9b0000;
     margin-bottom: 10px;
@@ -14,7 +15,7 @@ footer .row h2 {
 .icon {
     display: inline-block;
     padding: 20px;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .twitter-icon {
@@ -89,4 +90,9 @@ footer .row h2 {
 .copyright-info {
     float: left;
     font-size: 85%;
+}
+
+.socials {
+    background-color: #292929;
+    color: #fff;
 }
