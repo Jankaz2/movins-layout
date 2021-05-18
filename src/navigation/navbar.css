@@ -23,7 +23,7 @@ header {
 
 a {
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
 h2 {
@@ -40,21 +40,26 @@ h2 {
 }
 
 .navbar {
-    background-color: #fff;
-    width: 82%;
-    margin: 3% 9% 0 9%;
-    padding: 0 2% 0 2%;
-    height: 60px;
+    width: 100%;
+    padding: 1% 5%;
+    height: 70px;
     position: fixed;
     z-index: 100;
     transition: width, margin .3s;
+    color: #fff;
 }
 
 .sticky {
+    background-color: #fff;
+    color: #000 !important;
     width: 100%;
     margin: 0 !important;
     border-bottom: 1px solid #000;
     transition: width, margin .3s;
+}
+
+.sticky a {
+    color: #000;
 }
 
 .navbarItem {
@@ -62,7 +67,7 @@ h2 {
     padding: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 63%;
+    font-size: 70%;
     margin: 10px 5px 0 0;
     border-bottom: 2px solid transparent;
     align-items: center;
@@ -114,7 +119,6 @@ h2 {
     width: 250px;
     font-weight: bold;
     background: #9b0000;
-    color: #fff;
     text-transform: uppercase;
     padding: 10px 15px;
     border-radius: 10px;
@@ -126,4 +130,58 @@ h2 {
 .show-more:active {
     background-color: #e74c3c;
     cursor: pointer;
+}
+
+.signup-box,
+.login-box {
+    position: fixed;
+    left: 80%;
+    top: 10%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #555;
+    -webkit-box-shadow: inset 5px 3px 9px 4px #FFFFFF;
+    box-shadow: inset 5px 3px 9px 4px #FFFFFF;
+}
+
+.signup-box input,
+.login-box input{
+    display: block;
+    padding: 10px;
+    text-align: center;
+}
+
+.signup-box input[type=password],
+.signup-box input[type=name],
+.signup-box input[type=text],
+.signup-box input[type=number],
+.signup-box input[type=email],
+.login-box input[type=password],
+.login-box input[type=text] {
+    margin-bottom: 5px;
+    border: none;
+    background-color: #f6f6f6;
+    border-radius: 3px;
+}
+
+.signup-box input[type=password]:focus,
+.signup-box input[type=name]:focus,
+.signup-box input[type=text]:focus,
+.signup-box input[type=number]:focus,
+.signup-box input[type=email]:focus,
+.login-box input[type=password]:focus,
+.login-box input[type=text]:focus {
+    outline: none;
+}
+
+.signup-box input[type=submit],
+.login-box input[type=submit]{
+    text-transform: uppercase;
+    background-color: #9b0000;
+    text-align: center;
+    width: 150px;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 60%;
 }
