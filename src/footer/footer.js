@@ -41,7 +41,7 @@ class Footer extends Component {
                                 <li>225 View Street</li>
                                 <li>San Diego, USA</li>
                                 <li>Tel: <span className="footer-number">+99 111 222 333</span></li>
-                                <li>E-mail: <span className="footer-email">cinema@cinema.com</span></li>
+                                <li>E-mail: <span className="footer-email">appcinema2021@gmail.com</span></li>
                             </ul>
                         </div>
                     </div>

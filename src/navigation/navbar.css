@@ -14,7 +14,7 @@ html {
 }
 
 header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("images/cinema-background.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("images/background.png");
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -104,32 +104,11 @@ h2 {
     position: absolute;
     left: 50%;
     top: 45%;
-    transform: translate(-50%, -50%);
+    transform: translate(-70%, -40%);
 }
 
 .webstart-page h2 {
     font-style: italic;
-}
-
-.show-more {
-    position: absolute;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    font-weight: bold;
-    background: #9b0000;
-    text-transform: uppercase;
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 2px solid #9b0000;
-    transition: background-color .2s;
-}
-
-.show-more:hover,
-.show-more:active {
-    background-color: #e74c3c;
-    cursor: pointer;
 }
 
 .signup-box,
@@ -146,7 +125,7 @@ h2 {
 }
 
 .signup-box input,
-.login-box input{
+.login-box input {
     display: block;
     padding: 10px;
     text-align: center;
@@ -176,7 +155,7 @@ h2 {
 }
 
 .signup-box input[type=submit],
-.login-box input[type=submit]{
+.login-box input[type=submit] {
     text-transform: uppercase;
     background-color: #9b0000;
     text-align: center;
@@ -184,4 +163,94 @@ h2 {
     font-weight: bold;
     padding: 10px;
     font-size: 60%;
+}
+
+.webstart-page h3 {
+    font-weight: lighter;
+    margin-bottom: 20px;
+}
+
+.search-cinema-city ul li,
+.search-cinema-name ul li,
+.find-cinema input {
+    display: inline-block;
+    width: 300px;
+    background-color: #f6f6f6;
+    border: none;
+    padding: 15px;
+    margin-right: 10px;
+    color: #000;
+    font-size: 15px;
+}
+
+.find-cinema input {
+    margin-bottom: 5px;
+}
+
+.search-boxes {
+    width: 620px;
+    position: fixed;
+}
+
+.search-cinema-city,
+.search-cinema-name {
+    display: block;
+}
+
+.search-cinema-name {
+    float: left;
+}
+
+.search-cinema-city {
+    float: right;
+}
+
+.search-cinema-city ul,
+.search-cinema-name ul,
+.find-cinema input {
+    border-radius: 3px;
+}
+
+.find-cinema input:focus {
+    outline: none;
+}
+
+.find-cinema input[type=submit] {
+    width: 120px;
+    padding: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #9b0000;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.find-cinema input[type=submit]:hover {
+    background-color: #e74c3c;
+}
+
+.disappear {
+    display: none;
+}
+
+.search-cinema-city ul,
+.search-cinema-name ul {
+    list-style: none;
+}
+
+.search-cinema-city ul li,
+.search-cinema-name ul li {
+    display: block;
+}
+
+.search-cinema-city ul li:hover,
+.search-cinema-name ul li:hover {
+    background-color: #555555;
+    color: #fff;
+    cursor: pointer;
+}
+
+.icon-small {
+    font-size: 12px;
+    padding-right: 10px;
 }
