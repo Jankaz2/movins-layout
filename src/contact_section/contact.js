@@ -45,7 +45,7 @@ export default function Contact() {
                               placeholder='Leave us message'
                               {...register("content", { required: true })}
                     />
-                    <input type="submit" className='send-message-btn'/>
+                    <input type="submit" className='send-message-btn' value="SEND"/>
                 </form>
             </div>
         </section>

@@ -1,3 +1,5 @@
+/*--- BASIC SETTINGS ---*/
+
 * {
     padding: 0;
     margin: 0;
@@ -39,27 +41,22 @@ h2 {
     margin: 0 auto;
 }
 
+/*--- NAVIGATION ---*/
 .navbar {
     width: 100%;
     padding: 1% 5%;
     height: 70px;
     position: fixed;
     z-index: 100;
-    transition: width, margin .3s;
     color: #fff;
 }
 
-.sticky {
-    background-color: #fff;
-    color: #000 !important;
-    width: 100%;
-    margin: 0 !important;
-    border-bottom: 1px solid #000;
-    transition: width, margin .3s;
+.navbar-info {
+    float: right;
 }
 
-.sticky a {
-    color: #000;
+.navbar-options {
+    float: left;
 }
 
 .navbarItem {
@@ -76,30 +73,35 @@ h2 {
 
 .navbarItem:hover,
 .navbarItem:active {
-    border-bottom: 2px solid #9b0000;
-}
-
-.navbar-info {
-    float: right;
-}
-
-.navbar-options {
-    float: left;
+    border-bottom: 2px solid #0288D1;
 }
 
 .logo {
-    text-transform: uppercase;
     color: #000000;
     font-weight: bold;
     margin-top: 12px;
     margin-left: auto;
     margin-right: auto;
-    width: 120px;
     font-size: 130%;
     text-align: center;
-    border-bottom: 2px solid #9b0000;
+    border-bottom: none !important;
 }
 
+/*--- STICKY NAVBAR ---*/
+.sticky {
+    background-color: #fff;
+    color: #000 !important;
+    width: 100%;
+    margin: 0 !important;
+    border-bottom: 1px solid #000;
+    transition: width, margin .3s;
+}
+
+.sticky a {
+    color: #000;
+}
+
+/*--- WEBSTART PAGE ---*/
 .webstart-page {
     position: absolute;
     left: 50%;
@@ -110,6 +112,40 @@ h2 {
 .webstart-page h2 {
     font-style: italic;
 }
+
+.webstart-page h3 {
+    font-weight: lighter;
+    margin-bottom: 20px;
+}
+
+.webstart-page .find-cinema input {
+    margin-bottom: 5px;
+}
+
+.webstart-page .find-cinema input::placeholder {
+    color: #000;
+}
+
+.webstart-page .find-cinema input:focus {
+    outline: none;
+}
+
+.webstart-page .find-cinema input[type=submit] {
+    width: 120px !important;
+    padding: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #0288D1 !important;
+    font-weight: bold;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.webstart-page .find-cinema input[type=submit]:hover {
+    background-color: #448AFF;
+}
+
+/*--- LOGIN BOXES ---*/
 
 .signup-box,
 .login-box {
@@ -122,6 +158,7 @@ h2 {
     border: 1px solid #555;
     -webkit-box-shadow: inset 5px 3px 9px 4px #FFFFFF;
     box-shadow: inset 5px 3px 9px 4px #FFFFFF;
+    z-index: 1;
 }
 
 .signup-box input,
@@ -157,7 +194,7 @@ h2 {
 .signup-box input[type=submit],
 .login-box input[type=submit] {
     text-transform: uppercase;
-    background-color: #9b0000;
+    background-color: #0288D1;
     text-align: center;
     width: 150px;
     font-weight: bold;
@@ -165,27 +202,20 @@ h2 {
     font-size: 60%;
 }
 
-.webstart-page h3 {
-    font-weight: lighter;
-    margin-bottom: 20px;
-}
-
 .search-cinema-city ul li,
 .search-cinema-name ul li,
-.find-cinema input {
+.webstart-page .find-cinema input {
     display: inline-block;
-    width: 300px;
-    background-color: #f6f6f6;
+    width: 300px !important;
+    background-color: #f6f6f6 !important;
     border: none;
-    padding: 15px;
-    margin-right: 10px;
+    padding: 15px !important;
+    margin-right: 10px !important;
     color: #000;
     font-size: 15px;
 }
 
-.find-cinema input {
-    margin-bottom: 5px;
-}
+/*--- SEARCH BOXES ---*/
 
 .search-boxes {
     width: 620px;
@@ -207,35 +237,23 @@ h2 {
 
 .search-cinema-city ul,
 .search-cinema-name ul,
-.find-cinema input {
+.webstart-page .find-cinema input {
     border-radius: 3px;
-}
-
-.find-cinema input:focus {
-    outline: none;
-}
-
-.find-cinema input[type=submit] {
-    width: 120px;
-    padding: 15px;
-    text-transform: uppercase;
-    text-align: center;
-    background-color: #9b0000;
-    font-weight: bold;
-    border-radius: 3px;
-}
-
-.find-cinema input[type=submit]:hover {
-    background-color: #e74c3c;
-}
-
-.disappear {
-    display: none;
 }
 
 .search-cinema-city ul,
 .search-cinema-name ul {
     list-style: none;
+    height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.search-cinema-city ul::-webkit-scrollbar,
+.search-cinema-name ul::-webkit-scrollbar {
+    display: none;
 }
 
 .search-cinema-city ul li,
@@ -245,12 +263,26 @@ h2 {
 
 .search-cinema-city ul li:hover,
 .search-cinema-name ul li:hover {
-    background-color: #555555;
-    color: #fff;
+    background-color: #555555 !important;
+    color: #fff !important;
     cursor: pointer;
 }
+
+/*--- ICONS ---*/
 
 .icon-small {
     font-size: 12px;
     padding-right: 10px;
+}
+
+.icon-big {
+    position: absolute;
+    left: 50%;
+    top: 95%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+}
+
+.disappear {
+    display: none;
 }

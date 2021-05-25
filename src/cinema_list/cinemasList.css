@@ -1,0 +1,83 @@
+.cinemas-list-section {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    background-color: #edeff2;
+    min-height: 100vh;
+}
+
+.cinemas-list-section-logo{
+    float: left;
+    text-transform: uppercase;
+    padding-top: 6px;
+}
+
+.cinemas-list-section-nav {
+    background-color: #0f6bb1 !important;
+    width: 100%;
+    padding: 2% 5% 2% 0;
+    height: 70px;
+    position: fixed;
+    z-index: 1;
+}
+
+.cinema-list-section-form {
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #0f6bb1;
+}
+
+nav input {
+    position: relative;
+}
+
+nav input[type="search"] {
+    display: inline-block;
+    width: 250px;
+    padding: 10px;
+    background-color:#0c5993;
+    color: #fff;
+    border: none;
+    margin-right: 6px;
+    border-radius: 2px;
+    font-size: 14px;
+    transition: background-color .2s;
+}
+
+nav input[type="search"]:focus,
+nav input[type="search"]:focus::placeholder{
+    outline: none;
+    background-color: #fff;
+    color: #000;
+}
+
+nav input[type="submit"] {
+    display: inline-block;
+    width: 120px;
+    padding: 10px;
+    border-radius: 2px !important;
+    color: #fff;
+}
+
+.cinemas-list-section-logo {
+    text-transform: none !important;
+    display: block;
+    font-weight: bold;
+    margin-top: 12px;
+    padding-left: 40px;
+    width: 120px;
+    font-size: 130%;
+}
+
+.cinemas-list-section ul li {
+    display: block;
+    background-color: #fff;
+    width: 80%;
+    padding: 10px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+::placeholder {
+    color: #6b95b5;
+}
