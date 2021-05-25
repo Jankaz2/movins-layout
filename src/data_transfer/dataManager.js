@@ -1,16 +1,16 @@
 import React, {useState, createContext} from "react";
 
-export const DataContext = createContext([{}])
+export const DataContext = createContext([])
 
 export const DataManager = ({children}) => {
     const [state, setState] = useState({
         cinemas: [
-            {name: "Cinema Under The Stars", city: "Poznan"},
-            {name: "Cinema Under The Stars", city: "Warsaw"},
-            {name: "Mind", city: "Warsaw"},
-            {name: "CinemaStreet", city: "Cracov"},
-            {name: "Heaven", city: "Poznan"},
-            {name: "Dream", city: "Gdansk"},
+            {id: 1, name: "Cinema Under The Stars", city: "Poznan"},
+            {id: 2, name: "Cinema Under The Stars", city: "Warsaw"},
+            {id: 3, name: "Mind", city: "Warsaw"},
+            {id: 4, name: "CinemaStreet", city: "Cracov"},
+            {id: 5, name: "Heaven", city: "Poznan"},
+            {id: 6, name: "Dream", city: "Gdansk"},
         ]
     })
 

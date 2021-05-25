@@ -4,6 +4,7 @@
     padding: 20px;
     background-color: #edeff2;
     min-height: 100vh;
+    text-align: center;
 }
 
 .cinemas-list-section-logo{
@@ -25,6 +26,15 @@
     text-align: center;
     padding-bottom: 10px;
     background-color: #0f6bb1;
+}
+
+.cinemas-list-section h4 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.cinemas-list-section h5 {
+    font-weight: 400;
 }
 
 nav input {
@@ -76,6 +86,7 @@ nav input[type="submit"] {
     padding: 10px;
     color: #000;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 ::placeholder {
