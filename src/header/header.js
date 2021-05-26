@@ -61,20 +61,28 @@ const Navigation = () => {
                             </Link></li>
                     </ul>
                     <ul className="navbar-info">
-                        <li className="navbarItem font-link log-in-link"><a href="" onClick={(event) => {
-                            setShowLogin(!showLogin)
-                            if (showRegistry) {
-                                setShowRegistry(!showRegistry)
-                            }
-                            event.preventDefault()
-                        }}>Log in</a></li>
-                        <li className="navbarItem font-link sign-up-link"><a href="" onClick={(event) => {
-                            setShowRegistry(!showRegistry)
-                            if (showLogin) {
-                                setShowLogin(!showLogin)
-                            }
-                            event.preventDefault()
-                        }}>Sign up</a></li>
+                        <li className="navbarItem font-link log-in-link">
+                            <a href=""
+                               onClick={(event) => {
+                                   setShowLogin(!showLogin)
+                                   if (showRegistry) {
+                                       setShowRegistry(!showRegistry)
+                                   }
+                                   event.preventDefault()
+                               }}>Log in
+                            </a>
+                        </li>
+                        <li className="navbarItem font-link sign-up-link">
+                            <a href=""
+                               onClick={(event) => {
+                                   setShowRegistry(!showRegistry)
+                                   if (showLogin) {
+                                       setShowLogin(!showLogin)
+                                   }
+                                   event.preventDefault()
+                               }}>Sign up
+                            </a>
+                        </li>
                     </ul>
                     <span><div className="logo"><a href="#">CinemaFactory</a></div></span>
                 </ul>
@@ -118,12 +126,12 @@ const WebStart = () => {
 
 
     let cinemas = [
-        {name: "Cinema Under The Stars", city: "Poznan"},
-        {name: "Cinema Under The Stars", city: "Warsaw"},
-        {name: "Mind", city: "Warsaw"},
-        {name: "CinemaStreet", city: "Cracov"},
-        {name: "Heaven", city: "Poznan"},
-        {name: "Dream", city: "Gdansk"},
+        {id: 1, name: "Cinema Under The Stars", city: "Poznan"},
+        {id: 2, name: "Cinema Under The Stars", city: "Warsaw"},
+        {id: 3, name: "Mind", city: "Warsaw"},
+        {id: 4, name: "CinemaStreet", city: "Cracov"},
+        {id: 5, name: "Heaven", city: "Poznan"},
+        {id: 6, name: "Dream", city: "Gdansk"},
     ]
 
     const handleChange = e => {
@@ -194,7 +202,7 @@ const WebStart = () => {
                                 cinemas.map((cinema, index) => {
                                     return (
                                         <li className={'font-link'}
-                                            key={index}
+                                            key={cinema.id}
                                             onClick={() => {
                                                 setName(cinema.name)
                                             }}
@@ -214,7 +222,7 @@ const WebStart = () => {
                                 cinemas.map((cinema, index) => {
                                     return (
                                         <li className={'font-link'}
-                                            key={index}
+                                            key={cinema.id}
                                             onClick={() => setCity(cinema.city)}
                                         >
                                             <span className={'icon-small'}><FaGlobe/></span>
