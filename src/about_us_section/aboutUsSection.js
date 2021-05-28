@@ -22,6 +22,13 @@ class AboutUsSection extends Component {
                         quibusdam ratione sed veniam, voluptas. Cum eaque eos esse harum
                         in, inventore ipsa minima
                         nemo neque numquam omnis, saepe sapiente similique totam ut!
+                        <br/><br/><br/><br/>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Ad adipisci aspernatur commodi consectetur cumque dignissimos
+                        dolores eaque eius eligendi est eum exercitationem facilis laborum
+                        laudantium libero magni minus nesciunt nostrum odit optio quae ratione,
+                        recusandae sequi soluta unde veniam voluptates.
+                        Alias at eveniet id iusto maiores quis reiciendis voluptatibus voluptatum!
                     </p>
                 </div>
             </section>

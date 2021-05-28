@@ -16,11 +16,10 @@ html {
 }
 
 header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("images/background.png");
     background-size: cover;
-    background-position: center;
     height: 100vh;
-    background-attachment: fixed;
+    background: linear-gradient(130deg, #0652DD 60%, #74b9ff 60%) fixed center;
+    font-family: 'BioRhyme', serif;
 }
 
 a {
@@ -30,10 +29,6 @@ a {
 
 h2 {
     font-weight: 400;
-}
-
-.font-link {
-    font-family: 'Lato', 'Arial', sans-serif;
 }
 
 .row {

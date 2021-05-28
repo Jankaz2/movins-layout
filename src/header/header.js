@@ -124,7 +124,6 @@ const WebStart = () => {
     const [city, setCity] = useState("");
     const [hasFocus, setFocus] = useState({name: false, city: false})
 
-
     let cinemas = [
         {id: 1, name: "Cinema Under The Stars", city: "Poznan"},
         {id: 2, name: "Cinema Under The Stars", city: "Warsaw"},

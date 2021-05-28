@@ -3,7 +3,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    height: 70vh;
+    height: 100vh;
 }
 
 
@@ -13,7 +13,7 @@
     margin-right: auto;
     color: white;
     text-align: center;
-    padding: 60px 0;
+    padding: 100px 0 0 0;
     font-size: 110%;
 }
 

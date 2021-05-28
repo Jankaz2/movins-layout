@@ -1,6 +1,7 @@
 .reviews-section {
-    padding: 40px 30px 80px 30px;
+    padding: 80px 30px 20px 30px;
     color: #000;
+    height: 100vh;
 }
 
 .reviews-section h2 {
