@@ -1,4 +1,5 @@
 import React, {useContext, useState} from "react"
+import {FaShoppingBasket, FaVideo} from "react-icons/fa"
 import CinemaCss from "./cinema.css"
 import {DataContext} from "../data_transfer/dataManager";
 
@@ -175,7 +176,8 @@ const BuyTicketSection = (props) => {
                                                     place < 10 ?
                                                         parseInt(place / 10) + 1 :
                                                         parseInt(place / 10) :
-                                                    parseInt(place / 10)
+                                                    place % 10 === 0 ? parseInt((place - 1) / 10) :
+                                                        parseInt(place / 10)
                                                 }
                                             </div>
                                         )
@@ -197,6 +199,7 @@ const BuyTicketSection = (props) => {
                             className={'buy-ticket-btn-buying-section'}
                         >
                             buy
+                            <span className={'icon-small-shopping'}><FaShoppingBasket/></span>
                         </button>
                     </div>
                     {

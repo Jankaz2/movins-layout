@@ -4,6 +4,8 @@
     background-color: #edeff2;
     min-height: 100vh;
     text-align: center;
+    font-family: 'BioRhyme', serif;
+    font-size: 17px;
 }
 
 .cinema-page nav {
@@ -216,4 +218,10 @@ td:hover {
     outline: none;
     background-color: #c0392b;
     cursor: pointer;
+}
+
+.icon-small-shopping {
+    font-size: 17px;
+    padding-left: 10px;
+    margin-top: 2px;
 }
