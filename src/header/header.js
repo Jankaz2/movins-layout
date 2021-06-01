@@ -120,8 +120,8 @@ const Navigation = () => {
 const WebStart = () => {
     const {updateState} = useContext(DataContext);
     const history = useHistory();
-    const [name, setName] = useState("");
-    const [city, setCity] = useState("");
+    const [name, setName] = useState({name: "", clicked: false});
+    const [city, setCity] = useState({city: "", clicked: false});
     const [hasFocus, setFocus] = useState({name: false, city: false})
 
     let cinemas = [
@@ -136,30 +136,30 @@ const WebStart = () => {
     const handleChange = e => {
         e.preventDefault()
         if (e.target.className === 'cinema-name-input') {
-            setName(e.target.value)
+            setName({name: e.target.value, clicked: false})
         }
         if (e.target.className === 'cinema-city-input') {
-            setCity(e.target.value)
+            setCity({city: e.target.value, clicked: false})
         }
     }
 
-    if (name.length > 0) {
+    if (name.name.length > 0) {
         cinemas = cinemas.filter((i) => {
-            return i.name.toLowerCase().match(name.toLowerCase());
+            return i.name.toLowerCase().match(name.name.toLowerCase());
         })
     }
 
-    if (city.length > 0) {
+    if (city.city.length > 0) {
         cinemas = cinemas.filter((i) => {
-            return i.city.toLowerCase().match(city.toLowerCase());
+            return i.city.toLowerCase().match(city.city.toLowerCase());
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         updateState({
-            name: name,
-            city: city
+            name: name.name,
+            city: city.city
         });
         history.push("/cinema-list");
     };
@@ -178,7 +178,7 @@ const WebStart = () => {
                                setFocus({name: true})
                            }}
                            onBlur={() => setFocus({name: false})}
-                           value={name}
+                           value={name.name}
                     />
                     <input className={'cinema-city-input'}
                            type="search"
@@ -188,14 +188,19 @@ const WebStart = () => {
                                setFocus({city: true})
                            }}
                            onBlur={() => setFocus({city: false})}
-                           value={city}
+                           value={city.city}
                     />
                     <input type="submit"
                            value="search"/>
                 </form>
                 <div className='search-boxes'>
                     <div
-                        className={`search-cinema-name ${name.length === 0 && !hasFocus.name ? 'disappear' : ''}`}>
+                        className={
+                            `search-cinema-name ${(name.name.length === 0 && !hasFocus.name && !name.clicked)
+                            || name.clicked
+                                ? 'disappear'
+                                : ''}
+                            `}>
                         <ul>
                             {
                                 cinemas.map((cinema, index) => {
@@ -203,7 +208,8 @@ const WebStart = () => {
                                         <li className={'font-link'}
                                             key={cinema.id}
                                             onClick={() => {
-                                                setName(cinema.name)
+                                                setName({name: cinema.name, clicked: true})
+                                                console.log('clicked')
                                             }}
                                         >
                                             <span className={'icon-small'}><FaVideo/></span>
@@ -215,14 +221,19 @@ const WebStart = () => {
                         </ul>
                     </div>
                     <div
-                        className={`search-cinema-city ${city.length === 0 && !hasFocus.city ? 'disappear' : ''}`}>
+                        className={`search-cinema-city ${(city.city.length === 0 && !hasFocus.city && !city.clicked) 
+                        || city.clicked
+                            ? 'disappear'
+                            : ''}`}>
                         <ul>
                             {
                                 cinemas.map((cinema, index) => {
                                     return (
                                         <li className={'font-link'}
                                             key={cinema.id}
-                                            onClick={() => setCity(cinema.city)}
+                                            onClick={() => {
+                                                setCity({city: cinema.city, clicked: true})
+                                            }}
                                         >
                                             <span className={'icon-small'}><FaGlobe/></span>
                                             {cinema.city}
@@ -230,17 +241,17 @@ const WebStart = () => {
                                     )
                                 })
                             }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <Link to="steps-section" spy={true} smooth={true}
-                  offset={-60} duration={500}>
-                <span className={'show-more-link'}>Show more</span>
-                <span className={'caret-down'}><FaCaretDown/></span>
-            </Link>
-        </div>
-    )
-}
+                                </ul>
+                                </div>
+                                </div>
+                                </div>
+                                <Link to="steps-section" spy={true} smooth={true}
+                                offset={-60} duration={500}>
+                                <span className={'show-more-link'}>Show more</span>
+                                <span className={'caret-down'}><FaCaretDown/></span>
+                                </Link>
+                                </div>
+                                )
+                                }
 
-export default Header
+                                export default Header
