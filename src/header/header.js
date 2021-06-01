@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form"
 import HeaderCss from './header.css'
 import {Link} from "react-scroll"
 import {Link as LinkRouter, Route, useHistory} from "react-router-dom"
-import {FaVideo, FaGlobe} from "react-icons/fa"
+import {FaVideo, FaGlobe, FaCaretDown} from "react-icons/fa"
 import CinemasList from "../cinema_list/cinemaList";
 import {DataContext} from "../data_transfer/dataManager";
 import StepsSection from "../steps_section/stepsSection";
@@ -48,12 +48,12 @@ const Navigation = () => {
             <nav>
                 <ul className={`navbar ${scroll && 'sticky'}`}>
                     <ul className="navbar-options">
-                        <li className="navbarItem font-link">
+                        <li className="navbarItem about-us-link">
                             <Link to="about-us-section" spy={true} smooth={true}
                                   offset={-60} duration={500}>
                                 <a href="">About us</a>
                             </Link></li>
-                        <li className="navbarItem font-link">
+                        <li className="navbarItem contact-link">
                             <Link activeClass="active" to="contact-us-section"
                                   spy={true} smooth={true} offset={-60}
                                   duration={500}>
@@ -234,6 +234,11 @@ const WebStart = () => {
                     </div>
                 </div>
             </div>
+            <Link to="steps-section" spy={true} smooth={true}
+                  offset={-60} duration={500}>
+                <span className={'show-more-link'}>Show more</span>
+                <span className={'caret-down'}><FaCaretDown/></span>
+            </Link>
         </div>
     )
 }

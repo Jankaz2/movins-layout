@@ -71,6 +71,20 @@ h2 {
     border-bottom: 2px solid #0288D1;
 }
 
+.sign-up-link:hover,
+.sign-up-link:active,
+.log-in-link:active,
+.log-in-link:hover {
+    border-bottom: 2px solid #0652DD !important;
+}
+
+.contact-link:hover,
+.contact-link:active,
+.about-us-link:hover,
+.about-us-link:active {
+    border-bottom: 2px solid #74b9ff !important;
+}
+
 .logo {
     color: #000000;
     font-weight: bold;
@@ -138,6 +152,42 @@ h2 {
 
 .webstart-page .find-cinema input[type=submit]:hover {
     background-color: #448AFF;
+}
+
+.show-more-link,
+.caret-down {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 400;
+    transition: letter-spacing, color .2s;
+}
+
+.show-more-link {
+    bottom: 40px;
+    text-transform: uppercase;
+}
+
+.caret-down {
+    bottom: 0;
+    font-size: 40px;
+}
+
+.show-more-link:hover,
+.show-more-link:active,
+.caret-down:hover,
+.caret-down:active {
+    cursor: pointer;
+}
+
+.show-more-link:hover,
+.show-more-link:active {
+    letter-spacing: 1px;
+}
+
+.caret-down:hover,
+.caret-down:active {
+    color: #0652DD;
 }
 
 /*--- LOGIN BOXES ---*/

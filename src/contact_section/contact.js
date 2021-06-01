@@ -19,7 +19,10 @@ export default function Contact() {
         <section className='contact-us-section'>
             <div className="contact-form">
                 <h3 className="font-link">Contact us</h3>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form action={'mailto:appcinema2021@gmail.com'}
+                      method={'post'}
+                      encType={'text/plain'}
+                      onSubmit={handleSubmit(onSubmit)}>
                     <label htmlFor="name">First name</label>
                     <input type="text" className='no-outline' placeholder='First name'
                            name={"name"}
