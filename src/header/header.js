@@ -123,15 +123,21 @@ const WebStart = () => {
     const [name, setName] = useState({name: "", clicked: false});
     const [city, setCity] = useState({city: "", clicked: false});
     const [hasFocus, setFocus] = useState({name: false, city: false})
+    const [cinemas, setCinemas] = useState([])
+    const [filteredCinemas, setFilteredCinemas] = useState([])
 
-    let cinemas = [
-        {id: 1, name: "Cinema Under The Stars", city: "Poznan"},
-        {id: 2, name: "Cinema Under The Stars", city: "Warsaw"},
-        {id: 3, name: "Mind", city: "Warsaw"},
-        {id: 4, name: "CinemaStreet", city: "Cracov"},
-        {id: 5, name: "Heaven", city: "Poznan"},
-        {id: 6, name: "Dream", city: "Gdansk"},
-    ]
+    const loadData = async () => {
+        await fetch('http://localhost:4000/cinema')
+            .then(response => response.json())
+            .then(cinemas => {
+                setCinemas(cinemas.data)
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        loadData()
+    }, [])
 
     const handleChange = e => {
         e.preventDefault()
@@ -143,17 +149,17 @@ const WebStart = () => {
         }
     }
 
-    if (name.name.length > 0) {
-        cinemas = cinemas.filter((i) => {
-            return i.name.toLowerCase().match(name.name.toLowerCase());
-        })
-    }
+    useEffect(() => {
+        setFilteredCinemas(
+            cinemas.filter(cinema => cinema.name.toLowerCase().match(name.name.toLowerCase()))
+        )
+    }, [name.name, cinemas])
 
-    if (city.city.length > 0) {
-        cinemas = cinemas.filter((i) => {
-            return i.city.toLowerCase().match(city.city.toLowerCase());
-        })
-    }
+    useEffect(() => {
+        setFilteredCinemas(
+            cinemas.filter(cinema => cinema.address.city.toLowerCase().match(city.city.toLowerCase()))
+        )
+    }, [city.city, cinemas])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -203,13 +209,12 @@ const WebStart = () => {
                             `}>
                         <ul>
                             {
-                                cinemas.map((cinema, index) => {
+                                filteredCinemas.map((cinema, index) => {
                                     return (
                                         <li className={'font-link'}
                                             key={cinema.id}
                                             onClick={() => {
                                                 setName({name: cinema.name, clicked: true})
-                                                console.log('clicked')
                                             }}
                                         >
                                             <span className={'icon-small'}><FaVideo/></span>
@@ -221,37 +226,37 @@ const WebStart = () => {
                         </ul>
                     </div>
                     <div
-                        className={`search-cinema-city ${(city.city.length === 0 && !hasFocus.city && !city.clicked) 
+                        className={`search-cinema-city ${(city.city.length === 0 && !hasFocus.city && !city.clicked)
                         || city.clicked
                             ? 'disappear'
                             : ''}`}>
                         <ul>
                             {
-                                cinemas.map((cinema, index) => {
+                                filteredCinemas.map((cinema, index) => {
                                     return (
                                         <li className={'font-link'}
                                             key={cinema.id}
                                             onClick={() => {
-                                                setCity({city: cinema.city, clicked: true})
+                                                setCity({city: cinema.address.city, clicked: true})
                                             }}
                                         >
                                             <span className={'icon-small'}><FaGlobe/></span>
-                                            {cinema.city}
+                                            {cinema.address.city}
                                         </li>
                                     )
                                 })
                             }
-                                </ul>
-                                </div>
-                                </div>
-                                </div>
-                                <Link to="steps-section" spy={true} smooth={true}
-                                offset={-60} duration={500}>
-                                <span className={'show-more-link'}>Show more</span>
-                                <span className={'caret-down'}><FaCaretDown/></span>
-                                </Link>
-                                </div>
-                                )
-                                }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <Link to="steps-section" spy={true} smooth={true}
+                  offset={-60} duration={500}>
+                <span className={'show-more-link'}>Show more</span>
+                <span className={'caret-down'}><FaCaretDown/></span>
+            </Link>
+        </div>
+    )
+}
 
-                                export default Header
+export default Header
