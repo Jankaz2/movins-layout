@@ -1,20 +1,23 @@
 import React, {useState, useEffect, useContext} from "react";
 import {useForm} from "react-hook-form"
 import HeaderCss from './header.scss'
+import MainScss from '../scss/main.scss'
+import WebStartScss from './webstart.scss'
 import {Link} from "react-scroll"
-import {Link as LinkRouter, Route, useHistory} from "react-router-dom"
-import {FaVideo, FaGlobe, FaCaretDown} from "react-icons/fa"
+import {useHistory} from "react-router-dom"
+import {FaVideo, FaGlobe} from "react-icons/fa"
 import CinemasList from "../cinema_list/cinemaList";
 import {DataContext} from "../data_transfer/dataManager";
 import StepsSection from "../steps_section/stepsSection";
 import AboutUsSection from "../about_us_section/aboutUsSection";
 import Reviews from "../reviews_section/reviews";
 import Contact from "../contact_section/contact";
+import {FaSearch} from "react-icons/all";
 
 function Header() {
     return (
         <div>
-            <header>
+            <header className='header'>
                 <Navigation/>
                 <WebStart/>
             </header>
@@ -27,41 +30,30 @@ function Header() {
 }
 
 const Navigation = () => {
-    const [scroll, setScroll] = useState(false)
     const [showLogin, setShowLogin] = useState(false)
     const [showRegistry, setShowRegistry] = useState(false)
-
-    const handleScroll = () => {
-        if (window.pageYOffset > 90) {
-            setScroll(true)
-        } else {
-            setScroll(false)
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-    })
 
     return (
         <div>
             <nav>
-                <ul className={`navbar ${scroll && 'sticky'}`}>
-                    <ul className="navbar-options">
-                        <li className="navbarItem about-us-link">
+                <ul className={`header__navbar`}>
+
+                    <ul className="header__navbar--options">
+                        <li className="header__navbar--item about-us-link">
                             <Link to="about-us-section" spy={true} smooth={true}
                                   offset={-60} duration={500}>
                                 <a href="">About us</a>
                             </Link></li>
-                        <li className="navbarItem contact-link">
+                        <li className="header__navbar--item contact-link">
                             <Link activeClass="active" to="contact-us-section"
                                   spy={true} smooth={true} offset={-60}
                                   duration={500}>
                                 <a href="">Contact</a>
                             </Link></li>
                     </ul>
-                    <ul className="navbar-info">
-                        <li className="navbarItem font-link log-in-link">
+
+                    <ul className="header__navbar--info">
+                        <li className="header__navbar--item log-in-link">
                             <a href=""
                                onClick={(event) => {
                                    setShowLogin(!showLogin)
@@ -72,7 +64,7 @@ const Navigation = () => {
                                }}>Log in
                             </a>
                         </li>
-                        <li className="navbarItem font-link sign-up-link">
+                        <li className="header__navbar--item sign-up-link">
                             <a href=""
                                onClick={(event) => {
                                    setShowRegistry(!showRegistry)
@@ -84,31 +76,34 @@ const Navigation = () => {
                             </a>
                         </li>
                     </ul>
-                    <span><div className="logo"><a href="#">CinemaFactory</a></div></span>
+
+                    <span><div className="header__logo"><a href="#">CinemaFactory</a></div></span>
+
                 </ul>
             </nav>
-            <div>
+            <div className='header__registry'>
                 {
                     showLogin &&
-                    <div className="login-box">
-                        <form>
-                            <input type="text" placeholder="login"/>
-                            <input type="password" placeholder="password"/>
-                            <input type="submit" value="Log in"/>
+                    <div className="header__registry--login-box">
+                        <form className='header__registry--login-box--form'>
+                            <input className='login-form-input primary-input' type="text" placeholder="login"/>
+                            <input className='login-form-input primary-input' type="password" placeholder="password"/>
+                            <input className='login-form-input-submit primary-input' type="submit" value="Log in"/>
                         </form>
                     </div>
                 }
                 {
                     showRegistry &&
-                    <div className="signup-box">
-                        <form>
-                            <input type="name" placeholder="Name"/>
-                            <input type="text" placeholder="Surname"/>
-                            <input type="email" placeholder="e-mail"/>
-                            <input type="number" placeholder="phone number"/>
-                            <input type="password" placeholder="password"/>
-                            <input type="password" placeholder="repeat password"/>
-                            <input type="submit" value="Sign in"/>
+                    <div className="header__registry--signup-box">
+                        <form className='header__registry--login-box--form'>
+                            <input className='login-form-input primary-input' type="name" placeholder="Name"/>
+                            <input className='login-form-input primary-input' type="text" placeholder="Surname"/>
+                            <input className='login-form-input primary-input' type="email" placeholder="e-mail"/>
+                            <input className='login-form-input primary-input' type="number" placeholder="phone number"/>
+                            <input className='login-form-input primary-input' type="password" placeholder="password"/>
+                            <input className='login-form-input primary-input' type="password"
+                                   placeholder="repeat password"/>
+                            <input className='login-form-input-submit primary-input' type="submit" value="Sign in"/>
                         </form>
                     </div>
                 }
@@ -141,10 +136,10 @@ const WebStart = () => {
 
     const handleChange = e => {
         e.preventDefault()
-        if (e.target.className === 'cinema-name-input') {
+        if (e.target.className.match('cinema-name-input')) {
             setName({name: e.target.value, clicked: false})
         }
-        if (e.target.className === 'cinema-city-input') {
+        if (e.target.className.match('cinema-city-input')) {
             setCity({city: e.target.value, clicked: false})
         }
     }
@@ -172,48 +167,41 @@ const WebStart = () => {
 
     return (
         <div>
-            <div className="webstart-page">
-                <h1>Find cinema and book ticket.</h1>
-                <h3>Search among dozens of cinemas.</h3>
-                <form className="find-cinema" onSubmit={handleSubmit}>
-                    <input className={'cinema-name-input'}
+            <div className="webstart--page">
+                <h1 className='heading--primary'>
+                    <span className="heading--primary--main">Find cinema and book ticket</span>
+                    <span className="heading--primary--sub">Search among dozens of cinemas.</span>
+                </h1>
+                <form className="webstart--page__find-cinema" onSubmit={handleSubmit}>
+                    <input className={'cinema-name-input primary-input'}
                            type="search"
                            placeholder="cinema name"
                            onChange={handleChange}
-                           onFocus={() => {
-                               setFocus({name: true})
-                           }}
+                           onFocus={() => setFocus({name: true})}
                            onBlur={() => setFocus({name: false})}
                            value={name.name}
                     />
-                    <input className={'cinema-city-input'}
+                    <input className={'cinema-city-input primary-input'}
                            type="search"
                            placeholder="city"
                            onChange={handleChange}
-                           onFocus={() => {
-                               setFocus({city: true})
-                           }}
+                           onFocus={() => setFocus({city: true})}
                            onBlur={() => setFocus({city: false})}
                            value={city.city}
                     />
-                    <input type="submit"
-                           value="search"
-                           className="webstart-submit-cinemas"/>
+                    <input type="submit" value="search" className="submit-cinemas-inputs"/>
                 </form>
-                <div className='search-boxes'>
-                    <div
-                        className={
-                            `search-cinema-name ${(name.name.length === 0 && !hasFocus.name && !name.clicked)
-                            || name.clicked
-                                ? 'disappear'
-                                : ''}
-                            `}>
+                <div className='webstart--page__search-boxes'>
+                    <div className={
+                        `search-cinema-name 
+                            ${(name.name.length === 0 && !hasFocus.name && !name.clicked) || name.clicked
+                            ? 'disappear'
+                            : ''}`}>
                         <ul>
                             {
                                 filteredCinemas.map((cinema, index) => {
                                     return (
-                                        <li className={'font-link'}
-                                            key={cinema.id}
+                                        <li key={cinema.id}
                                             onClick={() => {
                                                 setName({name: cinema.name, clicked: true})
                                             }}
@@ -226,17 +214,16 @@ const WebStart = () => {
                             }
                         </ul>
                     </div>
-                    <div
-                        className={`search-cinema-city ${(city.city.length === 0 && !hasFocus.city && !city.clicked)
-                        || city.clicked
+                    <div className={
+                        `search-cinema-city 
+                        ${(city.city.length === 0 && !hasFocus.city && !city.clicked) || city.clicked
                             ? 'disappear'
                             : ''}`}>
                         <ul>
                             {
                                 filteredCinemas.map((cinema, index) => {
                                     return (
-                                        <li className={'font-link'}
-                                            key={cinema.id}
+                                        <li key={cinema.id}
                                             onClick={() => {
                                                 setCity({city: cinema.address.city, clicked: true})
                                             }}

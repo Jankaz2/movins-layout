@@ -1,0 +1,11 @@
+.primary-input {
+  margin-bottom: .5rem;
+
+  &::placeholder {
+    color: #000;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
