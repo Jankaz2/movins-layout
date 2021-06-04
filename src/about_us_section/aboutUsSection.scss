@@ -1,64 +1,48 @@
+@import "../scss/utils/variables";
+
 .about-us-section {
-    color: #000;
+    color: $color-grey-dark;
     margin-top: -18vh;
-    padding: 200px 0;
+    padding: 20rem 0;
     clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
-}
-
-.about-us-section-text {
-    text-align: center;
-}
-
-.about-us-section h2 {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 35px;
-    margin-bottom: 60px;
-    background-image: linear-gradient(
-            to right,
-            rgba(116, 185, 255, 0.8),
-            rgba(6, 82, 221, 0.8)
-    );
-    -webkit-background-clip: text;
-    color: transparent;
 }
 
 .composition {
     position: relative;
-}
 
-.photo {
-    width: 55%;
-    position: absolute;
-    z-index: 1;
-    border-radius: 2px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, .4);
-    outline-offset: 20px;
-    transition: all .2s;
-}
+    &__photo {
+        width: 55%;
+        position: absolute;
+        z-index: 1;
+        border-radius: 2px;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        outline-offset: 2rem;
+        transition: all .2s;
 
-.photo:hover {
-    transform: scaleY(1.05);
-    outline: 15px solid #0f6bb1;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, .5);
-    z-index: 11;
-}
+        &:hover {
+            transform: scaleY(1.05);
+            outline: 1.5rem solid $color-blue-dark;
+            box-shadow: 0 1.5rem 4rem rgba($color-black, .5);
+            z-index: 11;
+        }
 
-.composition:hover .photo:not(:hover) {
-    transform: scale(0.95);
-}
+        &-1 {
+            top: -2rem;
+            left: 1.5rem;
+        }
 
-.photo-1 {
-    top: -20px;
-    left: 15px;
-}
+        &-2 {
+            top: 1rem;
+            right: -1rem;
+        }
 
-.photo-2 {
-    top: 10px;
-    right: -10px;
-}
+        &-3 {
+            top: 15rem;
+            left: 5.5rem;
+        }
+    }
 
-.photo-3 {
-    top: 150px;
-    left: 55px;
+    &:hover .photo:not(:hover) {
+        transform: scale(0.95);
+    }
 }
