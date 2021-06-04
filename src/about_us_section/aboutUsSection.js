@@ -1,35 +1,35 @@
 import React, {Component} from 'react'
-import AboutUsSectionCss from './aboutUsSection.css'
+import AboutUsSectionCss from './aboutUsSection.scss'
+import img1 from './images/pic1.png'
+import img2 from './images/pic2.png'
+import img3 from './images/pic3.png'
 
 class AboutUsSection extends Component {
     render() {
         return (
             <section className='about-us-section'>
-                <div className='about-us-section-text'>
-                    <h3>Who we are?</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Deleniti dolorem provident quis veritatis! Amet animi assumenda
-                        cupiditate dicta dignissimos dolores dolorum ducimus eaque eius,
-                        eos eveniet ex incidunt itaque laboriosam libero maxime molestias
-                        mollitia natus nihil nobis nostrum nulla quis quos reiciendis,
-                        repellat reprehenderit sed temporibus ut vel vero. A at, corporis
-                        cum debitis deserunt doloribus, est et facere, fugiat hic
-                        impedit laborum libero porro reiciendis rem saepe veritatis vitae.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Ab beatae deserunt doloribus ea enim eveniet, ex ipsam minima
-                        minus modi, necessitatibus nemo nisi numquam odio omnis quasi
-                        quibusdam ratione sed veniam, voluptas. Cum eaque eos esse harum
-                        in, inventore ipsa minima
-                        nemo neque numquam omnis, saepe sapiente similique totam ut!
-                        <br/><br/><br/><br/>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Ad adipisci aspernatur commodi consectetur cumque dignissimos
-                        dolores eaque eius eligendi est eum exercitationem facilis laborum
-                        laudantium libero magni minus nesciunt nostrum odit optio quae ratione,
-                        recusandae sequi soluta unde veniam voluptates.
-                        Alias at eveniet id iusto maiores quis reiciendis voluptatibus voluptatum!
-                    </p>
+                <div className="u-center-text">
+                    <h2 className='about-us-section-text'>The name of culture is cinemafactory</h2>
+                </div>
+                <div className='row'>
+                    <div className='col span-1-of-2 box about-us-section-text'>
+                        <h3>Who we are?</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Adipisci corporis cumque delectus deleniti earum explicabo
+                            fuga laudantium odit porro similique.
+                        </p><br/>
+                        <h3>Find your dreams</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Adipisci corporis cumque delectus deleniti earum explicabo
+                        </p>
+                    </div>
+                    <div className='col span-1-of-2 box'>
+                        <div className="composition">
+                            <img src={img1} alt="Picture 1" className='photo photo-1'/>
+                            <img src={img2} alt="Picture 2" className='photo photo-2'/>
+                            <img src={img3} alt="Picture 3" className='photo photo-3'/>
+                        </div>
+                    </div>
                 </div>
             </section>
         );

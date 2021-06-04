@@ -1,49 +1,39 @@
 import React from 'react'
-import GridCss from '../grid/grid.css'
-import StepsSectionCss from './stepsSection.css'
+import {FaSearch, FaCamera, FaShoppingCart, FaSmile} from "react-icons/all";
+import GridCss from '../grid/grid.scss'
+import StepsSectionCss from './stepsSection.scss'
 
 const StepsSection = () => {
     return (
-        <section className="steps-section row">
-            <div className="steps-section-welcome-text">
-                <h2>CHOOSE AND WATCH</h2>
-                <p>
-                    Nice to see you. With our help, you are gonna find
-                    the nearest cinema and best films. It never was easier.
-                    <br/>Just follow the steps and enjoy!
-                </p>
-            </div>
-            <div className="steps">
-                <div className="step find-cinema col span-1-of-4">
+        <section className="steps-section">
+            <div className="row">
+                <div className="step col span-1-of-4">
+                    <span className="steps-icon"><FaSearch/></span>
                     <h4>Find cinema</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Ab architecto autem error, fuga nobis non numquam obcaecati
-                        optio possimus, provident reprehenderit sit tempore
-                        voluptate, voluptatem!
                     </p>
                 </div>
-                <div className="step find-cinema col span-1-of-4">
+                <div className="step col span-1-of-4">
+                    <span className="steps-icon"><FaCamera/></span>
                     <h4>Choose film</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Ab architecto autem error, fuga nobis non numquam obcaecati
-                        optio possimus, provident reprehenderit sit tempore
-                        voluptate, voluptatem!
                     </p>
                 </div>
-                <div className="step find-cinema col span-1-of-4">
+                <div className="step col span-1-of-4">
+                    <span className="steps-icon"><FaShoppingCart/></span>
                     <h4>Buy ticket</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Ab architecto autem error, fuga nobis non numquam obcaecati
-                        optio possimus, provident reprehenderit sit tempore
-                        voluptate, voluptatem!
+
                     </p>
                 </div>
-                <div className="step find-cinema col span-1-of-4">
+                <div className="step col span-1-of-4">
+                    <span className="steps-icon"><FaSmile/></span>
                     <h4>Enjoy your film</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Ab architecto autem error, fuga nobis non numquam obcaecati
-                        optio possimus, provident reprehenderit sit tempore
-                        voluptate, voluptatem!
                     </p>
                 </div>
             </div>

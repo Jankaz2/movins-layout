@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from "react";
 import {useForm} from "react-hook-form"
-import HeaderCss from './header.css'
+import HeaderCss from './header.scss'
 import {Link} from "react-scroll"
 import {Link as LinkRouter, Route, useHistory} from "react-router-dom"
 import {FaVideo, FaGlobe, FaCaretDown} from "react-icons/fa"
@@ -18,8 +18,8 @@ function Header() {
                 <Navigation/>
                 <WebStart/>
             </header>
-            <StepsSection/>
             <AboutUsSection/>
+            <StepsSection/>
             <Reviews/>
             <Contact/>
         </div>
@@ -197,7 +197,8 @@ const WebStart = () => {
                            value={city.city}
                     />
                     <input type="submit"
-                           value="search"/>
+                           value="search"
+                           className="webstart-submit-cinemas"/>
                 </form>
                 <div className='search-boxes'>
                     <div
@@ -250,11 +251,6 @@ const WebStart = () => {
                     </div>
                 </div>
             </div>
-            <Link to="steps-section" spy={true} smooth={true}
-                  offset={-60} duration={500}>
-                <span className={'show-more-link'}>Show more</span>
-                <span className={'caret-down'}><FaCaretDown/></span>
-            </Link>
         </div>
     )
 }

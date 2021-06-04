@@ -13,22 +13,32 @@ html {
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    background-color: #f7f7f7;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    font-size: 18px;
 }
 
 header {
     background-size: cover;
-    height: 100vh;
-    background: linear-gradient(130deg, #0652DD 60%, #74b9ff 60%) fixed center;
-    font-family: 'BioRhyme', serif;
+    height: 98vh;
+    background-image: linear-gradient(
+            to right bottom,
+            rgba(116, 185, 255, 0.8),
+            rgba(6, 82, 221, 0.8)),
+    url("images/background-photo.png");
+    background-position: top;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
 }
 
 a {
     text-decoration: none;
     color: #fff;
-}
-
-h2 {
-    font-weight: 400;
 }
 
 .row {
@@ -40,9 +50,9 @@ h2 {
 .navbar {
     width: 100%;
     padding: 1% 5%;
-    height: 70px;
+    height: 90px;
     position: fixed;
-    z-index: 100;
+    z-index: 1;
     color: #fff;
 }
 
@@ -104,6 +114,7 @@ h2 {
     margin: 0 !important;
     border-bottom: 1px solid #000;
     transition: width, margin .3s;
+    z-index: 1;
 }
 
 .sticky a {
@@ -118,12 +129,14 @@ h2 {
     transform: translate(-70%, -40%);
 }
 
-.webstart-page h2 {
-    font-style: italic;
+.webstart-page h1 {
+    font-weight: 400;
+    letter-spacing: 3px;
+    font-size: 50px;
 }
 
 .webstart-page h3 {
-    font-weight: lighter;
+    font-weight: 700;
     margin-bottom: 20px;
 }
 
@@ -139,19 +152,20 @@ h2 {
     outline: none;
 }
 
-.webstart-page .find-cinema input[type=submit] {
+.webstart-page .find-cinema .webstart-submit-cinemas {
     width: 120px !important;
     padding: 15px;
     text-transform: uppercase;
     text-align: center;
-    background-color: #0288D1 !important;
+    background-color: #0652DD !important;
     font-weight: bold;
     border-radius: 3px;
     color: #fff;
 }
 
-.webstart-page .find-cinema input[type=submit]:hover {
-    background-color: #448AFF;
+.webstart-page .find-cinema .webstart-submit-cinemas:active,
+.webstart-page .find-cinema .webstart-submit-cinemas:hover {
+    background-color: #0288D1 !important;
 }
 
 .show-more-link,

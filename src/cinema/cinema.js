@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react"
 import {FaShoppingBasket, FaVideo} from "react-icons/fa"
-import CinemaCss from "./cinema.css"
+import CinemaCss from "./cinema.scss"
 import {DataContext} from "../data_transfer/dataManager";
 
 function Cinema() {
@@ -19,8 +19,7 @@ function Cinema() {
             name: "The Darkest",
             rows: 10,
             places: 100,
-        }
-        ,
+        },
 
         movies: [
             {
@@ -138,6 +137,7 @@ const BuyTicketSection = (props) => {
             <div className={'popup-inner'}>
                 <div>
                     <div className={'cinema-places col span-1-of-2'}>
+                        <h3>Select and book your seat</h3>
                         {/*  <div className={'screen'}><p>screen</p></div>*/}
                         <table>
                             <tbody>

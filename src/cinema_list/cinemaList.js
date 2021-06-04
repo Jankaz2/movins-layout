@@ -1,7 +1,7 @@
 import React, {useState, useContext} from "react"
 import {Link} from "react-router-dom"
 import Header from "../header/header"
-import CinemasListCss from "./cinemasList.css"
+import CinemasListCss from "./cinemasList.scss"
 import {DataContext} from "../data_transfer/dataManager";
 
 const CinemasList = () => {
