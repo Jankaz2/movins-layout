@@ -1,52 +1,43 @@
+@import "../scss/utils/variables";
+
 .steps-section {
-    padding: 200px 100px;
-    text-align: center;
-    color: #000;
-    background-image: linear-gradient(
-            to right bottom,
-            rgba(116, 185, 255, 0.8),
-            rgba(6, 82, 221, 0.8)),
-    url("images/steps-background.png");
-    background-position: top;
-    background-size: cover;
-    position: relative;
-    transform: skewY(-6deg);
-}
+  padding: 20rem 10rem;
+  text-align: center;
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-blue-light, 0.8),
+                  rgba($color-blue-dark, 0.8)),
+  url("images/steps-background.png");
+  background-position: top;
+  background-size: cover;
+  position: relative;
+  transform: skewY(-6deg);
 
-.steps-section > * {
+  & > * {
     transform: skewY(6deg);
-}
+  }
 
-.steps-section h2 {
-    margin-bottom: 20px;
-}
-
-.step {
-    background-color: rgba(255, 255, 255, .8);
+  &__step {
+    background-color: rgba($color-white, .8);
     text-align: center;
-    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .15);
-    padding: 25px;
-    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    padding: 2.5rem;
+    border-radius: .2rem;
     transition: all .2s;
-    color: #777;
-}
+    color: $color-grey-dark;
 
-.step:hover {
-    transform: translateY(-20px) scale(1.03);
-}
+    &:hover {
+      transform: translateY(-20px) scale(1.03);
+    }
 
-.step h4 {
-    text-transform: uppercase;
-    font-weight: 400;
-}
+    .steps-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      color: $color-blue-light;
+    }
 
-.steps-icon {
-    font-size: 40px;
-   /* background-image: linear-gradient(
-            to right,
-            rgba(116, 185, 255, 0.8),
-            rgba(6, 82, 221, 0.8)
-    );
-    -webkit-background-clip: text;*/
-    color: #1da1f2;
+    .heading-tertiary {
+      margin-bottom: 1.5rem;
+    }
+  }
 }

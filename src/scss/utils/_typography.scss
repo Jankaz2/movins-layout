@@ -28,6 +28,12 @@ body {
   }
 }
 
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .icon-small {
   font-size: 12px;
   padding-right: 10px;
