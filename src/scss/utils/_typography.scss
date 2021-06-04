@@ -16,7 +16,7 @@ body {
     font-size: 4rem;
     font-weight: 400;
     letter-spacing: 3px;
-    //animation: moveInLeft 1s ease-out;
+    animation: moveInLeft 1.5s ease-out;
   }
 
   &--sub {
@@ -24,7 +24,7 @@ body {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
-    //animation: moveInRight 1s ease-out;
+    animation: moveInRight 1.5s ease-out;
   }
 }
 
@@ -35,11 +35,18 @@ body {
   margin-bottom: 60px;
   background-image: linear-gradient(
                   to right,
-                  rgba(116, 185, 255, 0.8),
-                  rgba(6, 82, 221, 0.8)
+                  rgba($color-blue-light, 0.8),
+                  rgba($color-blue-dark, 0.8)
   );
   -webkit-background-clip: text;
   color: transparent;
+  letter-spacing: .1rem;
+  transition: all .2s;
+
+  &:hover {
+    transform: skewX(1.05deg) skewY(1.5deg) scale(1.05);
+    text-shadow: .5 1 2rem rgba($color-black, .2);
+  }
 }
 
 .heading-tertiary {
@@ -49,6 +56,6 @@ body {
 }
 
 .icon-small {
-  font-size: 12px;
-  padding-right: 10px;
+  font-size: 1.2rem;
+  padding-right: 1rem;
 }
