@@ -77,7 +77,7 @@ const Navigation = () => {
                         </li>
                     </ul>
 
-                    <span><div className="header__logo"><a href="#">CinemaFactory</a></div></span>
+                    <span><div className="header__logo"><a href="#">LOGO</a></div></span>
 
                 </ul>
             </nav>

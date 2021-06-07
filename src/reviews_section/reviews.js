@@ -7,45 +7,56 @@ import woman1 from './images/woman1.png'
 class Reviews extends Component {
     render() {
         return (
-            <section className='reviews-section row'>
+            <section className='reviews-section'>
                 <div className='row'>
-                    <h2 className='font-link'>Our users know why we are the best!</h2>
+                    <h2 className='heading-secondary'>Our users know why we are the best!</h2>
                 </div>
-                <div className='row'>
-                    <div className='review col span-1-of-3'>
-                        <blockquote>
-                            <p className='font-link'>
+                <div className='row u-margin-bottom-small'>
+                    <div className='review'>
+                        <figure className="review__photo">
+                            <img src={woman1} alt="Woman 1" className="review__image"/>
+                            <figcaption className="review__caption">Jane Smith</figcaption>
+                        </figure>
+                        <div className="review__text">
+                            <h3 className="heading_tertiary">It changed my life!</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Accusantium distinctio dolore dolorum enim laboriosam minus
+                                    officiis possimus provident quam quia quis ratione, rem soluta.
+                                </p>
+                        </div>
+                    </div>
+                </div>
+                <div className='row u-margin-bottom-small'>
+                    <div className='review'>
+                        <figure className="review__photo">
+                            <img src={man1} alt="Woman 1" className="review__image"/>
+                            <figcaption className="review__caption">Luke White</figcaption>
+                        </figure>
+                        <div className="review__text">
+                            <h3 className="heading_tertiary">This website is just amazing!</h3>
+                            <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Accusantium distinctio dolore dolorum enim laboriosam minus
                                 officiis possimus provident quam quia quis ratione, rem soluta.
-                                Architecto, cupiditate debitis, dicta eaque facilis fugit inventore,
-                                numquam obcaecati odio quae reiciendis sed tenetur vero!
                             </p>
-                            <cite><img src={man1} alt={'man'}/> Maddox Villa</cite>
-                        </blockquote>
+                        </div>
                     </div>
-                    <div className='review col span-1-of-3'>
-                        <blockquote>
-                            <p className='font-link'>
+                </div>
+                <div className='row u-margin-bottom-small'>
+                    <div className='review'>
+                        <figure className="review__photo">
+                            <img src={woman11} alt="Woman 1" className="review__image"/>
+                            <figcaption className="review__caption">Lisa Kane</figcaption>
+                        </figure>
+                        <div className="review__text">
+                            <h3 className="heading_tertiary">I can finally find cinema with my favourite films</h3>
+                            <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Doloribus fuga ipsum libero, provident quaerat quasi qui veniam.
-                                Consequatur doloribus eaque est explicabo fugit iusto, labore, minima minus,
-                                molestias obcaecati officia placeat possimus quasi qui voluptas.
-                                Lorem ipsum dolor sit amet.
+                                Accusantium distinctio dolore dolorum enim laboriosam minus
+                                officiis possimus provident quam quia quis ratione, rem soluta.
                             </p>
-                            <cite><img src={woman11} alt={'woman'}/> Izabel Kline</cite>
-                        </blockquote>
-                    </div>
-                    <div className='review col span-1-of-3'>
-                        <blockquote>
-                            <p className='font-link'> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Ab aspernatur, atque autem consequatur consequuntur debitis
-                                dicta est exercitationem fugiat, inventore laborum magnam nemo
-                                perspiciatis qui quisquam reiciendis repudiandae tempore voluptates?
-                                Alias ea hic libero magni optio quam sequi.
-                            </p>
-                            <cite><img src={woman1} alt={'woman'}/> Caprice Francis</cite>
-                        </blockquote>
+                        </div>
                     </div>
                 </div>
             </section>

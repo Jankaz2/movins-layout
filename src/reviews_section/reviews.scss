@@ -1,14 +1,62 @@
+@import "../scss/utils/variables";
+
 .reviews-section {
-    padding: 80px 30px 20px 30px;
+    padding: 200px 30px;
     color: #000;
-    height: 100vh;
+    text-align: center;
 }
 
-.reviews-section h2 {
-    text-align: center;
-    text-transform: uppercase;
-    padding: 40px 0;
-    border-bottom: 1px solid #0288D1;
+.review {
+    width: 75%;
+    background-color: $color-grey-light-1;
+    margin: 0 auto;
+    transform: skewX(-12deg);
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    padding: 6rem;
+    font-size: $default-font-size;
+    border-radius: .3rem;
+
+    & > * {
+        transform: skewX(12deg);
+    }
+
+    &__photo {
+        position: relative;
+        float: left;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 50%;
+        transform: translateX(-3rem) skewX(12deg);
+        overflow: hidden;
+    }
+
+    &__image {
+        backface-visibility: hidden;
+        transition: all .5s;
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-weight: 400;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &:hover &__image {
+        transform: scale(1);
+        filter: blur(3px) brightness(80%);
+    }
 }
 
 blockquote {
@@ -26,17 +74,4 @@ blockquote:before {
     position: absolute;
     top: -5px;
     left: -5px;
-}
-
-cite {
-    display: block;
-    margin-top: 20px;
-    float: right;
-}
-
-cite img {
-    height: 45px;
-    border-radius: 50%;
-    margin-right: 10px;
-    vertical-align: middle;
 }
