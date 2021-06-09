@@ -9,7 +9,7 @@ class AboutUsSection extends Component {
         return (
             <section className='about-us-section'>
                 <div className="u-center-text">
-                    <h2 className='heading-secondary'>The name of culture is cinemafactory</h2>
+                    <h2 className='heading-secondary'>The name of culture is movins</h2>
                 </div>
                 <div className='row'>
                     <div className='col span-1-of-2 box'>
