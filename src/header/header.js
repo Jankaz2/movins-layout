@@ -6,13 +6,11 @@ import WebStartScss from './webstart.scss'
 import {Link} from "react-scroll"
 import {useHistory} from "react-router-dom"
 import {FaVideo, FaGlobe} from "react-icons/fa"
-import CinemasList from "../cinema_list/cinemaList";
-import {DataContext} from "../data_transfer/dataManager";
 import StepsSection from "../steps_section/stepsSection";
 import AboutUsSection from "../about_us_section/aboutUsSection";
 import Reviews from "../reviews_section/reviews";
 import Contact from "../contact_section/contact";
-import {FaSearch} from "react-icons/all";
+import {DataContext} from "../data_transfer/dataManager";
 
 function Header() {
     return (
@@ -112,27 +110,14 @@ const Navigation = () => {
     )
 }
 
-const WebStart = () => {
-    const {updateState} = useContext(DataContext);
+const WebStart = ({children}) => {
     const history = useHistory();
     const [name, setName] = useState({name: "", clicked: false});
     const [city, setCity] = useState({city: "", clicked: false});
     const [hasFocus, setFocus] = useState({name: false, city: false})
-    const [cinemas, setCinemas] = useState([])
     const [filteredCinemas, setFilteredCinemas] = useState([])
 
-    const loadData = async () => {
-        await fetch('http://localhost:4000/cinema')
-            .then(response => response.json())
-            .then(cinemas => {
-                setCinemas(cinemas.data)
-            })
-            .catch(err => console.log(err))
-    }
-
-    useEffect(() => {
-        loadData()
-    }, [])
+    const {cinemas, setCinemas} = useContext(DataContext)
 
     const handleChange = e => {
         e.preventDefault()
@@ -158,10 +143,10 @@ const WebStart = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateState({
-            name: name.name,
-            city: city.city
-        });
+        const submittedCinemas = cinemas.filter(cinema =>
+            cinema.name.toLowerCase() === name.name.toLowerCase() ||
+            cinema.address.city.toLowerCase() === city.city.toLowerCase())
+        setCinemas(submittedCinemas)
         history.push("/cinema-list");
     };
 

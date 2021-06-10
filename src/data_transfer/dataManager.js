@@ -1,26 +1,29 @@
-import React, {useState, createContext} from "react";
+import React, {useState, createContext, useEffect} from "react";
 
-export const DataContext = createContext([])
+export const DataContext = createContext({
+    cinemas: [],
+    setCinemas: () => {}
+})
 
-export const DataManager = ({children}) => {
-    const [state, setState] = useState({
-        cinemas: [
-            {id: 1, name: "Cinema Under The Stars", city: "Poznan"},
-            {id: 2, name: "Cinema Under The Stars", city: "Warsaw"},
-            {id: 3, name: "Mind", city: "Warsaw"},
-            {id: 4, name: "CinemaStreet", city: "Cracov"},
-            {id: 5, name: "Heaven", city: "Poznan"},
-            {id: 6, name: "Dream", city: "Gdansk"},
-        ]
-    })
+export const DataManager = props => {
+    const [cinemas, setCinemas] = useState([])
 
-    const updateState = value => {
-        setState(value)
+    const loadData = async () => {
+        await fetch('http://localhost:4000/cinema')
+            .then(response => response.json())
+            .then(cinemas => {
+                setCinemas(cinemas.data)
+            })
+            .catch(err => console.log(err))
     }
 
+    useEffect(() => {
+        loadData()
+    }, [])
+
     return (
-        <DataContext.Provider value={{state, updateState}}>
-            {children}
+        <DataContext.Provider value={{cinemas, setCinemas}}>
+            {props.children}
         </DataContext.Provider>
     )
 }

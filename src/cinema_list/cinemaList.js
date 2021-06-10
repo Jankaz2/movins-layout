@@ -5,13 +5,13 @@ import CinemasListCss from "./cinemasList.scss"
 import {DataContext} from "../data_transfer/dataManager";
 
 const CinemasList = () => {
-    const {state} = useContext(DataContext)
+    const {cinemas, setCinemas} = useContext(DataContext)
 
     return (
         <div>
             <nav className='cinema-list-section-nav'>
                 <Link to="/">
-                    <span><div className="cinemas-list-section-logo">CinemaFactory</div></span>
+                    <span><div className="cinemas-list-section-logo">Movins</div></span>
                 </Link>
                 <form className='cinema-list-section-form'>
                     <input type="search" placeholder="cinema name"/>
@@ -22,7 +22,7 @@ const CinemasList = () => {
             <section className="cinemas-list-section">
                 <ul>
                     {
-                        state.cinemas.map((cinema, idx) => {
+                        cinemas.map((cinema, idx) => {
                             return (
                                 <Link to={`/cinema-list/cinema/${cinema.id}`}>
                                     <li key={cinema.id} className='font-link row'>
@@ -34,7 +34,7 @@ const CinemasList = () => {
                                             </div>
                                             <div className='col span-1-of-2'>
                                                 <h4>city:</h4>
-                                                <h5>{cinema.city}</h5>
+                                                <h5>{cinema.address.city}</h5>
                                             </div>
                                         </div>
                                         <div className='col span-1-of-2'>
