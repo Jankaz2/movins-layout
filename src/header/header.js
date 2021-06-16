@@ -5,7 +5,7 @@ import MainScss from '../scss/main.scss'
 import WebStartScss from './webstart.scss'
 import {Link} from "react-scroll"
 import {useHistory} from "react-router-dom"
-import {FaVideo, FaGlobe} from "react-icons/fa"
+import {FaVideo, FaGlobe, FaWindowClose} from "react-icons/fa"
 import StepsSection from "../steps_section/stepsSection";
 import AboutUsSection from "../about_us_section/aboutUsSection";
 import Reviews from "../reviews_section/reviews";
@@ -29,80 +29,91 @@ function Header() {
 
 const Navigation = () => {
     const [showLogin, setShowLogin] = useState(false)
-    const [showRegistry, setShowRegistry] = useState(false)
 
     return (
         <div>
             <nav>
                 <ul className={`header__navbar`}>
-
-                    <ul className="header__navbar--options">
-                        <li className="header__navbar--item about-us-link">
-                            <Link to="about-us-section" spy={true} smooth={true}
-                                  offset={-60} duration={500}>
-                                <a href="">About us</a>
-                            </Link></li>
-                        <li className="header__navbar--item contact-link">
-                            <Link activeClass="active" to="contact-us-section"
-                                  spy={true} smooth={true} offset={-60}
-                                  duration={500}>
-                                <a href="">Contact</a>
-                            </Link></li>
-                    </ul>
-
-                    <ul className="header__navbar--info">
-                        <li className="header__navbar--item log-in-link">
-                            <a href=""
-                               onClick={(event) => {
-                                   setShowLogin(!showLogin)
-                                   if (showRegistry) {
-                                       setShowRegistry(!showRegistry)
-                                   }
-                                   event.preventDefault()
-                               }}>Log in
-                            </a>
-                        </li>
-                        <li className="header__navbar--item sign-up-link">
-                            <a href=""
-                               onClick={(event) => {
-                                   setShowRegistry(!showRegistry)
-                                   if (showLogin) {
-                                       setShowLogin(!showLogin)
-                                   }
-                                   event.preventDefault()
-                               }}>Sign up
-                            </a>
-                        </li>
-                    </ul>
-
                     <span><div className="header__logo"><a href="#">MOVINS</a></div></span>
 
+                    <li className="header__navbar--item">
+                        <Link to="about-us-section"
+                              spy={true} smooth={true}
+                              offset={-60}
+                              duration={500}>
+                            <a href="">About us</a>
+                        </Link>
+                    </li>
+
+                    <li className="header__navbar--item">
+                        <Link activeClass="active"
+                              to="contact-us-section"
+                              spy={true}
+                              smooth={true}
+                              offset={-60}
+                              duration={500}>
+                            <a href="">Contact</a>
+                        </Link>
+                    </li>
+
+                    <li className="header__navbar--item log-in-link"
+                        onClick={(event) => {
+                            setShowLogin(!showLogin)
+                            event.preventDefault()
+                        }}>
+                        <a href="">Log in</a>
+                    </li>
+
+                    <li className="header__navbar--item">
+                        <Link activeClass="active"
+                              to="steps-section"
+                              spy={true}
+                              smooth={true}
+                              offset={-60}
+                              duration={500}>
+                            <a href="">How it works</a>
+                        </Link>
+                    </li>
                 </ul>
             </nav>
+
             <div className='header__registry'>
                 {
                     showLogin &&
-                    <div className="header__registry--login-box">
-                        <form className='header__registry--login-box--form'>
-                            <input className='login-form-input primary-input' type="text" placeholder="login"/>
-                            <input className='login-form-input primary-input' type="password" placeholder="password"/>
-                            <input className='login-form-input-submit primary-input' type="submit" value="Log in"/>
-                        </form>
-                    </div>
-                }
-                {
-                    showRegistry &&
-                    <div className="header__registry--signup-box">
-                        <form className='header__registry--login-box--form'>
-                            <input className='login-form-input primary-input' type="name" placeholder="Name"/>
-                            <input className='login-form-input primary-input' type="text" placeholder="Surname"/>
-                            <input className='login-form-input primary-input' type="email" placeholder="e-mail"/>
-                            <input className='login-form-input primary-input' type="number" placeholder="phone number"/>
-                            <input className='login-form-input primary-input' type="password" placeholder="password"/>
-                            <input className='login-form-input primary-input' type="password"
-                                   placeholder="repeat password"/>
-                            <input className='login-form-input-submit primary-input' type="submit" value="Sign in"/>
-                        </form>
+                    <div className='header__registry--popup'>
+                        <span className='header__registry--popup-close'
+                              onClick={() => setShowLogin(!showLogin)}
+                        ><FaWindowClose/></span>
+                        <div className="header__registry--boxes">
+                            <div className="header__registry--login-box col span-1-of-2">
+                                <form className='header__registry--login-box--form'>
+                                    <input className='login-form-input primary-input' type="text"
+                                           placeholder="login"/>
+                                    <input className='login-form-input primary-input' type="password"
+                                           placeholder="password"/>
+                                    <input className='login-form-input-submit primary-input' type="submit"
+                                           value="Log in"/>
+                                </form>
+                            </div>
+                            <div className="header__registry--signup-box col span-1-of-2">
+                                <form className='header__registry--signup-box--form'>
+                                    <input className='signup-form-input primary-input' type="name"
+                                           placeholder="Name"/>
+                                    <input className='signup-form-input primary-input' type="text"
+                                           placeholder="Surname"/>
+                                    <input className='signup-form-input primary-input' type="email"
+                                           placeholder="e-mail"/>
+                                    <input className='signup-form-input primary-input' type="number"
+                                           placeholder="phone number"/>
+                                    <input className='signup-form-input primary-input' type="password"
+                                           placeholder="password"/>
+                                    <input className='signup-form-input primary-input' type="password"
+                                           placeholder="repeat password"/>
+                                    <input className='signup-form-input-submit primary-input' type="submit"
+                                           value="Sign in"/>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
@@ -110,7 +121,7 @@ const Navigation = () => {
     )
 }
 
-const WebStart = ({children}) => {
+const WebStart = () => {
     const history = useHistory();
     const [name, setName] = useState({name: "", clicked: false});
     const [city, setCity] = useState({city: "", clicked: false});
