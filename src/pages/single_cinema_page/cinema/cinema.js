@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react"
-import {FaShoppingBasket, FaVideo} from "react-icons/fa"
+import {FaShoppingBasket, FaVideo, FaWindowClose} from "react-icons/fa"
 import CinemaCss from "./cinema.scss"
-import {DataContext} from "../data_transfer/dataManager";
+import {DataContext} from "../../../utils/data_transfer/dataManager";
 
 function Cinema() {
     const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
@@ -131,9 +131,9 @@ const BuyTicketSection = (props) => {
     return (
         <div className={'popup font-link'}>
             <span
-                className={'close-popup font-link'}
+                className={'icon-small'}
                 onClick={props.closePopup}
-            >X</span>
+            ><FaWindowClose/></span>
             <div className={'popup-inner'}>
                 <div>
                     <div className={'cinema-places col span-1-of-2'}>

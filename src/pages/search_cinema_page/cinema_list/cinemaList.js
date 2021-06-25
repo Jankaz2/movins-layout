@@ -1,8 +1,8 @@
 import React, {useState, useContext} from "react"
 import {Link} from "react-router-dom"
-import Header from "../header/header"
+import Header from "../../home_page/header/header"
 import CinemasListCss from "./cinemasList.scss"
-import {DataContext} from "../data_transfer/dataManager";
+import {DataContext} from "../../../utils/data_transfer/dataManager";
 
 const CinemasList = () => {
     const {cinemas, setCinemas} = useContext(DataContext)

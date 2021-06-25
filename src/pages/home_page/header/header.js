@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext, useRef} from "react";
 import {useForm} from "react-hook-form"
 import HeaderCss from './header.scss'
-import MainScss from '../scss/main.scss'
+import MainScss from '../../../styles/scss/main.scss'
 import WebStartScss from './webstart.scss'
 import {Link} from "react-scroll"
 import {useHistory} from "react-router-dom"
@@ -10,7 +10,7 @@ import StepsSection from "../steps_section/stepsSection";
 import AboutUsSection from "../about_us_section/aboutUsSection";
 import Reviews from "../reviews_section/reviews";
 import Contact from "../contact_section/contact";
-import {DataContext} from "../data_transfer/dataManager";
+import {DataContext} from "../../../utils/data_transfer/dataManager";
 
 function Header() {
     return (
@@ -29,6 +29,10 @@ function Header() {
 
 const Navigation = () => {
     const [showLogin, setShowLogin] = useState(false)
+
+    useEffect(() => {
+            setShowLogin(true)
+    }, [])
 
     return (
         <div>
@@ -69,7 +73,6 @@ const Navigation = () => {
                               to="steps-section"
                               spy={true}
                               smooth={true}
-                              offset={-60}
                               duration={500}>
                             <a href="">How it works</a>
                         </Link>
