@@ -1,4 +1,4 @@
-@import "../../../styles/scss/utils/variables";
+@import "../../../../styles/scss/utils/variables";
 
 .header {
   background-size: cover;
@@ -7,7 +7,7 @@
                   to right bottom,
                   rgba($color-blue-light, 0.8),
                   rgba($color-blue-dark, 0.8)),
-  url("images/background-photo.png");
+  url("../images/background-photo.png");
   background-position: top;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
@@ -62,6 +62,8 @@
   }
 
   &__registry {
+    z-index: 200;
+
     &--popup {
       position: fixed;
       width: 100%;
@@ -72,10 +74,10 @@
       bottom: 0;
       margin: auto;
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("images/login.png");
+      url("../images/login.png");
       background-size: cover;
       background-position: center;
-      z-index: 1;
+      z-index: 100;
 
       &-close {
         position: absolute;
@@ -102,7 +104,7 @@
       border-radius: .5rem;
       background-size: cover;
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("images/background-login.png");
+      url("../images/background-login.png");
       background-position: center;
       z-index: 2;
     }

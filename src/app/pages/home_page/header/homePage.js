@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useContext, useRef} from "react";
 import {useForm} from "react-hook-form"
-import HeaderCss from './header.scss'
+import HeaderCss from './styles/header.scss'
 import MainScss from '../../../styles/scss/main.scss'
-import WebStartScss from './webstart.scss'
+import WebStartScss from './styles/webstart.scss'
 import {Link} from "react-scroll"
 import {useHistory} from "react-router-dom"
 import {FaVideo, FaGlobe, FaWindowClose} from "react-icons/fa"
@@ -11,10 +11,12 @@ import AboutUsSection from "../about_us_section/aboutUsSection";
 import Reviews from "../reviews_section/reviews";
 import Contact from "../contact_section/contact";
 import {DataContext} from "../../../utils/data_transfer/dataManager";
+import StickyNavigation from "./stickyNavigation";
 
-function Header() {
+function HomePage() {
     return (
         <div>
+            <StickyNavigation/>
             <header className='header'>
                 <Navigation/>
                 <WebStart/>
@@ -30,10 +32,6 @@ function Header() {
 const Navigation = () => {
     const [showLogin, setShowLogin] = useState(false)
 
-    useEffect(() => {
-            setShowLogin(true)
-    }, [])
-
     return (
         <div>
             <nav>
@@ -46,6 +44,15 @@ const Navigation = () => {
                               offset={-60}
                               duration={500}>
                             <a href="">About us</a>
+                        </Link>
+                    </li>
+
+                    <li className="header__navbar--item">
+                        <Link to="reviews-section"
+                              spy={true} smooth={true}
+                              offset={-60}
+                              duration={500}>
+                            <a href="">Reviews</a>
                         </Link>
                     </li>
 
@@ -241,4 +248,4 @@ const WebStart = () => {
     )
 }
 
-export default Header
+export default HomePage
