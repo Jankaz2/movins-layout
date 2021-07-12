@@ -9,7 +9,7 @@ export const DataManager = props => {
     const [cinemas, setCinemas] = useState([])
 
     const loadData = async () => {
-        await fetch('http://localhost:4000/cinema')
+        await fetch('http://localhost:5000/cinema')
             .then(response => response.json())
             .then(cinemas => {
                 setCinemas(cinemas.data)

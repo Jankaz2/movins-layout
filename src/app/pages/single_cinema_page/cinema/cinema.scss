@@ -136,7 +136,7 @@
 }
 
 /*--- TABLE WITH PLACES ---*/
-.screen {
+/*.screen {
     position: relative;
     width: 60%;
     left: 7%;
@@ -149,21 +149,21 @@
     font-weight: bold;
 }
 
-table {
+.seats-table {
     border-collapse: collapse;
     font-weight: bold;
 }
 
-table, td {
+.seats-table td {
     border: 2px solid #000;
 }
 
-td {
+.seats-table td {
     padding: 5px;
     transition: background-color, color .2s;
 }
 
-td:hover {
+.seats-table td:hover {
     cursor: pointer;
     background-color: #000;
     color: #fff;
@@ -187,7 +187,7 @@ td:hover {
     width: 50px;
     padding: 4px;
     margin-right: 6px;
-}
+}*/
 
 /*--- STATEMENTS ---*/
 .error-statement {

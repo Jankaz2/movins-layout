@@ -1,10 +1,14 @@
 import AdminPageScss from './styles/adminPage.scss'
 import GridScss from '../../../utils/grid/grid.scss'
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import {DataContext} from "../../../utils/data_transfer/dataManager";
+import {FaGlobe} from "react-icons/fa";
 
 const AdminPage = () => {
     const [showCreateCinema, setShowCreateCinema] = useState(false)
     const [showCreateNewAdmin, setShowCreateNewAdmin] = useState(false)
+    const [showAllCinemas, setShowAllCinemas] = useState(false)
+    const [showAllUsers, setShowAllUsers] = useState(false)
 
     useEffect(() => {
         document.title = 'Movins | ADMIN system'
@@ -53,22 +57,27 @@ const AdminPage = () => {
                 </div>
                 <div className="row">
                     <div className="menu-section__option col span-1-of-3">
-                        <h3 className="heading-tertiary">Create cinema</h3>
+                        <h3 className="heading-tertiary">Show all cinemas</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button">Create</button>
+                        <button className="menu-section__button"
+                                onClick={() => setShowAllCinemas(!showAllCinemas)}
+                        >Show
+                        </button>
                     </div>
                     <div className="menu-section__option col span-1-of-3">
-                        <h3 className="heading-tertiary">Create new admin account</h3>
+                        <h3 className="heading-tertiary">Show all users</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button">Create</button>
+                        <button className="menu-section__button"
+                                onClick={() => setShowAllUsers(!showAllUsers)}
+                        >Show</button>
                     </div>
                     <div className="menu-section__option col span-1-of-3">
                         <h3 className="heading-tertiary">Add cinema</h3>
@@ -82,7 +91,10 @@ const AdminPage = () => {
                 </div>
             </section>
             <AddCinemaPopup showCreateCinema={showCreateCinema} setShowCreateCinema={setShowCreateCinema}/>
-            <AddNewAdminAccountPopup showCreateNewAdmin={showCreateNewAdmin} setShowCreateNewAdmin={setShowCreateNewAdmin}/>
+            <AddNewAdminAccountPopup showCreateNewAdmin={showCreateNewAdmin}
+                                     setShowCreateNewAdmin={setShowCreateNewAdmin}/>
+            <ShowAllCinemasPopup showAllCinemas={showAllCinemas} setShowAllCinemas={setShowAllCinemas}/>
+            <ShowAllUsersPopup showAllUsers={showAllUsers} setShowAllUsers={setShowAllUsers}/>
         </div>
     )
 }
@@ -259,6 +271,108 @@ const AddNewAdminAccountPopup = (props) => {
                                        value='create'/>
                             </form>
                         </div>
+                    </div>
+                </div>
+            }
+        </div>
+    )
+}
+
+
+const ShowAllCinemasPopup = (props) => {
+    const {cinemas, setCinemas} = useContext(DataContext)
+
+    return (
+        <div>
+            {
+                props.showAllCinemas &&
+                <div className='popup'>
+                    <div className="popup__inside popup__inside--cinemas-list">
+                        <span className='popup__inside--close'
+                              onClick={() => props.setShowAllCinemas(!props.showAllCinemas)}
+                        >&#10005;</span>
+                        <table className='data-list-admin'>
+                            <thead className='data-list-admin--header'>
+                            <tr>
+                                <th>Pos.</th>
+                                <th>Cinema name</th>
+                                <th>Address</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+
+                                cinemas.map((cinema, idx) => {
+                                    return (
+                                        <tr key={cinema.id}>
+                                            <td>{idx + 1}</td>
+                                            <td>{cinema.name}</td>
+                                            <td>{cinema.address.city}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    )
+}
+
+const ShowAllUsersPopup = (props) => {
+    const [users, setUsers] = useState([])
+
+    const loadData = async () => {
+        await fetch('http://localhost:5000/user')
+            .then(response => response.json())
+            .then(users => {
+                setUsers(users.data)
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        loadData()
+    }, [])
+
+    return (
+        <div>
+            {
+                props.showAllUsers &&
+                <div className='popup'>
+                    <div className="popup__inside popup__inside--cinemas-list">
+                        <span className='popup__inside--close'
+                              onClick={() => props.setShowAllUsers(!props.showAllUsers)}
+                        >&#10005;</span>
+                        <table className='data-list-admin'>
+                            <thead className='data-list-admin--header'>
+                            <tr>
+                                <th>Pos.</th>
+                                <th>Username</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+
+                                users.map((user, idx) => {
+                                    return (
+                                        <tr key={user.id}>
+                                            <td>{idx + 1}</td>
+                                            <td>{user.username}</td>
+                                            <td>{user.age}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.role}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             }

@@ -89,6 +89,10 @@
         cursor: pointer;
       }
     }
+
+    &--cinemas-list {
+      max-height: 60rem;
+    }
   }
 }
 
@@ -99,5 +103,31 @@
 
   &__add-cinema {
 
+  }
+}
+
+.data-list-admin {
+  border: none;
+  width: 80%;
+  margin: auto;
+
+  th, td {
+    border: none;
+  }
+
+  th {
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 1.5rem;
+  }
+
+  tbody tr {
+    width: 80%;
+    padding: 2rem 2.5rem;
+
+    &:hover {
+      background-color: $color-grey-dark;
+      color: $color-white;
+    }
   }
 }

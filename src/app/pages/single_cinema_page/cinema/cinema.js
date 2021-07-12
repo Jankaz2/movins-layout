@@ -139,7 +139,7 @@ const BuyTicketSection = (props) => {
                     <div className={'cinema-places col span-1-of-2'}>
                         <h3>Select and book your seat</h3>
                         {/*  <div className={'screen'}><p>screen</p></div>*/}
-                        <table>
+                        <table className='seats-table'>
                             <tbody>
                             {
                                 [...Array(props.rows)].map((row, rowIdx) =>
