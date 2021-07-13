@@ -2,13 +2,18 @@ import AdminPageScss from './styles/adminPage.scss'
 import GridScss from '../../../utils/grid/grid.scss'
 import React, {useState, useEffect, useContext} from "react";
 import {DataContext} from "../../../utils/data_transfer/dataManager";
-import {FaGlobe} from "react-icons/fa";
+import {FaGlobe, FaVideo} from "react-icons/fa";
+import Select from 'react-select'
+
+const BASE_URL = 'http://localhost:5000/cinema'
+
 
 const AdminPage = () => {
     const [showCreateCinema, setShowCreateCinema] = useState(false)
     const [showCreateNewAdmin, setShowCreateNewAdmin] = useState(false)
     const [showAllCinemas, setShowAllCinemas] = useState(false)
     const [showAllUsers, setShowAllUsers] = useState(false)
+    const [showAddCinemaRoomToCinema, setShowAddCinemaRoomToCinema] = useState(false)
 
     useEffect(() => {
         document.title = 'Movins | ADMIN system'
@@ -52,7 +57,10 @@ const AdminPage = () => {
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button">Create</button>
+                        <button className="menu-section__button"
+                                onClick={() => setShowAddCinemaRoomToCinema(!showAddCinemaRoomToCinema)}
+                        >Add
+                        </button>
                     </div>
                 </div>
                 <div className="row">
@@ -77,7 +85,8 @@ const AdminPage = () => {
                         </p>
                         <button className="menu-section__button"
                                 onClick={() => setShowAllUsers(!showAllUsers)}
-                        >Show</button>
+                        >Show
+                        </button>
                     </div>
                     <div className="menu-section__option col span-1-of-3">
                         <h3 className="heading-tertiary">Add cinema</h3>
@@ -95,6 +104,8 @@ const AdminPage = () => {
                                      setShowCreateNewAdmin={setShowCreateNewAdmin}/>
             <ShowAllCinemasPopup showAllCinemas={showAllCinemas} setShowAllCinemas={setShowAllCinemas}/>
             <ShowAllUsersPopup showAllUsers={showAllUsers} setShowAllUsers={setShowAllUsers}/>
+            <AddCinemaRoomToCinema showAddCinemaRoomToCinema={showAddCinemaRoomToCinema}
+                                   setShowAddCinemaRoomToCinema={setShowAddCinemaRoomToCinema}/>
         </div>
     )
 }
@@ -102,7 +113,6 @@ const AdminPage = () => {
 export default AdminPage
 
 const AddCinemaPopup = (props) => {
-    const POST_URL = 'http://localhost:5000/cinema'
     const [cinemaName, setCinemaName] = useState({name: ""})
     const [address, setAddress] = useState(
         {
@@ -121,8 +131,7 @@ const AddCinemaPopup = (props) => {
     const [cinemaRooms, setCinemaRoomsArray] = useState([])
 
     const addCinema = async (cinema) => {
-        console.log(JSON.stringify(cinema))
-        const response = await fetch(POST_URL, {
+        const response = await fetch(BASE_URL, {
             method: 'POST',
             body: JSON.stringify(cinema),
             headers: {
@@ -278,6 +287,98 @@ const AddNewAdminAccountPopup = (props) => {
     )
 }
 
+const AddCinemaRoomToCinema = (props) => {
+    const {cinemas, setCinemas} = useContext(DataContext)
+    const [cinemaRoom, setCinemaRoom] = useState({
+        name: "",
+        rows: "",
+        places: ""
+    })
+    const [cinemaName, setCinemaName] = useState("")
+
+    const options = []
+    cinemas.forEach(cinema => {
+        options.push({value: cinema.name, label: cinema.name})
+    })
+
+    const handleChange = e => {
+        const newCinemaRoom = {...cinemaRoom}
+        newCinemaRoom[e.target.id] = e.target.value
+        setCinemaRoom(newCinemaRoom)
+    }
+
+    const onSelectChange = (e) => {
+        setCinemaName(e.value)
+    }
+
+    const addCinemaRoom = async (cinemaRoom, cinemaName) => {
+        const cinemaRooms = []
+        cinemaRooms.push(cinemaRoom)
+
+        const response = await fetch(BASE_URL + `/${cinemaName}`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify(cinemaRooms),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+        return await response.json()
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        addCinemaRoom(cinemaRoom, cinemaName)
+        setCinemaRoom({name: '', rows: '', places: ''})
+    }
+
+    return (
+        <div>
+            {
+                props.showAddCinemaRoomToCinema &&
+                <div className="popup">
+                    <div className="popup__inside">
+                             <span className='popup__inside--close'
+                                   onClick={() => props.setShowAddCinemaRoomToCinema(!props.showAddCinemaRoomToCinema)}
+                             >&#10005;</span>
+                        <div className="row">
+                            <form action=""
+                                  className="form form__add-cinemaRoom"
+                                  onSubmit={e => handleSubmit(e)}>
+                                <label htmlFor="name">Choose cinema</label>
+                                <Select className='react-select' name=""
+                                        defaultValue={options[0]}
+                                        //inputValue={cinemaName}
+                                        options={options}
+                                        onChange={onSelectChange}
+                                        id='name'
+                                />
+                                <label htmlFor="name">Cinema room name</label>
+                                <input className='primary-input popup__input' type="text" id="name"
+                                       onChange={handleChange}
+                                       value={cinemaRoom.name}
+                                       placeholder=''/>
+                                <label htmlFor="rows">Cinema room rows number</label>
+                                <input className='primary-input popup__input' type="number" id="rows"
+                                       onChange={handleChange}
+                                       value={cinemaRoom.rows}
+                                       placeholder=''/>
+                                <label htmlFor="places">Cinema room places number</label>
+                                <input className='primary-input popup__input' type="number" id="places"
+                                       onChange={handleChange}
+                                       value={cinemaRoom.places}
+                                       placeholder=''/>
+                                <input className='popup__input--submit' type="submit" id='submit'
+                                       value='add'/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    )
+}
 
 const ShowAllCinemasPopup = (props) => {
     const {cinemas, setCinemas} = useContext(DataContext)
