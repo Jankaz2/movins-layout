@@ -1,11 +1,15 @@
 import AdminPageScss from './styles/adminPage.scss'
 import GridScss from '../../../utils/grid/grid.scss'
+import ButonScss from '../../../styles/scss/utils/_buttons.scss'
 import React, {useState, useEffect, useContext} from "react";
 import {DataContext} from "../../../utils/data_transfer/dataManager";
 import {FaGlobe, FaVideo} from "react-icons/fa";
 import Select from 'react-select'
+import {MdDeleteForever, MdUpdate} from "react-icons/md"
+import {GrUpdate} from 'react-icons/gr'
 
-const BASE_URL = 'http://localhost:5000/cinema'
+const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
+const BASE_USER_URL = 'http://localhost:5000/user'
 
 
 const AdminPage = () => {
@@ -131,7 +135,7 @@ const AddCinemaPopup = (props) => {
     const [cinemaRooms, setCinemaRoomsArray] = useState([])
 
     const addCinema = async (cinema) => {
-        const response = await fetch(BASE_URL, {
+        const response = await fetch(BASE_CINEMA_URL, {
             method: 'POST',
             body: JSON.stringify(cinema),
             headers: {
@@ -315,7 +319,7 @@ const AddCinemaRoomToCinema = (props) => {
         const cinemaRooms = []
         cinemaRooms.push(cinemaRoom)
 
-        const response = await fetch(BASE_URL + `/${cinemaName}`,
+        const response = await fetch(BASE_CINEMA_URL + `/${cinemaName}`,
             {
                 method: 'PATCH',
                 body: JSON.stringify(cinemaRooms),
@@ -349,7 +353,7 @@ const AddCinemaRoomToCinema = (props) => {
                                 <label htmlFor="name">Choose cinema</label>
                                 <Select className='react-select' name=""
                                         defaultValue={options[0]}
-                                        //inputValue={cinemaName}
+                                    //inputValue={cinemaName}
                                         options={options}
                                         onChange={onSelectChange}
                                         id='name'
@@ -382,6 +386,56 @@ const AddCinemaRoomToCinema = (props) => {
 
 const ShowAllCinemasPopup = (props) => {
     const {cinemas, setCinemas} = useContext(DataContext)
+    const [showOptions, setShowOptions] = useState(false)
+    const [coordinates, setCoordinates] = useState({left: "", top: ""})
+    const [cinemaInfoToDelete, setCinemaInfoToDelete] = useState({id: 0, name: "", city: ""})
+    const [name, setName] = useState({name: "", clicked: false});
+    const [city, setCity] = useState({city: "", clicked: false});
+    const [filteredCinemas, setFilteredCinemas] = useState([])
+
+    const handleElementClick = e => {
+        setShowOptions(true)
+
+        const l = e.clientX + 'px'
+        const t = e.clientY + 'px'
+        const currentRow = e.currentTarget
+
+        rowData(currentRow)
+        setCoordinates({left: l, top: t})
+    }
+
+    const handleChange = e => {
+        e.preventDefault()
+        if (e.target.className.match('cinema-admin-name-input')) {
+            setName({name: e.target.value, clicked: false})
+        }
+        if (e.target.className.match('cinema-admin-city-input')) {
+            setCity({city: e.target.value, clicked: false})
+        }
+    }
+
+    useEffect(() => {
+        setFilteredCinemas(
+            cinemas.filter(cinema => cinema.name.toLowerCase().match(name.name.toLowerCase()))
+        )
+    }, [name.name, cinemas])
+
+    useEffect(() => {
+        setFilteredCinemas(
+            cinemas.filter(cinema => cinema.address.city.toLowerCase().match(city.city.toLowerCase()))
+        )
+    }, [city.city, cinemas])
+
+    const rowData = row => {
+        const data = []
+        for (let j in row.cells) {
+            if (row.cells.hasOwnProperty(j)) {
+                const col = row.cells[j]
+                data.push(col.firstChild.nodeValue)
+            }
+        }
+        setCinemaInfoToDelete({id: data[0], name: data[1], city: data[2]})
+    }
 
     return (
         <div>
@@ -395,18 +449,37 @@ const ShowAllCinemasPopup = (props) => {
                         <table className='data-list-admin'>
                             <thead className='data-list-admin--header'>
                             <tr>
-                                <th>Pos.</th>
+                                <th>Database ID</th>
                                 <th>Cinema name</th>
                                 <th>Address</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input className='data-list-admin--search cinema-admin-name-input'
+                                           type="search"
+                                           value={name.name}
+                                           onChange={handleChange}
+                                           placeholder='Search...'
+                                    />
+                                </td>
+                                <td>
+                                    <input className='data-list-admin--search cinema-admin-city-input'
+                                           type="search"
+                                           value={city.city}
+                                           onChange={handleChange}
+                                           placeholder='Search...'
+                                    />
+                                </td>
+                            </tr>
                             {
-
-                                cinemas.map((cinema, idx) => {
+                                filteredCinemas.map((cinema, idx) => {
                                     return (
-                                        <tr key={cinema.id}>
-                                            <td>{idx + 1}</td>
+                                        <tr key={cinema.id}
+                                            onClick={handleElementClick}>
+                                            <td>{cinema.id}</td>
                                             <td>{cinema.name}</td>
                                             <td>{cinema.address.city}</td>
                                         </tr>
@@ -416,6 +489,11 @@ const ShowAllCinemasPopup = (props) => {
                             </tbody>
                         </table>
                     </div>
+                    <ObjectOptions showOptions={showOptions} setShowOptions={setShowOptions}
+                                   coordinates={coordinates} setCoordinates={setCoordinates}
+                                   cinemaInfoToDelete={cinemaInfoToDelete}
+                                   setCinemaInfoToDelete={setCinemaInfoToDelete}
+                    />
                 </div>
             }
         </div>
@@ -424,6 +502,7 @@ const ShowAllCinemasPopup = (props) => {
 
 const ShowAllUsersPopup = (props) => {
     const [users, setUsers] = useState([])
+    const [showOptions, setShowOptions] = useState(false)
 
     const loadData = async () => {
         await fetch('http://localhost:5000/user')
@@ -455,6 +534,7 @@ const ShowAllUsersPopup = (props) => {
                                 <th>Age</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Options</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -462,7 +542,9 @@ const ShowAllUsersPopup = (props) => {
 
                                 users.map((user, idx) => {
                                     return (
-                                        <tr key={user.id}>
+                                        <tr key={user.id}
+                                            onClick={setShowOptions(!showOptions)}
+                                        >
                                             <td>{idx + 1}</td>
                                             <td>{user.username}</td>
                                             <td>{user.age}</td>
@@ -474,6 +556,87 @@ const ShowAllUsersPopup = (props) => {
                             }
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            }
+            {/*    <ObjectOptions showOptions={showOptions} setShowOptions={setShowOptions}/>*/}
+        </div>
+    )
+}
+
+const ObjectOptions = props => {
+    const [deleteStatement, setDeleteStatement] = useState(false)
+
+    const deleteCinema = async (cinemaId) => {
+        console.log(cinemaId)
+        const response = await fetch(BASE_CINEMA_URL + `/${cinemaId}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+        return await response.json()
+    }
+
+    return (
+        <div>
+            {
+                props.showOptions &&
+                <div>
+                    <div className='object__options' id='object__options__id'
+                         style={props.coordinates}>
+                    <span className='object__options--close'
+                          onClick={() => {
+                              props.setShowOptions(!props.showOptions)
+                              setDeleteStatement(false)
+                          }}
+                    >&#10005;</span>
+                        <ul>
+                            <li className='object__options--item'
+                                onClick={() => setDeleteStatement(true)}
+                            >
+                                <span className='icon-options'><MdDeleteForever/></span>
+                                Delete
+                                <span className='object__options--item--action'>&gt;</span>
+
+                                {
+                                    deleteStatement &&
+                                    <ul className='object__options--item--nested'>
+                                        <li className='object__options--delete--statement'>
+                                            <p>
+                                                Do you really want to permanently
+                                                delete {props.cinemaInfoToDelete.name} cinema?
+                                            </p>
+                                            <button
+                                                className='object__options--delete--statement-btn object__options--delete--statement--yes'
+                                                onClick={() => {
+                                                    deleteCinema(props.cinemaInfoToDelete.id)
+                                                    props.setShowOptions(!props.showOptions)
+                                                    setDeleteStatement(!deleteStatement)
+                                                }}>
+                                                Yes
+                                            </button>
+                                            <button
+                                                className='object__options--delete--statement-btn object__options--delete--statement--cancel'
+                                                onClick={() => {
+                                                    props.setShowOptions(!props.showOptions)
+                                                    setDeleteStatement(!deleteStatement)
+                                                }}>
+                                                Cancel
+                                            </button>
+                                        </li>
+                                    </ul>
+                                }
+
+                            </li>
+                            <li className='object__options--item'>
+                                <span className='icon-options'><MdUpdate/></span>
+                                Update
+                                <span className='object__options--item--action'>&gt;</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             }

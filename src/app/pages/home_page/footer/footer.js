@@ -8,13 +8,6 @@ class Footer extends Component {
     render() {
         return (
             <footer>
-                <div className="font-link socials">
-                    <h2>Socials</h2>
-                    <div className={"icon twitter-icon"}><FaTwitter/></div>
-                    <div className={"icon facebook-icon"}><FaFacebook/></div>
-                    <div className={"icon instagram-icon"}><FaInstagram/></div>
-                    <div className={"icon google-icon"}><FaGoogle/></div>
-                </div>
                 <div className="footer-info">
                     <div className="row">
                         <div className="col span-1-of-3">
