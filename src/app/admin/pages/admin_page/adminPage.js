@@ -132,7 +132,6 @@ const AddCinemaPopup = (props) => {
             places: ""
         }
     )
-    const [cinemaRooms, setCinemaRoomsArray] = useState([])
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const addCinema = async (cinema) => {
         const response = await fetch(BASE_CINEMA_URL, {
@@ -149,7 +148,9 @@ const AddCinemaPopup = (props) => {
 
     const submit = (e) => {
         e.preventDefault()
-        setCinemaRoomsArray(array => [...array, cinemaRoomSingleObject])
+
+        const cinemaRooms = []
+        cinemaRooms.push(cinemaRoomSingleObject)
 
         const mergedCinema = {
             ...cinemaName,
@@ -161,7 +162,6 @@ const AddCinemaPopup = (props) => {
         setCinemaName({name: ''})
         setAddress({city: '', street: '', number: ''})
         setCinemaRoomSingleObject({name: '', rows: '', places: ''})
-        setCinemaRoomsArray([])
     }
 
     const handleNameChange = e => {
@@ -396,6 +396,7 @@ const ShowAllCinemasPopup = (props) => {
     const [filteredCinemas, setFilteredCinemas] = useState([])
 
     const handleElementClick = e => {
+        setChange(true)
         setShowOptions(true)
 
         const l = e.clientX + 'px'
@@ -614,7 +615,7 @@ const ObjectOptions = props => {
                                                 delete {props.cinemaInfoToDelete.name} cinema?
                                             </p>
                                             <button
-                                                className='object__options--delete--statement-btn object__options--delete--statement--yes'
+                                                className='object__options--delete--statement-btn object__options--delete--statement-btn--yes'
                                                 onClick={() => {
                                                     deleteCinema(props.cinemaInfoToDelete.id)
                                                     props.setShowOptions(!props.showOptions)
@@ -623,7 +624,7 @@ const ObjectOptions = props => {
                                                 Yes
                                             </button>
                                             <button
-                                                className='object__options--delete--statement-btn object__options--delete--statement--cancel'
+                                                className='object__options--delete--statement-btn object__options--delete--statement-btn--cancel'
                                                 onClick={() => {
                                                     props.setShowOptions(!props.showOptions)
                                                     setDeleteStatement(!deleteStatement)

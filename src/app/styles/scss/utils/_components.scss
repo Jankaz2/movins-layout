@@ -75,10 +75,24 @@
       border: 2px solid $color-navy-blue;
       transition: all .2s;
 
-      &:active,
-      &:hover {
-        background-color: $color-navy-blue;
+      &--cancel {
+        background-color: $color-navy-blue-2;
         color: $color-white-dark;
+
+        &:active,
+        &:hover {
+          background-color: $color-navy-blue;
+        }
+      }
+
+      &--yes {
+        margin-right: 1rem;
+
+        &:active,
+        &:hover {
+          background-color: $color-navy-blue;
+          color: $color-white-dark;
+        }
       }
     }
   }
