@@ -100,7 +100,7 @@ const WebStart = () => {
     const [hasFocus, setFocus] = useState({name: false, city: false})
     const [filteredCinemas, setFilteredCinemas] = useState([])
 
-    const {cinemas, setCinemas} = useContext(DataContext)
+    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
 
     const handleChange = e => {
         e.preventDefault()

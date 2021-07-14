@@ -133,7 +133,7 @@ const AddCinemaPopup = (props) => {
         }
     )
     const [cinemaRooms, setCinemaRoomsArray] = useState([])
-
+    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const addCinema = async (cinema) => {
         const response = await fetch(BASE_CINEMA_URL, {
             method: 'POST',
@@ -143,6 +143,7 @@ const AddCinemaPopup = (props) => {
             }
         })
 
+        setChange(true)
         return await response.json();
     }
 
@@ -157,7 +158,7 @@ const AddCinemaPopup = (props) => {
         }
 
         addCinema(mergedCinema)
-        setCinemaName('')
+        setCinemaName({name: ''})
         setAddress({city: '', street: '', number: ''})
         setCinemaRoomSingleObject({name: '', rows: '', places: ''})
         setCinemaRoomsArray([])
@@ -201,25 +202,25 @@ const AddCinemaPopup = (props) => {
                                            type="text" id='name'
                                            onChange={handleNameChange}
                                            value={cinemaName.name}
-                                           placeholder='Name'/>
+                                    />
                                     <label htmlFor="city">City</label>
                                     <input className='primary-input popup__input'
                                            type="text" id='city'
                                            onChange={handleAddressChange}
                                            value={address.city}
-                                           placeholder='City'/>
+                                    />
                                     <label htmlFor="street">Street</label>
                                     <input className='primary-input popup__input'
                                            type="text" id='street'
                                            onChange={handleAddressChange}
                                            value={address.street}
-                                           placeholder='Street'/>
+                                    />
                                     <label htmlFor="number">Number</label>
                                     <input className='primary-input popup__input'
                                            type="number" id='number'
                                            onChange={handleAddressChange}
                                            value={address.number}
-                                           placeholder='Number'/>
+                                    />
                                 </div>
                                 <div className="col span-1-of-2">
                                     <label htmlFor="name">Cinema Room name</label>
@@ -227,19 +228,19 @@ const AddCinemaPopup = (props) => {
                                            type="text" id='name'
                                            onChange={handleCinemaRoomsChange}
                                            value={cinemaRoomSingleObject.name}
-                                           placeholder='Name'/>
+                                    />
                                     <label htmlFor="rows">Rows</label>
                                     <input className='primary-input popup__input'
                                            type="number" id='rows'
                                            onChange={handleCinemaRoomsChange}
                                            value={cinemaRoomSingleObject.rows}
-                                           placeholder='Rows'/>
+                                    />
                                     <label htmlFor="places">Places</label>
                                     <input className='primary-input popup__input'
                                            type="number" id='places'
                                            onChange={handleCinemaRoomsChange}
                                            value={cinemaRoomSingleObject.places}
-                                           placeholder='Places'/>
+                                    />
                                     <input className='popup__input--submit'
                                            type="submit" id='submit'
                                            value='create'/>
@@ -292,7 +293,7 @@ const AddNewAdminAccountPopup = (props) => {
 }
 
 const AddCinemaRoomToCinema = (props) => {
-    const {cinemas, setCinemas} = useContext(DataContext)
+    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const [cinemaRoom, setCinemaRoom] = useState({
         name: "",
         rows: "",
@@ -328,6 +329,7 @@ const AddCinemaRoomToCinema = (props) => {
                 }
             })
 
+        setChange(true)
         return await response.json()
     }
 
@@ -385,7 +387,7 @@ const AddCinemaRoomToCinema = (props) => {
 }
 
 const ShowAllCinemasPopup = (props) => {
-    const {cinemas, setCinemas} = useContext(DataContext)
+    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const [showOptions, setShowOptions] = useState(false)
     const [coordinates, setCoordinates] = useState({left: "", top: ""})
     const [cinemaInfoToDelete, setCinemaInfoToDelete] = useState({id: 0, name: "", city: ""})
@@ -566,6 +568,7 @@ const ShowAllUsersPopup = (props) => {
 
 const ObjectOptions = props => {
     const [deleteStatement, setDeleteStatement] = useState(false)
+    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
 
     const deleteCinema = async (cinemaId) => {
         console.log(cinemaId)
@@ -577,6 +580,7 @@ const ObjectOptions = props => {
                 }
             })
 
+        setChange(true)
         return await response.json()
     }
 
