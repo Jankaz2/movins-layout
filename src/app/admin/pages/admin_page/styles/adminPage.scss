@@ -106,6 +106,10 @@
 .react-select {
   width: 30rem;
   margin: auto;
+
+  &__update {
+    margin-bottom: 1rem;
+  }
 }
 
 .data-list-admin {

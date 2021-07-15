@@ -18,6 +18,7 @@ const AdminPage = () => {
     const [showAllCinemas, setShowAllCinemas] = useState(false)
     const [showAllUsers, setShowAllUsers] = useState(false)
     const [showAddCinemaRoomToCinema, setShowAddCinemaRoomToCinema] = useState(false)
+    const [showUpdateCinema, setShowUpdateCinema] = useState(false)
 
     useEffect(() => {
         document.title = 'Movins | ADMIN system'
@@ -93,13 +94,15 @@ const AdminPage = () => {
                         </button>
                     </div>
                     <div className="menu-section__option col span-1-of-3">
-                        <h3 className="heading-tertiary">Add cinema</h3>
+                        <h3 className="heading-tertiary">Update cinema</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button">Create</button>
+                        <button className="menu-section__button"
+                                onClick={() => setShowUpdateCinema(!showUpdateCinema)}
+                        >Update</button>
                     </div>
                 </div>
             </section>
@@ -110,6 +113,7 @@ const AdminPage = () => {
             <ShowAllUsersPopup showAllUsers={showAllUsers} setShowAllUsers={setShowAllUsers}/>
             <AddCinemaRoomToCinema showAddCinemaRoomToCinema={showAddCinemaRoomToCinema}
                                    setShowAddCinemaRoomToCinema={setShowAddCinemaRoomToCinema}/>
+            <UpdateCinema showUpdateCinema={showUpdateCinema} setShowUpdateCinema={setShowUpdateCinema}/>
         </div>
     )
 }
@@ -567,6 +571,162 @@ const ShowAllUsersPopup = (props) => {
     )
 }
 
+const UpdateCinema = props => {
+    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
+    const [cinemaName, setCinemaName] = useState({name: ""})
+    const [selectCinemaName, setSelectCinemaName] = useState("")
+    const [address, setAddress] = useState(
+        {
+            city: "",
+            street: "",
+            number: ""
+        }
+    )
+    const [cinemaRoomSingleObject, setCinemaRoomSingleObject] = useState(
+        {
+            name: "",
+            rows: "",
+            places: ""
+        }
+    )
+
+    const options = []
+    cinemas.forEach(cinema => {
+        options.push({value: cinema.name, label: cinema.name})
+    })
+
+    const updateCinema = async (name, cinema) => {
+        const response = await fetch(BASE_CINEMA_URL + `/${name}`, {
+            method: 'PUT',
+            body: JSON.stringify(cinema),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        setChange(true)
+        return await response.json();
+    }
+
+    const submit = (e) => {
+        e.preventDefault()
+
+        const cinemaRooms = []
+        cinemaRooms.push(cinemaRoomSingleObject)
+
+        const mergedCinema = {
+            ...cinemaName,
+            address,
+            cinemaRooms
+        }
+
+        updateCinema(cinemaName, mergedCinema)
+        setCinemaName({name: ''})
+        setAddress({city: '', street: '', number: ''})
+        setCinemaRoomSingleObject({name: '', rows: '', places: ''})
+    }
+
+    const handleNameChange = e => {
+        const newCinema = {...cinemaName}
+        newCinema[e.target.id] = e.target.value
+        setCinemaName(newCinema)
+    }
+
+    const handleAddressChange = e => {
+        const newAddress = {...address}
+        newAddress[e.target.id] = e.target.value
+        setAddress(newAddress)
+    }
+
+    const handleCinemaRoomsChange = (e) => {
+        const newCinemaRoom = {...cinemaRoomSingleObject}
+        newCinemaRoom[e.target.id] = e.target.value
+        setCinemaRoomSingleObject(newCinemaRoom)
+    }
+
+    const onSelectChange = (e) => {
+        setSelectCinemaName(e.value)
+    }
+
+    return (
+        <div>
+            {
+                props.showUpdateCinema &&
+                <div className='popup'>
+                    <div className="popup__inside">
+                        <span className='popup__inside--close'
+                              onClick={() => props.setShowUpdateCinema(!props.showUpdateCinema)}
+                        >&#10005;</span>
+                        <div className="row">
+                            <form
+                                onSubmit={(e) => submit(e)}
+                                action=""
+                                className="form">
+                                <div className="col span-1-of-2">
+                                    <label htmlFor="name">Cinema you want to update</label>
+                                    <Select className='react-select react-select__update' name=""
+                                            defaultValue={options[0]}
+                                            options={options}
+                                            onChange={onSelectChange}
+                                            id='name'
+                                    />
+                                    <label htmlFor="name">Cinema name</label>
+                                    <input className='primary-input popup__input'
+                                           type="text" id='name'
+                                           onChange={handleNameChange}
+                                           value={cinemaName.name}
+                                    />
+                                    <label htmlFor="city">City</label>
+                                    <input className='primary-input popup__input'
+                                           type="text" id='city'
+                                           onChange={handleAddressChange}
+                                           value={address.city}
+                                    />
+                                    <label htmlFor="street">Street</label>
+                                    <input className='primary-input popup__input'
+                                           type="text" id='street'
+                                           onChange={handleAddressChange}
+                                           value={address.street}
+                                    />
+                                    <label htmlFor="number">Number</label>
+                                    <input className='primary-input popup__input'
+                                           type="number" id='number'
+                                           onChange={handleAddressChange}
+                                           value={address.number}
+                                    />
+                                </div>
+                                <div className="col span-1-of-2 ">
+                                    <label htmlFor="name">Cinema Room name</label>
+                                    <input className='primary-input popup__input'
+                                           type="text" id='name'
+                                           onChange={handleCinemaRoomsChange}
+                                           value={cinemaRoomSingleObject.name}
+                                    />
+                                    <label htmlFor="rows">Rows</label>
+                                    <input className='primary-input popup__input'
+                                           type="number" id='rows'
+                                           onChange={handleCinemaRoomsChange}
+                                           value={cinemaRoomSingleObject.rows}
+                                    />
+                                    <label htmlFor="places">Places</label>
+                                    <input className='primary-input popup__input'
+                                           type="number" id='places'
+                                           onChange={handleCinemaRoomsChange}
+                                           value={cinemaRoomSingleObject.places}
+                                    />
+                                    <input className='popup__input--submit'
+                                           type="submit" id='submit'
+                                           value='update'/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    )
+}
+
 const ObjectOptions = props => {
     const [deleteStatement, setDeleteStatement] = useState(false)
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
@@ -574,12 +734,7 @@ const ObjectOptions = props => {
     const deleteCinema = async (cinemaId) => {
         console.log(cinemaId)
         const response = await fetch(BASE_CINEMA_URL + `/${cinemaId}`,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+            {method: 'DELETE',})
 
         setChange(true)
         return await response.json()
