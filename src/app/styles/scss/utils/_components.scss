@@ -106,3 +106,13 @@
   font-size: 1.6rem;
   margin-top: .3rem;
 }
+
+.error-message {
+  color: $color-red;
+  font-weight: 700;
+  font-size: 1.1rem;
+
+  &__syntax {
+    color: $color-yellow-warning;
+  }
+}

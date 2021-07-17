@@ -7,6 +7,7 @@ import {FaGlobe, FaVideo} from "react-icons/fa";
 import Select from 'react-select'
 import {MdDeleteForever, MdUpdate} from "react-icons/md"
 import {GrUpdate} from 'react-icons/gr'
+import userEvent from "@testing-library/user-event";
 
 const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 const BASE_USER_URL = 'http://localhost:5000/user'
@@ -102,7 +103,8 @@ const AdminPage = () => {
                         </p>
                         <button className="menu-section__button"
                                 onClick={() => setShowUpdateCinema(!showUpdateCinema)}
-                        >Update</button>
+                        >Update
+                        </button>
                     </div>
                 </div>
             </section>
@@ -121,19 +123,26 @@ const AdminPage = () => {
 export default AdminPage
 
 const AddCinemaPopup = (props) => {
-    const [cinemaName, setCinemaName] = useState({name: ""})
+    const [error, setError] = useState({
+        name: false,
+        city: false,
+        street: false,
+        number: false,
+        cinemaRoomName: false,
+        rows: false,
+        places: false
+    })
+    const [cinemaName, setCinemaName] = useState({name: "", focused: false})
     const [address, setAddress] = useState(
         {
-            city: "",
-            street: "",
-            number: ""
+            city: "", street: "", number: "",
+            cityFocused: false, streetFocused: false, numberFocused: false
         }
     )
     const [cinemaRoomSingleObject, setCinemaRoomSingleObject] = useState(
         {
-            name: "",
-            rows: "",
-            places: ""
+            name: "", rows: "", places: "",
+            nameFocused: false, rowsFocused: false, placesFocused: false
         }
     )
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
@@ -170,18 +179,67 @@ const AddCinemaPopup = (props) => {
 
     const handleNameChange = e => {
         const newCinema = {...cinemaName}
+        if (!e.target.value.match(/^[A-Za-z ]+$/) || e.target.value.length < 4) {
+            setError({name: true})
+        } else {
+            setError({name: false})
+        }
+
         newCinema[e.target.id] = e.target.value
         setCinemaName(newCinema)
     }
 
     const handleAddressChange = e => {
         const newAddress = {...address}
+        if (e.target.id === 'city' &&
+            (!e.target.value.match(/^[A-Z][a-z]+$/) || e.target.value.length < 3)) {
+            setError({city: true})
+        } else if (e.target.id === 'city') {
+            setError({city: false})
+        }
+
+        if (e.target.id === 'street' &&
+            (!e.target.value.match(/^[A-Z][a-z]+$/) || e.target.value.length < 3)) {
+            setError({street: true})
+        } else if (e.target.id === 'street') {
+            setError({street: false})
+        }
+
+        if (e.target.id === 'number' &&
+            (!Number.isInteger(Number(e.target.value)) || parseInt(e.target.value) < 1)) {
+            setError({number: true})
+        } else if (e.target.id === 'number') {
+            setError({number: false})
+        }
+
         newAddress[e.target.id] = e.target.value
         setAddress(newAddress)
     }
 
     const handleCinemaRoomsChange = (e) => {
         const newCinemaRoom = {...cinemaRoomSingleObject}
+
+        if (e.target.id === 'name' &&
+            (!e.target.value.match(/^[A-Za-z ]+$/) || e.target.value.length < 4)) {
+            setError({cinemaRoomName: true})
+        } else if (e.target.id === 'name') {
+            setError({cinemaRoomName: false})
+        }
+
+        if (e.target.id === 'rows' &&
+            (!Number.isInteger(Number(e.target.value)) || parseInt(e.target.value) < 1)) {
+            setError({rows: true})
+        } else if (e.target.id === 'rows') {
+            setError({rows: false})
+        }
+
+        if (e.target.id === 'places' &&
+            (!Number.isInteger(Number(e.target.value)) || parseInt(e.target.value) < 1)) {
+            setError({places: true})
+        } else if (e.target.id === 'places') {
+            setError({places: false})
+        }
+
         newCinemaRoom[e.target.id] = e.target.value
         setCinemaRoomSingleObject(newCinemaRoom)
     }
@@ -202,51 +260,123 @@ const AddCinemaPopup = (props) => {
                                 className="form form__add-cinema">
                                 <div className="col span-1-of-2">
                                     <label htmlFor="name">Cinema name</label>
+                                    {
+                                        error.name && cinemaName.focused ?
+                                            <p className='error-message'>
+                                                Length must be greater than 3<br/>
+                                                Syntax must be: <span
+                                                className='error-message__syntax'> /^[A-Za-z ]+$/</span>
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="text" id='name'
                                            onChange={handleNameChange}
+                                           onFocus={() => setCinemaName({focused: true})}
+                                           onBlur={() => setCinemaName({focused: false})}
                                            value={cinemaName.name}
+                                           required={true}
                                     />
                                     <label htmlFor="city">City</label>
+                                    {
+                                        error.city && address.cityFocused ?
+                                            <p className='error-message'>
+                                                Length must be greater than 2<br/>
+                                                Syntax must be: <span
+                                                className='error-message__syntax'> /^[A-Z][a-z]+$/</span>
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="text" id='city'
                                            onChange={handleAddressChange}
+                                           onFocus={() => setAddress({cityFocused: true})}
+                                           onBlur={() => setAddress({cityFocused: false})}
                                            value={address.city}
+                                           required={true}
                                     />
                                     <label htmlFor="street">Street</label>
+                                    {
+                                        error.street && address.streetFocused ?
+                                            <p className='error-message'>
+                                                Length must be greater than 2<br/>
+                                                Syntax must be: <span
+                                                className='error-message__syntax'> /^[A-Z][a-z]+$/</span>
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="text" id='street'
                                            onChange={handleAddressChange}
+                                           onFocus={() => setAddress({streetFocused: true})}
+                                           onBlur={() => setAddress({streetFocused: false})}
                                            value={address.street}
+                                           required={true}
                                     />
                                     <label htmlFor="number">Number</label>
+                                    {
+                                        error.number && address.numberFocused ?
+                                            <p className='error-message'>
+                                                Number must be integer and greater than 0
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="number" id='number'
                                            onChange={handleAddressChange}
+                                           onFocus={() => setAddress({numberFocused: true})}
+                                           onBlur={() => setAddress({numberFocused: false})}
                                            value={address.number}
+                                           required={true}
                                     />
                                 </div>
                                 <div className="col span-1-of-2">
                                     <label htmlFor="name">Cinema Room name</label>
+                                    {
+                                        error.cinemaRoomName && cinemaRoomSingleObject.nameFocused ?
+                                            <p className='error-message'>
+                                                Length must be greater than 2<br/>
+                                                Syntax must be: <span
+                                                className='error-message__syntax'> /^[A-Za-z ]+$/</span>
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="text" id='name'
                                            onChange={handleCinemaRoomsChange}
                                            value={cinemaRoomSingleObject.name}
+                                           onFocus={() => setCinemaRoomSingleObject({nameFocused: true})}
+                                           onBlur={() => setCinemaRoomSingleObject({nameFocused: false})}
+                                           required={true}
                                     />
                                     <label htmlFor="rows">Rows</label>
+                                    {
+                                        error.rows && cinemaRoomSingleObject.rowsFocused ?
+                                            <p className='error-message'>
+                                                Number must be integer and greater than 0
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="number" id='rows'
                                            onChange={handleCinemaRoomsChange}
+                                           onFocus={() => setCinemaRoomSingleObject({rowsFocused: true})}
+                                           onBlur={() => setCinemaRoomSingleObject({rowsFocused: false})}
                                            value={cinemaRoomSingleObject.rows}
+                                           required={true}
                                     />
                                     <label htmlFor="places">Places</label>
+                                    {
+                                        error.places && cinemaRoomSingleObject.placesFocused ?
+                                            <p className='error-message'>
+                                                Number must be integer and greater than 0
+                                            </p> : null
+                                    }
                                     <input className='primary-input popup__input'
                                            type="number" id='places'
                                            onChange={handleCinemaRoomsChange}
+                                           onFocus={() => setCinemaRoomSingleObject({placesFocused: true})}
+                                           onBlur={() => setCinemaRoomSingleObject({placesFocused: false})}
                                            value={cinemaRoomSingleObject.places}
+                                           required={true}
                                     />
                                     <input className='popup__input--submit'
-                                           type="submit" id='submit'
+                                           type="submit"
+                                           id='submit'
                                            value='create'/>
                                 </div>
                             </form>
@@ -297,11 +427,15 @@ const AddNewAdminAccountPopup = (props) => {
 }
 
 const AddCinemaRoomToCinema = (props) => {
+    const [error, setError] = useState({
+        name: false,
+        rows: false,
+        places: false
+    })
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const [cinemaRoom, setCinemaRoom] = useState({
-        name: "",
-        rows: "",
-        places: ""
+        name: "", rows: "", places: "",
+        nameFocused: false, rowsFocused: false, placesFocused: false
     })
     const [cinemaName, setCinemaName] = useState("")
 
@@ -312,6 +446,27 @@ const AddCinemaRoomToCinema = (props) => {
 
     const handleChange = e => {
         const newCinemaRoom = {...cinemaRoom}
+
+        if (e.target.id === 'name' &&
+            (!e.target.value.match(/^[A-Za-z ]+$/) || e.target.value.length < 4)) {
+            setError({name: true})
+        } else if (e.target.id === 'name') {
+            setError({name: false})
+        }
+
+        if (e.target.id === 'rows' &&
+            (!Number.isInteger(Number(e.target.value)) || parseInt(e.target.value) < 1)) {
+            setError({rows: true})
+        } else if (e.target.id === 'rows') {
+            setError({rows: false})
+        }
+
+        if (e.target.id === 'places' &&
+            (!Number.isInteger(Number(e.target.value)) || parseInt(e.target.value) < 1)) {
+            setError({places: true})
+        } else if (e.target.id === 'places') {
+            setError({places: false})
+        }
         newCinemaRoom[e.target.id] = e.target.value
         setCinemaRoom(newCinemaRoom)
     }
@@ -359,25 +514,50 @@ const AddCinemaRoomToCinema = (props) => {
                                 <label htmlFor="name">Choose cinema</label>
                                 <Select className='react-select' name=""
                                         defaultValue={options[0]}
-                                    //inputValue={cinemaName}
                                         options={options}
                                         onChange={onSelectChange}
                                         id='name'
                                 />
                                 <label htmlFor="name">Cinema room name</label>
+                                {
+                                    error.name && cinemaRoom.nameFocused ?
+                                        <p className='error-message'>
+                                            Length must be greater than 2<br/>
+                                            Syntax must be: <span
+                                            className='error-message__syntax'> /^[A-Za-z ]+$/</span>
+                                        </p> : null
+                                }
                                 <input className='primary-input popup__input' type="text" id="name"
                                        onChange={handleChange}
                                        value={cinemaRoom.name}
+                                       onFocus={() => setCinemaRoom({nameFocused: true})}
+                                       onBlur={() => setCinemaRoom({nameFocused: false})}
                                        placeholder=''/>
                                 <label htmlFor="rows">Cinema room rows number</label>
+                                {
+                                    error.rows && cinemaRoom.rowsFocused ?
+                                        <p className='error-message'>
+                                            Number must be integer and greater than 0
+                                        </p> : null
+                                }
                                 <input className='primary-input popup__input' type="number" id="rows"
                                        onChange={handleChange}
                                        value={cinemaRoom.rows}
+                                       onFocus={() => setCinemaRoom({rowsFocused: true})}
+                                       onBlur={() => setCinemaRoom({rowsFocused: false})}
                                        placeholder=''/>
                                 <label htmlFor="places">Cinema room places number</label>
+                                {
+                                    error.places && cinemaRoom.placesFocused ?
+                                        <p className='error-message'>
+                                            Number must be integer and greater than 0
+                                        </p> : null
+                                }
                                 <input className='primary-input popup__input' type="number" id="places"
                                        onChange={handleChange}
                                        value={cinemaRoom.places}
+                                       onFocus={() => setCinemaRoom({placesFocused: true})}
+                                       onBlur={() => setCinemaRoom({placesFocused: false})}
                                        placeholder=''/>
                                 <input className='popup__input--submit' type="submit" id='submit'
                                        value='add'/>
@@ -620,7 +800,7 @@ const UpdateCinema = props => {
             cinemaRooms
         }
 
-        updateCinema(cinemaName, mergedCinema)
+        updateCinema(selectCinemaName, mergedCinema)
         setCinemaName({name: ''})
         setAddress({city: '', street: '', number: ''})
         setCinemaRoomSingleObject({name: '', rows: '', places: ''})
@@ -657,19 +837,19 @@ const UpdateCinema = props => {
                         <span className='popup__inside--close'
                               onClick={() => props.setShowUpdateCinema(!props.showUpdateCinema)}
                         >&#10005;</span>
-                        <div className="row">
-                            <form
-                                onSubmit={(e) => submit(e)}
-                                action=""
-                                className="form">
+                        <form
+                            onSubmit={(e) => submit(e)}
+                            action=""
+                            className="form">
+                            <label htmlFor="name">Cinema you want to update</label>
+                            <Select className='react-select react-select__update' name=""
+                                    defaultValue={options[0]}
+                                    options={options}
+                                    onChange={onSelectChange}
+                                    id='name'
+                            />
+                            <div className="row">
                                 <div className="col span-1-of-2">
-                                    <label htmlFor="name">Cinema you want to update</label>
-                                    <Select className='react-select react-select__update' name=""
-                                            defaultValue={options[0]}
-                                            options={options}
-                                            onChange={onSelectChange}
-                                            id='name'
-                                    />
                                     <label htmlFor="name">Cinema name</label>
                                     <input className='primary-input popup__input'
                                            type="text" id='name'
@@ -718,8 +898,8 @@ const UpdateCinema = props => {
                                            type="submit" id='submit'
                                            value='update'/>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             }
@@ -727,7 +907,8 @@ const UpdateCinema = props => {
     )
 }
 
-const ObjectOptions = props => {
+const ObjectOptions = props =>
+{
     const [deleteStatement, setDeleteStatement] = useState(false)
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
 
