@@ -32,8 +32,8 @@ body {
 .heading-secondary {
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 35px;
-  margin-bottom: 60px;
+  font-size: 3.5rem;
+  margin-bottom: 6rem;
   background-image: linear-gradient(
                   to right,
                   rgba($color-blue-light, 0.8),
@@ -48,12 +48,52 @@ body {
     transform: skewX(1.05deg) skewY(1.5deg) scale(1.05);
     text-shadow: .5 1 2rem rgba($color-black, .2);
   }
+
+  &__name {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 3.2rem;
+    margin-bottom: 3rem;
+    background-image: linear-gradient(
+                    to right,
+                    rgba($color-blue-light, 0.8),
+                    rgba($color-blue-dark, 0.8)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .1rem;
+    transition: all .2s;
+  }
 }
 
 .heading-tertiary {
   font-size: $default-font-size;
   font-weight: 700;
   text-transform: uppercase;
+
+  &__pink {
+    font-size: 2rem;
+    background-image: linear-gradient(
+                    to right,
+                    rgba($color-pink, 0.8),
+                    rgba($color-pink-2, 0.8)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .1rem;
+  }
+
+  &__blue {
+    font-size: 2rem;
+    background-image: linear-gradient(
+                    to right,
+                    rgba($color-blue-light, 0.8),
+                    rgba($color-blue-dark, 0.8)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .1rem;
+  }
 }
 
 .icon-small {

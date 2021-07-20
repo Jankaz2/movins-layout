@@ -8,57 +8,50 @@ const CinemasList = () => {
     const {cinemas, setCinemas} = useContext(DataContext)
 
     return (
-        <div>
-            <nav className='cinema-list-section-nav'>
+        <div className="cinemas-list-section">
+            <div className='cinemas-list-section__logo'>
                 <Link to="/">
-                    <span><div className="cinemas-list-section-logo">Movins</div></span>
+                    <span className='cinemas-list-section__logo--text'>Movins</span>
                 </Link>
-                <form className='cinema-list-section-form'>
-                    <input type="search" placeholder="cinema name"/>
-                    <input type="search" placeholder="city"/>
-                    <input type="submit" value="search"/>
-                </form>
-            </nav>
-            <section className="cinemas-list-section">
-                <ul>
-                    {
-                        cinemas.map((cinema, idx) => {
-                            return (
-                                <Link to={`/cinema-list/cinema/${cinema.id}`}>
-                                    <li key={cinema.id} className='font-link row'>
-                                        <div className='col span-1-of-2'>
-                                            <div className='col span-1-of-2'>
-                                                <h4>name:</h4>
-                                                <h5>{cinema.name}</h5>
-                                                <br/>
-                                            </div>
-                                            <div className='col span-1-of-2'>
-                                                <h4>city:</h4>
-                                                <h5>{cinema.address.city}</h5>
-                                            </div>
-                                        </div>
-                                        <div className='col span-1-of-2'>
-                                            <h4>Description</h4>
-                                            <br/>
-                                            <p>Lorem ipsum dolor sit amet, consectetur
-                                                adipisicing elit.
-                                                Dolor doloremque dolores id possimus, quae
-                                                quas recusandae tempora.
-                                                Aspernatur autem blanditiis corporis, dolor
-                                                eos esse facere iure
-                                                nam nemo, nostrum quibusdam, saepe
-                                                similique! Dignissimos doloremque
-                                                iusto natus quod. Accusantium, dignissimos,
-                                                laudantium.
-                                            </p>
-                                        </div>
-                                    </li>
-                                </Link>
-                            )
-                        })
-                    }
-                </ul>
-            </section>
+            </div>
+            <ul>
+                {
+                    cinemas.map((cinema, idx) => {
+                        return (
+                            <Link to={`/cinema-list/cinema/${cinema.id}`}>
+                                <li key={cinema.id}
+                                    className='cinemas-list-section__item row'>
+
+                                    <div className='col span-1-of-2'>
+                                        <h2 className='heading-secondary__name'>{cinema.name}</h2>
+                                        <h3 className='heading-tertiary__blue'>City:</h3>
+                                        <h3 className='heading-tertiary'>{cinema.address.city}</h3>
+                                        <div className='u-margin-bottom-tiny'></div>
+                                        <h3 className='heading-tertiary__blue'>Street:</h3>
+                                        <h3 className='heading-tertiary'>{cinema.address.street} {cinema.address.number}</h3>
+                                    </div>
+                                    <div className='border-line'></div>
+                                    <div className='col span-1-of-2'>
+                                        <h2 className='heading-secondary__name'>Cinema Rooms</h2>
+                                        {
+                                            cinema.cinemaRooms.map((cinemaRoom, idx) => {
+                                                return (
+                                                    <div>
+                                                        <h3 className='heading-tertiary__pink'>{cinemaRoom.name}</h3>
+                                                        <h3 className='heading-tertiary'>Rows: {cinemaRoom.rows}</h3>
+                                                        <h3 className='heading-tertiary'>Places: {cinemaRoom.places}</h3>
+                                                        <div className='u-margin-bottom-tiny'></div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </li>
+                            </Link>
+                        )
+                    })
+                }
+            </ul>
         </div>
     )
 }

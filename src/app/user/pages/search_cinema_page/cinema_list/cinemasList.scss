@@ -1,86 +1,51 @@
+@import "../../../../../app/styles/scss/utils/variables";
+
 .cinemas-list-section {
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-    background-color: #edeff2;
-    min-height: 100vh;
+  width: 100%;
+  margin: auto;
+  background-color: $color-grey-light-1;
+  min-height: 100vh;
+  text-align: center;
+
+  &__logo {
     text-align: center;
-}
+    background-color: $color-blue-medium;
 
-.cinemas-list-section-logo{
-    float: left;
-    text-transform: uppercase;
-    padding-top: 6px;
-}
+    &--text {
+      text-transform: uppercase;
+      color: $color-white-dark;
+      font-size: 5rem;
+      font-weight: 400;
+    }
+  }
 
-.cinemas-list-section-nav {
-    background-color: #0f6bb1 !important;
-    width: 100%;
-    padding: 2% 5% 2% 0;
-    height: 70px;
-    position: fixed;
-    z-index: 1;
-}
+  &__item {
+    display: block;
+    background-color: rgba($color-white, .8);
+    width: 72%;
+    padding: 1rem;
+    color: $color-grey-dark;
+    margin-bottom: 3rem;
+    transition: all .3s;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
 
-.cinema-list-section-form {
-    text-align: center;
-    padding-bottom: 10px;
-    background-color: #0f6bb1;
-}
+    &:first-child {
+      margin-top: 3rem;
+    }
 
-.cinemas-list-section h4 {
+    &:hover,
+    &:active {
+      transform: scale(1.01) translateY(-.5rem);
+    }
+  }
+
+  h4 {
     text-transform: uppercase;
     font-weight: bold;
-}
+  }
 
-.cinemas-list-section h5 {
+  h5 {
     font-weight: 400;
-}
 
-nav input {
-    position: relative;
-}
-
-nav input[type="search"] {
-    display: inline-block;
-    width: 250px;
-    padding: 10px;
-    background-color:#0c5993;
-    color: #fff;
-    border: none;
-    margin-right: 6px;
-    border-radius: 2px;
-    font-size: 14px;
-    transition: background-color .2s;
-}
-
-nav input[type="search"]:focus,
-nav input[type="search"]:focus::placeholder{
-    outline: none;
-    background-color: #fff;
-    color: #000;
-}
-
-.cinemas-list-section-logo {
-    text-transform: none !important;
-    display: block;
-    font-weight: bold;
-    margin-top: 12px;
-    padding-left: 40px;
-    width: 120px;
-    font-size: 130%;
-}
-
-.cinemas-list-section ul li {
-    display: block;
-    background-color: #fff;
-    width: 80%;
-    padding: 10px;
-    color: #000;
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
-::placeholder {
-    color: #6b95b5;
+  }
 }
