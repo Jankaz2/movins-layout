@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react"
 import {FaShoppingBasket, FaVideo, FaWindowClose} from "react-icons/fa"
 import CinemaCss from "./cinema.scss"
-import {DataContext} from "../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 function Cinema() {
     const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
@@ -56,18 +56,19 @@ function Cinema() {
     }
 
     return (
-        <div className={'cinema-page'}>
-            <nav>
-                <h2 className={'font-link'}>{mockCinema.name}</h2>
+        <div className='cinema__page'>
+            <nav className='cinema__page--nav'>
+                <h2 className='heading-secondary'>{mockCinema.name}</h2>
             </nav>
-            <section className={'cinema-section'}>
-                <ul>
+            <section className='cinema__page--section'>
+                <ul className='cinema__page--cinemas-list'>
                     {
                         mockCinema.movies.map((movie, idx) => {
                             return (
                                 <div>
                                     <div>
-                                        <li key={movie.id} className={'row'}>
+                                        <li key={movie.id}
+                                            className={'cinema__page--cinemas-list--item row'}>
                                             <div>
                                                 <div className={'col span-1-of-2 font-link'}>
                                                     <h4>Title: {movie.name}</h4><br/>
@@ -195,11 +196,9 @@ const BuyTicketSection = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <button
-                            className={'buy-ticket-btn-buying-section'}
-                        >
+                        <button className={'buy-ticket-btn-buying-section'}>
                             buy
-                            <span className={'icon-small-shopping'}><FaShoppingBasket/></span>
+                            <span className={'icon-small-shopping'}></span>
                         </button>
                     </div>
                     {

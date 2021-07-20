@@ -44,8 +44,8 @@ const ObjectOptions = props =>
                                     <ul className='object__options--item--nested'>
                                         <li className='object__options--delete--statement'>
                                             <p>
-                                                Do you really want to permanently
-                                                delete {props.cinemaInfoToDelete.name} cinema?
+                                                Do you really want to
+                                                delete {props.cinemaInfoToDelete.name} cinema permanently?
                                             </p>
                                             <button
                                                 className='object__options--delete--statement-btn object__options--delete--statement-btn--yes'

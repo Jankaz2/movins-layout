@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import HomePage from "./pages/home_page/header/homePage";
-import Footer from "./pages/home_page/footer/footer";
-import CinemasList from "./pages/search_cinema_page/cinema_list/cinemaList";
-import Cinema from "./pages/single_cinema_page/cinema/cinema"
+import HomePage from "./user/pages/home_page/header/homePage";
+import Footer from "./user/pages/home_page/footer/footer";
+import CinemasList from "./user/pages/search_cinema_page/cinema_list/cinemaList";
+import Cinema from "./user/pages/single_cinema_page/cinema/cinema"
 import {DataManager} from "./utils/data_transfer/dataManager";
 import AdminPage from "./admin/pages/admin_page/adminPage";
 

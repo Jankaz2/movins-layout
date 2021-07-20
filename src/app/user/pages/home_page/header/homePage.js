@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, useRef} from "react";
 import {useForm} from "react-hook-form"
 import HeaderCss from './styles/header.scss'
-import MainScss from '../../../styles/scss/main.scss'
+import MainScss from '../../../../styles/scss/main.scss'
 import WebStartScss from './styles/webstart.scss'
 import {Link} from "react-scroll"
 import {useHistory} from "react-router-dom"
@@ -10,7 +10,7 @@ import StepsSection from "../steps_section/stepsSection";
 import AboutUsSection from "../about_us_section/aboutUsSection";
 import Reviews from "../reviews_section/reviews";
 import Contact from "../contact_section/contact";
-import {DataContext} from "../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../utils/data_transfer/dataManager";
 import StickyNavigation from "./stickyNavigation";
 import LoginBox from "./loginBox";
 

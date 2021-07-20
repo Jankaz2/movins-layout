@@ -1,46 +1,45 @@
-@import "../../../styles/scss/utils/variables";
+@import "../../../../styles/scss/utils/variables";
 
-.cinema-page {
+.cinema__page {
     width: 100%;
     margin: auto;
     background-color: #edeff2;
     min-height: 100vh;
     text-align: center;
     font-size: 17px;
+
+    &--nav {
+        font-weight: bold;
+        color: #000;
+        text-transform: uppercase;
+        width: 100%;
+        padding: 2% 5% 2% 0;
+        height: 70px;
+        z-index: 1;
+    }
+
+    &--section {
+        min-height: 100vh;
+        padding: 0 0 30px 0;
+    }
+
+    &--cinemas-list {
+        list-style: none;
+        width: 80%;
+        margin: auto;
+        text-align: center;
+
+        &--item {
+            display: block;
+            padding: 10px;
+            color: #000;
+            margin: 30px auto 0 auto;
+            background-color: #fff;
+        }
+    }
 }
 
-.cinema-page nav {
-    font-weight: bold;
-    color: #000;
-    text-transform: uppercase;
-    width: 100%;
-    padding: 2% 5% 2% 0;
-    height: 70px;
-    z-index: 1;
-}
 
-.cinema-page nav h2 {
-}
-
-.cinema-section {
-    min-height: 100vh;
-    padding: 0 0 30px 0;
-}
-
-.cinema-section ul {
-    list-style: none;
-    width: 80%;
-    margin: auto;
-    text-align: center;
-}
-
-.cinema-section ul li {
-    display: block;
-    padding: 10px;
-    color: #000;
-    margin: 30px auto 0 auto;
-    background-color: #fff;
-}
 
 .buy-ticket-btn-buying-section,
 .buy-ticket-btn {
@@ -55,15 +54,13 @@
     border: none;
     border-radius: 10px;
     transition: background-color .2s;
-}
 
-.buy-ticket-btn-buying-section:hover,
-.buy-ticket-btn-buying-section:active,
-.buy-ticket-btn:active,
-.buy-ticket-btn:hover {
-    background-color: #1da1f2;
-    outline: none;
-    cursor: pointer;
+    &:active,
+    &:hover {
+        background-color: #1da1f2;
+        outline: none;
+        cursor: pointer;
+    }
 }
 
 .buy-ticket-btn-buying-section {

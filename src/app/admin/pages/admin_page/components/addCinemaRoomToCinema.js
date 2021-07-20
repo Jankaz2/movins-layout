@@ -12,9 +12,12 @@ const AddCinemaRoomToCinema = (props) => {
     })
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const [cinemaRoom, setCinemaRoom] = useState({
-        name: "", rows: "", places: "",
+        name: "", rows: "", places: ""
+    })
+    const [cinemaRoomFocused, setCinemaRoomFocused] = useState({
         nameFocused: false, rowsFocused: false, placesFocused: false
     })
+
     const [cinemaName, setCinemaName] = useState("")
 
     const options = []
@@ -98,7 +101,7 @@ const AddCinemaRoomToCinema = (props) => {
                                 />
                                 <label htmlFor="name">Cinema room name</label>
                                 {
-                                    error.name && cinemaRoom.nameFocused ?
+                                    error.name && cinemaRoomFocused.nameFocused ?
                                         <p className='error-message'>
                                             Length must be greater than 2<br/>
                                             Syntax must be: <span
@@ -108,12 +111,12 @@ const AddCinemaRoomToCinema = (props) => {
                                 <input className='primary-input popup__input' type="text" id="name"
                                        onChange={handleChange}
                                        value={cinemaRoom.name}
-                                       onFocus={() => setCinemaRoom({nameFocused: true})}
-                                       onBlur={() => setCinemaRoom({nameFocused: false})}
+                                       onFocus={() => setCinemaRoomFocused({nameFocused: true})}
+                                       onBlur={() => setCinemaRoomFocused({nameFocused: false})}
                                        placeholder=''/>
                                 <label htmlFor="rows">Cinema room rows number</label>
                                 {
-                                    error.rows && cinemaRoom.rowsFocused ?
+                                    error.rows && cinemaRoomFocused.rowsFocused ?
                                         <p className='error-message'>
                                             Number must be integer and greater than 0
                                         </p> : null
@@ -121,12 +124,12 @@ const AddCinemaRoomToCinema = (props) => {
                                 <input className='primary-input popup__input' type="number" id="rows"
                                        onChange={handleChange}
                                        value={cinemaRoom.rows}
-                                       onFocus={() => setCinemaRoom({rowsFocused: true})}
-                                       onBlur={() => setCinemaRoom({rowsFocused: false})}
+                                       onFocus={() => setCinemaRoomFocused({rowsFocused: true})}
+                                       onBlur={() => setCinemaRoomFocused({rowsFocused: false})}
                                        placeholder=''/>
                                 <label htmlFor="places">Cinema room places number</label>
                                 {
-                                    error.places && cinemaRoom.placesFocused ?
+                                    error.places && cinemaRoomFocused.placesFocused ?
                                         <p className='error-message'>
                                             Number must be integer and greater than 0
                                         </p> : null
@@ -134,8 +137,8 @@ const AddCinemaRoomToCinema = (props) => {
                                 <input className='primary-input popup__input' type="number" id="places"
                                        onChange={handleChange}
                                        value={cinemaRoom.places}
-                                       onFocus={() => setCinemaRoom({placesFocused: true})}
-                                       onBlur={() => setCinemaRoom({placesFocused: false})}
+                                       onFocus={() => setCinemaRoomFocused({placesFocused: true})}
+                                       onBlur={() => setCinemaRoomFocused({placesFocused: false})}
                                        placeholder=''/>
                                 <input className='popup__input--submit' type="submit" id='submit'
                                        value='add'/>

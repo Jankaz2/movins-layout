@@ -13,19 +13,21 @@ const AddCinemaPopup = (props) => {
         rows: false,
         places: false
     })
-    const [cinemaName, setCinemaName] = useState({name: "", focused: false})
-    const [address, setAddress] = useState(
-        {
-            city: "", street: "", number: "",
-            cityFocused: false, streetFocused: false, numberFocused: false
-        }
-    )
-    const [cinemaRoomSingleObject, setCinemaRoomSingleObject] = useState(
-        {
-            name: "", rows: "", places: "",
-            nameFocused: false, rowsFocused: false, placesFocused: false
-        }
-    )
+    const [cinemaName, setCinemaName] = useState({name: ""})
+    const [cinemaNameFocused, setCinemaNameFocused] = useState({focused: false})
+    const [address, setAddress] = useState({
+        city: "", street: "", number: ""
+    })
+    const [addressFocused, setAddressFocused] = useState({
+        cityFocused: false, streetFocused: false, numberFocused: false
+    })
+    const [cinemaRoomSingleObject, setCinemaRoomSingleObject] = useState({
+        name: "", rows: "", places: ""
+    })
+    const [cinemaRoomSingleObjectFocused, setCinemaRoomSingleObjectFocused] = useState({
+        nameFocused: false, rowsFocused: false, placesFocused: false
+    })
+
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
     const addCinema = async (cinema) => {
         const response = await fetch(BASE_CINEMA_URL, {
@@ -142,7 +144,7 @@ const AddCinemaPopup = (props) => {
                                 <div className="col span-1-of-2">
                                     <label htmlFor="name">Cinema name</label>
                                     {
-                                        error.name && cinemaName.focused ?
+                                        error.name && cinemaNameFocused.focused ?
                                             <p className='error-message'>
                                                 Length must be greater than 3<br/>
                                                 Syntax must be: <span
@@ -152,14 +154,14 @@ const AddCinemaPopup = (props) => {
                                     <input className='primary-input popup__input'
                                            type="text" id='name'
                                            onChange={handleNameChange}
-                                           onFocus={() => setCinemaName({focused: true})}
-                                           onBlur={() => setCinemaName({focused: false})}
+                                           onFocus={() => setCinemaNameFocused({focused: true})}
+                                           onBlur={() => setCinemaNameFocused({focused: false})}
                                            value={cinemaName.name}
                                            required={true}
                                     />
                                     <label htmlFor="city">City</label>
                                     {
-                                        error.city && address.cityFocused ?
+                                        error.city && addressFocused.cityFocused ?
                                             <p className='error-message'>
                                                 Length must be greater than 2<br/>
                                                 Syntax must be: <span
@@ -169,14 +171,14 @@ const AddCinemaPopup = (props) => {
                                     <input className='primary-input popup__input'
                                            type="text" id='city'
                                            onChange={handleAddressChange}
-                                           onFocus={() => setAddress({cityFocused: true})}
-                                           onBlur={() => setAddress({cityFocused: false})}
+                                           onFocus={() => setAddressFocused({cityFocused: true})}
+                                           onBlur={() => setAddressFocused({cityFocused: false})}
                                            value={address.city}
                                            required={true}
                                     />
                                     <label htmlFor="street">Street</label>
                                     {
-                                        error.street && address.streetFocused ?
+                                        error.street && addressFocused.streetFocused ?
                                             <p className='error-message'>
                                                 Length must be greater than 2<br/>
                                                 Syntax must be: <span
@@ -186,14 +188,14 @@ const AddCinemaPopup = (props) => {
                                     <input className='primary-input popup__input'
                                            type="text" id='street'
                                            onChange={handleAddressChange}
-                                           onFocus={() => setAddress({streetFocused: true})}
-                                           onBlur={() => setAddress({streetFocused: false})}
+                                           onFocus={() => setAddressFocused({streetFocused: true})}
+                                           onBlur={() => setAddressFocused({streetFocused: false})}
                                            value={address.street}
                                            required={true}
                                     />
                                     <label htmlFor="number">Number</label>
                                     {
-                                        error.number && address.numberFocused ?
+                                        error.number && addressFocused.numberFocused ?
                                             <p className='error-message'>
                                                 Number must be integer and greater than 0
                                             </p> : null
@@ -201,8 +203,8 @@ const AddCinemaPopup = (props) => {
                                     <input className='primary-input popup__input'
                                            type="number" id='number'
                                            onChange={handleAddressChange}
-                                           onFocus={() => setAddress({numberFocused: true})}
-                                           onBlur={() => setAddress({numberFocused: false})}
+                                           onFocus={() => setAddressFocused({numberFocused: true})}
+                                           onBlur={() => setAddressFocused({numberFocused: false})}
                                            value={address.number}
                                            required={true}
                                     />
@@ -210,7 +212,7 @@ const AddCinemaPopup = (props) => {
                                 <div className="col span-1-of-2">
                                     <label htmlFor="name">Cinema Room name</label>
                                     {
-                                        error.cinemaRoomName && cinemaRoomSingleObject.nameFocused ?
+                                        error.cinemaRoomName && cinemaRoomSingleObjectFocused.nameFocused ?
                                             <p className='error-message'>
                                                 Length must be greater than 2<br/>
                                                 Syntax must be: <span
@@ -221,8 +223,8 @@ const AddCinemaPopup = (props) => {
                                            type="text" id='name'
                                            onChange={handleCinemaRoomsChange}
                                            value={cinemaRoomSingleObject.name}
-                                           onFocus={() => setCinemaRoomSingleObject({nameFocused: true})}
-                                           onBlur={() => setCinemaRoomSingleObject({nameFocused: false})}
+                                           onFocus={() => setCinemaRoomSingleObjectFocused({nameFocused: true})}
+                                           onBlur={() => setCinemaRoomSingleObjectFocused({nameFocused: false})}
                                            required={true}
                                     />
                                     <label htmlFor="rows">Rows</label>
@@ -235,14 +237,14 @@ const AddCinemaPopup = (props) => {
                                     <input className='primary-input popup__input'
                                            type="number" id='rows'
                                            onChange={handleCinemaRoomsChange}
-                                           onFocus={() => setCinemaRoomSingleObject({rowsFocused: true})}
-                                           onBlur={() => setCinemaRoomSingleObject({rowsFocused: false})}
+                                           onFocus={() => setCinemaRoomSingleObjectFocused({rowsFocused: true})}
+                                           onBlur={() => setCinemaRoomSingleObjectFocused({rowsFocused: false})}
                                            value={cinemaRoomSingleObject.rows}
                                            required={true}
                                     />
                                     <label htmlFor="places">Places</label>
                                     {
-                                        error.places && cinemaRoomSingleObject.placesFocused ?
+                                        error.places && cinemaRoomSingleObjectFocused.placesFocused ?
                                             <p className='error-message'>
                                                 Number must be integer and greater than 0
                                             </p> : null
@@ -250,8 +252,8 @@ const AddCinemaPopup = (props) => {
                                     <input className='primary-input popup__input'
                                            type="number" id='places'
                                            onChange={handleCinemaRoomsChange}
-                                           onFocus={() => setCinemaRoomSingleObject({placesFocused: true})}
-                                           onBlur={() => setCinemaRoomSingleObject({placesFocused: false})}
+                                           onFocus={() => setCinemaRoomSingleObjectFocused({placesFocused: true})}
+                                           onBlur={() => setCinemaRoomSingleObjectFocused({placesFocused: false})}
                                            value={cinemaRoomSingleObject.places}
                                            required={true}
                                     />

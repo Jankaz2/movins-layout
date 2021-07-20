@@ -1,7 +1,7 @@
 import React from 'react'
 import {useForm} from "react-hook-form"
 import ContactCss from './contact.scss'
-import GridCss from "../../../utils/grid/grid.scss"
+import GridCss from "../../../../utils/grid/grid.scss"
 
 export default function Contact() {
     const {register, handleSubmit, formState: {errors}} = useForm();
