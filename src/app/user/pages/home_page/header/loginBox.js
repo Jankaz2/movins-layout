@@ -1,19 +1,21 @@
 import {FaWindowClose} from "react-icons/fa";
-import React from "react";
+import React, {useContext} from "react";
 import LoginBoxScss from './styles/loginBox.scss'
+import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 const LoginBox = (props) => {
+    const {loginBox, setLoginBox} = useContext(DataContext)
 
     return (
         <div>
             {
-                props.showLogin &&
+                loginBox &&
                 <div className='login__box'>
                     <div className="login__box--background">&nbsp;</div>
 
                     <div className='login__box--popup'>
                         <span className='login__box--popup-close'
-                              onClick={() => props.setShowLogin(!props.showLogin)}
+                              onClick={() => setLoginBox(false)}
                         ><FaWindowClose/></span>
                         <div className="login__box--boxes">
                             <div className="login__box--login-box col span-1-of-2">

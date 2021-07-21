@@ -9,6 +9,8 @@ export const DataContext = createContext({
 export const DataManager = props => {
     const [cinemas, setCinemas] = useState([])
     const [change, setChange] = useState(true)
+    const [transferredCinemas, setTransferredCinemas] = useState([])
+    const [loginBox, setLoginBox] = useState(true)
 
     const loadData = async () => {
         await fetch('http://localhost:5000/cinema')
@@ -29,7 +31,12 @@ export const DataManager = props => {
     }, [change])
 
     return (
-        <DataContext.Provider value={{cinemas, setCinemas, change, setChange}}>
+        <DataContext.Provider value={{
+            cinemas, setCinemas,
+            change, setChange,
+            transferredCinemas, setTransferredCinemas,
+            loginBox, setLoginBox
+        }}>
             {props.children}
         </DataContext.Provider>
     )
