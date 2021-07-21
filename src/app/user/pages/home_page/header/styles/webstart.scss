@@ -7,7 +7,7 @@
   transform: translate(-70%, -40%);
 
   &__find-cinema {
-     animation: moveInBottom 1.5s ease-out;
+    animation: moveInBottom 1.5s ease-out;
 
     .cinema-name-input,
     .cinema-city-input {
@@ -22,19 +22,23 @@
       border-radius: .3rem;
     }
 
-    .submit-cinemas-inputs {
+    &--submit {
       width: 12rem;
-      padding: 1.6rem;
+      padding: 1.67rem;
       text-transform: uppercase;
       text-align: center;
       background-color: $color-blue-light;
       font-weight: bold;
       border-radius: .3rem;
       color: $color-white;
+      outline: none;
+      transition: all .2s;
+      border: none;
 
       &:hover,
       &:active {
         background-color: $color-blue-dark;
+        cursor: pointer;
       }
     }
   }

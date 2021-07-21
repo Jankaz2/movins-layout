@@ -17,38 +17,52 @@ export default function Contact() {
 
     return (
         <section className='contact-us-section'>
-            <div className="contact-form">
-                <h3 className="font-link">Contact us</h3>
+            <div className="contact-us-section__form">
+                <h3 className="heading-tertiary">Contact us</h3>
                 <form action={'mailto:appcinema2021@gmail.com'}
                       method={'post'}
                       encType={'text/plain'}
                       onSubmit={handleSubmit(onSubmit)}>
-                    <label htmlFor="name">First name</label>
-                    <input type="text" className='no-outline' placeholder='First name'
+                    <label htmlFor="name"
+                           className='contact-us-section__form__label'
+                    >Name</label>
+                    <input type="text"
+                           className='no-outline contact-us-section__form__input'
                            name={"name"}
-                           {...register("name", { required: true })}
+                           {...register("name", {required: true})}
                     />
-                    <label htmlFor="surname">Surname</label>
-                    <input type="text" className='no-outline' placeholder='Surname'
+                    <label htmlFor="surname"
+                           className='contact-us-section__form__label'
+                    >Surname</label>
+                    <input type="text"
+                           className='no-outline contact-us-section__form__input'
                            name={"surname"}
-                           {...register("surname", { required: true })}
+                           {...register("surname", {required: true})}
                     />
-                    <label htmlFor="email">Email</label>
-                    <input type="email" className='no-outline' placeholder='e-mail'
+                    <label htmlFor="email"
+                           className='contact-us-section__form__label'
+                    >Email</label>
+                    <input type="email"
+                           className='no-outline contact-us-section__form__input'
                            name={"email"}
-                           {...register("email", { required: true })}
+                           {...register("email", {required: true})}
                     />
-                    <label htmlFor="subject">Subject</label>
-                    <input type="text" className='no-outline' placeholder='Subject'
+                    <label htmlFor="subject"
+                           className='contact-us-section__form__label'
+                    >Subject</label>
+                    <input type="text"
+                           className='no-outline contact-us-section__form__input'
                            name={"subject"}
-                           {...register("subject", { required: true })}
+                           {...register("subject", {required: true})}
                     />
-                    <label htmlFor="content">Message</label>
                     <textarea name="content" cols="30" rows="10"
-                              placeholder='Leave us message'
-                              {...register("content", { required: true })}
+                              placeholder='Message...'
+                              className='contact-us-section__form__textarea'
+                              {...register("content", {required: true})}
                     />
-                    <input type="submit" className='send-message-btn' value="SEND"/>
+                    <input type="submit"
+                           className='contact-us-section__form__input--submit'
+                           value="SEND"/>
                 </form>
             </div>
         </section>

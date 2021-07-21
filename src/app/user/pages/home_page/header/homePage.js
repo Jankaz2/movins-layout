@@ -159,7 +159,9 @@ const WebStart = () => {
                        onBlur={() => setFocus({city: false})}
                        value={city.city}
                 />
-                <input type="submit" value="search" className="submit-cinemas-inputs"/>
+                <input type="submit"
+                       value="search"
+                       className="webstart--page__find-cinema--submit"/>
             </form>
             <div className='webstart--page__search-boxes'>
                 <div className={
