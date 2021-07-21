@@ -5,7 +5,7 @@ import CinemasListCss from "./styles/cinemasList.scss"
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 const CinemasList = () => {
-    const {transferredCinemas} = useContext(DataContext)
+    const {transferredCinemas, setCinemaId} = useContext(DataContext)
 
     return (
         <div className="cinemas-list-section">
@@ -19,10 +19,12 @@ const CinemasList = () => {
                     transferredCinemas.length > 0 ?
                         transferredCinemas.map((cinema, idx) => {
                             return (
-                                <Link to={`/cinema-list/cinema/${cinema.id}`}>
+                                <Link
+                                    onClick={() => setCinemaId(cinema.id)}
+                                    to={`/cinema-list/cinema/${cinema.id}`}>
                                     <li key={cinema.id}
-                                        className='cinemas-list-section__item row'>
-
+                                        className='cinemas-list-section__item row'
+                                        >
                                         <div className='col span-1-of-2'>
                                             <h2 className='heading-secondary__name'>{cinema.name}</h2>
                                             <h3 className='heading-tertiary__blue'>City:</h3>

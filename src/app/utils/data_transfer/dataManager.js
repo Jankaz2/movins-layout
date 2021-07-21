@@ -7,13 +7,15 @@ export const DataContext = createContext({
 })
 
 export const DataManager = props => {
+    const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
     const [cinemas, setCinemas] = useState([])
     const [change, setChange] = useState(true)
     const [transferredCinemas, setTransferredCinemas] = useState([])
     const [loginBox, setLoginBox] = useState(true)
+    const [cinemaId, setCinemaId] = useState(null)
 
     const loadData = async () => {
-        await fetch('http://localhost:5000/cinema')
+        await fetch(BASE_CINEMA_URL)
             .then(response => response.json())
             .then(cinemas => {
                 setCinemas(cinemas.data)
@@ -35,7 +37,8 @@ export const DataManager = props => {
             cinemas, setCinemas,
             change, setChange,
             transferredCinemas, setTransferredCinemas,
-            loginBox, setLoginBox
+            loginBox, setLoginBox,
+            cinemaId, setCinemaId
         }}>
             {props.children}
         </DataContext.Provider>

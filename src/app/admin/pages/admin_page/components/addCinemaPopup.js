@@ -28,7 +28,7 @@ const AddCinemaPopup = (props) => {
         nameFocused: false, rowsFocused: false, placesFocused: false
     })
 
-    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
+    const {setChange} = useContext(DataContext)
     const addCinema = async (cinema) => {
         const response = await fetch(BASE_CINEMA_URL, {
             method: 'POST',

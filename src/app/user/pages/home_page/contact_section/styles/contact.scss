@@ -2,8 +2,9 @@
 
 .contact-us-section {
   background-image: linear-gradient(
-                  rgba(0, 0, 0, 0.7),
-                  rgba(0, 0, 0, 0.7)),
+                  to right bottom,
+                  rgba($color-blue-light, 0.8),
+                  rgba($color-blue-dark, 0.8)),
   url("../images/contact_us_background.png");
   background-position: center;
   background-size: cover;
