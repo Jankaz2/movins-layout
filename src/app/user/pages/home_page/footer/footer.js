@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import FooterCss from "./footer.scss"
+import FooterCss from "./styles/footer.scss"
 import {FaTwitter, FaFacebook, FaInstagram, FaGoogle}
     from "react-icons/fa"
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import AboutUsSectionCss from './aboutUsSection.scss'
+import AboutUsSectionCss from './styles/aboutUsSection.scss'
 import img1 from './images/pic1.png'
 import img2 from './images/pic2.png'
 import img3 from './images/pic3.png'

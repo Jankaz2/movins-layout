@@ -1,7 +1,7 @@
 import React from 'react'
 import {FaSearch, FaCamera, FaShoppingCart, FaSmile} from "react-icons/all";
 import GridCss from '../../../../utils/grid/grid.scss'
-import StepsSectionCss from './stepsSection.scss'
+import StepsSectionCss from './styles/stepsSection.scss'
 
 const StepsSection = () => {
     return (

@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react"
 import {FaShoppingBasket, FaVideo, FaWindowClose} from "react-icons/fa"
-import CinemaCss from "./cinema.scss"
+import CinemaCss from "./styles/cinema.scss"
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 function Cinema() {
