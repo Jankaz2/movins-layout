@@ -19,13 +19,23 @@
 
   &__option {
     background-color: rgba($color-grey-light-2, .8);
+    color: $color-black;
+
+    &--odd {
+      background-color: rgba($color-blue-light, .6);
+      color: $color-white;
+    }
+  }
+
+  &__option--odd,
+  &__option {
     text-align: center;
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
     padding: 2.5rem;
     border-radius: .2rem;
     transition: all .2s;
-    color: $color-black;
     transition: all .2s;
+
 
     &:hover,
     &:active {
@@ -35,9 +45,28 @@
 
   &__button {
     background-color: $color-blue-light;
+    color: $color-white-dark;
+
+    &:hover,
+    &:active {
+      background-color: $color-blue-dark;
+    }
+
+    &--odd {
+      background-color:  rgba($color-grey-light-1, .8);
+      color: $color-blue-medium;
+
+      &:hover,
+      &:active {
+        background-color: $color-grey-light-1;
+      }
+    }
+  }
+
+  &__button--odd,
+  &__button {
     width: 20rem;
     text-align: center;
-    color: $color-white-dark;
     text-transform: uppercase;
     font-weight: 700;
     padding: 1rem 1.5rem;
@@ -50,7 +79,6 @@
     &:hover,
     &:active {
       cursor: pointer;
-      background-color: $color-blue-dark;
       transform: scale(1.05);
     }
   }

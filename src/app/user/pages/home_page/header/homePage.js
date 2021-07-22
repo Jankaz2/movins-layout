@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext, createContext} from "react";
 import HeaderCss from './styles/header.scss'
 import MainScss from '../../../../styles/scss/main.scss'
 import WebStartScss from './styles/webstart.scss'
+import Select from "react-select";
 import {Link} from "react-scroll"
 import {useHistory, Link as LinkToPage} from "react-router-dom"
 import {FaVideo, FaGlobe, FaWindowClose} from "react-icons/fa"
@@ -166,7 +167,7 @@ const WebStart = () => {
             <div className='webstart--page__search-boxes'>
                 <div className={
                     `search-cinema-name 
-                            ${(name.name.length === 0 && !hasFocus.name && !name.clicked) || name.clicked
+                            ${(name.name.length === 0 && !hasFocus.name && !name.clicked)
                         ? 'disappear'
                         : ''}`}>
                     <ul>
@@ -188,7 +189,7 @@ const WebStart = () => {
                 </div>
                 <div className={
                     `search-cinema-city 
-                        ${(city.city.length === 0 && !hasFocus.city && !city.clicked) || city.clicked
+                        ${(city.city.length === 0 && !hasFocus.city && !city.clicked)
                         ? 'disappear'
                         : ''}`}>
                     <ul>

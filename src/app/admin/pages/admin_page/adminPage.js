@@ -26,14 +26,14 @@ const AdminPage = () => {
             </h1>
             <section className='menu-section'>
                 <div className="row">
-                    <div className="menu-section__option col span-1-of-3">
+                    <div className="menu-section__option--odd col span-1-of-3">
                         <h3 className="heading-tertiary">Create cinema</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button"
+                        <button className="menu-section__button--odd"
                                 onClick={() => setShowCreateCinema(!showCreateCinema)}
                         >Create
                         </button>
@@ -50,14 +50,14 @@ const AdminPage = () => {
                         >Create
                         </button>
                     </div>
-                    <div className="menu-section__option col span-1-of-3">
+                    <div className="menu-section__option--odd col span-1-of-3">
                         <h3 className="heading-tertiary">Add cinema room to cinema</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button"
+                        <button className="menu-section__button--odd"
                                 onClick={() => setShowAddCinemaRoomToCinema(!showAddCinemaRoomToCinema)}
                         >Add
                         </button>
@@ -76,14 +76,14 @@ const AdminPage = () => {
                         >Show
                         </button>
                     </div>
-                    <div className="menu-section__option col span-1-of-3">
+                    <div className="menu-section__option--odd col span-1-of-3">
                         <h3 className="heading-tertiary">Show all users</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
                             officiis optio praesentium quae ut. Aut distinctio error eum
                             fuga, in inventore ipsam!
                         </p>
-                        <button className="menu-section__button"
+                        <button className="menu-section__button--odd"
                                 onClick={() => setShowAllUsers(!showAllUsers)}
                         >Show
                         </button>

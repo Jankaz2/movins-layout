@@ -1,101 +1,119 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import {FaShoppingBasket, FaVideo, FaWindowClose} from "react-icons/fa"
 import CinemaCss from "./styles/cinema.scss"
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 function Cinema() {
+    const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
     const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
+    const {cinemaId, change, setChange} = useContext(DataContext)
     const showOnClick = () => setShowBuyTicketSection(true)
     const hideOnClick = () => setShowBuyTicketSection(false)
-    const mockCinema = {
-        id: 1,
-        name: 'Cinema Under The Stars',
-        address: {
-            city: 'Poznan',
-            street: 'Owocowa',
-            number: 12
-        },
-        cinemaRooms: {
-            name: "The Darkest",
-            rows: 10,
-            places: 100,
-        },
+    const [cinema, setCinema] = useState({})
+    const [cinemaRoomsIds, setCinemaRoomsIds] = useState([])
+    const [seances, setSeances] = useState([])
 
-        movies: [
-            {
-                id: 1,
-                name: 'Harry Potter',
-                genre: 'Fiction',
-                description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae consequatur dignissimos impedit ipsam laborum numquam quidem, reiciendis unde vitae! At culpa distinctio eius et fugit labore laboriosam laborum libero magnam molestias non optio possimus ratione repudiandae sunt, vel vitae!'
-            },
-            {
-                id: 2,
-                name: 'Game of Thrones',
-                genre: 'Fiction',
-                description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae consequatur dignissimos impedit ipsam laborum numquam quidem, reiciendis unde vitae! At culpa distinctio eius et fugit labore laboriosam laborum libero magnam molestias non optio possimus ratione repudiandae sunt, vel vitae!'
-            },
-            {
-                id: 3,
-                name: 'Love',
-                genre: 'Drama',
-                description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae consequatur dignissimos impedit ipsam laborum numquam quidem, reiciendis unde vitae! At culpa distinctio eius et fugit labore laboriosam laborum libero magnam molestias non optio possimus ratione repudiandae sunt, vel vitae!'
-            },
-            {
-                id: 4,
-                name: 'Sherlock Holmes',
-                genre: 'Fiction',
-                description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae consequatur dignissimos impedit ipsam laborum numquam quidem, reiciendis unde vitae! At culpa distinctio eius et fugit labore laboriosam laborum libero magnam molestias non optio possimus ratione repudiandae sunt, vel vitae!'
-            },
-            {
-                id: 5,
-                name: 'The Lord of Rings',
-                genre: 'Fiction',
-                description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae consequatur dignissimos impedit ipsam laborum numquam quidem, reiciendis unde vitae! At culpa distinctio eius et fugit labore laboriosam laborum libero magnam molestias non optio possimus ratione repudiandae sunt, vel vitae!'
-            },
-        ]
+    const loadSingleCinema = async () => {
+        await fetch(BASE_CINEMA_URL + `/${cinemaId}`)
+            .then(response => response.json())
+            .then(cinema => {
+                setCinema(cinema.data)
+            })
+            .catch(err => console.log(err))
     }
+
+    const loadCinemaRoomsIds = async () => {
+        await fetch(BASE_CINEMA_URL + `/rooms/name/${cinema.id}`)
+            .then(response => response.json())
+            .then(cinemaRooms => {
+                cinemaRooms.data.forEach(cinemaRoom => setCinemaRoomsIds([...cinemaRoomsIds, cinemaRoom.id]))
+            })
+            .catch(err => console.log(err))
+    }
+
+    const loadSeances = async () => {
+        await cinemaRoomsIds.forEach((id, index) => {
+            fetch(BASE_CINEMA_URL + `/movies/seances/${id}`)
+                .then(response => response.json())
+                .then(seances => {
+                    seances.data.forEach(newSeance => setSeances(old => [...old, newSeance]))
+                })
+                .catch(err => console.log(err))
+        })
+    }
+
+    useEffect(() => {
+        async function getData() {
+            await loadSingleCinema()
+        }
+
+        getData().catch(err => console.log(err))
+        setChange(false)
+    }, [])
+
+    useEffect(() => {
+        async function getData() {
+            await loadCinemaRoomsIds()
+        }
+
+        getData().catch(err => console.log(err))
+    }, [cinema])
+
+    useEffect(() => {
+        async function getData() {
+            await loadSeances()
+        }
+
+        getData().catch(err => console.log(err))
+    }, [cinemaRoomsIds])
 
     return (
         <div className='cinema__page'>
             <nav className='cinema__page--nav'>
-                <h2 className='heading-secondary'>{mockCinema.name}</h2>
+                <h2 className='heading-secondary__name'>{cinema.name}</h2>
             </nav>
             <section className='cinema__page--section'>
                 <ul className='cinema__page--cinemas-list'>
                     {
-                        mockCinema.movies.map((movie, idx) => {
+                        seances.map((seance, idx) => {
                             return (
                                 <div>
                                     <div>
-                                        <li key={movie.id}
+                                        <li key={seance.id}
                                             className={'cinema__page--cinemas-list--item row'}>
                                             <div>
                                                 <div className={'col span-1-of-2 font-link'}>
-                                                    <h4>Title: {movie.name}</h4><br/>
-                                                    <h4>Genre: {movie.genre}</h4>
-                                                    <br/><br/>
-                                                    <button
-                                                        className={'buy-ticket-btn'}
-                                                        onClick={showOnClick}
-                                                    >
-                                                        buy ticket
-                                                    </button>
+                                                    <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.movie.title}</h3>
+                                                    <h3 className='heading-tertiary__blue'>Genre:</h3>
+                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.movie.genre}</h3>
+                                                    <h3 className='heading-tertiary__blue'>Show date:</h3>
+                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.date}</h3>
+                                                    <h3 className='heading-tertiary__blue'>Duration:</h3>
+                                                    <h3 className='heading-tertiary'>{seance.movie.duration} minutes</h3>
                                                 </div>
                                                 <div className={'col span-1-of-2 font-link'}>
-                                                    <h4>Description</h4>
-                                                    <br/>
-                                                    <p>{movie.description}</p>
+                                                    <h3 className='heading-tertiary'>Cinema Room</h3>
+                                                    <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.cinemaRoom.name}</h3>
+                                                    <h3 className='heading-tertiary__blue'>Rows:</h3>
+                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.rows}</h3>
+                                                    <h3 className='heading-tertiary__blue'>Places:</h3>
+                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.places}</h3>
+                                                    <button
+                                                        className='buy__ticket--section__btn'
+                                                        onClick={showOnClick}>
+                                                        buy ticket
+                                                    </button>
+                                                    <div>
+                                                        {showBuyTicketSection ?
+                                                            <BuyTicketSection
+                                                                rows={seance.cinemaRoom.rows}
+                                                                places={seance.cinemaRoom.places}
+                                                                closePopup={hideOnClick}/>
+                                                            : null}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
-                                        <div>
-                                            {showBuyTicketSection ?
-                                                <BuyTicketSection
-                                                    rows={mockCinema.cinemaRooms.rows}
-                                                    places={mockCinema.cinemaRooms.places}
-                                                    closePopup={hideOnClick}/>
-                                                : null}
-                                        </div>
                                     </div>
                                 </div>
                             )
@@ -110,13 +128,11 @@ function Cinema() {
 const BuyTicketSection = (props) => {
     const [greenPlace, setGreenPlace] = useState([])
     const [showStatement, setShowStatement] = useState(false)
-    const [redPlace, setRedPlace] = useState()
-    const placesInRow = parseInt(props.places / props.rows)
 
     const changeColor = (e, value) => {
         const greenPlaceCopy = [...greenPlace]
 
-        if (greenPlace.length >= 3 && e.target.className !== 'greenTd') {
+        if (greenPlace.length >= 6 && !e.target.className.includes('greenTd')) {
             setShowStatement(true)
         } else {
             if (greenPlaceCopy.includes(value)) {
@@ -126,36 +142,37 @@ const BuyTicketSection = (props) => {
                 setGreenPlace([...greenPlaceCopy])
             }
         }
-        console.log(greenPlace)
+    }
+
+    const generateValueForTable = (x, y) => {
+        return x === 0 ? y + 1 : (y + 1) + (x * 10)
     }
 
     return (
-        <div className={'popup font-link'}>
-            <span
-                className={'icon-small'}
-                onClick={props.closePopup}
-            ><FaWindowClose/></span>
-            <div className={'popup-inner'}>
-                <div>
-                    <div className={'cinema-places col span-1-of-2'}>
-                        <h3>Select and book your seat</h3>
-                        {/*  <div className={'screen'}><p>screen</p></div>*/}
-                        <table className='seats-table'>
+        <div className='popup'>
+            <div className='popup__inside'>
+                 <span className='popup__inside--close'
+                       onClick={props.closePopup}
+                 >&#10005;</span>
+                <div className='buy__ticket--section'>
+                    <div className='buy__ticket--section__places'>
+                        <h3 className='heading-tertiary'>Select and book your seat</h3>
+                        <table className='buy__ticket--section__table u-margin-bottom-tiny'>
                             <tbody>
                             {
                                 [...Array(props.rows)].map((row, rowIdx) =>
                                     <tr key={rowIdx}>
                                         {
-                                            [...Array(placesInRow)].map((x, idx) =>
-                                                <td key={rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1}
-                                                    className={`${greenPlace.includes(rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1) ?
+                                            [...Array(props.places)].map((place, idx) =>
+                                                <td key={rowIdx === 0 ? idx + 1 : (idx + 1) + (rowIdx * 10)}
+                                                    className={`buy__ticket--section__table--seat
+                                                    ${greenPlace.includes(rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1) ?
                                                         'greenTd' :
                                                         'whiteTd'}`}
-                                                    onClick={(e) =>
+                                                    onClick={(e) => {
                                                         changeColor(e, rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1)
                                                     }
-                                                >{rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1}
-                                                </td>
+                                                    }>{generateValueForTable(rowIdx, idx)}</td>
                                             )
                                         }
                                     </tr>
@@ -163,53 +180,29 @@ const BuyTicketSection = (props) => {
                             }
                             </tbody>
                         </table>
-                    </div>
-                    <div className={'cinema-buying-section col span-1-of-2'}>
                         <div>
-                            <div className={'col span-1-of-2'}>
-                                <h4>Choosen row: </h4><br/>
-                                <div>
-                                    {
-                                        [...greenPlace].map((place, idx) =>
-                                            <div
-                                                className={'selected-place'}>{
-                                                place < 100 ?
-                                                    place < 10 ?
-                                                        parseInt(place / 10) + 1 :
-                                                        parseInt(place / 10) :
-                                                    place % 10 === 0 ? parseInt((place - 1) / 10) :
-                                                        parseInt(place / 10)
-                                                }
-                                            </div>
-                                        )
-                                    }
-                                </div>
-                            </div>
-                            <div className={'col span-1-of-2'}>
-                                <h4>Choosen place:</h4><br/>
-                                <div>
-                                    {
-                                        [...greenPlace].map((place, idx) =>
-                                            <div className={'selected-place'}>{place}</div>
-                                        )
-                                    }
-                                </div>
+                            <div>
+                                <h3 className='heading-tertiary'>Choosen places:</h3>
+                                {
+                                    [...greenPlace].map((place, idx) =>
+                                        <div className='buy__ticket--section__selected-place'>{place}</div>
+                                    )
+                                }
                             </div>
                         </div>
-                        <button className={'buy-ticket-btn-buying-section'}>
-                            buy
-                            <span className={'icon-small-shopping'}></span>
-                        </button>
+                    </div>
+                    <div className='u-margin-top-small'>
+                        <button className='buy__ticket--section__btn'>buy</button>
                     </div>
                     {
                         showStatement ?
-                            <div className={'error-statement'}>
-                                <h2>You cannot buy more than 3 tickets</h2>
+                            <div className='error-statement'>
+                                <h3 className='heading-tertiary'>You cannot buy more than 6 tickets</h3>
                                 <button
                                     onClick={() => {
                                         setShowStatement(false)
                                     }}
-                                >
+                                    className='error-statement__btn'>
                                     Ok
                                 </button>
                             </div>

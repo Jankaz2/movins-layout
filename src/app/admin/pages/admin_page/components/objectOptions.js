@@ -4,8 +4,7 @@ import React, {useState, useContext} from 'react'
 
 const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
-const ObjectOptions = props =>
-{
+const ObjectOptions = props => {
     const [deleteStatement, setDeleteStatement] = useState(false)
     const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
 
