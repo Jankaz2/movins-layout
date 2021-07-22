@@ -75,49 +75,56 @@ function Cinema() {
             <section className='cinema__page--section'>
                 <ul className='cinema__page--cinemas-list'>
                     {
-                        seances.map((seance, idx) => {
-                            return (
-                                <div>
+                        seances.length > 0 ?
+                            seances.map((seance, idx) => {
+                                return (
                                     <div>
-                                        <li key={seance.id}
-                                            className={'cinema__page--cinemas-list--item row'}>
-                                            <div>
-                                                <div className={'col span-1-of-2 font-link'}>
-                                                    <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.movie.title}</h3>
-                                                    <h3 className='heading-tertiary__blue'>Genre:</h3>
-                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.movie.genre}</h3>
-                                                    <h3 className='heading-tertiary__blue'>Show date:</h3>
-                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.date}</h3>
-                                                    <h3 className='heading-tertiary__blue'>Duration:</h3>
-                                                    <h3 className='heading-tertiary'>{seance.movie.duration} minutes</h3>
-                                                </div>
-                                                <div className={'col span-1-of-2 font-link'}>
-                                                    <h3 className='heading-tertiary'>Cinema Room</h3>
-                                                    <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.cinemaRoom.name}</h3>
-                                                    <h3 className='heading-tertiary__blue'>Rows:</h3>
-                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.rows}</h3>
-                                                    <h3 className='heading-tertiary__blue'>Places:</h3>
-                                                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.places}</h3>
-                                                    <button
-                                                        className='buy__ticket--section__btn'
-                                                        onClick={showOnClick}>
-                                                        buy ticket
-                                                    </button>
-                                                    <div>
-                                                        {showBuyTicketSection ?
-                                                            <BuyTicketSection
-                                                                rows={seance.cinemaRoom.rows}
-                                                                places={seance.cinemaRoom.places}
-                                                                closePopup={hideOnClick}/>
-                                                            : null}
+                                        <div>
+                                            <li key={seance.id}
+                                                className={'cinema__page--cinemas-list--item row'}>
+                                                <div>
+                                                    <div className={'col span-1-of-2 font-link'}>
+                                                        <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.movie.title}</h3>
+                                                        <h3 className='heading-tertiary__blue'>Genre:</h3>
+                                                        <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.movie.genre}</h3>
+                                                        <h3 className='heading-tertiary__blue'>Show date:</h3>
+                                                        <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.date}</h3>
+                                                        <h3 className='heading-tertiary__blue'>Duration:</h3>
+                                                        <h3 className='heading-tertiary'>{seance.movie.duration} minutes</h3>
+                                                    </div>
+                                                    <div className={'col span-1-of-2 font-link'}>
+                                                        <h3 className='heading-tertiary'>Cinema Room</h3>
+                                                        <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.cinemaRoom.name}</h3>
+                                                        <h3 className='heading-tertiary__blue'>Rows:</h3>
+                                                        <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.rows}</h3>
+                                                        <h3 className='heading-tertiary__blue'>Places:</h3>
+                                                        <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.places}</h3>
+                                                        <button
+                                                            className='buy__ticket--section__btn'
+                                                            onClick={showOnClick}>
+                                                            buy ticket
+                                                        </button>
+                                                        <div>
+                                                            {showBuyTicketSection ?
+                                                                <BuyTicketSection
+                                                                    rows={seance.cinemaRoom.rows}
+                                                                    places={seance.cinemaRoom.places}
+                                                                    closePopup={hideOnClick}/>
+                                                                : null}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        </div>
                                     </div>
+                                )
+                            }) :
+                            <div>
+                                <div className='error-404'>
+                                    <h1 className='error-404__text'>404 Not Found</h1>
+                                    <h1 className='error-404__text'>There are any seances this cinema shows now</h1>
                                 </div>
-                            )
-                        })
+                            </div>
                     }
                 </ul>
             </section>
