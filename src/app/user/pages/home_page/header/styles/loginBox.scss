@@ -74,7 +74,17 @@
           margin: 0 auto 2rem auto;
           border: none;
           background-color: $color-blue-light;
+          color: $color-white-dark;
+          font-weight: 700;
           border-radius: .3rem;
+          text-transform: uppercase;
+          transition: all .2s;
+
+          &:hover,
+          &:active {
+            background-color: $color-blue-dark;
+            cursor: pointer;
+          }
         }
       }
     }
@@ -108,7 +118,17 @@
           margin: 2rem auto 0 auto;
           border: none;
           background-color: $color-blue-light;
+          color: $color-white-dark;
+          font-weight: 700;
+          text-transform: uppercase;
           border-radius: .3rem;
+          transition: all .2s;
+
+          &:hover,
+          &:active {
+            background-color: $color-blue-dark;
+            cursor: pointer;
+          }
         }
       }
     }
