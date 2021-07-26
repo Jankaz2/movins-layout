@@ -1,17 +1,18 @@
-import React, {useContext, useEffect, useState} from "react"
-import {FaShoppingBasket, FaVideo, FaWindowClose} from "react-icons/fa"
+import React, {useContext, useEffect, useState, useCallback} from "react"
 import CinemaCss from "./styles/cinema.scss"
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 function Cinema() {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
-    const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
     const {cinemaId, change, setChange} = useContext(DataContext)
-    const showOnClick = () => setShowBuyTicketSection(true)
-    const hideOnClick = () => setShowBuyTicketSection(false)
+
+    const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
     const [cinema, setCinema] = useState({})
     const [cinemaRoomsIds, setCinemaRoomsIds] = useState([])
     const [seances, setSeances] = useState([])
+
+    const showOnClick = () => setShowBuyTicketSection(true)
+    const hideOnClick = () => setShowBuyTicketSection(false)
 
     const loadSingleCinema = async () => {
         await fetch(BASE_CINEMA_URL + `/${cinemaId}`)
@@ -49,7 +50,7 @@ function Cinema() {
 
         getData().catch(err => console.log(err))
         setChange(false)
-    }, [])
+    }, [change])
 
     useEffect(() => {
         async function getData() {
@@ -66,6 +67,16 @@ function Cinema() {
 
         getData().catch(err => console.log(err))
     }, [cinemaRoomsIds])
+
+    const generateArray = (rows, places) => {
+        const howManyPlaces = rows * places
+        const placesArray = Array(howManyPlaces).fill().map((_, idx) => 1 + idx)
+        const finalArray = []
+
+        while (placesArray.length) finalArray.push(placesArray.splice(0, places))
+
+        return finalArray
+    }
 
     return (
         <div className='cinema__page'>
@@ -105,12 +116,14 @@ function Cinema() {
                                                             buy ticket
                                                         </button>
                                                         <div>
-                                                            {showBuyTicketSection ?
-                                                                <BuyTicketSection
-                                                                    rows={seance.cinemaRoom.rows}
-                                                                    places={seance.cinemaRoom.places}
-                                                                    closePopup={hideOnClick}/>
-                                                                : null}
+                                                            {
+                                                                showBuyTicketSection ?
+                                                                    <BuyTicketSection
+                                                                        rows={seance.cinemaRoom.rows}
+                                                                        places={seance.cinemaRoom.places}
+                                                                        array={generateArray(seance.cinemaRoom.rows, seance.cinemaRoom.places)}
+                                                                        closePopup={hideOnClick}/>
+                                                                    : null}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,6 +146,10 @@ function Cinema() {
 }
 
 const BuyTicketSection = (props) => {
+    const rows = props.rows
+    const places = props.places
+    const finalArray = props.array
+
     const [greenPlace, setGreenPlace] = useState([])
     const [showStatement, setShowStatement] = useState(false)
 
@@ -151,8 +168,8 @@ const BuyTicketSection = (props) => {
         }
     }
 
-    const generateValueForTable = (x, y) => {
-        return x === 0 ? y + 1 : (y + 1) + (x * 10)
+    const generateRow = rowIdx => {
+        return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(rowIdx)
     }
 
     return (
@@ -167,19 +184,20 @@ const BuyTicketSection = (props) => {
                         <table className='buy__ticket--section__table u-margin-bottom-tiny'>
                             <tbody>
                             {
-                                [...Array(props.rows)].map((row, rowIdx) =>
+                                [...Array(rows)].map((row, rowIdx) =>
                                     <tr key={rowIdx}>
+                                        <td className={'buy__ticket--section__table--row'}>{generateRow(rowIdx)}</td>
                                         {
-                                            [...Array(props.places)].map((place, idx) =>
-                                                <td key={rowIdx === 0 ? idx + 1 : (idx + 1) + (rowIdx * 10)}
+                                            [...Array(places)].map((place, placeIdx) =>
+                                                <td key={finalArray[rowIdx][placeIdx]}
                                                     className={`buy__ticket--section__table--seat
-                                                    ${greenPlace.includes(rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1) ?
+                                                    ${greenPlace.includes(finalArray[rowIdx][placeIdx]) ?
                                                         'greenTd' :
                                                         'whiteTd'}`}
                                                     onClick={(e) => {
-                                                        changeColor(e, rowIdx + 1 > 1 ? (idx + 1) + (rowIdx * 10) : idx + 1)
+                                                        changeColor(e, finalArray[rowIdx][placeIdx])
                                                     }
-                                                    }>{generateValueForTable(rowIdx, idx)}</td>
+                                                    }>{finalArray[rowIdx][placeIdx]}</td>
                                             )
                                         }
                                     </tr>

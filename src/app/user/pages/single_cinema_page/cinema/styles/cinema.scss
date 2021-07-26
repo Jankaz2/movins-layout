@@ -64,6 +64,14 @@
         color: $color-white-dark;
       }
     }
+
+    &--row {
+      font-weight: 700;
+      color: $color-black;
+      padding: .5rem;
+      margin-right: .5rem;
+      border: none;
+    }
   }
 
   &__selected-place {
