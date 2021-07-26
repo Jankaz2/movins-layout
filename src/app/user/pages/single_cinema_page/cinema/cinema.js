@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState, useCallback} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import CinemaCss from "./styles/cinema.scss"
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
@@ -10,6 +10,7 @@ function Cinema() {
     const [cinema, setCinema] = useState({})
     const [cinemaRoomsIds, setCinemaRoomsIds] = useState([])
     const [seances, setSeances] = useState([])
+    const [transferData, setTransferData] = useState({rows: null, places: null})
 
     const showOnClick = () => setShowBuyTicketSection(true)
     const hideOnClick = () => setShowBuyTicketSection(false)
@@ -87,14 +88,14 @@ function Cinema() {
                 <ul className='cinema__page--cinemas-list'>
                     {
                         seances.length > 0 ?
-                            seances.map((seance, idx) => {
+                            seances.map((seance, _) => {
                                 return (
                                     <div>
                                         <div>
                                             <li key={seance.id}
                                                 className={'cinema__page--cinemas-list--item row'}>
                                                 <div>
-                                                    <div className={'col span-1-of-2 font-link'}>
+                                                    <div className={'col span-1-of-2'}>
                                                         <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.movie.title}</h3>
                                                         <h3 className='heading-tertiary__blue'>Genre:</h3>
                                                         <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.movie.genre}</h3>
@@ -103,7 +104,7 @@ function Cinema() {
                                                         <h3 className='heading-tertiary__blue'>Duration:</h3>
                                                         <h3 className='heading-tertiary'>{seance.movie.duration} minutes</h3>
                                                     </div>
-                                                    <div className={'col span-1-of-2 font-link'}>
+                                                    <div className={'col span-1-of-2'}>
                                                         <h3 className='heading-tertiary'>Cinema Room</h3>
                                                         <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.cinemaRoom.name}</h3>
                                                         <h3 className='heading-tertiary__blue'>Rows:</h3>
@@ -112,18 +113,25 @@ function Cinema() {
                                                         <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.places}</h3>
                                                         <button
                                                             className='buy__ticket--section__btn'
-                                                            onClick={showOnClick}>
+                                                            onClick={() => {
+                                                                setTransferData({
+                                                                    rows: seance.cinemaRoom.rows,
+                                                                    places: seance.cinemaRoom.places
+                                                                })
+                                                                showOnClick()
+                                                            }}>
                                                             buy ticket
                                                         </button>
                                                         <div>
                                                             {
                                                                 showBuyTicketSection ?
                                                                     <BuyTicketSection
-                                                                        rows={seance.cinemaRoom.rows}
-                                                                        places={seance.cinemaRoom.places}
-                                                                        array={generateArray(seance.cinemaRoom.rows, seance.cinemaRoom.places)}
+                                                                        rows={transferData.rows}
+                                                                        places={transferData.places}
+                                                                        array={generateArray(transferData.rows, transferData.places)}
                                                                         closePopup={hideOnClick}/>
-                                                                    : null}
+                                                                    : null
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,7 +143,7 @@ function Cinema() {
                             <div>
                                 <div className='error-404'>
                                     <h1 className='error-404__text'>404 Not Found</h1>
-                                    <h1 className='error-404__text'>There are any seances this cinema shows now</h1>
+                                    <h1 className='error-404__text'>There are any seances {cinema.name} shows now</h1>
                                 </div>
                             </div>
                     }
@@ -168,10 +176,6 @@ const BuyTicketSection = (props) => {
         }
     }
 
-    const generateRow = rowIdx => {
-        return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(rowIdx)
-    }
-
     return (
         <div className='popup'>
             <div className='popup__inside'>
@@ -186,14 +190,11 @@ const BuyTicketSection = (props) => {
                             {
                                 [...Array(rows)].map((row, rowIdx) =>
                                     <tr key={rowIdx}>
-                                        <td className={'buy__ticket--section__table--row'}>{generateRow(rowIdx)}</td>
                                         {
                                             [...Array(places)].map((place, placeIdx) =>
                                                 <td key={finalArray[rowIdx][placeIdx]}
                                                     className={`buy__ticket--section__table--seat
-                                                    ${greenPlace.includes(finalArray[rowIdx][placeIdx]) ?
-                                                        'greenTd' :
-                                                        'whiteTd'}`}
+                                                    ${greenPlace.includes(finalArray[rowIdx][placeIdx]) ? 'greenTd' : 'whiteTd'}`}
                                                     onClick={(e) => {
                                                         changeColor(e, finalArray[rowIdx][placeIdx])
                                                     }
@@ -224,9 +225,7 @@ const BuyTicketSection = (props) => {
                             <div className='error-statement'>
                                 <h3 className='heading-tertiary'>You cannot buy more than 6 tickets</h3>
                                 <button
-                                    onClick={() => {
-                                        setShowStatement(false)
-                                    }}
+                                    onClick={() => setShowStatement(false)}
                                     className='error-statement__btn'>
                                     Ok
                                 </button>
