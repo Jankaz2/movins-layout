@@ -4,7 +4,7 @@ import {DataContext} from "../../../../utils/data_transfer/dataManager";
 
 function Cinema() {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
-    const {cinemaId, change, setChange} = useContext(DataContext)
+    const {cinemaId, change, setChange, loader, showLoader, hideLoader} = useContext(DataContext)
 
     const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
     const [cinema, setCinema] = useState({})
@@ -16,28 +16,34 @@ function Cinema() {
     const hideOnClick = () => setShowBuyTicketSection(false)
 
     const loadSingleCinema = async () => {
+        showLoader()
         await fetch(BASE_CINEMA_URL + `/${cinemaId}`)
             .then(response => response.json())
             .then(cinema => {
+                hideLoader()
                 setCinema(cinema.data)
             })
             .catch(err => console.log(err))
     }
 
     const loadCinemaRoomsIds = async () => {
+        showLoader()
         await fetch(BASE_CINEMA_URL + `/rooms/name/${cinema.id}`)
             .then(response => response.json())
             .then(cinemaRooms => {
+                hideLoader()
                 cinemaRooms.data.forEach(cinemaRoom => setCinemaRoomsIds([...cinemaRoomsIds, cinemaRoom.id]))
             })
             .catch(err => console.log(err))
     }
 
     const loadSeances = async () => {
+        showLoader()
         await cinemaRoomsIds.forEach((id, index) => {
             fetch(BASE_CINEMA_URL + `/movies/seances/${id}`)
                 .then(response => response.json())
                 .then(seances => {
+                    hideLoader()
                     seances.data.forEach(newSeance => setSeances(old => [...old, newSeance]))
                 })
                 .catch(err => console.log(err))
@@ -148,6 +154,7 @@ function Cinema() {
                             </div>
                     }
                 </ul>
+                {loader}
             </section>
         </div>
     )

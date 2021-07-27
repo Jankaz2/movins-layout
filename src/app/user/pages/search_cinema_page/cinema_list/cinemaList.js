@@ -3,9 +3,10 @@ import {Link} from "react-router-dom"
 import HomePage from "../../home_page/header/homePage"
 import CinemasListCss from "./styles/cinemasList.scss"
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
+import useLoadPage from "../../../../utils/hooks/useLoadPage";
 
 const CinemasList = () => {
-    const {transferredCinemas, setCinemaId} = useContext(DataContext)
+    const {transferredCinemas, setCinemaId, loader, showLoader, hideLoader} = useContext(DataContext)
 
     return (
         <div className="cinemas-list-section">
@@ -60,6 +61,7 @@ const CinemasList = () => {
                         </div>
                 }
             </ul>
+            {loader}
         </div>
     )
 }

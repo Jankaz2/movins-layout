@@ -29,7 +29,8 @@ class Footer extends Component {
                     </div>
                     <div className="col span-1-of-2">
                         <p className="footer_copyright">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Created by <a href="https://github.com/Jankaz2" target="_blank" className="footer__link">Jan
+                            Kaźmierczak</a>, consectetur adipisicing elit.
                             Aliquam architecto culpa dolore dolorem doloremque dolores
                             explicabo ipsam mollitia nobis pariatur qui quia, quibusdam
                             quo quod tempora velit voluptatibus. Ad aliquam aut dicta,
@@ -40,7 +41,7 @@ class Footer extends Component {
                 </div>
             </footer>
 
-    );
+        );
     }
 }
 

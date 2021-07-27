@@ -1,0 +1,22 @@
+@import "../../../styles/scss/utils/variables";
+
+.loading-page {
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  background-color: $color-grey-light-1;
+  position: relative;
+
+  &__text,
+  &__dots {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__dots {
+    margin-top: 6rem;
+  }
+}

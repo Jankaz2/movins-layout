@@ -6,6 +6,7 @@ import CinemasList from "./user/pages/search_cinema_page/cinema_list/cinemaList"
 import Cinema from "./user/pages/single_cinema_page/cinema/cinema"
 import {DataManager} from "./utils/data_transfer/dataManager";
 import AdminPage from "./admin/pages/admin_page/adminPage";
+import LoadingPage from "./utils/pages/LoadingPage";
 
 function App() {
     return (

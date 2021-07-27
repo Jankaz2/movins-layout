@@ -1,4 +1,5 @@
 import React, {useState, createContext, useEffect} from "react";
+import useLoadPage from "../hooks/useLoadPage";
 
 export const DataContext = createContext({
     cinemas: [],
@@ -13,11 +14,14 @@ export const DataManager = props => {
     const [transferredCinemas, setTransferredCinemas] = useState([])
     const [loginBox, setLoginBox] = useState(true)
     const [cinemaId, setCinemaId] = useState(null)
+    const [loader, showLoader, hideLoader] = useLoadPage()
 
     const loadData = async () => {
+        showLoader()
         await fetch(BASE_CINEMA_URL)
             .then(response => response.json())
             .then(cinemas => {
+                hideLoader()
                 setCinemas(cinemas.data)
             })
             .catch(err => console.log(err))
@@ -38,7 +42,8 @@ export const DataManager = props => {
             change, setChange,
             transferredCinemas, setTransferredCinemas,
             loginBox, setLoginBox,
-            cinemaId, setCinemaId
+            cinemaId, setCinemaId,
+            loader, showLoader, hideLoader
         }}>
             {props.children}
         </DataContext.Provider>
