@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef, useCallback} from "react";
-import StickyNavigationCss from "./styles/stickyNavigation.scss"
+import StickyNavigationCss from "../styles/stickyNavigation.scss"
 import {Link} from "react-scroll";
 
 const StickyNavigation = () => {

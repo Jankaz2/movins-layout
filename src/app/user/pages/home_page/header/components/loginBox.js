@@ -1,7 +1,7 @@
 import {FaWindowClose} from "react-icons/fa";
 import React, {useContext} from "react";
-import LoginBoxScss from './styles/loginBox.scss'
-import {DataContext} from "../../../../utils/data_transfer/dataManager";
+import LoginBoxScss from '../styles/loginBox.scss'
+import {DataContext} from "../../../../../utils/data_transfer/dataManager";
 
 const LoginBox = (props) => {
     const {loginBox, setLoginBox} = useContext(DataContext)

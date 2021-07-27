@@ -1,9 +1,9 @@
 import React, {useState, useContext} from "react"
 import {Link} from "react-router-dom"
-import HomePage from "../../home_page/header/homePage"
-import CinemasListCss from "./styles/cinemasList.scss"
-import {DataContext} from "../../../../utils/data_transfer/dataManager";
-import useLoadPage from "../../../../utils/hooks/useLoadPage";
+import HomePage from "../../../home_page/header/components/homePage"
+import CinemasListCss from "../styles/cinemasList.scss"
+import {DataContext} from "../../../../../utils/data_transfer/dataManager";
+import useLoadPage from "../../../../../utils/hooks/useLoadPage";
 
 const CinemasList = () => {
     const {transferredCinemas, setCinemaId, loader, showLoader, hideLoader} = useContext(DataContext)

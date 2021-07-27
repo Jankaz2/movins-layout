@@ -1,19 +1,19 @@
 import React, {useState, useEffect, useContext, createContext} from "react";
-import HeaderCss from './styles/header.scss'
-import MainScss from '../../../../styles/scss/main.scss'
-import WebStartScss from './styles/webstart.scss'
+import HeaderCss from '../styles/header.scss'
+import MainScss from '../../../../../styles/scss/main.scss'
+import WebStartScss from '../styles/webstart.scss'
 import Select from "react-select";
 import {Link} from "react-scroll"
 import {useHistory, Link as LinkToPage} from "react-router-dom"
 import {FaVideo, FaGlobe, FaWindowClose} from "react-icons/fa"
-import StepsSection from "../steps_section/stepsSection";
-import AboutUsSection from "../about_us_section/aboutUsSection";
-import Reviews from "../reviews_section/reviews";
-import Contact from "../contact_section/contact";
-import {DataContext} from "../../../../utils/data_transfer/dataManager";
+import StepsSection from "../../steps_section/components/stepsSection";
+import AboutUsSection from "../../about_us_section/components/aboutUsSection";
+import Reviews from "../../reviews_section/components/reviews";
+import Contact from "../../contact_section/components/contact";
+import {DataContext} from "../../../../../utils/data_transfer/dataManager";
 import StickyNavigation from "./stickyNavigation";
 import LoginBox from "./loginBox";
-import CinemasList from "../../search_cinema_page/cinema_list/cinemaList";
+import CinemasList from "../../../search_cinema_page/cinema_list/components/cinemaList";
 
 function HomePage() {
     return (

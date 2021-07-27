@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import FooterCss from "./styles/footer.scss"
+import FooterCss from "../styles/footer.scss"
 
 class Footer extends Component {
     render() {
@@ -13,16 +13,16 @@ class Footer extends Component {
                         <div className="footer__navigation">
                             <ul className="footer__list">
                                 <li className="footer__item">
-                                    <a href="" className="footer__link">Company</a>
+                                    <p className="footer__link__p">Company</p>
                                 </li>
                                 <li className="footer__item">
-                                    <a href="" className="footer__link">Carrer</a>
+                                    <p className="footer__link__p">Carrer</p>
                                 </li>
                                 <li className="footer__item">
-                                    <a href="" className="footer__link">Privacy</a>
+                                    <p className="footer__link__p">Privacy</p>
                                 </li>
                                 <li className="footer__item">
-                                    <a href="" className="footer__link">Terms</a>
+                                    <p className="footer__link__p">Terms</p>
                                 </li>
                             </ul>
                         </div>
