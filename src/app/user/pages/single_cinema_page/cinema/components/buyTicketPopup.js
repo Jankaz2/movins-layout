@@ -2,26 +2,40 @@ import React, {useState} from "react";
 import CinemaScss from '../styles/cinema.scss'
 
 const BuyTicketSection = (props) => {
+    const BASE_TICKET_URL = 'http://localhost:5000/tickets'
+    const seance = props.seance
     const rows = props.rows
     const places = props.places
     const finalArray = props.array
 
-    const [greenPlace, setGreenPlace] = useState([])
+    const [greenPlace, setGreenPlace] = useState([{row: null, place: null}])
     const [showStatement, setShowStatement] = useState(false)
 
-    const changeColor = (e, value) => {
+    const changeColor = (e, row, place) => {
         const greenPlaceCopy = [...greenPlace]
 
-        if (greenPlace.length >= 6 && !e.target.className.includes('greenTd')) {
+        if (greenPlace.length >= 7 && !e.target.className.includes('greenTd')) {
             setShowStatement(true)
         } else {
-            if (greenPlaceCopy.includes(value)) {
-                setGreenPlace([...greenPlaceCopy.filter(val => val !== value)])
+            if (greenPlaceCopy.filter(seat => seat.place === place).length > 0) {
+                setGreenPlace([...greenPlaceCopy.filter(seat => seat.place !== place)])
             } else {
-                greenPlaceCopy.push(value)
+                greenPlaceCopy.push({row: row, place: place})
                 setGreenPlace([...greenPlaceCopy])
             }
         }
+    }
+
+    const orderTicket = async (data) => {
+        const response = await fetch(BASE_TICKET_URL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        return await response.json();
     }
 
     return (
@@ -42,10 +56,9 @@ const BuyTicketSection = (props) => {
                                             [...Array(places)].map((place, placeIdx) =>
                                                 <td key={finalArray[rowIdx][placeIdx]}
                                                     className={`buy__ticket--section__table--seat
-                                                    ${greenPlace.includes(finalArray[rowIdx][placeIdx]) ? 'greenTd' : 'whiteTd'}`}
-                                                    onClick={(e) => {
-                                                        changeColor(e, finalArray[rowIdx][placeIdx])
-                                                    }
+                                                    ${greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0 ? 
+                                                        'greenTd' : 'whiteTd'}`}
+                                                    onClick={(e) => changeColor(e, rowIdx + 1, finalArray[rowIdx][placeIdx])
                                                     }>{finalArray[rowIdx][placeIdx]}</td>
                                             )
                                         }
@@ -58,8 +71,10 @@ const BuyTicketSection = (props) => {
                             <div>
                                 <h3 className='heading-tertiary'>Choosen places:</h3>
                                 {
-                                    [...greenPlace].map((place, idx) =>
-                                        <div className='buy__ticket--section__selected-place'>{place}</div>
+                                    [...greenPlace]
+                                        .filter((seat, idx) => idx !== 0)
+                                        .map((seat, idx) =>
+                                        <div className='buy__ticket--section__selected-place'>{seat.place}</div>
                                     )
                                 }
                             </div>

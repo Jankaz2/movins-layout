@@ -20,6 +20,10 @@
       color: #000;
       font-size: 1.5rem;
       border-radius: .3rem;
+
+      &::placeholder {
+        color: $color-grey-dark;
+      }
     }
 
     &--submit {

@@ -11,7 +11,11 @@ function Cinema() {
     const [cinema, setCinema] = useState({})
     const [cinemaRoomsIds, setCinemaRoomsIds] = useState([])
     const [seances, setSeances] = useState([])
-    const [transferData, setTransferData] = useState({rows: null, places: null})
+    const [transferData, setTransferData] = useState({
+        rows: null, places: null,
+        userId: 112,
+        seance: null
+    })
 
     const showOnClick = () => setShowBuyTicketSection(true)
     const hideOnClick = () => setShowBuyTicketSection(false)
@@ -123,7 +127,8 @@ function Cinema() {
                                                             onClick={() => {
                                                                 setTransferData({
                                                                     rows: seance.cinemaRoom.rows,
-                                                                    places: seance.cinemaRoom.places
+                                                                    places: seance.cinemaRoom.places,
+                                                                    seance: seance
                                                                 })
                                                                 showOnClick()
                                                             }}>
@@ -135,6 +140,7 @@ function Cinema() {
                                                                     <BuyTicketSection
                                                                         rows={transferData.rows}
                                                                         places={transferData.places}
+                                                                        seance={transferData.seance}
                                                                         array={generateArray(transferData.rows, transferData.places)}
                                                                         closePopup={hideOnClick}/>
                                                                     : null
