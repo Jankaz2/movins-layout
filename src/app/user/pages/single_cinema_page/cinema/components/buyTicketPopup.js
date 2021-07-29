@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import CinemaScss from '../styles/cinema.scss'
+import {DataContext} from "../../../../../utils/data_transfer/dataManager";
 
 const BuyTicketSection = (props) => {
     const BASE_TICKET_URL = 'http://localhost:5000/tickets'
+    const BASE_SEATS_URL = 'http://localhost:5000/cinema/seats'
+
     const seance = props.seance
     const rows = props.rows
     const places = props.places
@@ -10,8 +13,31 @@ const BuyTicketSection = (props) => {
 
     const [greenPlace, setGreenPlace] = useState([{row: null, place: null}])
     const [showStatement, setShowStatement] = useState(false)
+    const [currentlyBookedTickets, setCurrentlyBookedTickets] = useState([])
+    const [bookedSeats, setBookedSeats] = useState([])
+
+    const {setChange} = useContext(DataContext)
+
+    const loadSeats = async () => {
+        await fetch(BASE_TICKET_URL)
+            .then(response => response.json())
+            .then(tickets => {
+                tickets.data.forEach(newSeat => setBookedSeats(old => [...old, newSeat]))
+            })
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        async function getData() {
+            await loadSeats()
+        }
+
+        getData().catch(err => console.log(err))
+        setChange(false)
+    }, [currentlyBookedTickets])
 
     const changeColor = (e, row, place) => {
+        console.log(bookedSeats)
         const greenPlaceCopy = [...greenPlace]
 
         if (greenPlace.length >= 7 && !e.target.className.includes('greenTd')) {
@@ -26,17 +52,40 @@ const BuyTicketSection = (props) => {
         }
     }
 
-    const orderTicket = async (data) => {
+    const createTickets = (places) => {
+        const tempTickets = []
+
+        places.forEach(place =>
+            tempTickets.push(
+                {
+                    userId: 112,
+                    seanceId: seance.id,
+                    seat: {
+                        row: place.row,
+                        place: place.place,
+                        cinemaRoomId: seance.cinemaRoom.id,
+                    },
+                    price: 50,
+                }
+            )
+        )
+
+        setCurrentlyBookedTickets(tempTickets)
+    }
+
+    const orderTicket = async (ticket) => {
         const response = await fetch(BASE_TICKET_URL, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(ticket),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
 
+        setChange(false)
         return await response.json();
     }
+
 
     return (
         <div className='popup'>
@@ -56,8 +105,15 @@ const BuyTicketSection = (props) => {
                                             [...Array(places)].map((place, placeIdx) =>
                                                 <td key={finalArray[rowIdx][placeIdx]}
                                                     className={`buy__ticket--section__table--seat
-                                                    ${greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0 ? 
-                                                        'greenTd' : 'whiteTd'}`}
+                                                    
+                                                    ${typeof (bookedSeats) === 'undefined' ? null
+                                                        : bookedSeats.filter(ticket => 
+                                                            seance.cinemaRoom.id === ticket.seance.cinemaRoom.id &&
+                                                            ticket.seance.row === rowIdx + 1 && ticket.seance.place === finalArray[rowIdx][[placeIdx]]).length > 0 ?
+                                                            'greyTd' :
+                                                            greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0 ? 'greenTd'
+                                                                : 'whiteTd'}`}
+
                                                     onClick={(e) => changeColor(e, rowIdx + 1, finalArray[rowIdx][placeIdx])
                                                     }>{finalArray[rowIdx][placeIdx]}</td>
                                             )
@@ -74,14 +130,29 @@ const BuyTicketSection = (props) => {
                                     [...greenPlace]
                                         .filter((seat, idx) => idx !== 0)
                                         .map((seat, idx) =>
-                                        <div className='buy__ticket--section__selected-place'>{seat.place}</div>
-                                    )
+                                            <div className='buy__ticket--section__selected-wrapper'>
+                                                <div className='buy__ticket--section__selected-row'>
+                                                    <p className='buy__ticket--section__selected-row-p'>Row</p>
+                                                    {seat.row}
+                                                </div>
+                                                <div className='buy__ticket--section__selected-place'>
+                                                    <p className='buy__ticket--section__selected-place-p'>Place</p>
+                                                    {seat.place}
+                                                </div>
+                                            </div>
+                                        )
                                 }
                             </div>
                         </div>
                     </div>
                     <div className='u-margin-top-small'>
-                        <button className='buy__ticket--section__btn'>buy</button>
+                        <button className='buy__ticket--section__btn'
+                                onClick={() => {
+                                    createTickets(greenPlace)
+                                    currentlyBookedTickets.forEach(ticket => orderTicket(ticket))
+                                }}>
+                            buy
+                        </button>
                     </div>
                     {
                         showStatement ?

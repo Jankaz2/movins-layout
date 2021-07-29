@@ -74,15 +74,45 @@
     }
   }
 
-  &__selected-place {
+
+  &__selected-wrapper {
     display: inline-block;
-    border: 2px solid $color-black;
+    margin-right: .6rem;
+  }
+
+  &__selected-row {
+    display: block;
+    float: left;
+    border-left: 2px solid $color-black;
+    border-top: 2px solid $color-black;
+    border-bottom: 2px solid $color-black;
     color: $color-black;
     font-weight: 700;
-    width: 5rem;
     padding: .4rem;
-    margin-right: .6rem;
     margin-top: 1.5rem;
+
+    &-p {
+      text-transform: uppercase;
+      color: $color-black;
+      font-size: .8rem;
+    }
+  }
+
+  &__selected-place {
+    display: block;
+    border: 2px solid $color-black;
+    color: $color-white;
+    font-weight: 700;
+    padding: .4rem;
+    margin-top: 1.5rem;
+    overflow: hidden;
+    background-color: $color-black;
+
+    &-p {
+      text-transform: uppercase;
+      color: $color-grey-light-1;
+      font-size: .8rem;
+    }
   }
 
   &__btn {
@@ -119,6 +149,11 @@
   &:hover {
     background-color: $color-red-dark;
   }
+}
+
+.greyTd {
+  background-color: $color-grey-dark;
+  color: $color-white;
 }
 
 .error-statement {
