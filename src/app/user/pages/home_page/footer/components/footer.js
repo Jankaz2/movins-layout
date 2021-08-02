@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {Link} from "react-router-dom"
 import FooterCss from "../styles/footer.scss"
 
 class Footer extends Component {
@@ -6,7 +7,9 @@ class Footer extends Component {
         return (
             <footer className="footer">
                 <div className="footer__logo-box">
-                    <h1 className='heading--primary--main'>MOVINS</h1>
+                    <Link className='footer__logo-box-text' to="/">
+                        <h1 className='heading--primary--main'>MOVINS</h1>
+                    </Link>
                 </div>
                 <div className="row">
                     <div className="col span-1-of-2">

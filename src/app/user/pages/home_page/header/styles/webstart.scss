@@ -7,11 +7,13 @@
   transform: translate(-70%, -40%);
 
   &__find-cinema {
+    display: flex;
+   // justify-items: center;
+    align-items: center;
     animation: moveInBottom 1.5s ease-out;
 
     .cinema-name-input,
     .cinema-city-input {
-      display: inline-block;
       width: 30rem;
       background-color: $color-white-dark;
       border: none;
@@ -28,9 +30,10 @@
 
     &--submit {
       width: 12rem;
-      padding: 1.67rem;
+      transform: translateY(-.2rem);
+      height: 4.85rem;
+      padding: 1.6rem;
       text-transform: uppercase;
-      text-align: center;
       background-color: $color-blue-light;
       font-weight: bold;
       border-radius: .3rem;
@@ -38,6 +41,7 @@
       outline: none;
       transition: all .2s;
       border: none;
+      font-size: 1.5rem;
 
       &:hover,
       &:active {

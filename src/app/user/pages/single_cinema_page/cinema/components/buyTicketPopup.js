@@ -1,6 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import CinemaScss from '../styles/cinema.scss'
+import StatementScss from '../../../../../styles/scss/utils/statement.scss'
 import {DataContext} from "../../../../../utils/data_transfer/dataManager";
+
 
 const BuyTicketSection = (props) => {
     const BASE_TICKET_URL = 'http://localhost:5000/tickets'
@@ -13,6 +15,8 @@ const BuyTicketSection = (props) => {
 
     const [greenPlace, setGreenPlace] = useState([{row: null, place: null}])
     const [showStatement, setShowStatement] = useState(false)
+    const [showBuyStatement, setShowBuyStatement] = useState(false)
+    const [choice, setChoice] = useState(false)
     const [currentlyBookedTickets, setCurrentlyBookedTickets] = useState([])
     const [bookedSeats, setBookedSeats] = useState([])
 
@@ -148,6 +152,8 @@ const BuyTicketSection = (props) => {
                     <div className='u-margin-top-small'>
                         <button className='buy__ticket--section__btn'
                                 onClick={() => {
+                                    setShowBuyStatement(true)
+                                    choice &&
                                     createTickets(greenPlace)
                                     currentlyBookedTickets.forEach(ticket => orderTicket(ticket))
                                 }}>
@@ -167,6 +173,24 @@ const BuyTicketSection = (props) => {
                             : null
                     }
                 </div>
+                {
+                    showBuyStatement ?
+                        <div className='statement'>
+                            <span className='statement--close'
+                                  onClick={() => {
+                                      setChoice(false)
+                                      setShowBuyStatement(false)
+                                  }}
+                            >&#10005;</span>
+                            <p className='statement__text'>Do you really want to buy this ticket?</p>
+                            <div className='statement__buttons'>
+                                <button className="statement__buttons--yes"
+                                        onClick={() => setChoice(true)}
+                                >Yes</button>
+                            </div>
+                        </div>
+                        : null
+                }
             </div>
         </div>
     )
