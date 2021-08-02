@@ -1,14 +1,15 @@
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 
-const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
 const ShowAllUsersPopup = (props) => {
+    const BASE_USERS_URL = 'http://localhost:5000/users'
+    const {change, setChange} = useContext(DataContext)
     const [users, setUsers] = useState([])
     const [showOptions, setShowOptions] = useState(false)
 
     const loadData = async () => {
-        await fetch('http://localhost:5000/user')
+        await fetch(BASE_USERS_URL)
             .then(response => response.json())
             .then(users => {
                 setUsers(users.data)
@@ -17,8 +18,13 @@ const ShowAllUsersPopup = (props) => {
     }
 
     useEffect(() => {
-        loadData()
-    }, [])
+        async function getData() {
+            await loadData()
+        }
+
+        getData().catch(err => console.log(err))
+        setChange(false)
+    }, [change])
 
     return (
         <div>

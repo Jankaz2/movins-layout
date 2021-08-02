@@ -12,7 +12,7 @@ class AboutUsSection extends Component {
                     <h2 className='heading-secondary'>The name of culture is movins</h2>
                 </div>
                 <div className='row'>
-                    <div className='col span-1-of-2 box'>
+                    <div className='col-1-of-2 box'>
                         <h3 className='heading-tertiary'>Who we are?</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Adipisci corporis cumque delectus deleniti earum explicabo
@@ -23,7 +23,7 @@ class AboutUsSection extends Component {
                             Adipisci corporis cumque delectus deleniti earum explicabo
                         </p>
                     </div>
-                    <div className='col span-1-of-2 box'>
+                    <div className='col-1-of-2 box'>
                         <div className="composition">
                             <img src={img1} alt="Picture 1" className='composition__photo composition__photo-1'/>
                             <img src={img2} alt="Picture 2" className='composition__photo composition__photo-2'/>

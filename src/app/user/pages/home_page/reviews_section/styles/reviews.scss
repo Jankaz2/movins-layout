@@ -1,9 +1,14 @@
 @import "../../../../../styles/scss/utils/variables";
+@import "../../../../../styles/scss/utils/mixins";
 
 .reviews-section {
-    padding: 200px 30px;
+    padding: 20rem 3rem;
     color: #000;
     text-align: center;
+
+    @include respond(tab-port) {
+        padding: 12rem 3rem;
+    }
 }
 
 .review {
@@ -16,6 +21,15 @@
     font-size: $default-font-size;
     border-radius: .3rem;
 
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0);
+    }
+
     & > * {
         transform: skewX(12deg);
     }
@@ -25,14 +39,31 @@
         float: left;
         width: 15rem;
         height: 15rem;
-        border-radius: 50%;
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
         transform: translateX(-3rem) skewX(12deg);
         overflow: hidden;
+
+        @include respond(phone) {
+            transform: translateX(-3rem) skewX(0);
+        }
     }
 
     &__image {
+        height: 100%;
         backface-visibility: hidden;
         transition: all .5s;
+        overflow: hidden;
+    }
+
+    &__text {
+        transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skewX(0);
+        }
     }
 
     &__caption {

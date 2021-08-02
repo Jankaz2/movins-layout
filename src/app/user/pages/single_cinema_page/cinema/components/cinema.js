@@ -106,7 +106,7 @@ function Cinema() {
                                             <li key={seance.id}
                                                 className={'cinema__page--cinemas-list--item row'}>
                                                 <div>
-                                                    <div className={'col span-1-of-2'}>
+                                                    <div className={'col-1-of-2'}>
                                                         <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.movie.title}</h3>
                                                         <h3 className='heading-tertiary__blue'>Genre:</h3>
                                                         <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.movie.genre}</h3>
@@ -115,7 +115,7 @@ function Cinema() {
                                                         <h3 className='heading-tertiary__blue'>Duration:</h3>
                                                         <h3 className='heading-tertiary'>{seance.movie.duration} minutes</h3>
                                                     </div>
-                                                    <div className={'col span-1-of-2'}>
+                                                    <div className={'col-1-of-2'}>
                                                         <h3 className='heading-tertiary'>Cinema Room</h3>
                                                         <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.cinemaRoom.name}</h3>
                                                         <h3 className='heading-tertiary__blue'>Rows:</h3>

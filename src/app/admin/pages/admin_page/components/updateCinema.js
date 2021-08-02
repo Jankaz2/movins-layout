@@ -102,7 +102,7 @@ const UpdateCinema = props => {
                                     id='name'
                             />
                             <div className="row">
-                                <div className="col span-1-of-2">
+                                <div className="col-1-of-2">
                                     <label htmlFor="name">Cinema name</label>
                                     <input className='primary-input popup__input'
                                            type="text" id='name'
@@ -128,7 +128,7 @@ const UpdateCinema = props => {
                                            value={address.number}
                                     />
                                 </div>
-                                <div className="col span-1-of-2 ">
+                                <div className="col-1-of-2 ">
                                     <label htmlFor="name">Cinema Room name</label>
                                     <input className='primary-input popup__input'
                                            type="text" id='name'

@@ -26,7 +26,7 @@ const CinemasList = () => {
                                     <li key={cinema.id}
                                         className='cinemas-list-section__item row'
                                         >
-                                        <div className='col span-1-of-2'>
+                                        <div className='col-1-of-2'>
                                             <h2 className='heading-secondary__name'>{cinema.name}</h2>
                                             <h3 className='heading-tertiary__blue'>City:</h3>
                                             <h3 className='heading-tertiary'>{cinema.address.city}</h3>
@@ -35,7 +35,7 @@ const CinemasList = () => {
                                             <h3 className='heading-tertiary'>{cinema.address.street} {cinema.address.number}</h3>
                                         </div>
                                         <div className='border-line'></div>
-                                        <div className='col span-1-of-2'>
+                                        <div className='col-1-of-2'>
                                             <h2 className='heading-secondary__name'>Cinema Rooms</h2>
                                             {
                                                 cinema.cinemaRooms.map((cinemaRoom, idx) => {

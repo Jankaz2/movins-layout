@@ -141,7 +141,7 @@ const AddCinemaPopup = (props) => {
                                 onSubmit={(e) => submit(e)}
                                 action=""
                                 className="form form__add-cinema">
-                                <div className="col span-1-of-2">
+                                <div className="col-1-of-2">
                                     <label htmlFor="name">Cinema name</label>
                                     {
                                         error.name && cinemaNameFocused.focused ?
@@ -209,7 +209,7 @@ const AddCinemaPopup = (props) => {
                                            required={true}
                                     />
                                 </div>
-                                <div className="col span-1-of-2">
+                                <div className="col-1-of-2">
                                     <label htmlFor="name">Cinema Room name</label>
                                     {
                                         error.cinemaRoomName && cinemaRoomSingleObjectFocused.nameFocused ?

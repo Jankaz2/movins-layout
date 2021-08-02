@@ -12,7 +12,7 @@ class Footer extends Component {
                     </Link>
                 </div>
                 <div className="row">
-                    <div className="col span-1-of-2">
+                    <div className="col-1-of-2">
                         <div className="footer__navigation">
                             <ul className="footer__list">
                                 <li className="footer__item">
@@ -30,7 +30,7 @@ class Footer extends Component {
                             </ul>
                         </div>
                     </div>
-                    <div className="col span-1-of-2">
+                    <div className="col-1-of-2">
                         <p className="footer_copyright">
                             Created by <a href="https://github.com/Jankaz2" target="_blank" className="footer__link">Jan
                             Kaźmierczak</a>, consectetur adipisicing elit.
