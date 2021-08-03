@@ -16,17 +16,22 @@ const LoginBox = (props) => {
                     <div className='login__box--popup'>
                         <span className='login__box--popup-close'
                               onClick={() => setLoginBox(false)}
-                        ><FaWindowClose/></span>
+                        >&#10005;</span>
                         <div className="row login__box--boxes">
                             <div className='col-1-of-2'>
                                 <div className="login__box--login-box">
+                                    <h3 className='login__box--boxes__text heading-tertiary__blue'>Movins</h3>
+                                    <p className='login__box--boxes__subtext'>Book tickets and manage your account!</p>
+
                                     <form className='login__box--login-box--form'>
+                                        <label htmlFor="login" className='login__box--label'>Login</label>
                                         <input className='login-form-input primary-input' type="text"
-                                               placeholder="login"/>
+                                               id='login'/>
+                                        <label htmlFor="password" className='login__box--label'>Password</label>
                                         <input className='login-form-input primary-input' type="password"
-                                               placeholder="password"/>
+                                               id='password' />
                                         <input className='login-form-input-submit primary-input' type="submit"
-                                               value="Log in"/>
+                                               value="Login"/>
                                     </form>
                                 </div>
                             </div>
@@ -46,7 +51,7 @@ const LoginBox = (props) => {
                                         <input className='signup-form-input primary-input' type="password"
                                                placeholder="repeat password"/>
                                         <input className='signup-form-input-submit primary-input' type="submit"
-                                               value="Sign in"/>
+                                               value="Signin"/>
                                     </form>
                                 </div>
                             </div>
