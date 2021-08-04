@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState} from "react"
+import {useHistory} from "react-router-dom";
 import BuyTicketSection from "./buyTicketPopup";
 import CinemaCss from "../styles/cinema.scss"
 import {DataContext} from "../../../../../utils/data_transfer/dataManager";
 
-function Cinema() {
+function Cinema(props) {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
     const {cinemaId, change, setChange, loader, showLoader, hideLoader} = useContext(DataContext)
 
@@ -92,6 +93,9 @@ function Cinema() {
 
     return (
         <div className='cinema__page'>
+            <span className='cinema__page--back'
+                  onClick={() => props.history.goBack()}
+            >&larr;</span>
             <nav className='cinema__page--nav'>
                 <h2 className='heading-secondary__name'>{cinema.name}</h2>
             </nav>

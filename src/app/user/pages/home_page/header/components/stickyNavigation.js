@@ -1,9 +1,10 @@
-import React, {useEffect, useState, useRef, useCallback} from "react";
+import React, {useEffect, useState} from "react";
 import StickyNavigationCss from "../styles/stickyNavigation.scss"
 import {Link} from "react-scroll";
 
 const StickyNavigation = () => {
     const [isSticky, setIsSticky] = useState(false)
+    const width = window.innerWidth
 
     const handleScroll = () => {
         if (window.scrollY > 120) {
@@ -18,14 +19,17 @@ const StickyNavigation = () => {
     };
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
+        if (width > 1050) {
+            window.addEventListener('scroll', handleScroll)
+        }
     })
+
 
     return (
         <div>
             {
                 isSticky &&
-                <div className="sticky__navigation">
+                <div className={`sticky__navigation`}>
                     <input type="checkbox" className="sticky__navigation__checkbox" id="navi-toggle"/>
                     <label htmlFor="navi-toggle" className="sticky__navigation__button">
                         <span className="sticky__navigation__icon">&nbsp;</span>
@@ -42,7 +46,7 @@ const StickyNavigation = () => {
                                       duration={50}
                                 >
                                     <a href="" className="sticky__navigation__link"
-                                    onClick={() => setIsSticky(!isSticky)}
+                                       onClick={() => setIsSticky(!isSticky)}
                                     >How it works</a>
                                 </Link>
                             </li>

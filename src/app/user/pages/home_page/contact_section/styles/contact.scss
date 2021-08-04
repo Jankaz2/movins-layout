@@ -26,7 +26,7 @@
     border-radius: 1rem;
 
     @include respond(tab-port) {
-      width: 70%;
+      width: 65%;
     }
 
     @include respond(phone) {

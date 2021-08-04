@@ -68,11 +68,6 @@ const ObjectOptions = props => {
                                 }
 
                             </li>
-                            <li className='object__options--item'>
-                                <span className='icon-options'><MdUpdate/></span>
-                                Update
-                                <span className='object__options--item--action'>&gt;</span>
-                            </li>
                         </ul>
                     </div>
                 </div>

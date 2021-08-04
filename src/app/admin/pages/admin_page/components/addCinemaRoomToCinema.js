@@ -10,7 +10,7 @@ const AddCinemaRoomToCinema = (props) => {
         rows: false,
         places: false
     })
-    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
+    const {cinemas, setChange} = useContext(DataContext)
     const [cinemaRoom, setCinemaRoom] = useState({
         name: "", rows: "", places: ""
     })
@@ -57,6 +57,7 @@ const AddCinemaRoomToCinema = (props) => {
     }
 
     const addCinemaRoom = async (cinemaRoom, cinemaName) => {
+        console.log(cinemaRoom)
         const cinemaRooms = []
         cinemaRooms.push(cinemaRoom)
 
@@ -65,7 +66,7 @@ const AddCinemaRoomToCinema = (props) => {
                 method: 'PATCH',
                 body: JSON.stringify(cinemaRooms),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json; charset=UTF-8'
                 }
             })
 

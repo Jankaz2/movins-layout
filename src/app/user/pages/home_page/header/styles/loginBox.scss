@@ -51,6 +51,14 @@
       width: 80%;
     }
 
+    @include respond(tab-port) {
+      width: 100%;
+    }
+
+    @include respond(phone) {
+      width: 100%;
+    }
+
     transform: translate(-50%, -50%);
     border-radius: .5rem;
     box-shadow: 0 1rem 3rem rgba($color-black, .1);
@@ -59,6 +67,28 @@
     &__subtext {
       display: block;
       padding-left: 11rem;
+
+      @include respond(tab-port) {
+        padding-left: 8rem;
+      }
+
+      &--register {
+        opacity: 0;
+
+        &-link {
+          color: $color-blue-light;
+
+          &:active,
+          &:hover {
+            color: $color-blue-medium;
+          }
+        }
+
+        @include respond(tab-port) {
+          opacity: 1;
+          margin-left: 8rem;
+        }
+      }
     }
 
     &__text {
@@ -66,6 +96,10 @@
       font-size: 3.5rem !important;
       padding-left: 11rem;
       padding-top: 4rem;
+
+      @include respond(tab-port) {
+        padding-left: 8rem;
+      }
     }
   }
 
@@ -122,6 +156,14 @@
     margin-bottom: 0 !important;
     padding: 10rem 0;
 
+    @include respond(tab-port) {
+      display: none;
+    }
+
+    @include respond(phone) {
+      display: none;
+    }
+
     &--form {
       .signup-form-input {
         width: 40%;
@@ -132,6 +174,14 @@
         background-color: $color-white-dark;
         border: 1px solid $color-grey-light-2;
         border-radius: 10rem;
+
+        @include respond(tab-port){
+          width: 60%;
+        }
+
+        @include respond(phone){
+          width: 85%;
+        }
 
         &-submit {
           display: block;
@@ -152,8 +202,24 @@
             background-color: $color-blue-dark;
             cursor: pointer;
           }
+
+          @include respond(tab-port){
+            width: 60%;
+          }
+
+          @include respond(phone){
+            width: 85%;
+          }
         }
       }
     }
   }
+}
+
+.hide-div {
+  display: none;
+}
+
+.show-div {
+  display: block;
 }
