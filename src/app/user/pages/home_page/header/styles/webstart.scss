@@ -23,36 +23,35 @@
       display: block;
     }
 
-    .cinema-name-input,
-    .cinema-city-input {
+    &-select {
       width: 30rem;
-      background-color: $color-white-dark;
       border: none;
-      padding: 1.5rem;
       margin-right: 1rem;
-      color: #000;
       font-size: 1.5rem;
       border-radius: .3rem;
 
       &::placeholder {
         color: $color-grey-dark;
       }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     &--submit {
-      width: 12rem;
-      transform: translateY(-.2rem);
-      height: 4.85rem;
+      height: 4rem;
+      width: 10rem;
       padding: 1.6rem;
       text-transform: uppercase;
+      text-align: center;
       background-color: $color-blue-light;
-      font-weight: bold;
+      font-weight: 700;
       border-radius: .3rem;
       color: $color-white;
       outline: none;
       transition: all .2s;
       border: none;
-      font-size: 1.5rem;
 
       @include respond(phone) {
         width: 30rem;
@@ -65,63 +64,4 @@
       }
     }
   }
-
-  &__search-boxes {
-    width: 62rem;
-    position: fixed;
-
-    @include respond(phone) {
-      display: block;
-    }
-
-    .search-cinema-city,
-    .search-cinema-name {
-      transition: all .2s;
-
-      ul {
-        list-style: none;
-        height: 20rem;
-        overflow: hidden;
-        overflow-y: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-
-      ul::-webkit-scrollbar {
-        display: none;
-      }
-
-      ul li {
-        width: 30rem;
-        background-color: $color-white-dark;
-        border: none;
-        padding: 1.5rem;
-        margin-right: 1rem;
-        color: #000;
-        font-size: 1.5rem;
-      }
-
-      ul li:hover {
-        background-color: $color-grey-dark;
-        color: $color-white;
-        cursor: pointer;
-      }
-    }
-
-    .search-cinema-name {
-      float: left;
-    }
-
-    .search-cinema-city {
-      float: right;
-
-      @include respond(phone) {
-        float: left;
-      }
-    }
-  }
-}
-
-.disappear {
-  display: none;
 }

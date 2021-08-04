@@ -1,38 +1,41 @@
 import {useHistory} from "react-router-dom";
 import React, {useContext, useEffect, useState} from "react";
 import {DataContext} from "../../../../../utils/data_transfer/dataManager";
-import {FaGlobe, FaVideo} from "react-icons/fa";
+import {FaSearch} from "react-icons/fa";
+import Select from "react-select";
 import WebStartScss from '../styles/webstart.scss'
 
 const WebStart = () => {
     const history = useHistory();
-    const [name, setName] = useState({name: "", clicked: false});
-    const [city, setCity] = useState({city: "", clicked: false});
-    const [hasFocus, setFocus] = useState({name: false, city: false})
-    const [filteredCinemas, setFilteredCinemas] = useState([])
+    const [name, setName] = useState({name: ""});
+    const [city, setCity] = useState({city: ""});
     const {cinemas, setTransferredCinemas} = useContext(DataContext)
 
-    const handleChange = e => {
-        e.preventDefault()
-        if (e.target.className.match('cinema-name-input')) {
-            setName({name: e.target.value, clicked: false})
-        }
-        if (e.target.className.match('cinema-city-input')) {
-            setCity({city: e.target.value, clicked: false})
-        }
+    const distinct = (value, index, self) => {
+        return self.indexOf(value) === index
     }
 
-    useEffect(() => {
-        setFilteredCinemas(
-            cinemas.filter(cinema => cinema.name.toLowerCase().match(name.name.toLowerCase()))
-        )
-    }, [name.name, cinemas])
+    const cinemasCitiesDistinct = cinemas
+        .map(cinema => cinema.address.city)
+        .filter(distinct)
 
-    useEffect(() => {
-        setFilteredCinemas(
-            cinemas.filter(cinema => cinema.address.city.toLowerCase().match(city.city.toLowerCase()))
-        )
-    }, [city.city, cinemas])
+    const cinemaNames = []
+    cinemas.forEach(cinema =>
+        cinemaNames.push({value: cinema.name, label: cinema.name})
+    )
+
+    const cinemaCities = []
+    cinemasCitiesDistinct.forEach(city =>
+        cinemaCities.push({value: city, label: city})
+    )
+
+    const handleNameChange = e => {
+        setName({name: e.value})
+    }
+
+    const handleCityChange = e => {
+        setCity({city: e.value})
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -58,72 +61,24 @@ const WebStart = () => {
             </h1>
             <form className="webstart--page__find-cinema"
                   onSubmit={handleSubmit}>
-                <input className={'cinema-name-input primary-input'}
-                       type="search"
-                       placeholder="cinema name"
-                       onChange={handleChange}
-                       onFocus={() => setFocus({name: true})}
-                       onBlur={() => setFocus({name: false})}
-                       value={name.name}
+                <Select className='webstart--page__find-cinema-select'
+                        placeholder="cinema name"
+                        options={cinemaNames}
+                        onChange={handleNameChange}
+                        id='names-only'
+                        maxMenuHeight={200}
                 />
-                <input className={'cinema-city-input primary-input'}
-                       type="search"
-                       placeholder="city"
-                       onChange={handleChange}
-                       onFocus={() => setFocus({city: true})}
-                       onBlur={() => setFocus({city: false})}
-                       value={city.city}
+                <Select className='webstart--page__find-cinema-select'
+                        placeholder="city"
+                        options={cinemaCities}
+                        onChange={handleCityChange}
+                        id='cities-only'
+                        maxMenuHeight={200}
                 />
                 <input type="submit"
                        value="search"
                        className="webstart--page__find-cinema--submit"/>
             </form>
-            <div className='webstart--page__search-boxes'>
-                <div className={
-                    `search-cinema-name 
-                            ${(name.name.length === 0 && !hasFocus.name && !name.clicked)
-                        ? 'disappear'
-                        : ''}`}>
-                    <ul>
-                        {
-                            filteredCinemas.map((cinema, index) => {
-                                return (
-                                    <li key={cinema.id}
-                                        onClick={() => {
-                                            setName({name: cinema.name, clicked: true})
-                                        }}
-                                    >
-                                        <span className={'icon-small'}><FaVideo/></span>
-                                        {cinema.name}
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
-                <div className={
-                    `search-cinema-city 
-                        ${(city.city.length === 0 && !hasFocus.city && !city.clicked)
-                        ? 'disappear'
-                        : ''}`}>
-                    <ul>
-                        {
-                            filteredCinemas.map((cinema, index) => {
-                                return (
-                                    <li key={cinema.id}
-                                        onClick={() => {
-                                            setCity({city: cinema.address.city, clicked: true})
-                                        }}
-                                    >
-                                        <span className={'icon-small'}><FaGlobe/></span>
-                                        {cinema.address.city}
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
-            </div>
         </div>
     )
 }

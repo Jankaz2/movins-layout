@@ -26,7 +26,7 @@ const AdminPage = () => {
             </h1>
             <section className='menu-section'>
                 <div className="row">
-                    <div className="menu-section__option--odd col-1-of-3">
+                    <div className="col-1-of-3 menu-section__option--odd">
                         <h3 className="heading-tertiary">Create cinema</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
@@ -38,7 +38,7 @@ const AdminPage = () => {
                         >Create
                         </button>
                     </div>
-                    <div className="menu-section__option col-1-of-3">
+                    <div className="col-1-of-3 menu-section__option">
                         <h3 className="heading-tertiary">Create new admin account</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
@@ -50,7 +50,7 @@ const AdminPage = () => {
                         >Create
                         </button>
                     </div>
-                    <div className="menu-section__option--odd col-1-of-3">
+                    <div className="col-1-of-3 menu-section__option--odd">
                         <h3 className="heading-tertiary">Add cinema room to cinema</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
@@ -64,7 +64,7 @@ const AdminPage = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="menu-section__option col-1-of-3">
+                    <div className="col-1-of-3 menu-section__option">
                         <h3 className="heading-tertiary">Show all cinemas</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
@@ -76,7 +76,7 @@ const AdminPage = () => {
                         >Show
                         </button>
                     </div>
-                    <div className="menu-section__option--odd col-1-of-3">
+                    <div className="col-1-of-3 menu-section__option--odd">
                         <h3 className="heading-tertiary">Show all users</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
@@ -88,7 +88,7 @@ const AdminPage = () => {
                         >Show
                         </button>
                     </div>
-                    <div className="menu-section__option col-1-of-3">
+                    <div className="col-1-of-3 menu-section__option">
                         <h3 className="heading-tertiary">Update cinema</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Dolorum, enim est, fuga, fugit id minus nihil nobis
