@@ -149,7 +149,7 @@ const BuyTicketSection = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className='u-margin-top-small'>
+                    <div className='u-margin-top-tiny'>
                         <button className='buy__ticket--section__btn'
                                 onClick={() => {
                                     setShowBuyStatement(true)

@@ -1,12 +1,39 @@
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 import React, {useState, useEffect, useContext} from 'react'
-
+import ObjectOptions from "./objectOptions";
 
 const ShowAllUsersPopup = (props) => {
     const BASE_USERS_URL = 'http://localhost:5000/users'
     const {change, setChange} = useContext(DataContext)
     const [users, setUsers] = useState([])
     const [showOptions, setShowOptions] = useState(false)
+    const [coordinates, setCoordinates] = useState({left: "", top: ""})
+    const [userInfoToDelete, setUserInfoToDelete] = useState({id: 0, username: "", email: ""})
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+
+    const rowData = row => {
+        const data = []
+        for (let j in row.cells) {
+            if (row.cells.hasOwnProperty(j)) {
+                const col = row.cells[j]
+                data.push(col.firstChild.nodeValue)
+            }
+        }
+        setUserInfoToDelete({id: data[0], username: data[1], email: data[2]})
+    }
+
+    const handleElementClick = e => {
+        setChange(true)
+        setShowOptions(true)
+
+        const l = e.clientX + 'px'
+        const t = e.clientY + 'px'
+        const currentRow = e.currentTarget
+
+        rowData(currentRow)
+        setCoordinates({left: l, top: t})
+    }
 
     const loadData = async () => {
         await fetch(BASE_USERS_URL)
@@ -15,6 +42,16 @@ const ShowAllUsersPopup = (props) => {
                 setUsers(users.data)
             })
             .catch(err => console.log(err))
+    }
+
+    const handleChange = e => {
+        e.preventDefault()
+        if (e.target.className.match('cinema-admin-username-input')) {
+            setUsername(e.target.value)
+        }
+        if (e.target.className.match('cinema-admin-email-input')) {
+            setEmail(e.target.value)
+        }
     }
 
     useEffect(() => {
@@ -43,16 +80,35 @@ const ShowAllUsersPopup = (props) => {
                                 <th>Age</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Options</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input className='data-list-admin--search cinema-admin-username-input'
+                                           type="search"
+                                           value={username}
+                                           onChange={handleChange}
+                                           placeholder='Search...'
+                                    />
+                                </td>
+                                <td></td>
+                                <td>
+                                    <input className='data-list-admin--search cinema-admin-email-input'
+                                           type="search"
+                                           value={email}
+                                           onChange={handleChange}
+                                           placeholder='Search...'
+                                    />
+                                </td>
+                            </tr>
                             {
 
                                 users.map((user, idx) => {
                                     return (
                                         <tr key={user.id}
-                                            onClick={setShowOptions(!showOptions)}
+                                            onClick={handleElementClick}
                                         >
                                             <td>{idx + 1}</td>
                                             <td>{user.username}</td>
@@ -66,9 +122,13 @@ const ShowAllUsersPopup = (props) => {
                             </tbody>
                         </table>
                     </div>
+                    <ObjectOptions showOptions={showOptions} setShowOptions={setShowOptions}
+                                   coordinates={coordinates} setCoordinates={setCoordinates}
+                                   userInfoToDelete={userInfoToDelete}
+                                   setUserInfoToDelete={setUserInfoToDelete}
+                    />
                 </div>
             }
-            {/*    <ObjectOptions showOptions={showOptions} setShowOptions={setShowOptions}/>*/}
         </div>
     )
 }

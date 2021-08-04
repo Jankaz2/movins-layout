@@ -6,12 +6,12 @@ const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
 const ObjectOptions = props => {
     const [deleteStatement, setDeleteStatement] = useState(false)
-    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
+    const {setChange} = useContext(DataContext)
 
     const deleteCinema = async (cinemaId) => {
         console.log(cinemaId)
         const response = await fetch(BASE_CINEMA_URL + `/${cinemaId}`,
-            {method: 'DELETE',})
+            {method: 'DELETE'})
 
         setChange(true)
         return await response.json()
