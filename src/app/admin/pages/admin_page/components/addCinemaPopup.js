@@ -1,9 +1,9 @@
 import {DataContext} from "../../../../utils/data_transfer/dataManager";
 import React, {useState, useContext} from 'react'
 
-const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
-
 const AddCinemaPopup = (props) => {
+    const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
+
     const [error, setError] = useState({
         name: false,
         city: false,
@@ -29,6 +29,7 @@ const AddCinemaPopup = (props) => {
     })
 
     const {setChange} = useContext(DataContext)
+
     const addCinema = async (cinema) => {
         const response = await fetch(BASE_CINEMA_URL, {
             method: 'POST',

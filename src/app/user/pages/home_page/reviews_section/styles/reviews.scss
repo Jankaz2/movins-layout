@@ -3,7 +3,7 @@
 
 .reviews-section {
     padding: 20rem 3rem;
-    color: #000;
+    color: $color-black;
     text-align: center;
 
     @include respond(tab-port) {

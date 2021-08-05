@@ -110,7 +110,8 @@ function Cinema(props) {
                                             <li key={seance.id}
                                                 className={'cinema__page--cinemas-list--item row'}>
                                                 <div>
-                                                    <div className={'col-1-of-2'}>
+                                                    <div className={'col-1-of-2 cinema__page--cinemas-list--item--info'}>
+                                                        <h3 className='heading-tertiary'>Title</h3>
                                                         <h3 className='heading-secondary__name u-margin-bottom-tiny'>{seance.movie.title}</h3>
                                                         <h3 className='heading-tertiary__blue'>Genre:</h3>
                                                         <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.movie.genre}</h3>

@@ -26,6 +26,7 @@
 
   &::placeholder {
     text-transform: lowercase;
+    color: $color-grey-dark;
   }
 
   &--submit {

@@ -6,6 +6,7 @@ import AddCinemaRoomToCinema from './components/addCinemaRoomToCinema'
 import ShowAllCinemasPopup from './components/showAllCinemasPopup'
 import ShowAllUsersPopup from "./components/showAllUsersPopup";
 import UpdateCinema from "./components/updateCinema";
+import CreateMovie from "./components/createMovie";
 
 const AdminPage = () => {
     const [showCreateCinema, setShowCreateCinema] = useState(false)
@@ -14,6 +15,7 @@ const AdminPage = () => {
     const [showAllUsers, setShowAllUsers] = useState(false)
     const [showAddCinemaRoomToCinema, setShowAddCinemaRoomToCinema] = useState(false)
     const [showUpdateCinema, setShowUpdateCinema] = useState(false)
+    const [showCreateMovie, setShowCreateMovie] = useState(false)
 
     useEffect(() => {
         document.title = 'Movins | ADMIN system'
@@ -101,6 +103,24 @@ const AdminPage = () => {
                         </button>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-1-of-3">
+                    </div>
+                    <div className="col-1-of-3 menu-section__option">
+                        <h3 className="heading-tertiary">Create movie</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Dolorum, enim est, fuga, fugit id minus nihil nobis
+                            officiis optio praesentium quae ut. Aut distinctio error eum
+                            fuga, in inventore ipsam!
+                        </p>
+                        <button className="menu-section__button"
+                                onClick={() => setShowCreateMovie(!showCreateMovie)}
+                        >Show
+                        </button>
+                    </div>
+                    <div className="col-1-of-3">
+                    </div>
+                </div>
             </section>
             <AddCinemaPopup showCreateCinema={showCreateCinema} setShowCreateCinema={setShowCreateCinema}/>
             <AddNewAdminAccountPopup showCreateNewAdmin={showCreateNewAdmin}
@@ -110,6 +130,7 @@ const AdminPage = () => {
             <AddCinemaRoomToCinema showAddCinemaRoomToCinema={showAddCinemaRoomToCinema}
                                    setShowAddCinemaRoomToCinema={setShowAddCinemaRoomToCinema}/>
             <UpdateCinema showUpdateCinema={showUpdateCinema} setShowUpdateCinema={setShowUpdateCinema}/>
+            <CreateMovie showCreateMovie={showCreateMovie} setShowCreateMovie={setShowCreateMovie}/>
         </div>
     )
 }

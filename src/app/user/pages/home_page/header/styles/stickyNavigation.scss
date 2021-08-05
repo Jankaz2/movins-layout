@@ -37,8 +37,8 @@
     transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 
     @include respond(tab-port-land) {
-      top: 4rem;
-      right: 5rem;
+      top: 4.5rem;
+      right: 5.5rem;
     }
   }
 
