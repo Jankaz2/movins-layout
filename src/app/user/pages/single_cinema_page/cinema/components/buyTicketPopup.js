@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import CinemaScss from '../styles/cinema.scss'
 import StatementScss from '../../../../../styles/scss/utils/statement.scss'
-import {DataContext} from "../../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../../utils/data/dataManager";
 
 
 const BuyTicketSection = (props) => {

@@ -7,7 +7,7 @@ import StepsSection from "../../steps_section/components/stepsSection";
 import AboutUsSection from "../../about_us_section/components/aboutUsSection";
 import Reviews from "../../reviews_section/components/reviews";
 import Contact from "../../contact_section/components/contact";
-import {DataContext} from "../../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../../utils/data/dataManager";
 import StickyNavigation from "./stickyNavigation";
 import LoginBox from "./loginBox";
 import WebStart from "./webStart";

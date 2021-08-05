@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {DataContext} from "../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../utils/data/dataManager";
 import useLoadPage from "../../../../utils/hooks/useLoadPage";
 import Select from "react-select";
 

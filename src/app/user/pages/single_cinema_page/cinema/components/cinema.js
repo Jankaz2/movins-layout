@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react"
 import {useHistory} from "react-router-dom";
 import BuyTicketSection from "./buyTicketPopup";
 import CinemaCss from "../styles/cinema.scss"
-import {DataContext} from "../../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../../utils/data/dataManager";
 
 function Cinema(props) {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'

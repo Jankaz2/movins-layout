@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import LoginBoxScss from '../styles/loginBox.scss'
-import {DataContext} from "../../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../../utils/data/dataManager";
 
 const LoginBox = (props) => {
     const {loginBox, setLoginBox} = useContext(DataContext)

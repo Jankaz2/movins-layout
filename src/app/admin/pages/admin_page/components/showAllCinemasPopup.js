@@ -1,4 +1,4 @@
-import {DataContext} from "../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../utils/data/dataManager";
 import ObjectOptions from './objectOptions'
 import React, {useState, useContext, useEffect} from 'react'
 

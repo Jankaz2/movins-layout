@@ -1,4 +1,4 @@
-import {DataContext} from "../../../../utils/data_transfer/dataManager";
+import {DataContext} from "../../../../utils/data/dataManager";
 import {MdDeleteForever, MdUpdate} from "react-icons/md";
 import React, {useState, useContext} from 'react'
 
