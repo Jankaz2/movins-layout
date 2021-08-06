@@ -1,15 +1,18 @@
-import React, {useState, useContext} from "react"
-import {Link} from "react-router-dom"
+import React, {useContext} from "react"
+import {Link, useHistory} from "react-router-dom"
 import HomePage from "../../../home_page/header/components/homePage"
 import CinemasListCss from "../styles/cinemasList.scss"
 import {DataContext} from "../../../../../utils/data/dataManager";
 import useLoadPage from "../../../../../utils/hooks/useLoadPage";
 
-const CinemasList = () => {
+const CinemasList = (props) => {
     const {transferredCinemas, setCinemaId, loader, showLoader, hideLoader} = useContext(DataContext)
 
     return (
         <div className="cinemas-list-section">
+              <span className='cinema__page--back'
+                    onClick={() => props.history.goBack()}
+              >&larr;</span>
             <div className='cinemas-list-section__logo'>
                 <Link to="/">
                     <span className='cinemas-list-section__logo--text'>Movins</span>
@@ -25,7 +28,7 @@ const CinemasList = () => {
                                     to={`/cinema-list/cinema/${cinema.id}`}>
                                     <li key={cinema.id}
                                         className='cinemas-list-section__item row'
-                                        >
+                                    >
                                         <div className='col-1-of-2'>
                                             <h2 className='heading-secondary__name'>{cinema.name}</h2>
                                             <h3 className='heading-tertiary__blue'>City:</h3>

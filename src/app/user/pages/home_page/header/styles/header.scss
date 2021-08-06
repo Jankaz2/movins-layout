@@ -69,5 +69,13 @@
     border-bottom: none !important;
     float: left;
     margin-left: 3rem;
+
+    @include respond(tab-port) {
+      margin-top: 3rem;
+    }
+
+    @include respond(phone) {
+      margin-top: 4rem;
+    }
   }
 }

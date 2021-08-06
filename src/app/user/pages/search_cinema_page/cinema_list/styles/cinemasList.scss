@@ -9,11 +9,11 @@
 
   &__logo {
     text-align: center;
-    background-color: $color-blue-medium;
+    border-bottom: 1px solid $color-grey-light-2;
 
     &--text {
       text-transform: uppercase;
-      color: $color-white-dark;
+      color: $color-blue-medium;
       font-size: 5rem;
       font-weight: 400;
     }

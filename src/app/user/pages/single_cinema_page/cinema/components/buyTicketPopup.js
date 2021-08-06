@@ -19,8 +19,19 @@ const BuyTicketSection = (props) => {
     const [choice, setChoice] = useState(false)
     const [currentlyBookedTickets, setCurrentlyBookedTickets] = useState([])
     const [bookedSeats, setBookedSeats] = useState([])
+    const [coordinates, setCoordinates] = useState({left: "", top: ""})
 
     const {setChange} = useContext(DataContext)
+
+    const handleElementBooked = e => {
+        setChange(true)
+
+        const l = e.clientX + 'px'
+        const t = e.clientY + 'px'
+        const currentCell = e.currentTarget
+
+        setCoordinates({left: l, top: t})
+    }
 
     const loadSeats = async () => {
         await fetch(BASE_TICKET_URL)
@@ -41,17 +52,18 @@ const BuyTicketSection = (props) => {
     }, [currentlyBookedTickets])
 
     const changeColor = (e, row, place) => {
-        console.log(bookedSeats)
         const greenPlaceCopy = [...greenPlace]
 
-        if (greenPlace.length >= 7 && !e.target.className.includes('greenTd')) {
-            setShowStatement(true)
-        } else {
-            if (greenPlaceCopy.filter(seat => seat.place === place).length > 0) {
-                setGreenPlace([...greenPlaceCopy.filter(seat => seat.place !== place)])
+        if (!e.target.className.includes('greyTd')) {
+            if (greenPlace.length >= 7 && !e.target.className.includes('greenTd')) {
+                setShowStatement(true)
             } else {
-                greenPlaceCopy.push({row: row, place: place})
-                setGreenPlace([...greenPlaceCopy])
+                if (greenPlaceCopy.filter(seat => seat.place === place).length > 0) {
+                    setGreenPlace([...greenPlaceCopy.filter(seat => seat.place !== place)])
+                } else {
+                    greenPlaceCopy.push({row: row, place: place})
+                    setGreenPlace([...greenPlaceCopy])
+                }
             }
         }
     }
@@ -62,7 +74,7 @@ const BuyTicketSection = (props) => {
         places.forEach(place =>
             tempTickets.push(
                 {
-                    userId: 112,
+                    userId: 91,
                     seanceId: seance.id,
                     seat: {
                         row: place.row,
@@ -75,6 +87,7 @@ const BuyTicketSection = (props) => {
         )
 
         setCurrentlyBookedTickets(tempTickets)
+        console.log(currentlyBookedTickets)
     }
 
     const orderTicket = async (ticket) => {
@@ -89,7 +102,6 @@ const BuyTicketSection = (props) => {
         setChange(false)
         return await response.json();
     }
-
 
     return (
         <div className='popup'>
@@ -111,15 +123,18 @@ const BuyTicketSection = (props) => {
                                                     className={`buy__ticket--section__table--seat
                                                     
                                                     ${typeof (bookedSeats) === 'undefined' ? null
-                                                        : bookedSeats.filter(ticket => 
+                                                        : bookedSeats.filter(ticket =>
                                                             seance.cinemaRoom.id === ticket.seance.cinemaRoom.id &&
-                                                            ticket.seance.row === rowIdx + 1 && ticket.seance.place === finalArray[rowIdx][[placeIdx]]).length > 0 ?
-                                                            'greyTd' :
-                                                            greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0 ? 'greenTd'
+                                                            seance.movie.id === ticket.seance.movie.id &&
+                                                            ticket.seat.row === rowIdx + 1 &&
+                                                            ticket.seat.place === finalArray[rowIdx][[placeIdx]]).length > 0
+                                                            ? 'greyTd'
+                                                            : greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0
+                                                                ? 'greenTd'
                                                                 : 'whiteTd'}`}
 
-                                                    onClick={(e) => changeColor(e, rowIdx + 1, finalArray[rowIdx][placeIdx])
-                                                    }>{finalArray[rowIdx][placeIdx]}</td>
+                                                    onClick={(e) => changeColor(e, rowIdx + 1, finalArray[rowIdx][placeIdx])}
+                                                >{finalArray[rowIdx][placeIdx]}</td>
                                             )
                                         }
                                     </tr>
@@ -153,9 +168,7 @@ const BuyTicketSection = (props) => {
                         <button className='buy__ticket--section__btn'
                                 onClick={() => {
                                     setShowBuyStatement(true)
-                                    choice &&
                                     createTickets(greenPlace)
-                                    currentlyBookedTickets.forEach(ticket => orderTicket(ticket))
                                 }}>
                             buy
                         </button>
@@ -173,19 +186,21 @@ const BuyTicketSection = (props) => {
                             : null
                     }
                 </div>
-                {
+                 {
                     showBuyStatement ?
                         <div className='statement'>
                             <span className='statement--close'
                                   onClick={() => {
-                                      setChoice(false)
                                       setShowBuyStatement(false)
                                   }}
                             >&#10005;</span>
                             <p className='statement__text'>Do you really want to buy this ticket?</p>
                             <div className='statement__buttons'>
                                 <button className="statement__buttons--yes"
-                                        onClick={() => setChoice(true)}
+                                        onClick={() => {
+                                            currentlyBookedTickets.forEach(ticket => orderTicket(ticket))
+                                            setShowBuyStatement(false)
+                                        }}
                                 >Yes</button>
                             </div>
                         </div>

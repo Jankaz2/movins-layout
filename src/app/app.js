@@ -6,16 +6,20 @@ import CinemasList from "./user/pages/search_cinema_page/cinema_list/components/
 import Cinema from "./user/pages/single_cinema_page/cinema/components/cinema"
 import {DataManager} from "./utils/data/dataManager";
 import AdminPage from "./admin/pages/admin_page/adminPage";
-import LoadingPage from "./utils/pages/LoadingPage";
+import LoadingPage from "./utils/pages/loadingPage";
+import PageNotFound from "./utils/pages/pageNotFound";
 
 function App() {
     return (
         <DataManager>
             <Router>
-                <Route path="/cinema-list" exact component={CinemasList}/>
-                <Route path="/cinema-list/cinema/:id" exact component={Cinema}/>
-                <Route path="/" exact component={HomePage}/>
-                <Route path="/admin" exact component={AdminPage}/>
+                <Switch>
+                    <Route path="/cinema-list" exact component={CinemasList}/>
+                    <Route path="/cinema-list/cinema/:id" exact component={Cinema}/>
+                    <Route path="/" exact component={HomePage}/>
+                    <Route path="/admin" exact component={AdminPage}/>
+                    <Route exact component={PageNotFound}/>
+                </Switch>
                 <Route path="/" component={Footer}/>
             </Router>
         </DataManager>

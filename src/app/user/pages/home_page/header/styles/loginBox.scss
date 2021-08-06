@@ -72,6 +72,10 @@
         padding-left: 8rem;
       }
 
+      @include respond(phone) {
+        padding-left: 10rem;
+      }
+
       &--register {
         opacity: 0;
 
@@ -88,6 +92,10 @@
           opacity: 1;
           margin-left: 8rem;
         }
+
+        @include respond(phone) {
+          margin-left: 10rem;
+        }
       }
     }
 
@@ -99,6 +107,10 @@
 
       @include respond(tab-port) {
         padding-left: 8rem;
+      }
+
+      @include respond(phone) {
+        padding-left: 10rem;
       }
     }
   }

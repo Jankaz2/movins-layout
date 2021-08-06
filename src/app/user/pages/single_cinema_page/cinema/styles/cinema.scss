@@ -10,7 +10,7 @@
 
   &--back {
     position: fixed;
-    top: 2rem;
+    top: 1rem;
     left: 5rem;
     font-weight: 700;
     color: $color-black;
@@ -181,6 +181,15 @@
 .greyTd {
   background-color: $color-grey-dark;
   color: $color-white;
+
+  &:hover {
+    cursor: auto;
+    background-color: $color-grey-dark;
+  }
+
+  &:after {
+    content: 'B';
+  }
 }
 
 .error-statement {
