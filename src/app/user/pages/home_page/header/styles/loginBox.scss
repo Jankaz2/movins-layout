@@ -116,6 +116,10 @@
   }
 
   &--login-box {
+    .error-message {
+      margin-left: 11rem;
+    }
+
     &--form {
       padding-top: 8rem;
 

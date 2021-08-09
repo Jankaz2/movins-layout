@@ -13,10 +13,12 @@ import LoginBox from "./loginBox";
 import WebStart from "./webStart";
 
 function HomePage() {
+    const {isLogged} = useContext(DataContext)
+
     return (
         <div>
             <StickyNavigation/>
-            <LoginBox />
+            {!isLogged && <LoginBox/>}
             <header className='header'>
                 <Navigation/>
                 <WebStart/>
@@ -29,8 +31,12 @@ function HomePage() {
     )
 }
 
-const Navigation = () => {
-    const {setLoginBox} = useContext(DataContext)
+const Navigation = (props) => {
+    const {setLoginBox, isLogged} = useContext(DataContext)
+
+    const goToMyAccount = e => {
+        props.history.push("/my-account")
+    }
 
     return (
         <div>
@@ -67,14 +73,24 @@ const Navigation = () => {
                         </Link>
                     </li>
 
-                    <li className="header__navbar--item log-in-link"
-                        onClick={(event) => {
-                            setLoginBox(true)
-                            event.preventDefault()
-                        }}>
-                        <a href="">Log in</a>
-                    </li>
-
+                    {
+                        !isLogged &&
+                        <li className="header__navbar--item log-in-link"
+                            onClick={(event) => {
+                                setLoginBox(true)
+                                event.preventDefault()
+                            }}>
+                            <a href="">Log in</a>
+                        </li>
+                    }
+                    {
+                        isLogged &&
+                        <li className="header__navbar--item log-in-link"
+                            onClick={goToMyAccount}
+                        >
+                            <a href="">My account</a>
+                        </li>
+                    }
                     <li className="header__navbar--item">
                         <Link activeClass="active"
                               to="steps-section"

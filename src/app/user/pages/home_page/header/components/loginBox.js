@@ -1,11 +1,60 @@
 import React, {useContext, useState} from "react";
+import {useHistory} from 'react-router-dom'
 import LoginBoxScss from '../styles/loginBox.scss'
 import {DataContext} from "../../../../../utils/data/dataManager";
 
 const LoginBox = (props) => {
-    const {loginBox, setLoginBox} = useContext(DataContext)
+    const BASE_URL = 'http://localhost:5000'
+
+    const {loginBox, setLoginBox, setChange, loggedUser, setLoggedUser, isLogged, setIsLogged} = useContext(DataContext)
     const [showCreateAccount, setShowCreateAccount] = useState(false)
+    const [userData, setUserData] = useState({username: '', password: ''})
+    const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
+    const [error, setError] = useState({username: false, password: false})
     const width = window.innerWidth
+
+    const handleChange = (e) => {
+        const newUser = {...userData}
+        if (e.target.id === 'username' &&
+            e.target.value.length > 0 &&
+            (!e.target.value.match(/^[A-Za-z]+[0-9]{0,4}$/) ||
+                e.target.value.length < 3)) {
+            setError({username: true})
+        } else if (e.target.id === 'username') {
+            setError({username: false})
+        }
+
+        if (e.target.id === 'password' &&
+            e.target.value.length > 0 &&
+            e.target.value.length < 8) {
+            setError({password: true})
+        } else if (e.target.id === 'password') {
+            setError({password: false})
+        }
+
+        newUser[e.target.id] = e.target.value
+        setLoggedUser(newUser)
+    }
+
+    const login = async (user) => {
+        const response = await fetch(BASE_URL + "/login", {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        setChange(true)
+        return await response.json();
+    }
+
+    const submit = e => {
+        e.preventDefault()
+        login(loggedUser).catch(err => console.log(err))
+        setIsLogged(true)
+        props.history.push("/")
+    }
 
     return (
         <div>
@@ -25,12 +74,38 @@ const LoginBox = (props) => {
                                     <h3 className='login__box--boxes__text heading-tertiary__blue'>Movins</h3>
                                     <p className='login__box--boxes__subtext'>Book tickets and manage your account!</p>
 
-                                    <form className='login__box--login-box--form'>
-                                        <label htmlFor="login" className='login__box--label'>Login</label>
+                                    <form className='login__box--login-box--form'
+                                          onSubmit={e => submit(e)}
+                                    >
+                                        <label htmlFor="username"
+                                               className='login__box--label'
+                                        >Login</label>
+                                        {
+                                            error.username && userDataFocused.usernameFocused ?
+                                                <p className='error-message'>
+                                                    Length must be greater than 3<br/>
+                                                    Syntax must be: <span
+                                                    className='error-message__syntax'>/^[A-Za-z]+[0-9]{0 + ',' + 4}$/</span>
+                                                </p> : null
+                                        }
                                         <input className='login-form-input primary-input' type="text"
-                                               id='login'/>
+                                               onChange={handleChange}
+                                               onFocus={() => setUserDataFocused({usernameFocused: true})}
+                                               onBlur={() => setUserDataFocused({usernameFocused: false})}
+                                               required={true}
+                                               id="username"/>
                                         <label htmlFor="password" className='login__box--label'>Password</label>
+                                        {
+                                            error.password && userDataFocused.passwordFocused ?
+                                                <p className='error-message'>
+                                                    Length must be greater than 7<br/>
+                                                </p> : null
+                                        }
                                         <input className='login-form-input primary-input' type="password"
+                                               onChange={handleChange}
+                                               onFocus={() => setUserDataFocused({passwordFocused: true})}
+                                               onBlur={() => setUserDataFocused({passwordFocused: false})}
+                                               required={true}
                                                id='password'/>
                                         <input className='login-form-input-submit primary-input' type="submit"
                                                value="Login"/>
