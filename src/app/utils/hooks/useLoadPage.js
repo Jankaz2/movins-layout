@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import LoadingPage from "../pages/loadingPage";
+import LoadingPage from "../pages/components/loadingPage";
 
 const useLoadPage = () => {
     const [loading, setLoading] = useState(false)

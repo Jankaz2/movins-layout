@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Loading} from 'react-loading-dot'
-import LoadingPageScss from './styles/loadingPage.scss'
+import LoadingPageScss from '../styles/loadingPage.scss'
 
 const LoadingPage = () => {
     return (
