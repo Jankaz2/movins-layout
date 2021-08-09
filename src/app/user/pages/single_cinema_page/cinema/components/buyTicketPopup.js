@@ -12,6 +12,10 @@ const BuyTicketSection = (props) => {
     const rows = props.rows
     const places = props.places
     const finalArray = props.array
+    const today = new Date()
+    const days = String(today.getDate()).padStart(2, '0')
+    const month = String(today.getMonth() + 1).padStart(2, '0')
+    const year = today.getFullYear()
 
     const [greenPlace, setGreenPlace] = useState([{row: null, place: null}])
     const [showStatement, setShowStatement] = useState(false)
@@ -82,6 +86,7 @@ const BuyTicketSection = (props) => {
                         cinemaRoomId: seance.cinemaRoom.id,
                     },
                     price: 50,
+                    purchaseDate: year + '-' + month + '-' + days
                 }
             )
         )
@@ -90,125 +95,126 @@ const BuyTicketSection = (props) => {
         console.log(currentlyBookedTickets)
     }
 
-    const orderTicket = async (ticket) => {
-        const response = await fetch(BASE_TICKET_URL, {
-            method: 'POST',
-            body: JSON.stringify(ticket),
-            headers: {
-                'Content-Type': 'application/json'
+        const orderTicket = async (tickets) => {
+            for await (const ticket of tickets) {
+                await fetch(BASE_TICKET_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(ticket),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
             }
-        })
+            setChange(false)
+        }
 
-        setChange(false)
-        return await response.json();
-    }
-
-    return (
-        <div className='popup'>
-            <div className='popup__inside'>
+        return (
+            <div className='popup'>
+                <div className='popup__inside'>
                  <span className='popup__inside--close'
                        onClick={props.closePopup}
                  >&#10005;</span>
-                <div className='buy__ticket--section'>
-                    <div className='buy__ticket--section__places'>
-                        <h3 className='heading-tertiary'>Select and book your seat</h3>
-                        <table className='buy__ticket--section__table u-margin-bottom-tiny'>
-                            <tbody>
-                            {
-                                [...Array(rows)].map((row, rowIdx) =>
-                                    <tr key={rowIdx}>
-                                        {
-                                            [...Array(places)].map((place, placeIdx) =>
-                                                <td key={finalArray[rowIdx][placeIdx]}
-                                                    className={`buy__ticket--section__table--seat
+                    <div className='buy__ticket--section'>
+                        <div className='buy__ticket--section__places'>
+                            <h3 className='heading-tertiary'>Select and book your seat</h3>
+                            <table className='buy__ticket--section__table u-margin-bottom-tiny'>
+                                <tbody>
+                                {
+                                    [...Array(rows)].map((row, rowIdx) =>
+                                        <tr key={rowIdx}>
+                                            {
+                                                [...Array(places)].map((place, placeIdx) =>
+                                                    <td key={finalArray[rowIdx][placeIdx]}
+                                                        className={`buy__ticket--section__table--seat
                                                     
                                                     ${typeof (bookedSeats) === 'undefined' ? null
-                                                        : bookedSeats.filter(ticket =>
-                                                            seance.cinemaRoom.id === ticket.seance.cinemaRoom.id &&
-                                                            seance.movie.id === ticket.seance.movie.id &&
-                                                            ticket.seat.row === rowIdx + 1 &&
-                                                            ticket.seat.place === finalArray[rowIdx][[placeIdx]]).length > 0
-                                                            ? 'greyTd'
-                                                            : greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0
-                                                                ? 'greenTd'
-                                                                : 'whiteTd'}`}
+                                                            : bookedSeats.filter(ticket =>
+                                                                seance.cinemaRoom.id === ticket.seance.cinemaRoom.id &&
+                                                                seance.movie.id === ticket.seance.movie.id &&
+                                                                ticket.seat.row === rowIdx + 1 &&
+                                                                ticket.seat.place === finalArray[rowIdx][[placeIdx]]).length > 0
+                                                                ? 'greyTd'
+                                                                : greenPlace.filter(seat => seat.place === finalArray[rowIdx][placeIdx]).length > 0
+                                                                    ? 'greenTd'
+                                                                    : 'whiteTd'}`}
 
-                                                    onClick={(e) => changeColor(e, rowIdx + 1, finalArray[rowIdx][placeIdx])}
-                                                >{finalArray[rowIdx][placeIdx]}</td>
-                                            )
-                                        }
-                                    </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
-                        <div>
-                            <div>
-                                <h3 className='heading-tertiary'>Choosen places:</h3>
-                                {
-                                    [...greenPlace]
-                                        .filter((seat, idx) => idx !== 0)
-                                        .map((seat, idx) =>
-                                            <div className='buy__ticket--section__selected-wrapper'>
-                                                <div className='buy__ticket--section__selected-row'>
-                                                    <p className='buy__ticket--section__selected-row-p'>Row</p>
-                                                    {seat.row}
-                                                </div>
-                                                <div className='buy__ticket--section__selected-place'>
-                                                    <p className='buy__ticket--section__selected-place-p'>Place</p>
-                                                    {seat.place}
-                                                </div>
-                                            </div>
-                                        )
+                                                        onClick={(e) => changeColor(e, rowIdx + 1, finalArray[rowIdx][placeIdx])}
+                                                    >{finalArray[rowIdx][placeIdx]}</td>
+                                                )
+                                            }
+                                        </tr>
+                                    )
                                 }
+                                </tbody>
+                            </table>
+                            <div>
+                                <div>
+                                    <h3 className='heading-tertiary'>Choosen places:</h3>
+                                    {
+                                        [...greenPlace]
+                                            .filter((seat, idx) => idx !== 0)
+                                            .map((seat, idx) =>
+                                                <div className='buy__ticket--section__selected-wrapper'>
+                                                    <div className='buy__ticket--section__selected-row'>
+                                                        <p className='buy__ticket--section__selected-row-p'>Row</p>
+                                                        {seat.row}
+                                                    </div>
+                                                    <div className='buy__ticket--section__selected-place'>
+                                                        <p className='buy__ticket--section__selected-place-p'>Place</p>
+                                                        {seat.place}
+                                                    </div>
+                                                </div>
+                                            )
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='u-margin-top-tiny'>
-                        <button className='buy__ticket--section__btn'
-                                onClick={() => {
-                                    setShowBuyStatement(true)
-                                    createTickets(greenPlace)
-                                }}>
-                            buy
-                        </button>
+                        <div className='u-margin-top-tiny'>
+                            <button className='buy__ticket--section__btn'
+                                    onClick={() => {
+                                        setShowBuyStatement(true)
+                                        createTickets(greenPlace)
+                                    }}>
+                                buy
+                            </button>
+                        </div>
+                        {
+                            showStatement ?
+                                <div className='error-statement'>
+                                    <h3 className='heading-tertiary'>You cannot buy more than 6 tickets</h3>
+                                    <button
+                                        onClick={() => setShowStatement(false)}
+                                        className='error-statement__btn'>
+                                        Ok
+                                    </button>
+                                </div>
+                                : null
+                        }
                     </div>
                     {
-                        showStatement ?
-                            <div className='error-statement'>
-                                <h3 className='heading-tertiary'>You cannot buy more than 6 tickets</h3>
-                                <button
-                                    onClick={() => setShowStatement(false)}
-                                    className='error-statement__btn'>
-                                    Ok
-                                </button>
-                            </div>
-                            : null
-                    }
-                </div>
-                 {
-                    showBuyStatement ?
-                        <div className='statement'>
+                        showBuyStatement ?
+                            <div className='statement'>
                             <span className='statement--close'
                                   onClick={() => {
                                       setShowBuyStatement(false)
                                   }}
                             >&#10005;</span>
-                            <p className='statement__text'>Do you really want to buy this ticket?</p>
-                            <div className='statement__buttons'>
-                                <button className="statement__buttons--yes"
-                                        onClick={() => {
-                                            currentlyBookedTickets.forEach(ticket => orderTicket(ticket))
-                                            setShowBuyStatement(false)
-                                        }}
-                                >Yes</button>
+                                <p className='statement__text'>Do you really want to buy this ticket?</p>
+                                <div className='statement__buttons'>
+                                    <button className="statement__buttons--yes"
+                                            onClick={() => {
+                                                orderTicket(currentlyBookedTickets).catch(err => console.log(err))
+                                                setShowBuyStatement(false)
+                                            }}
+                                    >Yes
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        : null
-                }
+                            : null
+                    }
+                </div>
             </div>
-        </div>
-    )
-}
+        )
+    }
 
-export default BuyTicketSection
+    export default BuyTicketSection

@@ -103,6 +103,32 @@ body {
     color: transparent;
     letter-spacing: .1rem;
   }
+
+  &__active {
+    text-transform: uppercase;
+    font-size: 2rem;
+    background-image: linear-gradient(
+                    to right,
+                    rgba($color-green, 0.8),
+                    rgba($color-green-2, 0.8)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .1rem;
+  }
+
+  &__inactive {
+    text-transform: uppercase;
+    font-size: 2rem;
+    background-image: linear-gradient(
+                    to right,
+                    rgba($color-red, 0.8),
+                    rgba($color-red-dark, 0.8)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .1rem;
+  }
 }
 
 .icon-small {

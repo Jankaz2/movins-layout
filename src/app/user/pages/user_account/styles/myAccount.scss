@@ -1,0 +1,79 @@
+@import '../../../../styles/scss/utils/variables';
+
+.my-account {
+  width: 100%;
+  margin: auto;
+  background-color: $color-grey-light-1;
+  min-height: 100vh;
+  text-align: center;
+
+  &__text {
+    float: left;
+    padding-left: 6rem;
+    text-transform: uppercase;
+  }
+
+  &__person-icon {
+    display: inline-block;
+    color: $color-blue-light;
+    font-size: 2.5rem;
+    transform: translateY(.5rem);
+    font-weight: 700;
+  }
+
+  &__nav {
+    width: 100%;
+    padding: 4rem 1.5rem;
+    border-bottom: 1px solid $color-grey-light-2;
+  }
+
+  &__options {
+    list-style: none;
+    width: 100%;
+    padding: 1rem 8rem;
+    margin: auto;
+
+    &--item {
+      display: inline-block;
+      color: $color-grey-dark;
+      font-weight: 400;
+      text-transform: uppercase;
+      transition: all .3s;
+      padding: .5rem 0;
+      float: right;
+
+
+      &:not(:last-child){
+        margin-left: 2rem;
+      }
+
+      &:active,
+      &:hover {
+        cursor: pointer;
+        border-bottom: 2px solid $color-pink;
+      }
+    }
+  }
+
+  &__tickets {
+    list-style: none;
+    width: 70%;
+    padding-top: 8rem;
+    margin: auto;
+
+    &__single-ticket {
+      width: 100%;
+      background-color: rgba($color-white, .8);
+      box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+      border: 1px solid $color-grey-light-2;
+      border-radius: .3rem;
+    }
+  }
+
+  &__user {
+    width: 70%;
+    padding-top: 8rem;
+    margin: auto;
+    color: $color-grey-dark;
+  }
+}

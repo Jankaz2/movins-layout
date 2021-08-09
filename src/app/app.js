@@ -8,6 +8,7 @@ import {DataManager} from "./utils/data/dataManager";
 import AdminPage from "./admin/pages/admin_page/adminPage";
 import LoadingPage from "./utils/pages/loadingPage";
 import PageNotFound from "./utils/pages/pageNotFound";
+import MyAccount from "./user/pages/user_account/components/myAccount";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/cinema-list/cinema/:id" exact component={Cinema}/>
                     <Route path="/" exact component={HomePage}/>
                     <Route path="/admin" exact component={AdminPage}/>
+                    <Route path="/my-account" exact component={MyAccount}/>
                     <Route exact component={PageNotFound}/>
                 </Switch>
                 <Route path="/" component={Footer}/>
