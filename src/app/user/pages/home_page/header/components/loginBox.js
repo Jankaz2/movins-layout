@@ -5,16 +5,34 @@ import {DataContext} from "../../../../../utils/data/dataManager";
 
 const LoginBox = (props) => {
     const BASE_URL = 'http://localhost:5000'
+    const history = useHistory()
 
-    const {loginBox, setLoginBox, setChange, loggedUser, setLoggedUser, isLogged, setIsLogged} = useContext(DataContext)
+    const {
+        loginBox,
+        setLoginBox,
+        setChange,
+        loggedUser,
+        setLoggedUser,
+        isLogged,
+        setIsLogged,
+        setIsRegistered
+    } = useContext(DataContext)
     const [showCreateAccount, setShowCreateAccount] = useState(false)
-    const [userData, setUserData] = useState({username: '', password: ''})
+    const [loginData, setLoginData] = useState({username: '', password: ''})
+    const [registerData, setRegisterData] = useState({
+        username: '',
+        email: '',
+        age: '',
+        password: '',
+        passwordConfirmation: '',
+        role: 'USER'
+    })
     const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
     const [error, setError] = useState({username: false, password: false})
     const width = window.innerWidth
 
-    const handleChange = (e) => {
-        const newUser = {...userData}
+    const handleLoginChange = (e) => {
+        const loggedUser = {...loginData}
         if (e.target.id === 'username' &&
             e.target.value.length > 0 &&
             (!e.target.value.match(/^[A-Za-z]+[0-9]{0,4}$/) ||
@@ -32,8 +50,33 @@ const LoginBox = (props) => {
             setError({password: false})
         }
 
-        newUser[e.target.id] = e.target.value
-        setLoggedUser(newUser)
+        loggedUser[e.target.id] = e.target.value
+        setLoggedUser(loggedUser)
+    }
+
+    const handleRegisterChange = e => {
+        const newUser = {...registerData}
+        if (e.target.id === 'register-username') {
+            newUser['username'] = e.target.value
+        }
+
+        if (e.target.id === 'email') {
+            newUser['email'] = e.target.value
+        }
+
+        if (e.target.id === 'age') {
+            newUser['age'] = e.target.value
+        }
+
+        if (e.target.id === 'register-password') {
+            newUser['password'] = e.target.value
+        }
+
+        if (e.target.id === 'register-password-confirmation') {
+            newUser['passwordConfirmation'] = e.target.value
+        }
+
+        setRegisterData(newUser)
     }
 
     const login = async (user) => {
@@ -49,11 +92,29 @@ const LoginBox = (props) => {
         return await response.json();
     }
 
-    const submit = e => {
+    const register = async (user) => {
+        const response = await fetch(BASE_URL + "/users/register", {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        setChange(true)
+        return await response.json();
+    }
+
+    const submitLogin = e => {
         e.preventDefault()
         login(loggedUser).catch(err => console.log(err))
         setIsLogged(true)
-        props.history.push("/")
+    }
+
+    const submitRegister = e => {
+        e.preventDefault()
+        register(registerData).catch(err => console.log(err))
+        setIsRegistered(true)
     }
 
     return (
@@ -75,7 +136,10 @@ const LoginBox = (props) => {
                                     <p className='login__box--boxes__subtext'>Book tickets and manage your account!</p>
 
                                     <form className='login__box--login-box--form'
-                                          onSubmit={e => submit(e)}
+                                          onSubmit={e => {
+                                              submitLogin(e)
+                                              history.push("/")
+                                          }}
                                     >
                                         <label htmlFor="username"
                                                className='login__box--label'
@@ -89,7 +153,7 @@ const LoginBox = (props) => {
                                                 </p> : null
                                         }
                                         <input className='login-form-input primary-input' type="text"
-                                               onChange={handleChange}
+                                               onChange={handleLoginChange}
                                                onFocus={() => setUserDataFocused({usernameFocused: true})}
                                                onBlur={() => setUserDataFocused({usernameFocused: false})}
                                                required={true}
@@ -102,7 +166,7 @@ const LoginBox = (props) => {
                                                 </p> : null
                                         }
                                         <input className='login-form-input primary-input' type="password"
-                                               onChange={handleChange}
+                                               onChange={handleLoginChange}
                                                onFocus={() => setUserDataFocused({passwordFocused: true})}
                                                onBlur={() => setUserDataFocused({passwordFocused: false})}
                                                required={true}
@@ -120,18 +184,31 @@ const LoginBox = (props) => {
                                 <div
                                     className={`${width <= 900 && showCreateAccount ? 'show-div' : width <= 900 ? 'hide-div' : ''} 
                                     login__box--signup-box`}>
-                                    <form className='login__box--signup-box--form'>
-                                        <input className='signup-form-input primary-input' type="name"
-                                               placeholder="Name"/>
+                                    <form className='login__box--signup-box--form'
+                                          onSubmit={e => {
+                                              submitRegister(e)
+                                              history.push("/user/verification")
+                                          }}
+                                    >
                                         <input className='signup-form-input primary-input' type="text"
-                                               placeholder="Surname"/>
+                                               id='register-username'
+                                               onChange={handleRegisterChange}
+                                               placeholder="Username"/>
                                         <input className='signup-form-input primary-input' type="email"
+                                               id='email'
+                                               onChange={handleRegisterChange}
                                                placeholder="e-mail"/>
                                         <input className='signup-form-input primary-input' type="number"
-                                               placeholder="phone number"/>
+                                               id='age'
+                                               onChange={handleRegisterChange}
+                                               placeholder="age"/>
                                         <input className='signup-form-input primary-input' type="password"
+                                               id='register-password'
+                                               onChange={handleRegisterChange}
                                                placeholder="password"/>
                                         <input className='signup-form-input primary-input' type="password"
+                                               id='register-password-confirmation'
+                                               onChange={handleRegisterChange}
                                                placeholder="repeat password"/>
                                         <input className='signup-form-input-submit primary-input' type="submit"
                                                value="Signin"/>

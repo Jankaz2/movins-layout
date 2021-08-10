@@ -53,6 +53,28 @@
         border-bottom: 2px solid $color-pink;
       }
     }
+
+    &--item--home {
+      display: inline-block;
+      color: $color-grey-dark;
+      font-weight: 400;
+      text-transform: uppercase;
+      transition: all .3s;
+      padding: .5rem 2rem;
+      float: right;
+      border: 2px solid $color-pink;
+
+      &:not(:last-child){
+        margin-left: 2rem;
+      }
+
+      &:active,
+      &:hover {
+        cursor: pointer;
+        background-color: $color-pink;
+        color: $color-white;
+      }
+    }
   }
 
   &__tickets {

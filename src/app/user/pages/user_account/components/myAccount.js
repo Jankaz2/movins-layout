@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
 import {DataContext} from "../../../../utils/data/dataManager";
 import MyAccountScss from "../styles/myAccount.scss"
 import {MdPerson} from 'react-icons/md'
@@ -7,6 +8,7 @@ const MyAccount = () => {
     const BASE_TICKETS_URL = 'http://localhost:5000/tickets'
     const BASE_USERS_URL = 'http://localhost:5000/users'
 
+    const history = useHistory()
     const {change, setChange} = useContext(DataContext)
     const [tickets, setTickets] = useState([])
     const [showTickets, setShowTickets] = useState(false)
@@ -104,7 +106,10 @@ const MyAccount = () => {
                         }}
                     >Data
                     </li>
-
+                    <li className='my-account__options--item--home'
+                        onClick={() => history.push("/")}
+                    >Home
+                    </li>
                 </ul>
             </nav>
             {

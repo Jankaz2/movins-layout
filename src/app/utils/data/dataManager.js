@@ -16,6 +16,7 @@ export const DataManager = props => {
     const [cinemaId, setCinemaId] = useState(null)
     const [loggedUser, setLoggedUser] = useState({username: '', password: ''})
     const [isLogged, setIsLogged] = useState(false)
+    const [isRegistered, setIsRegistered] = useState(false)
     const [loader, showLoader, hideLoader] = useLoadPage()
 
     const loadData = async () => {
@@ -47,7 +48,8 @@ export const DataManager = props => {
             cinemaId, setCinemaId,
             loader, showLoader, hideLoader,
             loggedUser, setLoggedUser,
-            isLogged, setIsLogged
+            isLogged, setIsLogged,
+            isRegistered, setIsRegistered
         }}>
             {props.children}
         </DataContext.Provider>

@@ -55,7 +55,7 @@ const AddCinemaPopup = (props) => {
             cinemaRooms
         }
 
-        addCinema(mergedCinema).catch(err => console.log(err))
+        addCinema(mergedCinema)
         setCinemaName({name: ''})
         setAddress({city: '', street: '', number: ''})
         setCinemaRoomSingleObject({name: '', rows: '', places: ''})

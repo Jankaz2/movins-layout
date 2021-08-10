@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import HeaderCss from '../styles/header.scss'
 import MainScss from '../../../../../styles/scss/main.scss'
 import Select from "react-select";
+import {useHistory} from "react-router-dom";
 import {Link} from "react-scroll"
 import StepsSection from "../../steps_section/components/stepsSection";
 import AboutUsSection from "../../about_us_section/components/aboutUsSection";
@@ -33,9 +34,9 @@ function HomePage() {
 
 const Navigation = (props) => {
     const {setLoginBox, isLogged} = useContext(DataContext)
-
+    const history = useHistory()
     const goToMyAccount = e => {
-        props.history.push("/my-account")
+        history.push("/my-account")
     }
 
     return (
