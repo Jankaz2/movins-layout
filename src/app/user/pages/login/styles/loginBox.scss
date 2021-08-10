@@ -1,5 +1,5 @@
-@import "../../../../../styles/scss/utils/variables";
-@import "../../../../../styles/scss/utils/mixins";
+@import "../../../../styles/scss/utils/variables";
+@import "../../../../styles/scss/utils/mixins";
 
 .login__box {
   &--background {
@@ -167,7 +167,7 @@
                     to right bottom,
                     rgba($color-blue-light, 0.8),
                     rgba($color-blue-dark, 0.8)),
-    url("../images/background-login.png");
+    url("../../home_page/header/images/background-login.png");
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding: 10rem 0;

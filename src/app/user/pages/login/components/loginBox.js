@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import {useHistory} from 'react-router-dom'
 import LoginBoxScss from '../styles/loginBox.scss'
-import {DataContext} from "../../../../../utils/data/dataManager";
+import {DataContext} from "../../../../utils/data/dataManager";
 
 const LoginBox = (props) => {
     const BASE_URL = 'http://localhost:5000'

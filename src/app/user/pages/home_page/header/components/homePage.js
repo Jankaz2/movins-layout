@@ -10,7 +10,7 @@ import Reviews from "../../reviews_section/components/reviews";
 import Contact from "../../contact_section/components/contact";
 import {DataContext} from "../../../../../utils/data/dataManager";
 import StickyNavigation from "./stickyNavigation";
-import LoginBox from "./loginBox";
+import LoginBox from "../../../login/components/loginBox";
 import WebStart from "./webStart";
 
 function HomePage() {
