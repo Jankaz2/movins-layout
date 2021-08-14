@@ -181,6 +181,11 @@
     }
 
     &--form {
+      .error-message {
+        margin-left: 15rem;
+        color: $color-white;
+      }
+
       .signup-form-input {
         width: 40%;
         display: block;
@@ -230,6 +235,14 @@
       }
     }
   }
+}
+
+.error-input {
+  background-color: rgba($color-red, .7) !important;
+}
+
+.correct-input {
+  background-color: rgba($color-green, .7) !important;
 }
 
 .hide-div {

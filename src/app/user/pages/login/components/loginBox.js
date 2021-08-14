@@ -29,6 +29,7 @@ const LoginBox = (props) => {
     })
     const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
     const [error, setError] = useState({username: false, password: false})
+    const [passwordConfirmation, setPasswordConfirmation] = useState(false)
     const width = window.innerWidth
 
     const handleLoginChange = (e) => {
@@ -73,6 +74,11 @@ const LoginBox = (props) => {
         }
 
         if (e.target.id === 'register-password-confirmation') {
+            if (!e.target.value.match(newUser['password'])) {
+                setPasswordConfirmation(true)
+            } else {
+                setPasswordConfirmation(false)
+            }
             newUser['passwordConfirmation'] = e.target.value
         }
 
@@ -206,10 +212,16 @@ const LoginBox = (props) => {
                                                id='register-password'
                                                onChange={handleRegisterChange}
                                                placeholder="password"/>
-                                        <input className='signup-form-input primary-input' type="password"
-                                               id='register-password-confirmation'
-                                               onChange={handleRegisterChange}
-                                               placeholder="repeat password"/>
+                                        <input
+                                            className={`${passwordConfirmation ? 'error-input' : 'correct-input'} signup-form-input primary-input`}
+                                            type="password"
+                                            id='register-password-confirmation'
+                                            onChange={handleRegisterChange}
+                                            placeholder="repeat password"/>
+                                        {
+                                            passwordConfirmation &&
+                                                <p className='error-message'>Passwords are not the same</p>
+                                        }
                                         <input className='signup-form-input-submit primary-input' type="submit"
                                                value="Signin"/>
                                     </form>
