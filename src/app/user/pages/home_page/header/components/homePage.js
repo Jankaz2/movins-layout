@@ -8,18 +8,18 @@ import StepsSection from "../../steps_section/components/stepsSection";
 import AboutUsSection from "../../about_us_section/components/aboutUsSection";
 import Reviews from "../../reviews_section/components/reviews";
 import Contact from "../../contact_section/components/contact";
-import {DataContext} from "../../../../../utils/data/dataManager";
+import {DataContext} from "../../../../../utils/store/appContext";
 import StickyNavigation from "./stickyNavigation";
 import LoginBox from "../../../login/components/loginBox";
 import WebStart from "./webStart";
 
 function HomePage() {
-    const {isLogged} = useContext(DataContext)
+    const {authContextValue} = useContext(DataContext)
 
     return (
         <div>
             <StickyNavigation/>
-            {!isLogged && <LoginBox/>}
+            {!authContextValue.userIsLoggedIn && <LoginBox/>}
             <header className='header'>
                 <Navigation/>
                 <WebStart/>
@@ -33,7 +33,7 @@ function HomePage() {
 }
 
 const Navigation = (props) => {
-    const {setLoginBox, isLogged} = useContext(DataContext)
+    const {setLoginBox, authContextValue} = useContext(DataContext)
     const history = useHistory()
     const goToMyAccount = e => {
         history.push("/my-account")
@@ -73,9 +73,8 @@ const Navigation = (props) => {
                             <a href="">Contact</a>
                         </Link>
                     </li>
-
                     {
-                        !isLogged &&
+                        !authContextValue.isLoggedIn &&
                         <li className="header__navbar--item log-in-link"
                             onClick={(event) => {
                                 setLoginBox(true)
@@ -85,7 +84,7 @@ const Navigation = (props) => {
                         </li>
                     }
                     {
-                        isLogged &&
+                        authContextValue.isLoggedIn &&
                         <li className="header__navbar--item log-in-link"
                             onClick={goToMyAccount}
                         >

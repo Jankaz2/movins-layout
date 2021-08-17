@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
-import {DataContext} from "../../../../utils/data/dataManager";
+import {DataContext} from "../../../../utils/store/appContext";
 import MyAccountScss from "../styles/myAccount.scss"
 import {MdPerson} from 'react-icons/md'
+import {FaRegEnvelope} from "react-icons/all";
 
 const MyAccount = () => {
     const BASE_TICKETS_URL = 'http://localhost:5000/tickets'
@@ -12,7 +13,8 @@ const MyAccount = () => {
     const {change, setChange} = useContext(DataContext)
     const [tickets, setTickets] = useState([])
     const [showTickets, setShowTickets] = useState(false)
-    const [showUserData, setShowUserData] = useState(true)
+    const [showUserData, setShowUserData] = useState(false)
+    const [showEntryMessage, setShowEntryMessage] = useState(true)
     const [userData, setUserData] = useState({})
     const [purchasedTickets, setPurchasedTickets] = useState(null)
 
@@ -22,7 +24,7 @@ const MyAccount = () => {
     const differenceInDays = (date2) => {
         const splittedDate = date2.split('-')
         const month = parseInt(splittedDate[1]) - 1
-        const date = Date.UTC(parseInt(splittedDate[0]), month,  splittedDate[2])
+        const date = Date.UTC(parseInt(splittedDate[0]), month, splittedDate[2])
         return parseInt((date - timeInMs) / (1000 * 3600 * 24))
     }
 
@@ -94,6 +96,7 @@ const MyAccount = () => {
                 <ul className='my-account__options'>
                     <li className='my-account__options--item'
                         onClick={() => {
+                            setShowEntryMessage(false)
                             setShowUserData(false)
                             setShowTickets(true)
                         }}
@@ -101,6 +104,7 @@ const MyAccount = () => {
                     </li>
                     <li className='my-account__options--item'
                         onClick={() => {
+                            setShowEntryMessage(false)
                             setShowTickets(false)
                             setShowUserData(true)
                         }}
@@ -112,6 +116,15 @@ const MyAccount = () => {
                     </li>
                 </ul>
             </nav>
+            {
+             showEntryMessage &&
+             <div className='my-account__entry'>
+                 <div className='correct-200'>
+                     <h1 className='correct-200__text'>Welcome to your account</h1>
+                     <h1 className='correct-200__text'>You can get some actions here</h1>
+                 </div>
+             </div>
+            }
             {
                 showTickets &&
                 <ul className='my-account__tickets'>
@@ -134,7 +147,8 @@ const MyAccount = () => {
                                             <h3 className='heading-tertiary'>{ticket.seance.movie.duration} minutes</h3>
                                         </div>
                                         <div className='col-1-of-2'>
-                                            <h3 className='heading-tertiary__blue u-margin-top-very-tiny'>Purchase date:</h3>
+                                            <h3 className='heading-tertiary__blue u-margin-top-very-tiny'>Purchase
+                                                date:</h3>
                                             <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.purchaseDate}</h3>
                                             <h3 className='heading-tertiary__blue'>Price:</h3>
                                             <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.price}</h3>

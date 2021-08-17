@@ -4,7 +4,7 @@ import HomePage from "./user/pages/home_page/header/components/homePage";
 import Footer from "./user/pages/home_page/footer/components/footer";
 import CinemasList from "./user/pages/search_cinema_page/cinema_list/components/cinemaList";
 import Cinema from "./user/pages/single_cinema_page/cinema/components/cinema"
-import {DataManager} from "./utils/data/dataManager";
+import {AppContext} from "./utils/store/appContext";
 import AdminPage from "./admin/pages/admin_page/adminPage";
 import PageNotFound from "./utils/pages/components/pageNotFound";
 import MyAccount from "./user/pages/user_account/components/myAccount";
@@ -13,7 +13,7 @@ import EmailVerification from "./utils/pages/components/emailVerification";
 
 function App() {
     return (
-        <DataManager>
+        <AppContext>
             <Router>
                 <Switch>
                     <Route path="/cinema-list" exact component={CinemasList}/>
@@ -27,7 +27,7 @@ function App() {
                 </Switch>
                 <Route path="/" component={Footer}/>
             </Router>
-        </DataManager>
+        </AppContext>
     );
 }
 

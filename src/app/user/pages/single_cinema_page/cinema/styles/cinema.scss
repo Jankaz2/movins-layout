@@ -198,7 +198,7 @@
   text-align: center;
   text-transform: uppercase;
   font-size: 1.3rem;
-  z-index: 2;
+  z-index: 200000 !important;
   border: 2px solid $color-grey-dark;
   background-color: $color-white-dark;
 

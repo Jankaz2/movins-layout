@@ -1,7 +1,7 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useRef, useState} from "react";
 import {useHistory} from 'react-router-dom'
+import {DataContext} from "../../../../utils/store/appContext";
 import LoginBoxScss from '../styles/loginBox.scss'
-import {DataContext} from "../../../../utils/data/dataManager";
 
 const LoginBox = (props) => {
     const BASE_URL = 'http://localhost:5000'
@@ -11,12 +11,16 @@ const LoginBox = (props) => {
         loginBox,
         setLoginBox,
         setChange,
-        loggedUser,
-        setLoggedUser,
-        isLogged,
-        setIsLogged,
-        setIsRegistered
+        showLoader,
+        hideLoader,
+        loggedUsername,
+        setLoggedUsername,
     } = useContext(DataContext)
+
+    const {authContextValue} = useContext(DataContext)
+
+    const [isOkLogin, setIsOkLogin] = useState(true)
+    const [isOkRegister, setIsOkRegister] = useState(true)
     const [showCreateAccount, setShowCreateAccount] = useState(false)
     const [loginData, setLoginData] = useState({username: '', password: ''})
     const [registerData, setRegisterData] = useState({
@@ -27,10 +31,23 @@ const LoginBox = (props) => {
         passwordConfirmation: '',
         role: 'USER'
     })
+
+    const [registerInputLength, setRegisterInputLength] = useState(false)
+
     const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
     const [error, setError] = useState({username: false, password: false})
     const [passwordConfirmation, setPasswordConfirmation] = useState(false)
+
     const width = window.innerWidth
+
+    const usernameRef = useRef()
+    const passwordRef = useRef()
+
+    const usernameRefRegister = useRef()
+    const emailRef = useRef()
+    const ageRef = useRef()
+    const passwordRegisterRef = useRef()
+    const passwordConfirmationRef = useRef()
 
     const handleLoginChange = (e) => {
         const loggedUser = {...loginData}
@@ -52,11 +69,13 @@ const LoginBox = (props) => {
         }
 
         loggedUser[e.target.id] = e.target.value
-        setLoggedUser(loggedUser)
+        setLoginData(loggedUser)
+        setLoggedUsername(loggedUser.username)
     }
 
     const handleRegisterChange = e => {
         const newUser = {...registerData}
+
         if (e.target.id === 'register-username') {
             newUser['username'] = e.target.value
         }
@@ -74,6 +93,13 @@ const LoginBox = (props) => {
         }
 
         if (e.target.id === 'register-password-confirmation') {
+            if (e.target.value.length > 0) {
+                setRegisterInputLength(true)
+            } else {
+                setRegisterInputLength(false)
+                setPasswordConfirmation(false)
+            }
+
             if (!e.target.value.match(newUser['password'])) {
                 setPasswordConfirmation(true)
             } else {
@@ -85,7 +111,16 @@ const LoginBox = (props) => {
         setRegisterData(newUser)
     }
 
-    const login = async (user) => {
+    const login = async (event) => {
+        event.preventDefault()
+
+        const username = usernameRef.current.value
+        const password = passwordRef.current.value
+
+        showLoader()
+
+        const user = {username: username, password: password}
+
         const response = await fetch(BASE_URL + "/login", {
             method: 'POST',
             body: JSON.stringify(user),
@@ -94,11 +129,33 @@ const LoginBox = (props) => {
             }
         })
 
-        setChange(true)
-        return await response.json();
+        hideLoader()
+
+        if (response.ok) {
+            setChange(true)
+            const responseBody = await response.json()
+
+            authContextValue.login(responseBody.accessToken, 300000)
+
+            setLoginBox(false)
+            return await responseBody
+        }
+
+        setIsOkLogin(false)
     }
 
-    const register = async (user) => {
+    const register = async (event) => {
+        event.preventDefault()
+
+        const user = {
+            username: usernameRefRegister,
+            email: emailRef,
+            age: ageRef,
+            password: passwordRegisterRef,
+            passwordConfirmation: passwordConfirmationRef,
+            role: 'USER'
+        }
+
         const response = await fetch(BASE_URL + "/users/register", {
             method: 'POST',
             body: JSON.stringify(user),
@@ -107,20 +164,13 @@ const LoginBox = (props) => {
             }
         })
 
+        if (!response.ok) {
+            setIsOkRegister(false)
+            return false
+        }
+
         setChange(true)
         return await response.json();
-    }
-
-    const submitLogin = e => {
-        e.preventDefault()
-        login(loggedUser).catch(err => console.log(err))
-        setIsLogged(true)
-    }
-
-    const submitRegister = e => {
-        e.preventDefault()
-        register(registerData).catch(err => console.log(err))
-        setIsRegistered(true)
     }
 
     return (
@@ -142,10 +192,7 @@ const LoginBox = (props) => {
                                     <p className='login__box--boxes__subtext'>Book tickets and manage your account!</p>
 
                                     <form className='login__box--login-box--form'
-                                          onSubmit={e => {
-                                              submitLogin(e)
-                                              history.push("/")
-                                          }}
+                                          onSubmit={login}
                                     >
                                         <label htmlFor="username"
                                                className='login__box--label'
@@ -154,8 +201,7 @@ const LoginBox = (props) => {
                                             error.username && userDataFocused.usernameFocused ?
                                                 <p className='error-message'>
                                                     Length must be greater than 3<br/>
-                                                    Syntax must be: <span
-                                                    className='error-message__syntax'>/^[A-Za-z]+[0-9]{0 + ',' + 4}$/</span>
+                                                    Syntax must be:/^[A-Za-z]+[0-9]{0 + ',' + 4}$/
                                                 </p> : null
                                         }
                                         <input className='login-form-input primary-input' type="text"
@@ -163,6 +209,7 @@ const LoginBox = (props) => {
                                                onFocus={() => setUserDataFocused({usernameFocused: true})}
                                                onBlur={() => setUserDataFocused({usernameFocused: false})}
                                                required={true}
+                                               ref={usernameRef}
                                                id="username"/>
                                         <label htmlFor="password" className='login__box--label'>Password</label>
                                         {
@@ -176,6 +223,7 @@ const LoginBox = (props) => {
                                                onFocus={() => setUserDataFocused({passwordFocused: true})}
                                                onBlur={() => setUserDataFocused({passwordFocused: false})}
                                                required={true}
+                                               ref={passwordRef}
                                                id='password'/>
                                         <input className='login-form-input-submit primary-input' type="submit"
                                                value="Login"/>
@@ -192,42 +240,74 @@ const LoginBox = (props) => {
                                     login__box--signup-box`}>
                                     <form className='login__box--signup-box--form'
                                           onSubmit={e => {
-                                              submitRegister(e)
-                                              history.push("/user/verification")
+                                              register(e)
+                                              isOkRegister && history.push("/user/verification")
                                           }}
                                     >
                                         <input className='signup-form-input primary-input' type="text"
                                                id='register-username'
                                                onChange={handleRegisterChange}
-                                               placeholder="Username"/>
+                                               placeholder="Username"
+                                               ref={usernameRefRegister}
+                                        />
                                         <input className='signup-form-input primary-input' type="email"
                                                id='email'
                                                onChange={handleRegisterChange}
-                                               placeholder="e-mail"/>
+                                               placeholder="e-mail"
+                                               ref={emailRef}
+                                        />
                                         <input className='signup-form-input primary-input' type="number"
                                                id='age'
                                                onChange={handleRegisterChange}
-                                               placeholder="age"/>
+                                               placeholder="age"
+                                               ref={ageRef}
+                                        />
                                         <input className='signup-form-input primary-input' type="password"
                                                id='register-password'
                                                onChange={handleRegisterChange}
-                                               placeholder="password"/>
+                                               placeholder="password"
+                                               ref={passwordRegisterRef}
+                                        />
                                         <input
-                                            className={`${passwordConfirmation ? 'error-input' : 'correct-input'} signup-form-input primary-input`}
+                                            className={`${passwordConfirmation ? 'error-input' : registerInputLength ? 'correct-input' : ''} signup-form-input primary-input`}
                                             type="password"
                                             id='register-password-confirmation'
                                             onChange={handleRegisterChange}
-                                            placeholder="repeat password"/>
+                                            placeholder="repeat password"
+                                            ref={passwordConfirmationRef}
+                                        />
                                         {
                                             passwordConfirmation &&
-                                                <p className='error-message'>Passwords are not the same</p>
+                                            <p className='error-message'>Passwords are not the same</p>
                                         }
                                         <input className='signup-form-input-submit primary-input' type="submit"
-                                               value="Signin"/>
+                                               value="Sign up"/>
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        {
+                            !isOkLogin &&
+                            <div className='error-statement'>
+                                <h3 className='heading-tertiary'>Wrong login or password</h3>
+                                <button
+                                    onClick={() => setIsOkLogin(true)}
+                                    className='error-statement__btn'>
+                                    Try again
+                                </button>
+                            </div>
+                        }
+                        {
+                            !isOkRegister &&
+                            <div className='error-statement'>
+                                <h3 className='heading-tertiary'>Sorry, we cannot register you</h3>
+                                <button
+                                    onClick={() => setIsOkRegister(true)}
+                                    className='error-statement__btn'>
+                                    Try again
+                                </button>
+                            </div>
+                        }
                     </div>
                 </div>
             }

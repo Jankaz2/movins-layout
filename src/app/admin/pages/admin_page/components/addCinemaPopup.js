@@ -1,4 +1,4 @@
-import {DataContext} from "../../../../utils/data/dataManager";
+import {DataContext} from "../../../../utils/store/appContext";
 import React, {useState, useContext} from 'react'
 
 const AddCinemaPopup = (props) => {
