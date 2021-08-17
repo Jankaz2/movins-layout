@@ -8,7 +8,6 @@ body {
 
 .heading--primary {
   color: $color-white;
-  //text-transform: uppercase;
   margin-bottom: 2rem;
 
   &--main {
@@ -45,7 +44,6 @@ body {
   transition: all .2s;
 
   &:hover {
-    transform: skewX(1.05deg) skewY(1.5deg) scale(1.05);
     text-shadow: .5 1 2rem rgba($color-black, .2);
   }
 
