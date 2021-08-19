@@ -68,7 +68,7 @@ const ShowAllCinemasPopup = (props) => {
                         <table className='data-list-admin'>
                             <thead className='data-list-admin--header'>
                             <tr>
-                                <th>Database ID</th>
+                                <th>Id.</th>
                                 <th>Cinema name</th>
                                 <th>Address</th>
                             </tr>

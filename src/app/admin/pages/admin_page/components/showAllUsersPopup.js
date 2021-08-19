@@ -6,7 +6,7 @@ const ShowAllUsersPopup = (props) => {
     const BASE_USERS_URL = 'http://localhost:5000/users'
     const {change, setChange} = useContext(DataContext)
     const [users, setUsers] = useState([])
-    const [showOptions, setShowOptions] = useState(false)
+    const [showUserOptions, setShowUserOptions] = useState(false)
     const [coordinates, setCoordinates] = useState({left: "", top: ""})
     const [userInfoToDelete, setUserInfoToDelete] = useState({id: 0, username: "", email: ""})
     const [username, setUsername] = useState("")
@@ -25,7 +25,7 @@ const ShowAllUsersPopup = (props) => {
 
     const handleElementClick = e => {
         setChange(true)
-        setShowOptions(true)
+        setShowUserOptions(true)
 
         const l = e.clientX + 'px'
         const t = e.clientY + 'px'
@@ -75,7 +75,7 @@ const ShowAllUsersPopup = (props) => {
                         <table className='data-list-admin'>
                             <thead className='data-list-admin--header'>
                             <tr>
-                                <th>Pos.</th>
+                                <th>Id.</th>
                                 <th>Username</th>
                                 <th>Age</th>
                                 <th>Email</th>
@@ -110,7 +110,7 @@ const ShowAllUsersPopup = (props) => {
                                         <tr key={user.id}
                                             onClick={handleElementClick}
                                         >
-                                            <td>{idx + 1}</td>
+                                            <td>{user.id}</td>
                                             <td>{user.username}</td>
                                             <td>{user.age}</td>
                                             <td>{user.email}</td>
@@ -122,7 +122,7 @@ const ShowAllUsersPopup = (props) => {
                             </tbody>
                         </table>
                     </div>
-                    <ObjectOptions showOptions={showOptions} setShowOptions={setShowOptions}
+                    <ObjectOptions showUserOptions={showUserOptions} setShowUserOptions={setShowUserOptions}
                                    coordinates={coordinates} setCoordinates={setCoordinates}
                                    userInfoToDelete={userInfoToDelete}
                                    setUserInfoToDelete={setUserInfoToDelete}

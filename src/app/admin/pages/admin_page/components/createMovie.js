@@ -2,10 +2,12 @@ import React, {useState, useContext, useEffect} from 'react'
 import {DataContext} from "../../../../utils/store/appContext";
 import useLoadPage from "../../../../utils/hooks/useLoadPage";
 import Select from "react-select";
+import {ImHappy, ImSad} from "react-icons/all";
 
 const CreateMovie = (props) => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
+    const [createMovieResponse, setCreateMovieResponse] = useState({correct: false, error: false})
     const [movieData, setMovieData] = useState({
         title: '',
         genre: '',
@@ -52,6 +54,12 @@ const CreateMovie = (props) => {
             }
         })
 
+        if (!response.ok) {
+            setCreateMovieResponse({error: true})
+            return
+        }
+
+        setCreateMovieResponse({correct: true})
         setChange(true)
         return await response.json();
     }
@@ -170,6 +178,38 @@ const CreateMovie = (props) => {
 
                             </form>
                         </div>
+                    </div>
+                </div>
+            }
+            {
+                createMovieResponse.error &&
+                <div className='error-statement'>
+                    <div className='error-statement__top-section'>
+                        <h3 className='heading-tertiary'>Something went wrong</h3>
+                        <span className='error-statement__icon'><ImSad/></span>
+                    </div>
+                    <div className='error-statement__bottom-section'>
+                        <button
+                            onClick={() => setCreateMovieResponse({error: false})}
+                            className='error-statement__btn'>
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            }
+            {
+                createMovieResponse.correct &&
+                <div className='correct-statement'>
+                    <div className='correct-statement__top-section'>
+                        <h3 className='heading-tertiary'>Movie has been added</h3>
+                        <span className='correct-statement__icon'><ImHappy/></span>
+                    </div>
+                    <div className='correct-statement__bottom-section'>
+                        <button
+                            onClick={() => setCreateMovieResponse({correct: false})}
+                            className='correct-statement__btn'>
+                            Ok
+                        </button>
                     </div>
                 </div>
             }

@@ -1,9 +1,11 @@
 import {DataContext} from "../../../../utils/store/appContext";
 import React, {useState, useContext} from 'react'
+import {ImHappy, ImSad} from "react-icons/all";
 
 const AddCinemaPopup = (props) => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
+    const [addCinemaResponse, setAddCinemaResponse] = useState({correct: false, error: false})
     const [error, setError] = useState({
         name: false,
         city: false,
@@ -31,7 +33,7 @@ const AddCinemaPopup = (props) => {
     const {setChange} = useContext(DataContext)
 
     const addCinema = async (cinema) => {
-        const response = await fetch(BASE_CINEMA_URL, {
+        const response = await fetch(BASE_CINEMA_URL + '/admin', {
             method: 'POST',
             body: JSON.stringify(cinema),
             headers: {
@@ -39,6 +41,12 @@ const AddCinemaPopup = (props) => {
             }
         })
 
+        if (!response.ok) {
+            setAddCinemaResponse({error: true})
+            return
+        }
+
+        setAddCinemaResponse({correct: true})
         setChange(true)
         return await response.json();
     }
@@ -56,9 +64,12 @@ const AddCinemaPopup = (props) => {
         }
 
         addCinema(mergedCinema)
-        setCinemaName({name: ''})
-        setAddress({city: '', street: '', number: ''})
-        setCinemaRoomSingleObject({name: '', rows: '', places: ''})
+
+        if (addCinemaResponse.correct) {
+            setCinemaName({name: ''})
+            setAddress({city: '', street: '', number: ''})
+            setCinemaRoomSingleObject({name: '', rows: '', places: ''})
+        }
     }
 
     const handleNameChange = e => {
@@ -265,6 +276,38 @@ const AddCinemaPopup = (props) => {
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+            }
+            {
+                addCinemaResponse.error &&
+                <div className='error-statement'>
+                    <div className='error-statement__top-section'>
+                        <h3 className='heading-tertiary'>Something went wrong</h3>
+                        <span className='error-statement__icon'><ImSad/></span>
+                    </div>
+                    <div className='error-statement__bottom-section'>
+                        <button
+                            onClick={() => setAddCinemaResponse({error: false})}
+                            className='error-statement__btn'>
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            }
+            {
+                addCinemaResponse.correct &&
+                <div className='correct-statement'>
+                    <div className='correct-statement__top-section'>
+                        <h3 className='heading-tertiary'>Cinema has been added</h3>
+                        <span className='correct-statement__icon'><ImHappy/></span>
+                    </div>
+                    <div className='correct-statement__bottom-section'>
+                        <button
+                            onClick={() => setAddCinemaResponse({correct: false})}
+                            className='correct-statement__btn'>
+                            Ok
+                        </button>
                     </div>
                 </div>
             }

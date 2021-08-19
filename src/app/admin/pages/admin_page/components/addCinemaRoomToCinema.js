@@ -1,10 +1,13 @@
 import {DataContext} from "../../../../utils/store/appContext";
 import Select from "react-select";
 import React, {useState, useContext} from 'react'
+import {ImHappy, ImSad} from "react-icons/all";
 
 const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
 const AddCinemaRoomToCinema = (props) => {
+
+    const [addCinemaRoomResponse, setAddCinemaRoomResponse] = useState({correct: false, error: false})
     const [error, setError] = useState({
         name: false,
         rows: false,
@@ -70,6 +73,12 @@ const AddCinemaRoomToCinema = (props) => {
                 }
             })
 
+        if(!response.ok) {
+            setAddCinemaRoomResponse({error: true})
+            return
+        }
+
+        setAddCinemaRoomResponse({correct: true})
         setChange(true)
         return await response.json()
     }
@@ -145,6 +154,38 @@ const AddCinemaRoomToCinema = (props) => {
                                        value='add'/>
                             </form>
                         </div>
+                    </div>
+                </div>
+            }
+            {
+                addCinemaRoomResponse.error &&
+                <div className='error-statement'>
+                    <div className='error-statement__top-section'>
+                        <h3 className='heading-tertiary'>Something went wrong</h3>
+                        <span className='error-statement__icon'><ImSad/></span>
+                    </div>
+                    <div className='error-statement__bottom-section'>
+                        <button
+                            onClick={() => setAddCinemaRoomResponse({error: false})}
+                            className='error-statement__btn'>
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            }
+            {
+                addCinemaRoomResponse.correct &&
+                <div className='correct-statement'>
+                    <div className='correct-statement__top-section'>
+                        <h3 className='heading-tertiary'>Cinema room has been added to chosen cinema</h3>
+                        <span className='correct-statement__icon'><ImHappy/></span>
+                    </div>
+                    <div className='correct-statement__bottom-section'>
+                        <button
+                            onClick={() => setAddCinemaRoomResponse({correct: false})}
+                            className='correct-statement__btn'>
+                            Ok
+                        </button>
                     </div>
                 </div>
             }

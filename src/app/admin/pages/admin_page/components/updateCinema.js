@@ -1,10 +1,13 @@
 import {DataContext} from "../../../../utils/store/appContext";
 import Select from "react-select";
 import React, {useState, useContext} from "react";
+import {ImHappy, ImSad} from "react-icons/all";
 
 const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
 const UpdateCinema = props => {
+
+    const [updateCinemaResponse, setUpdateCinemaResponse] = useState({correct: false, error: false})
     const {cinemas, setChange} = useContext(DataContext)
     const [cinemaName, setCinemaName] = useState({name: ""})
     const [selectCinemaName, setSelectCinemaName] = useState("")
@@ -30,6 +33,12 @@ const UpdateCinema = props => {
             }
         })
 
+        if (!response.ok) {
+            setUpdateCinemaResponse({error: true})
+            return
+        }
+
+        setUpdateCinemaResponse({correct: true})
         setChange(true)
         return await response.json();
     }
@@ -111,6 +120,38 @@ const UpdateCinema = props => {
                                    type="submit" id='submit'
                                    value='update'/>
                         </form>
+                    </div>
+                </div>
+            }
+            {
+                updateCinemaResponse.error &&
+                <div className='error-statement'>
+                    <div className='error-statement__top-section'>
+                        <h3 className='heading-tertiary'>Something went wrong</h3>
+                        <span className='error-statement__icon'><ImSad/></span>
+                    </div>
+                    <div className='error-statement__bottom-section'>
+                        <button
+                            onClick={() => setUpdateCinemaResponse({error: false})}
+                            className='error-statement__btn'>
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            }
+            {
+                updateCinemaResponse.correct &&
+                <div className='correct-statement'>
+                    <div className='correct-statement__top-section'>
+                        <h3 className='heading-tertiary'>Cinema has been added</h3>
+                        <span className='correct-statement__icon'><ImHappy/></span>
+                    </div>
+                    <div className='correct-statement__bottom-section'>
+                        <button
+                            onClick={() => setUpdateCinemaResponse({correct: false})}
+                            className='correct-statement__btn'>
+                            Ok
+                        </button>
                     </div>
                 </div>
             }
