@@ -20,9 +20,9 @@ class Reviews extends Component {
                         <div className="review__text">
                             <h3 className="heading_tertiary">It changed my life!</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Accusantium distinctio dolore dolorum enim laboriosam minus
-                                    officiis possimus provident quam quia quis ratione, rem soluta.
+                                    I do not remember any other website that has changed my life
+                                    as this one. It saves my time so much, I do not need to go to the
+                                    cinema to check what films they show, because everything is here!
                                 </p>
                         </div>
                     </div>
@@ -36,9 +36,9 @@ class Reviews extends Component {
                         <div className="review__text">
                             <h3 className="heading_tertiary">This website is just amazing!</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Accusantium distinctio dolore dolorum enim laboriosam minus
-                                officiis possimus provident quam quia quis ratione, rem soluta.
+                                Just wow! It makes life easy. I was oppose to this website
+                                originally, but when I started using this, I just regret
+                                I haven't used this before. Really amazing!
                             </p>
                         </div>
                     </div>
@@ -52,9 +52,10 @@ class Reviews extends Component {
                         <div className="review__text">
                             <h3 className="heading_tertiary">I can finally find cinema with my favourite films</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Accusantium distinctio dolore dolorum enim laboriosam minus
-                                officiis possimus provident quam quia quis ratione, rem soluta.
+                                Movins, thank you so much for your work. Because of you, I can
+                                easily find cinema with film I really want to watch. I do not need
+                                to ask on forums or call to cinema receptionists to ask them about
+                                films because everything I need is here!
                             </p>
                         </div>
                     </div>

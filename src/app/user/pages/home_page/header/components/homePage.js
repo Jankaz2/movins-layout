@@ -19,7 +19,7 @@ function HomePage() {
     return (
         <div>
             <StickyNavigation/>
-            {!authContextValue.userIsLoggedIn && <LoginBox/>}
+            {authContextValue.isLoggedIn && <LoginBox/>}
             <header className='header'>
                 <Navigation/>
                 <WebStart/>
@@ -32,7 +32,7 @@ function HomePage() {
     )
 }
 
-const Navigation = (props) => {
+const Navigation = () => {
     const {setLoginBox, authContextValue} = useContext(DataContext)
     const history = useHistory()
     const goToMyAccount = e => {

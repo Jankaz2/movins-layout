@@ -14,13 +14,13 @@ class AboutUsSection extends Component {
                 <div className='row'>
                     <div className='col-1-of-2 box'>
                         <h3 className='heading-tertiary'>Who we are?</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Adipisci corporis cumque delectus deleniti earum explicabo
-                            fuga laudantium odit porro similique.
+                        <p>We are one of the fastest growing company in the world.
+                            Our young and ambitious team care about you every single day
+                            to make you smile.
                         </p><br/>
                         <h3 className='heading-tertiary'>Find your dreams</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Adipisci corporis cumque delectus deleniti earum explicabo
+                        <p> Our mission is to get you all the cinemas and films
+                            you are looking for without leaving home.
                         </p>
                     </div>
                     <div className='col-1-of-2 box'>

@@ -2,6 +2,7 @@ import React, {useContext, useRef, useState} from "react";
 import {useHistory} from 'react-router-dom'
 import {DataContext} from "../../../../utils/store/appContext";
 import LoginBoxScss from '../styles/loginBox.scss'
+import {ImSad} from "react-icons/all";
 
 const LoginBox = (props) => {
     const BASE_URL = 'http://localhost:5000'
@@ -136,7 +137,6 @@ const LoginBox = (props) => {
             const responseBody = await response.json()
 
             authContextValue.login(responseBody.accessToken, 300000)
-
             setLoginBox(false)
             return await responseBody
         }
@@ -289,12 +289,17 @@ const LoginBox = (props) => {
                         {
                             !isOkLogin &&
                             <div className='error-statement'>
-                                <h3 className='heading-tertiary'>Wrong login or password</h3>
-                                <button
-                                    onClick={() => setIsOkLogin(true)}
-                                    className='error-statement__btn'>
-                                    Try again
-                                </button>
+                                <div className='error-statement__top-section'>
+                                    <h3 className='heading-tertiary'>Wrong email or login</h3>
+                                    <span className='error-statement__icon'><ImSad/></span>
+                                </div>
+                                <div className='error-statement__bottom-section'>
+                                    <button
+                                        onClick={() => setIsOkLogin(true)}
+                                        className='error-statement__btn'>
+                                        Ok
+                                    </button>
+                                </div>
                             </div>
                         }
                         {

@@ -5,8 +5,6 @@ export const DataContext = createContext({
     cinemas: [],
     setCinemas: () => {
     },
-    /* loggedUsername: '',
-     setLoggedUsername: () => '',*/
     token: '',
     isLoggedIn: false,
     login: token => {

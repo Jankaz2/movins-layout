@@ -114,6 +114,7 @@ const CreateMovie = (props) => {
                                 onSubmit={(e) => submit(e)}
                                 action=""
                                 className="form form__add-cinema">
+                                <label htmlFor="cinema-rooms">Cinema room</label>
                                 <Select className='react-select react-select__update' name=""
                                         defaultValue={options[0]}
                                         options={options}

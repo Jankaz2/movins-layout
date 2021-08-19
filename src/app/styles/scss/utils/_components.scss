@@ -147,6 +147,7 @@
   z-index: 9999;
 
   &__inside {
+    max-height: 100vh;
     padding: 1rem;
     width: 60%;
     background-color: $color-white;

@@ -10,7 +10,7 @@ const MyAccount = () => {
     const BASE_USERS_URL = 'http://localhost:5000/users'
 
     const history = useHistory()
-    const {change, setChange} = useContext(DataContext)
+    const {change, setChange, loggedUsername, authContextValue} = useContext(DataContext)
     const [tickets, setTickets] = useState([])
     const [showTickets, setShowTickets] = useState(false)
     const [showUserData, setShowUserData] = useState(false)
@@ -28,8 +28,20 @@ const MyAccount = () => {
         return parseInt((date - timeInMs) / (1000 * 3600 * 24))
     }
 
+    const loadUserByUsername = async(username) => {
+        const response = await fetch(BASE_USERS_URL + `/username/${username}`)
+            .then(response => response.json())
+            .then(user => {
+                console.log(user.data)
+                setUserData(user.data)
+            })
+
+        setChange(true)
+        return response.json()
+    }
+
     const loadUserTickets = async (userId) => {
-        const response = await fetch(BASE_TICKETS_URL + `/91`)
+        const response = await fetch(BASE_TICKETS_URL + `/${userId}`)
             .then(response => response.json())
             .then(tickets => {
                 setTickets(tickets.data)
@@ -39,7 +51,7 @@ const MyAccount = () => {
         return response.json()
     }
 
-    const loadUserData = async (userId) => {
+ /*   const loadUserData = async (userId) => {
         const response = await fetch(BASE_USERS_URL + `/91`)
             .then(response => response.json())
             .then(user => {
@@ -48,10 +60,10 @@ const MyAccount = () => {
 
         setChange(true)
         return response.json()
-    }
+    }*/
 
     const loadPurchasedTickets = async (userId) => {
-        const response = await fetch(BASE_USERS_URL + `/purchase/91`)
+        const response = await fetch(BASE_USERS_URL + `/purchase/${userId}`)
             .then(response => response.json())
             .then(number => {
                 setPurchasedTickets(number.data)
@@ -63,16 +75,7 @@ const MyAccount = () => {
 
     useEffect(() => {
         async function getData() {
-            await loadUserTickets()
-        }
-
-        getData().catch(err => console.log(err))
-        setChange(false)
-    }, [tickets, change])
-
-    useEffect(() => {
-        async function getData() {
-            await loadUserData()
+            await loadUserByUsername(loggedUsername)
         }
 
         getData().catch(err => console.log(err))
@@ -81,12 +84,21 @@ const MyAccount = () => {
 
     useEffect(() => {
         async function getData() {
-            await loadPurchasedTickets()
+            await loadUserTickets(userData.id)
         }
 
         getData().catch(err => console.log(err))
         setChange(false)
-    }, [purchasedTickets, change])
+    }, [userData, tickets, change])
+
+    useEffect(() => {
+        async function getData() {
+            await loadPurchasedTickets(userData.id)
+        }
+
+        getData().catch(err => console.log(err))
+        setChange(false)
+    }, [userData, purchasedTickets, change])
 
     return (
         <div className='my-account'>
