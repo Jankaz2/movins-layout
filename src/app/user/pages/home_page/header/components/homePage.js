@@ -12,6 +12,8 @@ import {DataContext} from "../../../../../utils/store/appContext";
 import StickyNavigation from "./stickyNavigation";
 import LoginBox from "../../../login/components/loginBox";
 import WebStart from "./webStart";
+import {AiOutlineLogout} from 'react-icons/all'
+import {A} from "react-select/dist/index-4bd03571.esm";
 
 function HomePage() {
     const {authContextValue} = useContext(DataContext)
@@ -19,7 +21,7 @@ function HomePage() {
     return (
         <div>
             <StickyNavigation/>
-            {authContextValue.isLoggedIn && <LoginBox/>}
+            {!authContextValue.isLoggedIn && <LoginBox/>}
             <header className='header'>
                 <Navigation/>
                 <WebStart/>
@@ -35,16 +37,24 @@ function HomePage() {
 const Navigation = () => {
     const {setLoginBox, authContextValue} = useContext(DataContext)
     const history = useHistory()
+
     const goToMyAccount = e => {
         history.push("/my-account")
     }
+
 
     return (
         <div>
             <nav>
                 <ul className={`header__navbar`}>
                     <span><div className="header__logo"><a href="#">MOVINS</a></div></span>
-
+                    {
+                        authContextValue.isLoggedIn &&
+                        <li className="header__navbar--item log-out-link"
+                            onClick={authContextValue.logout}
+                        ><AiOutlineLogout/>
+                        </li>
+                    }
                     <li className="header__navbar--item">
                         <Link to="about-us-section"
                               spy={true} smooth={true}
@@ -96,7 +106,12 @@ const Navigation = () => {
                               to="steps-section"
                               spy={true}
                               smooth={true}
-                              duration={500}>
+                              duration={500}
+                              onClick={() => {
+                                  console.log(authContextValue.token)
+                                  console.log(authContextValue.isLoggedIn)
+                              }}
+                        >
                             <a href="">How it works</a>
                         </Link>
                     </li>

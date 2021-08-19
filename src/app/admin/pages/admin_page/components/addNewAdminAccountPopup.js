@@ -6,7 +6,7 @@ const AddNewAdminAccountPopup = (props) => {
     const BASE_USER_URL = 'http://localhost:5000/users'
 
     const {setChange} = useContext(DataContext)
-    const [addAdminAccountRespone, setAddAdminAccountResponse] = useState({correct: false, error: false})
+    const [addAdminAccountResponse, setAddAdminAccountResponse] = useState({correct: false, error: false})
     const [userData, setUserData] = useState({
         username: '',
         age: '',
@@ -83,7 +83,7 @@ const AddNewAdminAccountPopup = (props) => {
                 </div>
             }
             {
-                addAdminAccountRespone.error &&
+                addAdminAccountResponse.error &&
                 <div className='error-statement'>
                     <div className='error-statement__top-section'>
                         <h3 className='heading-tertiary'>Something went wrong</h3>
@@ -99,7 +99,7 @@ const AddNewAdminAccountPopup = (props) => {
                 </div>
             }
             {
-                addAdminAccountRespone.correct &&
+                addAdminAccountResponse.correct &&
                 <div className='correct-statement'>
                     <div className='correct-statement__top-section'>
                         <h3 className='heading-tertiary'>Admin has been added, let him check his email</h3>

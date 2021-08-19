@@ -3,9 +3,8 @@ import Select from "react-select";
 import React, {useState, useContext} from "react";
 import {ImHappy, ImSad} from "react-icons/all";
 
-const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
-
 const UpdateCinema = props => {
+    const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
     const [updateCinemaResponse, setUpdateCinemaResponse] = useState({correct: false, error: false})
     const {cinemas, setChange} = useContext(DataContext)
@@ -40,7 +39,7 @@ const UpdateCinema = props => {
 
         setUpdateCinemaResponse({correct: true})
         setChange(true)
-        return await response.json();
+        return await response.json()
     }
 
     const submit = (e) => {
