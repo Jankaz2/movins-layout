@@ -14,7 +14,6 @@ const LoginBox = (props) => {
         setChange,
         showLoader,
         hideLoader,
-        loggedUsername,
         setLoggedUsername,
     } = useContext(DataContext)
 
@@ -24,6 +23,7 @@ const LoginBox = (props) => {
     const [isOkRegister, setIsOkRegister] = useState(true)
     const [showCreateAccount, setShowCreateAccount] = useState(false)
     const [loginData, setLoginData] = useState({username: '', password: ''})
+
     const [registerData, setRegisterData] = useState({
         username: '',
         email: '',
@@ -148,11 +148,11 @@ const LoginBox = (props) => {
         event.preventDefault()
 
         const user = {
-            username: usernameRefRegister,
-            email: emailRef,
-            age: ageRef,
-            password: passwordRegisterRef,
-            passwordConfirmation: passwordConfirmationRef,
+            username: usernameRefRegister.current.value,
+            email: emailRef.current.value,
+            age: ageRef.current.value,
+            password: passwordRegisterRef.current.value,
+            passwordConfirmation: passwordConfirmationRef.current.value,
             role: 'USER'
         }
 

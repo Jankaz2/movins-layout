@@ -13,7 +13,6 @@ import StickyNavigation from "./stickyNavigation";
 import LoginBox from "../../../login/components/loginBox";
 import WebStart from "./webStart";
 import {AiOutlineLogout} from 'react-icons/all'
-import {A} from "react-select/dist/index-4bd03571.esm";
 
 function HomePage() {
     const {authContextValue} = useContext(DataContext)
@@ -42,11 +41,10 @@ const Navigation = () => {
         history.push("/my-account")
     }
 
-
     return (
         <div>
             <nav>
-                <ul className={`header__navbar`}>
+                <ul className='header__navbar'>
                     <span><div className="header__logo"><a href="#">MOVINS</a></div></span>
                     {
                         authContextValue.isLoggedIn &&
@@ -116,6 +114,81 @@ const Navigation = () => {
                         </Link>
                     </li>
                 </ul>
+                {
+                    <div className='sticky__display sticky__navigation'>
+                        <input type="checkbox" className="sticky__navigation__checkbox" id="navi-toggle"/>
+                        <label htmlFor="navi-toggle" className="sticky__navigation__button">
+                            <span className="sticky__navigation__icon">&nbsp;</span>
+                        </label>
+                        <div className="sticky__navigation__background">&nbsp;</div>
+
+                        <nav className="sticky__navigation__nav">
+                            <ul className="sticky__navigation__list">
+
+                                <li className="sticky__navigation__item">
+                                    <Link to="steps-section"
+                                          spy={true} smooth={true}
+                                          offset={-60}
+                                          duration={50}>
+                                        <a href="" className="sticky__navigation__link">How it works</a>
+                                    </Link>
+                                </li>
+
+                                {
+                                    !authContextValue.isLoggedIn &&
+                                    <li className="sticky__navigation__item">
+                                        <a href="" className="sticky__navigation__link">Log in</a>
+                                    </li>
+                                }
+                                <li className="sticky__navigation__item">
+                                    <Link to="about-us-section"
+                                          spy={true} smooth={true}
+                                          offset={-60}
+                                          duration={500}>
+                                        <a href="" className="sticky__navigation__link">About us</a>
+                                    </Link>
+                                </li>
+
+                                <li className="sticky__navigation__item">
+                                    <Link to="reviews-section"
+                                          spy={true} smooth={true}
+                                          offset={-60}
+                                          duration={500}>
+                                        <a href="" className="sticky__navigation__link">Reviews</a>
+                                    </Link>
+                                </li>
+
+                                <li className="sticky__navigation__item">
+                                    <li className="sticky__navigation__item">
+                                        <Link to="contact-us-section"
+                                              spy={true} smooth={true}
+                                              offset={-60}
+                                              duration={500}>
+                                            <a href="" className="sticky__navigation__link">Contact</a>
+                                        </Link>
+                                    </li>
+                                </li>
+
+                                {
+                                    authContextValue.isLoggedIn &&
+                                    <li className="sticky__navigation__item">
+                                        <li className="sticky__navigation__item">
+                                            <Link to="contact-us-section"
+                                                  spy={true} smooth={true}
+                                                  offset={-60}
+                                                  duration={500}>
+                                                <a href="" className="sticky__navigation__link"
+                                                   onClick={() => {
+                                                       authContextValue.logout()
+                                                   }}>Logout</a>
+                                            </Link>
+                                        </li>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                }
             </nav>
         </div>
     )

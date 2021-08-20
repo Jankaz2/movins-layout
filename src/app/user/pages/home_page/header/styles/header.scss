@@ -36,7 +36,7 @@
       align-items: center;
       transition: border-bottom .2s;
 
-      @include respond(tab-port-land){
+      @include respond(tab-port-land) {
         display: none;
       }
 
@@ -92,5 +92,13 @@
     @include respond(phone) {
       margin-top: 4rem;
     }
+  }
+}
+
+.sticky__display {
+  display: none;
+
+  @include respond(tab-port-land) {
+    display: block;
   }
 }

@@ -18,7 +18,7 @@ function App() {
                 <Switch>
                     <Route path="/cinema-list" exact component={CinemasList}/>
                     <Route path="/cinema-list/cinema/:id" exact component={Cinema}/>
-                    <Route path="/user/activate" component={UserActivation}/>
+                    <Route path="/users/activation" component={UserActivation}/>
                     <Route path="/user/verification" component={EmailVerification}/>
                     <Route path="/" exact component={HomePage}/>
                     <Route path="/admin" exact component={AdminPage}/>

@@ -6,7 +6,7 @@ import {DataContext} from "../../../../../utils/store/appContext";
 import useLoadPage from "../../../../../utils/hooks/useLoadPage";
 
 const CinemasList = (props) => {
-    const {transferredCinemas, setCinemaId, loader, showLoader, hideLoader} = useContext(DataContext)
+    const {transferredCinemas, setCinemaId, loader} = useContext(DataContext)
 
     return (
         <div className="cinemas-list-section">

@@ -3,7 +3,6 @@ import {useHistory} from "react-router-dom";
 import {DataContext} from "../../../../utils/store/appContext";
 import MyAccountScss from "../styles/myAccount.scss"
 import {MdPerson} from 'react-icons/md'
-import {FaRegEnvelope} from "react-icons/all";
 
 const MyAccount = () => {
     const BASE_TICKETS_URL = 'http://localhost:5000/tickets'
@@ -28,11 +27,10 @@ const MyAccount = () => {
         return parseInt((date - timeInMs) / (1000 * 3600 * 24))
     }
 
-    const loadUserByUsername = async(username) => {
-        const response = await fetch(BASE_USERS_URL + `/username/${username}`)
+    const loadUserByUsername = async () => {
+        const response = await fetch(BASE_USERS_URL + `/username/${loggedUsername}`)
             .then(response => response.json())
             .then(user => {
-                console.log(user.data)
                 setUserData(user.data)
             })
 
@@ -51,17 +49,6 @@ const MyAccount = () => {
         return response.json()
     }
 
- /*   const loadUserData = async (userId) => {
-        const response = await fetch(BASE_USERS_URL + `/91`)
-            .then(response => response.json())
-            .then(user => {
-                setUserData(user.data)
-            })
-
-        setChange(true)
-        return response.json()
-    }*/
-
     const loadPurchasedTickets = async (userId) => {
         const response = await fetch(BASE_USERS_URL + `/purchase/${userId}`)
             .then(response => response.json())
@@ -75,12 +62,12 @@ const MyAccount = () => {
 
     useEffect(() => {
         async function getData() {
-            await loadUserByUsername(loggedUsername)
+            await loadUserByUsername()
         }
 
         getData().catch(err => console.log(err))
         setChange(false)
-    }, [userData, change])
+    }, [])
 
     useEffect(() => {
         async function getData() {
@@ -129,13 +116,13 @@ const MyAccount = () => {
                 </ul>
             </nav>
             {
-             showEntryMessage &&
-             <div className='my-account__entry'>
-                 <div className='correct-200'>
-                     <h1 className='correct-200__text'>Welcome to your account</h1>
-                     <h1 className='correct-200__text'>You can get some actions here</h1>
-                 </div>
-             </div>
+                showEntryMessage &&
+                <div className='my-account__entry'>
+                    <div className='correct-200'>
+                        <h1 className='correct-200__text'>Welcome to your account</h1>
+                        <h1 className='correct-200__text'>You can get some actions here</h1>
+                    </div>
+                </div>
             }
             {
                 showTickets &&
@@ -165,8 +152,9 @@ const MyAccount = () => {
                                             <h3 className='heading-tertiary__blue'>Price:</h3>
                                             <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.price}</h3>
                                             <h3 className='heading-tertiary__blue'>Days to show:</h3>
-                                            <h3 className='heading-tertiary u-margin-bottom-tiny'>
-                                                {differenceInDays(ticket.seance.date) > 0 ? differenceInDays(ticket.seance.date) : 'SHOW HAS BEEN DONE'}</h3>
+                                            {/* <h3 className='heading-tertiary u-margin-bottom-tiny'>
+                                                {differenceInDays(ticket.seance.date) > 0 ? differenceInDays(ticket.seance.date) : 'SHOW HAS BEEN DONE'}
+                                            </h3>*/}
                                         </div>
                                     </div>
                                 </li>

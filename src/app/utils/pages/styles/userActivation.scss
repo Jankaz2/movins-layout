@@ -5,14 +5,25 @@
   height: 100vh;
   text-align: center ;
 
-  &__check-icon {
+  &__login {
     position: absolute;
     top: 50%;
     left: 50%;
+    text-transform: uppercase;
     transform: translate(-50%, -50%);
     margin-top: 15rem;
-    color: rgba($color-green, .8);
-    padding: 1rem;
-    font-size: 10rem;
+    width: 20rem;
+    background-color: rgba($color-green, .8);
+    color: $color-white;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+    border: none;
+    border-radius: 10rem;
+
+    &:hover,
+    &:active {
+      background-color: rgba($color-green-2, .8);
+      cursor: pointer;
+    }
   }
 }

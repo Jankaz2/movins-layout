@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import StickyNavigationCss from "../styles/stickyNavigation.scss"
 import {Link} from "react-scroll";
+import {DataContext} from "../../../../../utils/store/appContext";
 
 const StickyNavigation = () => {
     const [isSticky, setIsSticky] = useState(false)
-    const width = window.innerWidth
+    const {authContextValue} = useContext(DataContext)
 
     const handleScroll = () => {
         if (window.scrollY > 120) {
@@ -16,20 +17,17 @@ const StickyNavigation = () => {
                 setIsSticky(false)
             }
         }
-    };
+    }
 
     useEffect(() => {
-        if (width > 1050) {
             window.addEventListener('scroll', handleScroll)
-        }
     })
-
 
     return (
         <div>
             {
                 isSticky &&
-                <div className={`sticky__navigation`}>
+                <div className='sticky__navigation'>
                     <input type="checkbox" className="sticky__navigation__checkbox" id="navi-toggle"/>
                     <label htmlFor="navi-toggle" className="sticky__navigation__button">
                         <span className="sticky__navigation__icon">&nbsp;</span>
@@ -51,11 +49,13 @@ const StickyNavigation = () => {
                                 </Link>
                             </li>
 
-                            <li className="sticky__navigation__item">
-                                <a href="" className="sticky__navigation__link"
-                                   onClick={() => setIsSticky(!isSticky)}>Log in</a>
-                            </li>
-
+                            {
+                                !authContextValue.isLoggedIn &&
+                                <li className="sticky__navigation__item">
+                                    <a href="" className="sticky__navigation__link"
+                                       onClick={() => setIsSticky(!isSticky)}>Log in</a>
+                                </li>
+                            }
                             <li className="sticky__navigation__item">
                                 <Link to="about-us-section"
                                       spy={true} smooth={true}
@@ -87,6 +87,24 @@ const StickyNavigation = () => {
                                     </Link>
                                 </li>
                             </li>
+
+                            {
+                                authContextValue.isLoggedIn &&
+                                <li className="sticky__navigation__item">
+                                    <li className="sticky__navigation__item">
+                                        <Link to="contact-us-section"
+                                              spy={true} smooth={true}
+                                              offset={-60}
+                                              duration={500}>
+                                            <a href="" className="sticky__navigation__link"
+                                               onClick={() => {
+                                                   setIsSticky(!isSticky)
+                                                   authContextValue.logout()
+                                               }}>Logout</a>
+                                        </Link>
+                                    </li>
+                                </li>
+                            }
                         </ul>
                     </nav>
                 </div>
