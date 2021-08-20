@@ -21,7 +21,14 @@
 
     @include respond(tab-port-land) {
       top: 4rem;
-      right: 5rem;
+      right: 3.5rem;
+    }
+
+    @include respond(phone) {
+      height: 5rem;
+      width: 5rem;
+      top: 3.5rem;
+      right: 2.5rem;
     }
   }
 
@@ -38,7 +45,14 @@
 
     @include respond(tab-port-land) {
       top: 4.5rem;
-      right: 5.5rem;
+      right: 3.5rem;
+    }
+
+    @include respond(phone) {
+      height: 5rem;
+      width: 5rem;
+      top: 3.5rem;
+      right: 2.5rem;
     }
   }
 
@@ -105,6 +119,10 @@
   &__icon {
     position: relative;
     margin-top: 3.5rem;
+
+    @include respond(phone) {
+      margin-top: 2.4rem;
+    }
 
     &,
     &::before,

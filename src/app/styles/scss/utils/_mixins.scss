@@ -26,7 +26,7 @@
     }
   }
 
-  @if $breakpoint == tab-port-land {
+  @if $breakpoint == tab-port-land { //1050
     @media(max-width: 65.625em) {
       @content
     }

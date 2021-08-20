@@ -6,9 +6,11 @@ import Select from "react-select";
 import WebStartScss from '../styles/webstart.scss'
 
 const WebStart = () => {
-    const history = useHistory();
-    const [name, setName] = useState({name: ""});
-    const [city, setCity] = useState({city: ""});
+    const width = window.innerWidth
+
+    const history = useHistory()
+    const [name, setName] = useState({name: ""})
+    const [city, setCity] = useState({city: ""})
     const {cinemas, setTransferredCinemas} = useContext(DataContext)
 
     const distinct = (value, index, self) => {
@@ -66,14 +68,14 @@ const WebStart = () => {
                         options={cinemaNames}
                         onChange={handleNameChange}
                         id='names-only'
-                        maxMenuHeight={200}
+                        maxMenuHeight={width >= 1500 ? 200 : 160}
                 />
                 <Select className='webstart--page__find-cinema-select'
                         placeholder="city"
                         options={cinemaCities}
                         onChange={handleCityChange}
                         id='cities-only'
-                        maxMenuHeight={200}
+                        maxMenuHeight={width >= 1500 ? 200 : 160}
                 />
                 <input type="submit"
                        value="search"

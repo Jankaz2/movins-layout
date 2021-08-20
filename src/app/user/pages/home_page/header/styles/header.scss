@@ -66,6 +66,10 @@
         display: block;
         transition: color .2s !important;
 
+        @include respond(tab-port-land) {
+          display: none;
+        }
+
         &:hover,
         &:active {
           color: $color-pink;
@@ -90,7 +94,7 @@
     }
 
     @include respond(phone) {
-      margin-top: 4rem;
+      margin-top: 3rem;
     }
   }
 }
