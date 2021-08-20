@@ -13,6 +13,8 @@
 
     @include respond(phone) {
         padding: 18rem 5rem;
+        clip-path: polygon(0 0, 100% 0, 100% 100vh, 0 100%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 100vh, 0 100%);
     }
 }
 

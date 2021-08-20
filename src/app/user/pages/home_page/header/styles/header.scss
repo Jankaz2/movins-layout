@@ -14,8 +14,8 @@
   clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
 
   @include respond(phone) {
-    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100vh, 0 100%);
   }
 
   &__navbar {

@@ -18,8 +18,16 @@
     padding: 15rem 5rem;
   }
 
+  @include respond(phone) {
+    transform: skewY(0deg);
+  }
+
   & > * {
     transform: skewY(6deg);
+
+    @include respond(phone) {
+      transform: skewY(0deg);
+    }
   }
 
   &__step {

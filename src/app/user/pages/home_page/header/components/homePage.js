@@ -114,8 +114,11 @@ const Navigation = () => {
                         </Link>
                     </li>
                 </ul>
-                {
-                    <div className='sticky__display sticky__navigation'>
+            </nav>
+            {
+                window.scrollY <= 120 &&
+                <div className='sticky__display'>
+                    <div className='sticky__navigation'>
                         <input type="checkbox" className="sticky__navigation__checkbox" id="navi-toggle"/>
                         <label htmlFor="navi-toggle" className="sticky__navigation__button">
                             <span className="sticky__navigation__icon">&nbsp;</span>
@@ -188,8 +191,8 @@ const Navigation = () => {
                             </ul>
                         </nav>
                     </div>
-                }
-            </nav>
+                </div>
+            }
         </div>
     )
 }
