@@ -114,7 +114,7 @@ const BuyTicketSection = (props) => {
                     <div className='buy__ticket--section__places'>
                         <h3 className='heading-tertiary'>Select and book your seat</h3>
                         <table className='buy__ticket--section__table u-margin-bottom-tiny'>
-                            <tbody>
+                            <tbody className='buy__ticket--section__table__body'>
                             {
                                 [...Array(rows)].map((row, rowIdx) =>
                                     <tr key={rowIdx}>
