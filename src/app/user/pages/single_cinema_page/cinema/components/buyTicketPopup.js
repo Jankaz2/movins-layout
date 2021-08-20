@@ -192,7 +192,7 @@ const BuyTicketSection = (props) => {
                     }
                 </div>
                 {
-                    showBuyStatement ?
+                    showBuyStatement && currentlyBookedTickets.length > 0 ?
                         <div className='statement'>
                             <span className='statement--close'
                                   onClick={() => {
@@ -207,6 +207,26 @@ const BuyTicketSection = (props) => {
                                             setShowBuyStatement(false)
                                         }}
                                 >Yes
+                                </button>
+                            </div>
+                        </div>
+                        : null
+                }
+                {
+                    showBuyStatement && currentlyBookedTickets.length === 0 ?
+                        <div className='statement'>
+                            <span className='statement--close'
+                                  onClick={() => {
+                                      setShowBuyStatement(false)
+                                  }}
+                            >&#10005;</span>
+                            <p className='statement__text'>You haven't chosen any tickets</p>
+                            <div className='statement__buttons'>
+                                <button className="statement__buttons--yes"
+                                        onClick={() => {
+                                            setShowBuyStatement(false)
+                                        }}
+                                >Ok
                                 </button>
                             </div>
                         </div>
