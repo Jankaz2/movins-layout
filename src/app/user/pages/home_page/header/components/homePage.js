@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import HeaderCss from '../styles/header.scss'
 import MainScss from '../../../../../styles/scss/main.scss'
 import Select from "react-select";
@@ -34,6 +34,8 @@ function HomePage() {
 }
 
 const Navigation = () => {
+    const [logoutStatement, setLogoutStatement] = useState(false)
+
     const {setLoginBox, authContextValue} = useContext(DataContext)
     const history = useHistory()
 
@@ -49,7 +51,7 @@ const Navigation = () => {
                     {
                         authContextValue.isLoggedIn &&
                         <li className="header__navbar--item log-out-link"
-                            onClick={authContextValue.logout}
+                            onClick={() => setLogoutStatement(true)}
                         ><AiOutlineLogout/>
                         </li>
                     }
@@ -114,6 +116,25 @@ const Navigation = () => {
                         </Link>
                     </li>
                 </ul>
+                {
+                    logoutStatement &&
+                    <div className='logout-statement statement'>
+                            <span className='statement--close'
+                                  onClick={() => {
+                                      setLogoutStatement(false)
+                                  }}
+                            >&#10005;</span>
+                        <p className='statement__text'>Do you really wanna logout?</p>
+                        <div className='statement__buttons'>
+                            <button className="statement__buttons--yes"
+                                    onClick={() => {
+                                        authContextValue.logout()
+                                        setLogoutStatement(false)
+                                    }}>Yes
+                            </button>
+                        </div>
+                    </div>
+                }
             </nav>
             {
                 window.scrollY <= 120 &&

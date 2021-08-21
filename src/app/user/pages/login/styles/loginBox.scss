@@ -46,6 +46,7 @@
     top: 50%;
     left: 50%;
     width: 75%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
 
     @include respond(tab-port-land) {
       width: 80%;
@@ -53,6 +54,8 @@
 
     @include respond(tab-port) {
       width: 100%;
+      padding: 0;
+      box-shadow: none;
     }
 
     @include respond(phone) {
@@ -61,7 +64,6 @@
 
     transform: translate(-50%, -50%);
     border-radius: .5rem;
-    box-shadow: 0 1rem 3rem rgba($color-black, .1);
     z-index: 1500;
 
     &__subtext {
@@ -116,6 +118,11 @@
   }
 
   &--login-box {
+
+    @include respond(tab-port){
+      border: 1px solid $color-grey-light-3;
+    }
+
     .error-message {
       margin-left: 11rem;
     }

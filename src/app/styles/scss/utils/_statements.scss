@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .statement {
   position: absolute;
@@ -154,5 +155,17 @@
       background-color: $color-green-2;
       cursor: pointer;
     }
+  }
+}
+
+.logout-statement {
+  display: block;
+  position: absolute;
+  top: 18% ;
+  left: 88%;
+  width: 30rem !important;
+
+  @include respond(tab-port) {
+    left: 85%;
   }
 }

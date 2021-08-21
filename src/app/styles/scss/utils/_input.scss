@@ -1,3 +1,5 @@
+@import "mixins";
+
 .primary-input {
   margin-bottom: .5rem;
 
@@ -29,6 +31,10 @@
     color: $color-grey-dark;
   }
 
+  @include respond(phone) {
+    width: 20rem;
+  }
+
   &--submit {
     width: 30rem;
     margin-top: 3rem;
@@ -45,6 +51,10 @@
     &:active {
       background-color: $color-blue-dark;
       cursor: pointer;
+    }
+
+    @include respond(phone) {
+      width: 20rem;
     }
   }
 }

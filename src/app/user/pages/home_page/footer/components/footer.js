@@ -32,13 +32,18 @@ class Footer extends Component {
                     </div>
                     <div className="col-1-of-2">
                         <p className="footer_copyright">
-                            Created by <a href="https://github.com/Jankaz2" target="_blank" className="footer__link">Jan
-                            Kaźmierczak</a>, consectetur adipisicing elit.
-                            Aliquam architecto culpa dolore dolorem doloremque dolores
-                            explicabo ipsam mollitia nobis pariatur qui quia, quibusdam
-                            quo quod tempora velit voluptatibus. Ad aliquam aut dicta,
-                            dolores eum illum impedit iusto numquam optio possimus quae
-                            sapiente tenetur unde ut vel. Consectetur delectus quasi tempora.
+                            Created by <a href="https://github.com/Jankaz2"
+                                          target="_blank"
+                                          className="footer__link">Jan Kaźmierczak</a>, as his own project for
+                            portfolio.&nbsp;
+                            <a href="#" className='footer__link'>Movins </a> is Spring
+                            application with fully responsive layout. Every functionality
+                            has been created by <a href="https://github.com/Jankaz2"
+                                                   target="_blank"
+                                                   className="footer__link">Jan Kaźmierczak</a>.<br/>
+                            Home page layout is inspired by Jonas Schmedtmann online course Advanced CSS and SASS
+                             where I learned advanced CSS tricks and SASS from.
+                            <br/>Copyright &copy; by Jan Kaźmierczak.
                         </p>
                     </div>
                 </div>

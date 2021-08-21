@@ -1,3 +1,5 @@
+@import "mixins";
+
 .object__options {
   position: absolute;
   border-radius: 2px;
@@ -157,6 +159,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 3px;
+
+    @include respond(tab-port) {
+      width: 100%;
+      padding: .6rem;
+    }
 
     &--close {
       display: block;

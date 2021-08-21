@@ -19,7 +19,7 @@ class AboutUsSection extends Component {
                             to make you smile.
                         </p><br/>
                         <h3 className='heading-tertiary'>Find your dreams</h3>
-                        <p> Our mission is to get you all the cinemas and films
+                        <p> Our mission is to give you all the cinemas and films
                             you are looking for without leaving home.
                         </p>
                     </div>

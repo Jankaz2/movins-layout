@@ -131,6 +131,10 @@
       height: 2px;
       background-color: $color-grey-dark;
       display: inline-block;
+
+      @include respond(phone) {
+       width: 2.5rem;
+      }
     }
 
     &::before,

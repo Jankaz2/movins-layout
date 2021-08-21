@@ -19,7 +19,7 @@ function App() {
                     <Route path="/cinema-list" exact component={CinemasList}/>
                     <Route path="/cinema-list/cinema/:id" exact component={Cinema}/>
                     <Route path="/users/activation" component={UserActivation}/>
-                    <Route path="/user/verification" component={EmailVerification}/>
+                    <Route path="/users/verification" component={EmailVerification}/>
                     <Route path="/" exact component={HomePage}/>
                     <Route path="/admin" exact component={AdminPage}/>
                     <Route path="/my-account" exact component={MyAccount}/>
