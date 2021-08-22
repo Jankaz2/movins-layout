@@ -30,7 +30,7 @@ class Reviews extends Component {
                 <div className='row u-margin-bottom-small'>
                     <div className='review'>
                         <figure className="review__photo">
-                            <img src={man1} alt="Woman 1" className="review__image"/>
+                            <img src={man1} alt="Man 1" className="review__image"/>
                             <figcaption className="review__caption">Luke White</figcaption>
                         </figure>
                         <div className="review__text">
@@ -38,7 +38,8 @@ class Reviews extends Component {
                             <p>
                                 Just wow! It makes life easy. I was oppose to this website
                                 originally, but when I started using this, I just regret
-                                I haven't used this before. Really amazing!
+                                I haven't used this before. Really amazing how the
+                                simple website to find films and cinemas can change your life!
                             </p>
                         </div>
                     </div>

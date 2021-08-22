@@ -71,7 +71,7 @@
       padding-left: 11rem;
 
       @include respond(tab-port) {
-        padding-left: 8rem;
+        padding-left: 11rem;
       }
 
       @include respond(phone) {
@@ -92,11 +92,11 @@
 
         @include respond(tab-port) {
           opacity: 1;
-          margin-left: 8rem;
+          margin-left: 11rem;
         }
 
         @include respond(phone) {
-          margin-left: 10rem;
+          margin-left: 11rem;
         }
       }
     }
@@ -108,7 +108,7 @@
       padding-top: 4rem;
 
       @include respond(tab-port) {
-        padding-left: 8rem;
+        padding-left: 11rem;
       }
 
       @include respond(phone) {

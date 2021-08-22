@@ -46,7 +46,14 @@
         transform: translateX(-3rem) skewX(12deg);
         overflow: hidden;
 
+        @include respond(tab-port) {
+            width: 13rem;
+            height: 13rem;
+        }
+
         @include respond(phone) {
+            width: 10rem;
+            height: 10rem;
             transform: translateX(-3rem) skewX(0);
         }
     }

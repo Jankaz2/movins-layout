@@ -51,11 +51,11 @@
       background-color: transparent;
 
       &--submit {
-        background-color: $color-blue-medium;
+        background-color: $color-blue-light;
         color: $color-white-dark;
         font-weight: bold;
         text-transform: uppercase;
-        border-radius: 1rem;
+        border-radius: 10rem;
         padding: 1rem;
         border: none;
         text-align: center;
@@ -66,6 +66,10 @@
         &:hover {
           cursor: pointer;
           background-color: $color-blue-dark;
+        }
+
+        @include respond(phone) {
+          width: 20rem;
         }
       }
     }
@@ -80,6 +84,10 @@
 
       &:focus {
         outline: none;
+      }
+
+      @include respond(phone) {
+        width: 70%;
       }
     }
   }

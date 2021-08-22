@@ -9,14 +9,9 @@
                   rgba($color-blue-light, 0.8),
                   rgba($color-blue-dark, 0.8)),
   url("../images/background-photo.png");
-  background-position: top;
+  background-position: bottom;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
-
-  /*@include respond(tab-port) {
-    clip-path: polygon(0 0, 100% 0, 100% 100vh, 0 100%);
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 92%);
-  }*/
 
   @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
