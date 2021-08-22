@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import ReviewsCss from '../styles/reviews.scss'
-import man1 from '../images/man1.png'
-import woman11 from '../images/woman11.png'
-import woman1 from '../images/woman1.png'
+import man1 from '../../../../../assets/images/man1.png'
+import woman11 from '../../../../../assets/images/woman11.png'
+import woman1 from '../../../../../assets/images/woman1.png'
 
 class Reviews extends Component {
     render() {

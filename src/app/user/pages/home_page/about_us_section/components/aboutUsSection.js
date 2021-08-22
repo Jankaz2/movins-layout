@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import AboutUsSectionCss from '../styles/aboutUsSection.scss'
-import img1 from '../images/pic1.png'
-import img2 from '../images/pic2.png'
-import img3 from '../images/pic3.png'
+import img1 from '../../../../../assets/images/pic1.png'
+import img2 from '../../../../../assets/images/pic2.png'
+import img3 from '../../../../../assets/images/pic3.png'
 
 class AboutUsSection extends Component {
     render() {
