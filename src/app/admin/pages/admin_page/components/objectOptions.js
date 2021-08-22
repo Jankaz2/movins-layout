@@ -1,7 +1,7 @@
 import {DataContext} from "../../../../utils/store/appContext";
 import {MdDeleteForever} from "react-icons/md";
 import React, {useState, useContext} from 'react'
-import {ImHappy, ImSad} from "react-icons/all";
+import {ImHappy, ImSad} from "react-icons/im";
 
 const ObjectOptions = props => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'

@@ -12,7 +12,7 @@ import {DataContext} from "../../../../../utils/store/appContext";
 import StickyNavigation from "./stickyNavigation";
 import LoginBox from "../../../login/components/loginBox";
 import WebStart from "./webStart";
-import {AiOutlineLogout} from 'react-icons/all'
+import {AiOutlineLogout} from 'react-icons/ai'
 
 function HomePage() {
     const {authContextValue} = useContext(DataContext)

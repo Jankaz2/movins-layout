@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaRegEnvelope} from "react-icons/all";
+import {FaRegEnvelope} from "react-icons/fa";
 import EmailVerificationSCSS from "../styles/emailVerification.scss"
 
 const EmailVerification = () => {

@@ -2,7 +2,7 @@ import React, {useContext, useRef, useState} from "react";
 import {useHistory} from 'react-router-dom'
 import {DataContext} from "../../../../utils/store/appContext";
 import LoginBoxScss from '../styles/loginBox.scss'
-import {ImSad} from "react-icons/all";
+import {ImSad} from "react-icons/im";
 
 const LoginBox = (props) => {
     const BASE_URL = 'http://localhost:5000'

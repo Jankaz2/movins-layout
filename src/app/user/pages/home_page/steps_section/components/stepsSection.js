@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaSearch, FaCamera, FaShoppingCart, FaSmile} from "react-icons/all";
+import {FaSearch, FaCamera, FaShoppingCart, FaSmile} from "react-icons/fa";
 import GridCss from '../../../../../styles/scss/utils/grid.scss'
 import StepsSectionCss from '../styles/stepsSection.scss'
 

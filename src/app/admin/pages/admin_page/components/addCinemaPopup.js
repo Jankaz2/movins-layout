@@ -1,6 +1,6 @@
 import {DataContext} from "../../../../utils/store/appContext";
 import React, {useState, useContext} from 'react'
-import {ImHappy, ImSad} from "react-icons/all";
+import {ImHappy, ImSad} from "react-icons/im";
 
 const AddCinemaPopup = (props) => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'

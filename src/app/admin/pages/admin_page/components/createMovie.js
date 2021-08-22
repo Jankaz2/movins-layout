@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import {DataContext} from "../../../../utils/store/appContext";
 import useLoadPage from "../../../../utils/hooks/useLoadPage";
 import Select from "react-select";
-import {ImHappy, ImSad} from "react-icons/all";
+import {ImHappy, ImSad} from "react-icons/im";
 
 const CreateMovie = (props) => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'

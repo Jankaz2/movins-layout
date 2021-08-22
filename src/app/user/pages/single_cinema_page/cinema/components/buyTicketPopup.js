@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import CinemaScss from '../styles/cinema.scss'
 import StatementScss from '../../../../../styles/scss/utils/_statements.scss'
 import {DataContext} from "../../../../../utils/store/appContext";
-import {ImSad, ImHappy} from "react-icons/all";
+import {ImSad, ImHappy} from "react-icons/im";
 
 
 const BuyTicketSection = (props) => {
