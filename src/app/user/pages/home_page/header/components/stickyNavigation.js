@@ -41,11 +41,9 @@ const StickyNavigation = () => {
                                 <Link to="steps-section"
                                       spy={true} smooth={true}
                                       offset={-60}
-                                      duration={50}
-                                >
+                                      duration={500}>
                                     <a href="" className="sticky__navigation__link"
-                                       onClick={() => setIsSticky(!isSticky)}
-                                    >How it works</a>
+                                       onClick={() => setIsSticky(!isSticky)}>How it works</a>
                                 </Link>
                             </li>
 
