@@ -35,7 +35,14 @@ const LoginBox = (props) => {
 
     const [registerInputLength, setRegisterInputLength] = useState(false)
     const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
-    const [error, setError] = useState({username: false, password: false})
+    const [userDataRegisterFocused, setUserDataRegisterFocused] = useState({
+        usernameFocused: false,
+        emailFocused: false,
+        ageFocused: false,
+        passwordFocused: false
+    })
+    const [errorLogin, setErrorLogin] = useState({username: false, password: false})
+    const [errorRegister, setErrorRegister] = useState({username: false, email: false, age: false, password: false})
     const [passwordConfirmation, setPasswordConfirmation] = useState(false)
 
     const width = window.innerWidth
@@ -55,17 +62,17 @@ const LoginBox = (props) => {
             e.target.value.length > 0 &&
             (!e.target.value.match(/^[A-Za-z]+[0-9]{0,4}$/) ||
                 e.target.value.length < 3)) {
-            setError({username: true})
+            setErrorLogin({username: true})
         } else if (e.target.id === 'username') {
-            setError({username: false})
+            setErrorLogin({username: false})
         }
 
         if (e.target.id === 'password' &&
             e.target.value.length > 0 &&
             e.target.value.length < 8) {
-            setError({password: true})
+            setErrorLogin({password: true})
         } else if (e.target.id === 'password') {
-            setError({password: false})
+            setErrorLogin({password: false})
         }
 
         loggedUser[e.target.id] = e.target.value
@@ -76,19 +83,37 @@ const LoginBox = (props) => {
     const handleRegisterChange = e => {
         const newUser = {...registerData}
 
-        if (e.target.id === 'register-username') {
-            newUser['username'] = e.target.value
+        if (e.target.id === 'register-username' &&
+            e.target.value.length > 0 &&
+            (!e.target.value.match(/^[A-Za-z]+[0-9]{0,4}$/) ||
+                e.target.value.length < 3)) {
+            setErrorRegister({username: true})
+        } else if (e.target.id === 'register-username') {
+            setErrorRegister({username: false})
         }
 
-        if (e.target.id === 'email') {
+        if (e.target.id === 'email' &&
+            e.target.value.length > 0 &&
+            (!e.target.value.match(/^[A-Za-z0-9.]{2,}@[a-z0-9]{2,}.[a-z]{2,}$/))) {
+            setErrorRegister({email: true})
+        } else if (e.target.id === 'email') {
+            setErrorRegister({email: false})
             newUser['email'] = e.target.value
         }
 
-        if (e.target.id === 'age') {
+        if (e.target.id === 'age' && e.target.value.match(/^[1-9][0-9]{0,2}$/)) {
+            setErrorRegister({age: true})
+        } else if (e.target.id === 'age') {
+            setErrorRegister({age: false})
             newUser['age'] = e.target.value
         }
 
-        if (e.target.id === 'register-password') {
+        if (e.target.id === 'register-password' &&
+            e.target.value.length > 0 &&
+            e.target.value.length < 8) {
+            setErrorRegister({password: true})
+        } else if (e.target.id === 'register-password') {
+            setErrorRegister({password: false})
             newUser['password'] = e.target.value
         }
 
@@ -198,7 +223,7 @@ const LoginBox = (props) => {
                                                className='login__box--label'
                                         >Login</label>
                                         {
-                                            error.username && userDataFocused.usernameFocused ?
+                                            errorLogin.username && userDataFocused.usernameFocused ?
                                                 <p className='error-message'>
                                                     Length must be greater than 3<br/>
                                                     Syntax must be:/^[A-Za-z]+[0-9]{0 + ',' + 4}$/
@@ -213,7 +238,7 @@ const LoginBox = (props) => {
                                                id="username"/>
                                         <label htmlFor="password" className='login__box--label'>Password</label>
                                         {
-                                            error.password && userDataFocused.passwordFocused ?
+                                            errorLogin.password && userDataFocused.passwordFocused ?
                                                 <p className='error-message'>
                                                     Length must be greater than 7<br/>
                                                 </p> : null
@@ -244,36 +269,78 @@ const LoginBox = (props) => {
                                               isOkRegister && history.push("/user/verification")
                                           }}
                                     >
+                                        {
+                                            errorRegister.username && userDataRegisterFocused.usernameFocused ?
+                                                <p className='error-message'>
+                                                    Length must be greater than 3<br/>
+                                                    Syntax must be:/^[A-Za-z]+[0-9]{0 + ',' + 4}$/
+                                                </p> : null
+                                        }
                                         <input className='signup-form-input primary-input' type="text"
                                                id='register-username'
                                                onChange={handleRegisterChange}
+                                               onFocus={() => setUserDataRegisterFocused({usernameFocused: true})}
+                                               onBlur={() => setUserDataRegisterFocused({usernameFocused: false})}
                                                placeholder="Username"
+                                               required={true}
                                                ref={usernameRefRegister}
                                         />
+                                        {
+                                            errorRegister.email && userDataRegisterFocused.emailFocused ?
+                                                <p className='error-message'>
+                                                    Wrong email syntax
+                                                </p> : null
+                                        }
                                         <input className='signup-form-input primary-input' type="email"
                                                id='email'
                                                onChange={handleRegisterChange}
+                                               onFocus={() => setUserDataRegisterFocused({emailFocused: true})}
+                                               onBlur={() => setUserDataRegisterFocused({emailFocused: false})}
                                                placeholder="e-mail"
+                                               required={true}
                                                ref={emailRef}
                                         />
+                                        {
+                                            errorRegister.age && userDataRegisterFocused.ageFocused ?
+                                                <p className='error-message'>
+                                                    Age cannot be less than 1
+                                                </p> : null
+                                        }
                                         <input className='signup-form-input primary-input' type="number"
                                                id='age'
                                                onChange={handleRegisterChange}
+                                               onFocus={() => setUserDataRegisterFocused({ageFocused: true})}
+                                               onBlur={() => setUserDataRegisterFocused({ageFocused: false})}
                                                placeholder="age"
+                                               required={true}
                                                ref={ageRef}
                                         />
+                                        {
+                                            errorRegister.password && userDataRegisterFocused.passwordFocused ?
+                                                <p className='error-message'>
+                                                    Length must be greater than 7<br/>
+                                                </p> : null
+                                        }
                                         <input className='signup-form-input primary-input' type="password"
                                                id='register-password'
                                                onChange={handleRegisterChange}
+                                               onFocus={() => setUserDataRegisterFocused({passwordFocused: true})}
+                                               onBlur={() => setUserDataRegisterFocused({passwordFocused: false})}
                                                placeholder="password"
+                                               required={true}
                                                ref={passwordRegisterRef}
                                         />
                                         <input
-                                            className={`${passwordConfirmation ? 'error-input' : registerInputLength ? 'correct-input' : ''} signup-form-input primary-input`}
+                                            className={`${passwordConfirmation
+                                                ? 'error-input'
+                                                : registerInputLength
+                                                    ? 'correct-input'
+                                                    : ''} signup-form-input primary-input`}
                                             type="password"
                                             id='register-password-confirmation'
                                             onChange={handleRegisterChange}
                                             placeholder="repeat password"
+                                            required={true}
                                             ref={passwordConfirmationRef}
                                         />
                                         {
