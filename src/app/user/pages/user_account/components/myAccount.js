@@ -7,9 +7,8 @@ import {MdPerson} from 'react-icons/md'
 const MyAccount = () => {
     const BASE_TICKETS_URL = 'http://localhost:5000/tickets'
     const BASE_USERS_URL = 'http://localhost:5000/users'
-
     const history = useHistory()
-    const {change, setChange, loggedUsername, authContextValue} = useContext(DataContext)
+    const {setChange} = useContext(DataContext)
     const [tickets, setTickets] = useState([])
     const [showTickets, setShowTickets] = useState(false)
     const [showUserData, setShowUserData] = useState(false)
@@ -17,6 +16,7 @@ const MyAccount = () => {
     const [userData, setUserData] = useState({})
     const [purchasedTickets, setPurchasedTickets] = useState(null)
 
+    const userId = localStorage.getItem('id')
     const date = new Date()
     const timeInMs = date.getTime()
 
@@ -27,8 +27,8 @@ const MyAccount = () => {
         return parseInt((date - timeInMs) / (1000 * 3600 * 24))
     }
 
-    const loadUserByUsername = async () => {
-        const response = await fetch(BASE_USERS_URL + `/username/${loggedUsername}`)
+    const loadUserById = async () => {
+        const response = await fetch(BASE_USERS_URL + `/${userId}`)
             .then(response => response.json())
             .then(user => {
                 setUserData(user.data)
@@ -62,7 +62,7 @@ const MyAccount = () => {
 
     useEffect(() => {
         async function getData() {
-            await loadUserByUsername()
+            await loadUserById()
         }
 
         getData().catch(err => console.log(err))
@@ -76,7 +76,7 @@ const MyAccount = () => {
 
         getData().catch(err => console.log(err))
         setChange(false)
-    }, [userData, tickets, change])
+    }, [userData])
 
     useEffect(() => {
         async function getData() {
@@ -85,7 +85,7 @@ const MyAccount = () => {
 
         getData().catch(err => console.log(err))
         setChange(false)
-    }, [userData, purchasedTickets, change])
+    }, [userData])
 
     return (
         <div className='my-account'>
@@ -110,7 +110,7 @@ const MyAccount = () => {
                     >Data
                     </li>
                     <li className='my-account__options--item--home'
-                        onClick={() => history.push("/")}
+                        onClick={() => history.replace('/')}
                     >Home
                     </li>
                 </ul>
