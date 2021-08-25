@@ -152,9 +152,9 @@ const MyAccount = () => {
                                             <h3 className='heading-tertiary__blue'>Price:</h3>
                                             <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.price}</h3>
                                             <h3 className='heading-tertiary__blue'>Days to show:</h3>
-                                            {/* <h3 className='heading-tertiary u-margin-bottom-tiny'>
+                                             <h3 className='heading-tertiary u-margin-bottom-tiny'>
                                                 {differenceInDays(ticket.seance.date) > 0 ? differenceInDays(ticket.seance.date) : 'SHOW HAS BEEN DONE'}
-                                            </h3>*/}
+                                            </h3>
                                         </div>
                                     </div>
                                 </li>
