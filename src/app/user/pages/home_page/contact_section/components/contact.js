@@ -35,6 +35,7 @@ export default function Contact() {
                     <input type="email"
                            className='no-outline contact-us-section__form__input'
                            name={"email"}
+                           required={true}
                            {...register("email", {required: true})}
                     />
                     <label htmlFor="subject"
@@ -42,12 +43,14 @@ export default function Contact() {
                     >Subject</label>
                     <input type="text"
                            className='no-outline contact-us-section__form__input'
+                           required={true}
                            name={"subject"}
                            {...register("subject", {required: true})}
                     />
                     <textarea name="content" cols="30" rows="10"
                               placeholder='Message...'
                               className='contact-us-section__form__textarea'
+                              required={true}
                               {...register("content", {required: true})}
                     />
                     <input type="submit"
