@@ -13,7 +13,6 @@ import EmailVerification from "./utils/pages/components/emailVerification";
 
 function App() {
     return (
-        <AppContext>
             <Router>
                 <Switch>
                     <Route path="/cinema-list" exact component={CinemasList}/>
@@ -27,7 +26,6 @@ function App() {
                 </Switch>
                 <Route path="/" component={Footer}/>
             </Router>
-        </AppContext>
     );
 }
 
