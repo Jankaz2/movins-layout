@@ -34,7 +34,6 @@ const LoginBox = (props) => {
     })
 
     const [registerInputLength, setRegisterInputLength] = useState(false)
-
     const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
     const [error, setError] = useState({username: false, password: false})
     const [passwordConfirmation, setPasswordConfirmation] = useState(false)
@@ -118,17 +117,18 @@ const LoginBox = (props) => {
         const username = usernameRef.current.value
         const password = passwordRef.current.value
 
-        showLoader()
+        authContextValue.setUser({username: username, password: password})
 
-        const user = {username: username, password: password}
+        showLoader()
 
         const response = await fetch(BASE_URL + "/login", {
             method: 'POST',
-            body: JSON.stringify(user),
+            body: JSON.stringify(authContextValue.user),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
+
 
         hideLoader()
 

@@ -10,7 +10,12 @@ export const DataContext = createContext({
     login: token => {
     },
     logout: () => {
-    }
+    },
+    user: {},
+    setUser: () => {
+    },
+    id: '',
+    setId: () => ''
 })
 
 export const AppContext = props => {
@@ -22,9 +27,12 @@ export const AppContext = props => {
     const [cinemaId, setCinemaId] = useState(null)
     const [loader, showLoader, hideLoader] = useLoadPage()
     const [loggedUsername, setLoggedUsername] = useState('')
+
     const initialToken = window.localStorage.getItem('token')
     const [token, setToken] = useState(initialToken)
     const userIsLoggedIn = !!token
+    const [user, setUser] = useState({})
+    const [id, setId] = useState('')
 
     let logoutTimer
 
@@ -32,13 +40,14 @@ export const AppContext = props => {
         setToken(null)
         localStorage.removeItem('token')
         localStorage.removeItem('expirationTime')
+        localStorage.removeItem('id')
 
         if (logoutTimer) {
             clearTimeout(logoutTimer)
         }
     }
 
-    const loginHandler = (token, expirationTime) => {
+    const loginHandler = (token, expirationTime, id) => {
         setToken(token)
 
         localStorage.setItem('token', token)
@@ -51,7 +60,11 @@ export const AppContext = props => {
         token: token,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
-        logout: logoutHandler
+        logout: logoutHandler,
+        user: user,
+        setUser: setUser,
+        id: id,
+        setId: setId
     }
 
     const loadData = async () => {

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import HeaderCss from '../styles/header.scss'
 import MainScss from '../../../../../styles/scss/main.scss'
 import Select from "react-select";
@@ -38,9 +38,29 @@ const Navigation = () => {
 
     const {setLoginBox, authContextValue} = useContext(DataContext)
     const history = useHistory()
+    const token = localStorage.getItem('token')
+
+    const parseJwt = (token) => {
+        if (!token) {
+            return;
+        }
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+    }
+
+    useEffect(() => {
+        if (token !== null) {
+            const decodedToken = parseJwt(authContextValue.token)
+            localStorage.setItem('id', decodedToken.sub)
+            authContextValue.setId(decodedToken.sub)
+            console.log(localStorage.getItem('id'))
+
+        }
+    }, [])
 
     const goToMyAccount = e => {
-        history.push("/my-account")
+        history.replace("/my-account")
     }
 
     return (
@@ -106,12 +126,8 @@ const Navigation = () => {
                               to="steps-section"
                               spy={true}
                               smooth={true}
-                              duration={500}
-                              onClick={() => {
-                                  console.log(authContextValue.token)
-                                  console.log(authContextValue.isLoggedIn)
-                              }}
-                        >
+                              offset={-60}
+                              duration={500}>
                             <a href="">How it works</a>
                         </Link>
                     </li>
@@ -159,10 +175,15 @@ const Navigation = () => {
                                 </li>
 
                                 {
-                                    !authContextValue.isLoggedIn &&
-                                    <li className="sticky__navigation__item">
-                                        <a href="" className="sticky__navigation__link">Log in</a>
-                                    </li>
+                                    !authContextValue.isLoggedIn ?
+                                        <li className="sticky__navigation__item">
+                                            <a href="" className="sticky__navigation__link">Log in</a>
+                                        </li>
+                                        :
+                                        <li className="sticky__navigation__item">
+                                            <a href="" className="sticky__navigation__link"
+                                               onClick={goToMyAccount}>My account</a>
+                                        </li>
                                 }
                                 <li className="sticky__navigation__item">
                                     <Link to="about-us-section"
