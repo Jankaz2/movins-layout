@@ -33,14 +33,12 @@ const LoginBox = (props) => {
     })
 
     const [registerInputLength, setRegisterInputLength] = useState(false)
-    const [userDataFocused, setUserDataFocused] = useState({usernameFocused: false, passwordFocused: false})
     const [userDataRegisterFocused, setUserDataRegisterFocused] = useState({
         usernameFocused: false,
         emailFocused: false,
         ageFocused: false,
         passwordFocused: false
     })
-    const [errorLogin, setErrorLogin] = useState({username: false, password: false})
     const [errorRegister, setErrorRegister] = useState({username: false, email: false, age: false, password: false})
     const [passwordConfirmation, setPasswordConfirmation] = useState(false)
 
@@ -57,22 +55,6 @@ const LoginBox = (props) => {
 
     const handleLoginChange = (e) => {
         const loggedUser = {...loginData}
-        if (e.target.id === 'username' &&
-            e.target.value.length > 0 &&
-            (!e.target.value.match(/^[A-Za-z]+[0-9]{0,4}$/) ||
-                e.target.value.length < 3)) {
-            setErrorLogin({username: true})
-        } else if (e.target.id === 'username') {
-            setErrorLogin({username: false})
-        }
-
-        if (e.target.id === 'password' &&
-            e.target.value.length > 0 &&
-            e.target.value.length < 8) {
-            setErrorLogin({password: true})
-        } else if (e.target.id === 'password') {
-            setErrorLogin({password: false})
-        }
 
         loggedUser[e.target.id] = e.target.value
         setLoginData(loggedUser)
@@ -139,18 +121,19 @@ const LoginBox = (props) => {
 
         const username = usernameRef.current.value
         const password = passwordRef.current.value
+        const user = {username: username, password: password}
+        authContextValue.setUser(user)
 
         showLoader()
 
         const response = await fetch(BASE_URL + "/login", {
             method: 'POST',
-            body: JSON.stringify({username: username, password: password}),
+            body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-
-
+        
         hideLoader()
 
         if (response.ok) {
@@ -218,31 +201,14 @@ const LoginBox = (props) => {
                                         <label htmlFor="username"
                                                className='login__box--label'
                                         >Login</label>
-                                        {
-                                            errorLogin.username && userDataFocused.usernameFocused ?
-                                                <p className='error-message'>
-                                                    Length must be greater than 3<br/>
-                                                    Syntax must be:/^[A-Za-z]+[0-9]{0 + ',' + 4}$/
-                                                </p> : null
-                                        }
                                         <input className='login-form-input primary-input' type="text"
                                                onChange={handleLoginChange}
-                                               onFocus={() => setUserDataFocused({usernameFocused: true})}
-                                               onBlur={() => setUserDataFocused({usernameFocused: false})}
                                                required={true}
                                                ref={usernameRef}
                                                id="username"/>
                                         <label htmlFor="password" className='login__box--label'>Password</label>
-                                        {
-                                            errorLogin.password && userDataFocused.passwordFocused ?
-                                                <p className='error-message'>
-                                                    Length must be greater than 7<br/>
-                                                </p> : null
-                                        }
                                         <input className='login-form-input primary-input' type="password"
                                                onChange={handleLoginChange}
-                                               onFocus={() => setUserDataFocused({passwordFocused: true})}
-                                               onBlur={() => setUserDataFocused({passwordFocused: false})}
                                                required={true}
                                                ref={passwordRef}
                                                id='password'/>

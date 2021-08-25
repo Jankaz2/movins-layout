@@ -38,7 +38,7 @@ const MyAccount = () => {
         return response.json()
     }
 
-    const loadUserTickets = async (userId) => {
+    const loadUserTickets = async () => {
         const response = await fetch(BASE_TICKETS_URL + `/${userId}`)
             .then(response => response.json())
             .then(tickets => {
@@ -49,7 +49,7 @@ const MyAccount = () => {
         return response.json()
     }
 
-    const loadPurchasedTickets = async (userId) => {
+    const loadPurchasedTickets = async () => {
         const response = await fetch(BASE_USERS_URL + `/purchase/${userId}`)
             .then(response => response.json())
             .then(number => {
@@ -71,7 +71,7 @@ const MyAccount = () => {
 
     useEffect(() => {
         async function getData() {
-            await loadUserTickets(userData.id)
+            await loadUserTickets()
         }
 
         getData().catch(err => console.log(err))
@@ -80,7 +80,7 @@ const MyAccount = () => {
 
     useEffect(() => {
         async function getData() {
-            await loadPurchasedTickets(userData.id)
+            await loadPurchasedTickets()
         }
 
         getData().catch(err => console.log(err))

@@ -54,10 +54,8 @@ const Navigation = () => {
             const decodedToken = parseJwt(authContextValue.token)
             localStorage.setItem('id', decodedToken.sub)
             authContextValue.setId(decodedToken.sub)
-            console.log(localStorage.getItem('id'))
-
         }
-    }, [])
+    })
 
     const goToMyAccount = e => {
         history.replace("/my-account")
