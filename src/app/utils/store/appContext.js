@@ -26,7 +26,6 @@ export const AppContext = props => {
     const [loginBox, setLoginBox] = useState(true)
     const [cinemaId, setCinemaId] = useState(null)
     const [loader, showLoader, hideLoader] = useLoadPage()
-    const [loggedUsername, setLoggedUsername] = useState('')
 
     const initialToken = window.localStorage.getItem('token')
     const [token, setToken] = useState(initialToken)
@@ -95,7 +94,6 @@ export const AppContext = props => {
             loginBox, setLoginBox,
             cinemaId, setCinemaId,
             loader, showLoader, hideLoader,
-            loggedUsername, setLoggedUsername,
             authContextValue
         }}>
             {props.children}

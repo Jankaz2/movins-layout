@@ -14,7 +14,6 @@ const LoginBox = (props) => {
         setChange,
         showLoader,
         hideLoader,
-        setLoggedUsername,
     } = useContext(DataContext)
 
     const {authContextValue} = useContext(DataContext)
@@ -77,7 +76,6 @@ const LoginBox = (props) => {
 
         loggedUser[e.target.id] = e.target.value
         setLoginData(loggedUser)
-        setLoggedUsername(loggedUser.username)
     }
 
     const handleRegisterChange = e => {
@@ -142,13 +140,11 @@ const LoginBox = (props) => {
         const username = usernameRef.current.value
         const password = passwordRef.current.value
 
-        authContextValue.setUser({username: username, password: password})
-
         showLoader()
 
         const response = await fetch(BASE_URL + "/login", {
             method: 'POST',
-            body: JSON.stringify(authContextValue.user),
+            body: JSON.stringify({username: username, password: password}),
             headers: {
                 'Content-Type': 'application/json'
             }
