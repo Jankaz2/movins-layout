@@ -140,7 +140,7 @@ const LoginBox = (props) => {
             setChange(true)
             const responseBody = await response.json()
 
-            authContextValue.login(responseBody.accessToken, 300000)
+            authContextValue.login(responseBody.accessToken, 300000, responseBody.refreshToken)
             setLoginBox(false)
             return await responseBody
         }

@@ -6,6 +6,7 @@ export const DataContext = createContext({
     setCinemas: () => {
     },
     token: '',
+    refreshToken: '',
     isLoggedIn: false,
     login: token => {
     },
@@ -28,7 +29,9 @@ export const AppContext = props => {
     const [loader, showLoader, hideLoader] = useLoadPage()
 
     const initialToken = window.localStorage.getItem('token')
+    const initialRefreshToken = window.localStorage.getItem('refreshToken')
     const [token, setToken] = useState(initialToken)
+    const [refreshToken, setRefreshToken] = useState(initialRefreshToken)
     const userIsLoggedIn = !!token
     const [user, setUser] = useState({})
     const [id, setId] = useState('')
@@ -38,6 +41,7 @@ export const AppContext = props => {
     const logoutHandler = () => {
         setToken(null)
         localStorage.removeItem('token')
+        localStorage.removeItem('refreshToken')
         localStorage.removeItem('expirationTime')
         localStorage.removeItem('id')
 
@@ -46,17 +50,19 @@ export const AppContext = props => {
         }
     }
 
-    const loginHandler = (token, expirationTime, id) => {
+    const loginHandler = (token, expirationTime, refreshToken) => {
         setToken(token)
 
         localStorage.setItem('token', token)
         localStorage.setItem('expirationTime', expirationTime)
+        localStorage.setItem('refreshToken', refreshToken)
 
         logoutTimer = setTimeout(logoutHandler, expirationTime)
     }
 
     const authContextValue = {
         token: token,
+        refreshToken: refreshToken,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
         logout: logoutHandler,

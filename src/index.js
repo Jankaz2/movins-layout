@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {StrictMode} from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from "./app/app"
 import {AppContext} from "./app/utils/store/appContext";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StrictMode>
         <AppContext>
-            <App/>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
         </AppContext>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root')
 );
