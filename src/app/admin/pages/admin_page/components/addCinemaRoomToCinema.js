@@ -155,38 +155,38 @@ const AddCinemaRoomToCinema = (props) => {
                             </form>
                         </div>
                     </div>
-                </div>
-            }
-            {
-                addCinemaRoomResponse.error &&
-                <div className='error-statement'>
-                    <div className='error-statement__top-section'>
-                        <h3 className='heading-tertiary'>Something went wrong</h3>
-                        <span className='error-statement__icon'><ImSad/></span>
-                    </div>
-                    <div className='error-statement__bottom-section'>
-                        <button
-                            onClick={() => setAddCinemaRoomResponse({error: false})}
-                            className='error-statement__btn'>
-                            Ok
-                        </button>
-                    </div>
-                </div>
-            }
-            {
-                addCinemaRoomResponse.correct &&
-                <div className='correct-statement'>
-                    <div className='correct-statement__top-section'>
-                        <h3 className='heading-tertiary'>Cinema room has been added to chosen cinema</h3>
-                        <span className='correct-statement__icon'><ImHappy/></span>
-                    </div>
-                    <div className='correct-statement__bottom-section'>
-                        <button
-                            onClick={() => setAddCinemaRoomResponse({correct: false})}
-                            className='correct-statement__btn'>
-                            Ok
-                        </button>
-                    </div>
+                    {
+                        addCinemaRoomResponse.error &&
+                        <div className='error-statement'>
+                            <div className='error-statement__top-section'>
+                                <h3 className='heading-tertiary'>Something went wrong</h3>
+                                <span className='error-statement__icon'><ImSad/></span>
+                            </div>
+                            <div className='error-statement__bottom-section'>
+                                <button
+                                    onClick={() => setAddCinemaRoomResponse({error: false})}
+                                    className='error-statement__btn'>
+                                    Ok
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    {
+                        addCinemaRoomResponse.correct &&
+                        <div className='correct-statement'>
+                            <div className='correct-statement__top-section'>
+                                <h3 className='heading-tertiary'>Cinema room has been added to chosen cinema</h3>
+                                <span className='correct-statement__icon'><ImHappy/></span>
+                            </div>
+                            <div className='correct-statement__bottom-section'>
+                                <button
+                                    onClick={() => setAddCinemaRoomResponse({correct: false})}
+                                    className='correct-statement__btn'>
+                                    Ok
+                                </button>
+                            </div>
+                        </div>
+                    }
                 </div>
             }
         </div>

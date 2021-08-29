@@ -179,38 +179,38 @@ const ObjectOptions = props => {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                }
-                {
-                    deleteUserResponse.error &&
-                    <div className='error-statement'>
-                        <div className='error-statement__top-section'>
-                            <h3 className='heading-tertiary'>Something went wrong</h3>
-                            <span className='error-statement__icon'><ImSad/></span>
-                        </div>
-                        <div className='error-statement__bottom-section'>
-                            <button
-                                onClick={() => setDeleteUserResponse({error: false})}
-                                className='error-statement__btn'>
-                                Ok
-                            </button>
-                        </div>
-                    </div>
-                }
-                {
-                    deleteUserResponse.correct &&
-                    <div className='correct-statement'>
-                        <div className='correct-statement__top-section'>
-                            <h3 className='heading-tertiary'>User has been deleted</h3>
-                            <span className='correct-statement__icon'><ImHappy/></span>
-                        </div>
-                        <div className='correct-statement__bottom-section'>
-                            <button
-                                onClick={() => setDeleteUserResponse({correct: false})}
-                                className='correct-statement__btn'>
-                                Ok
-                            </button>
-                        </div>
+                        {
+                            deleteUserResponse.error &&
+                            <div className='error-statement'>
+                                <div className='error-statement__top-section'>
+                                    <h3 className='heading-tertiary'>Something went wrong</h3>
+                                    <span className='error-statement__icon'><ImSad/></span>
+                                </div>
+                                <div className='error-statement__bottom-section'>
+                                    <button
+                                        onClick={() => setDeleteUserResponse({error: false})}
+                                        className='error-statement__btn'>
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        {
+                            deleteUserResponse.correct &&
+                            <div className='correct-statement'>
+                                <div className='correct-statement__top-section'>
+                                    <h3 className='heading-tertiary'>User has been deleted</h3>
+                                    <span className='correct-statement__icon'><ImHappy/></span>
+                                </div>
+                                <div className='correct-statement__bottom-section'>
+                                    <button
+                                        onClick={() => setDeleteUserResponse({correct: false})}
+                                        className='correct-statement__btn'>
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        }
                     </div>
                 }
             </div>
