@@ -162,6 +162,21 @@ const MyAccount = () => {
                                                 <h3 className='heading-tertiary u-margin-bottom-tiny'>
                                                     {differenceInDays(ticket.seance.date) > 0 ? differenceInDays(ticket.seance.date) : 'SHOW HAS BEEN DONE'}
                                                 </h3>
+                                                <h3 className='heading-tertiary__blue'>Seat:</h3>
+                                                <h3 className='heading-tertiary u-margin-bottom-tiny'>
+                                                  {
+                                                      <div className='buy__ticket--section__selected-wrapper'>
+                                                          <div className='buy__ticket--section__selected-row'>
+                                                              <p className='buy__ticket--section__selected-row-p'>Row</p>
+                                                              {ticket.seat.row}
+                                                          </div>
+                                                          <div className='buy__ticket--section__selected-place'>
+                                                              <p className='buy__ticket--section__selected-place-p'>Place</p>
+                                                              {ticket.seat.place}
+                                                          </div>
+                                                      </div>
+                                                  }
+                                                </h3>
                                             </div>
                                         </div>
                                     </li>

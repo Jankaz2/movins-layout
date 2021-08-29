@@ -7,7 +7,6 @@ import {ImSad, ImHappy} from "react-icons/im";
 
 const BuyTicketSection = (props) => {
     const BASE_TICKET_URL = 'http://localhost:5000/tickets'
-    const BASE_SEATS_URL = 'http://localhost:5000/cinema/seats'
 
     const seance = props.seance
     const rows = props.rows
@@ -97,7 +96,7 @@ const BuyTicketSection = (props) => {
                 }
             })
 
-            if(!response.ok) {
+            if (!response.ok) {
                 setBuyingError(true)
                 return
             }
@@ -213,27 +212,25 @@ const BuyTicketSection = (props) => {
                                 </button>
                             </div>
                         </div>
-                        : null
-                }
-                {
-                    showBuyStatement && currentlyBookedTickets.length === 0 ?
-                        <div className='statement'>
+                        :
+                        showBuyStatement && currentlyBookedTickets.length === 0 ?
+                            <div className='statement'>
                             <span className='statement--close'
                                   onClick={() => {
                                       setShowBuyStatement(false)
                                   }}
                             >&#10005;</span>
-                            <p className='statement__text'>You haven't chosen any tickets</p>
-                            <div className='statement__buttons'>
-                                <button className="statement__buttons--yes"
-                                        onClick={() => {
-                                            setShowBuyStatement(false)
-                                        }}
-                                >Ok
-                                </button>
+                                <p className='statement__text'>You haven't chosen any tickets</p>
+                                <div className='statement__buttons'>
+                                    <button className="statement__buttons--yes"
+                                            onClick={() => {
+                                                setShowBuyStatement(false)
+                                            }}
+                                    >Ok
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        : null
+                            : null
                 }
                 {
                     buyingError &&
