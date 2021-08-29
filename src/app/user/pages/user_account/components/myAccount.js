@@ -107,12 +107,19 @@ const MyAccount = () => {
                             setShowTickets(false)
                             setShowUserData(true)
                         }}
-                    >Data
+                    >My data
                     </li>
                     <li className='my-account__options--item--home'
                         onClick={() => history.replace('/')}
                     >Home
                     </li>
+                    {
+                        userData.role === 'ADMIN' &&
+                        <li className='my-account__options--item'
+                            onClick={() => history.push('/admin')}
+                        >Admin panel
+                        </li>
+                    }
                 </ul>
             </nav>
             {
