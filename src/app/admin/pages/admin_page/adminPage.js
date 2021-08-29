@@ -8,7 +8,7 @@ import ShowAllUsersPopup from "./components/showAllUsersPopup";
 import UpdateCinema from "./components/updateCinema";
 import CreateMovie from "./components/createMovie";
 
-const AdminPage = () => {
+const AdminPage = (props) => {
     const [showCreateCinema, setShowCreateCinema] = useState(false)
     const [showCreateNewAdmin, setShowCreateNewAdmin] = useState(false)
     const [showAllCinemas, setShowAllCinemas] = useState(false)
@@ -23,6 +23,9 @@ const AdminPage = () => {
 
     return (
         <div className='admin-page'>
+              <span className='cinema__page--back'
+                    onClick={() => props.history.goBack()}
+              >&larr;</span>
             <h1 className="admin-page__welcome-heading heading--secondary">
                 Welcome admin, choose the option and manage your app
             </h1>
