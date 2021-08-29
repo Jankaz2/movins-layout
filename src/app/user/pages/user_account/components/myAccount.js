@@ -164,18 +164,18 @@ const MyAccount = () => {
                                                 </h3>
                                                 <h3 className='heading-tertiary__blue'>Seat:</h3>
                                                 <h3 className='heading-tertiary u-margin-bottom-tiny'>
-                                                  {
-                                                      <div className='buy__ticket--section__selected-wrapper'>
-                                                          <div className='buy__ticket--section__selected-row'>
-                                                              <p className='buy__ticket--section__selected-row-p'>Row</p>
-                                                              {ticket.seat.row}
-                                                          </div>
-                                                          <div className='buy__ticket--section__selected-place'>
-                                                              <p className='buy__ticket--section__selected-place-p'>Place</p>
-                                                              {ticket.seat.place}
-                                                          </div>
-                                                      </div>
-                                                  }
+                                                    {
+                                                        <div className='buy__ticket--section__selected-wrapper'>
+                                                            <div className='buy__ticket--section__selected-row'>
+                                                                <p className='buy__ticket--section__selected-row-p'>Row</p>
+                                                                {ticket.seat.row}
+                                                            </div>
+                                                            <div className='buy__ticket--section__selected-place'>
+                                                                <p className='buy__ticket--section__selected-place-p'>Place</p>
+                                                                {ticket.seat.place}
+                                                            </div>
+                                                        </div>
+                                                    }
                                                 </h3>
                                             </div>
                                         </div>
@@ -194,13 +194,18 @@ const MyAccount = () => {
                 showUserData &&
                 <div className='my-account__user'>
                     <h3 className='heading-tertiary__blue'>Username:</h3>
-                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{userData.username}</h3>
+                    <h3 className='heading-tertiary--username u-margin-bottom-tiny'>{userData.username}</h3>
                     <h3 className='heading-tertiary__blue'>Age:</h3>
                     <h3 className='heading-tertiary u-margin-bottom-tiny'>{userData.age}</h3>
                     <h3 className='heading-tertiary__blue'>Email:</h3>
                     <h3 className='heading-tertiary u-margin-bottom-tiny u-text-lowercase'>{userData.email}</h3>
-                    <h3 className='heading-tertiary__blue'>Role:</h3>
-                    <h3 className='heading-tertiary u-margin-bottom-tiny'>{userData.role}</h3>
+                    {
+                        userData.role === 'ADMIN' &&
+                        <>
+                            <h3 className='heading-tertiary__blue'>Role:</h3>
+                            <h3 className='heading-tertiary u-margin-bottom-tiny'>{userData.role}</h3>
+                        </>
+                    }
                     <h3 className='heading-tertiary__blue'>Number of purchased tickets:</h3>
                     <h3 className='heading-tertiary'>{purchasedTickets}</h3>
                 </div>

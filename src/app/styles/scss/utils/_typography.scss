@@ -78,6 +78,10 @@ body {
   font-weight: 700;
   text-transform: uppercase;
 
+  &--username {
+    text-transform: none !important;
+  }
+
   &__pink {
     font-size: 2rem;
     background-image: linear-gradient(
