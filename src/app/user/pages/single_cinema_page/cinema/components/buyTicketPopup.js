@@ -13,6 +13,8 @@ const BuyTicketSection = (props) => {
     const rows = props.rows
     const places = props.places
     const finalArray = props.array
+    const price = props.ticketPrice
+
     const today = new Date()
     const days = String(today.getDate()).padStart(2, '0')
     const month = String(today.getMonth() + 1).padStart(2, '0')
@@ -26,7 +28,8 @@ const BuyTicketSection = (props) => {
     const [buyingError, setBuyingError] = useState(false)
     const [buyingCorrect, setBuyingCorrect] = useState(false)
 
-    const {setChange} = useContext(DataContext)
+    const {setChange, authContextValue} = useContext(DataContext)
+    const userId = authContextValue.id
 
     const loadSeats = async () => {
         await fetch(BASE_TICKET_URL)
@@ -69,14 +72,14 @@ const BuyTicketSection = (props) => {
         places.forEach(place =>
             tempTickets.push(
                 {
-                    userId: 91,
+                    userId: userId,
                     seanceId: seance.id,
                     seat: {
                         row: place.row,
                         place: place.place,
                         cinemaRoomId: seance.cinemaRoom.id,
                     },
-                    price: 50,
+                    price: price,
                     purchaseDate: year + '-' + month + '-' + days
                 }
             )

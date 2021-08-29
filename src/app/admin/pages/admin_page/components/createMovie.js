@@ -7,6 +7,8 @@ import {ImHappy, ImSad} from "react-icons/im";
 const CreateMovie = (props) => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
+    const prices = JSON.parse(localStorage.getItem('prices'))
+
     const [createMovieResponse, setCreateMovieResponse] = useState({correct: false, error: false})
     const [movieData, setMovieData] = useState({
         title: '',
@@ -18,6 +20,7 @@ const CreateMovie = (props) => {
     const [seanceSingleObject, setSeanceSingleObject] = useState({date: ''})
     const [cinemaRooms, setCinemaRooms] = useState([])
     const [cinemaRoomData, setCinemaRoomData] = useState({name: '', id: null})
+    const [ticketPrice, setTicketPrice] = useState({movieTile: '', price: '', finalObj: ''})
     const [showLoader, hideLoader] = useLoadPage()
 
     const {change, setChange} = useContext(DataContext)
@@ -46,7 +49,7 @@ const CreateMovie = (props) => {
     })
 
     const addMovie = async (movie, cinemaRoomId) => {
-        const response = await fetch(BASE_CINEMA_URL + `/movies/${cinemaRoomId}`, {
+        const response = await fetch(BASE_CINEMA_URL + `/movies/admin/${cinemaRoomId}`, {
             method: 'POST',
             body: JSON.stringify(movie),
             headers: {
@@ -55,11 +58,12 @@ const CreateMovie = (props) => {
         })
 
         if (!response.ok) {
-            setCreateMovieResponse({error: true})
+            setCreateMovieResponse({correct: false, error: true})
             return
         }
-
-        setCreateMovieResponse({correct: true})
+        prices.push(ticketPrice.finalObj)
+        localStorage.setItem('prices', JSON.stringify(prices))
+        setCreateMovieResponse({correct: true, error: false})
         setChange(true)
         return await response.json();
     }
@@ -75,7 +79,7 @@ const CreateMovie = (props) => {
             seances
         }
 
-        addMovie(mergedMovie, cinemaRoomData.id)
+        addMovie(mergedMovie, cinemaRoomData.id).catch(err => console.log(err))
         setMovieData({
             title: '',
             genre: '',
@@ -85,16 +89,11 @@ const CreateMovie = (props) => {
         setSeances([])
     }
 
-    const handleChange = e => {
-        if (e.target.id === 'title') {
-            setMovieData({title: e.target.value})
-        } else if (e.target.id === 'genre') {
-            setMovieData({genre: e.target.value})
-        } else if (e.target.id === 'duration') {
-            setMovieData({duration: e.target.value})
-        } else if (e.target.id === 'releaseDate') {
-            setMovieData({releaseDate: e.target.value})
-        }
+    const handleMovieChange = e => {
+        const newMovie = {...movieData}
+        newMovie[e.target.id] = e.target.value
+
+        setMovieData(newMovie)
     }
 
     const handleSeanceChange = e => {
@@ -102,6 +101,14 @@ const CreateMovie = (props) => {
 
         newSeance[e.target.id] = e.target.value
         setSeanceSingleObject(newSeance)
+    }
+
+    const handlePriceChange = e => {
+        setTicketPrice({
+            movieTitle: movieData.title,
+            price: e.target.value,
+            finalObj: movieData.title + '.' + e.target.value
+        })
     }
 
     const onSelectChange = (e) => {
@@ -124,7 +131,6 @@ const CreateMovie = (props) => {
                                 className="form form__add-cinema">
                                 <label htmlFor="cinema-rooms">Cinema room</label>
                                 <Select className='react-select react-select__update' name=""
-                                        defaultValue={options[0]}
                                         options={options}
                                         onChange={onSelectChange}
                                         id='cinema-rooms'
@@ -133,14 +139,14 @@ const CreateMovie = (props) => {
                                 <label htmlFor="title">Title</label>
                                 <input className='primary-input popup__input'
                                        type="text" id='title'
-                                       onChange={handleChange}
+                                       onChange={handleMovieChange}
                                        value={movieData.title}
                                        required={true}
                                 />
                                 <label htmlFor="city">Genre</label>
                                 <input className='primary-input popup__input'
                                        type="text" id='genre'
-                                       onChange={handleChange}
+                                       onChange={handleMovieChange}
                                        value={movieData.genre}
                                        required={true}
                                 />
@@ -148,7 +154,7 @@ const CreateMovie = (props) => {
 
                                 <input className='primary-input popup__input'
                                        type="number" id='duration'
-                                       onChange={handleChange}
+                                       onChange={handleMovieChange}
                                        value={movieData.duration}
                                        placeholder='in mins, e.g. 150'
                                        required={true}
@@ -157,7 +163,7 @@ const CreateMovie = (props) => {
                                 <label htmlFor="number">Release date</label>
                                 <input className='primary-input popup__input'
                                        type="text" id='releaseDate'
-                                       onChange={handleChange}
+                                       onChange={handleMovieChange}
                                        value={movieData.releaseDate}
                                        placeholder='yyyy-mm-dd'
                                        required={true}
@@ -171,6 +177,14 @@ const CreateMovie = (props) => {
                                        placeholder='yyyy-mm-dd'
                                        required={true}
                                 />
+
+                                <label htmlFor="name">Ticket price</label>
+                                <input className='primary-input popup__input'
+                                       type="text" id='price'
+                                       onChange={handlePriceChange}
+                                       value={ticketPrice.price}
+                                       required={true}
+                                />
                                 <input className='popup__input--submit'
                                        type="submit"
                                        id='submit'
@@ -179,38 +193,38 @@ const CreateMovie = (props) => {
                             </form>
                         </div>
                     </div>
-                </div>
-            }
-            {
-                createMovieResponse.error &&
-                <div className='error-statement'>
-                    <div className='error-statement__top-section'>
-                        <h3 className='heading-tertiary'>Something went wrong</h3>
-                        <span className='error-statement__icon'><ImSad/></span>
-                    </div>
-                    <div className='error-statement__bottom-section'>
-                        <button
-                            onClick={() => setCreateMovieResponse({error: false})}
-                            className='error-statement__btn'>
-                            Ok
-                        </button>
-                    </div>
-                </div>
-            }
-            {
-                createMovieResponse.correct &&
-                <div className='correct-statement'>
-                    <div className='correct-statement__top-section'>
-                        <h3 className='heading-tertiary'>Movie has been added</h3>
-                        <span className='correct-statement__icon'><ImHappy/></span>
-                    </div>
-                    <div className='correct-statement__bottom-section'>
-                        <button
-                            onClick={() => setCreateMovieResponse({correct: false})}
-                            className='correct-statement__btn'>
-                            Ok
-                        </button>
-                    </div>
+                    {
+                        createMovieResponse.error &&
+                        <div className='error-statement'>
+                            <div className='error-statement__top-section'>
+                                <h3 className='heading-tertiary'>Something went wrong</h3>
+                                <span className='error-statement__icon'><ImSad/></span>
+                            </div>
+                            <div className='error-statement__bottom-section'>
+                                <button
+                                    onClick={() => setCreateMovieResponse({error: false})}
+                                    className='error-statement__btn'>
+                                    Ok
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    {
+                        createMovieResponse.correct &&
+                        <div className='correct-statement'>
+                            <div className='correct-statement__top-section'>
+                                <h3 className='heading-tertiary'>Movie has been added</h3>
+                                <span className='correct-statement__icon'><ImHappy/></span>
+                            </div>
+                            <div className='correct-statement__bottom-section'>
+                                <button
+                                    onClick={() => setCreateMovieResponse({correct: false})}
+                                    className='correct-statement__btn'>
+                                    Ok
+                                </button>
+                            </div>
+                        </div>
+                    }
                 </div>
             }
         </div>

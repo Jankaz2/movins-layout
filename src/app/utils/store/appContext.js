@@ -16,7 +16,9 @@ export const DataContext = createContext({
     setUser: () => {
     },
     id: '',
-    setId: () => ''
+    setId: () => '',
+    ticketPrices: [],
+    setTicketPrices: () => []
 })
 
 export const AppContext = props => {
@@ -35,6 +37,8 @@ export const AppContext = props => {
     const userIsLoggedIn = !!token
     const [user, setUser] = useState({})
     const [id, setId] = useState('')
+    const [ticketPrices, setTicketPrices] = useState([])
+   // localStorage.setItem('prices', JSON.stringify(ticketPrices))
 
     let logoutTimer
 
@@ -100,6 +104,7 @@ export const AppContext = props => {
             loginBox, setLoginBox,
             cinemaId, setCinemaId,
             loader, showLoader, hideLoader,
+            ticketPrices: [], setTicketPrices: () => [],
             authContextValue
         }}>
             {props.children}
