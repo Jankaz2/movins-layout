@@ -132,43 +132,48 @@ const MyAccount = () => {
                 </div>
             }
             {
-                showTickets &&
-                <ul className='my-account__tickets'>
-                    {
-                        tickets.map(ticket => {
-                            return (
-                                <li className='my-account__tickets__single-ticket'>
-                                    <div className='row'>
-                                        <h3 className={`heading-tertiary__${ticket.purchaseDate <= ticket.seance.date ? 'active' : 'inactive'}`}>
-                                            {ticket.purchaseDate <= ticket.seance.date ? 'active' : 'inactive'}
-                                        </h3>
-                                        <div className='col-1-of-2'>
-                                            <h3 className='heading-tertiary'>Title</h3>
-                                            <h3 className='heading-secondary__name u-margin-bottom-tiny'>{ticket.seance.movie.title}</h3>
-                                            <h3 className='heading-tertiary__blue'>Genre:</h3>
-                                            <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.seance.movie.genre}</h3>
-                                            <h3 className='heading-tertiary__blue'>Show date:</h3>
-                                            <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.seance.date}</h3>
-                                            <h3 className='heading-tertiary__blue'>Duration:</h3>
-                                            <h3 className='heading-tertiary'>{ticket.seance.movie.duration} minutes</h3>
-                                        </div>
-                                        <div className='col-1-of-2'>
-                                            <h3 className='heading-tertiary__blue u-margin-top-very-tiny'>Purchase
-                                                date:</h3>
-                                            <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.purchaseDate}</h3>
-                                            <h3 className='heading-tertiary__blue'>Price:</h3>
-                                            <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.price}</h3>
-                                            <h3 className='heading-tertiary__blue'>Days to show:</h3>
-                                             <h3 className='heading-tertiary u-margin-bottom-tiny'>
-                                                {differenceInDays(ticket.seance.date) > 0 ? differenceInDays(ticket.seance.date) : 'SHOW HAS BEEN DONE'}
+                showTickets && tickets.length > 0 ?
+                    <ul className='my-account__tickets'>
+                        {
+                            tickets.map(ticket => {
+                                return (
+                                    <li className='my-account__tickets__single-ticket'>
+                                        <div className='row'>
+                                            <h3 className={`heading-tertiary__${ticket.purchaseDate <= ticket.seance.date ? 'active' : 'inactive'}`}>
+                                                {ticket.purchaseDate <= ticket.seance.date ? 'active' : 'inactive'}
                                             </h3>
+                                            <div className='col-1-of-2'>
+                                                <h3 className='heading-tertiary'>Title</h3>
+                                                <h3 className='heading-secondary__name u-margin-bottom-tiny'>{ticket.seance.movie.title}</h3>
+                                                <h3 className='heading-tertiary__blue'>Genre:</h3>
+                                                <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.seance.movie.genre}</h3>
+                                                <h3 className='heading-tertiary__blue'>Show date:</h3>
+                                                <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.seance.date}</h3>
+                                                <h3 className='heading-tertiary__blue'>Duration:</h3>
+                                                <h3 className='heading-tertiary'>{ticket.seance.movie.duration} minutes</h3>
+                                            </div>
+                                            <div className='col-1-of-2'>
+                                                <h3 className='heading-tertiary__blue u-margin-top-very-tiny'>Purchase
+                                                    date:</h3>
+                                                <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.purchaseDate}</h3>
+                                                <h3 className='heading-tertiary__blue'>Price:</h3>
+                                                <h3 className='heading-tertiary u-margin-bottom-tiny'>{ticket.price}</h3>
+                                                <h3 className='heading-tertiary__blue'>Days to show:</h3>
+                                                <h3 className='heading-tertiary u-margin-bottom-tiny'>
+                                                    {differenceInDays(ticket.seance.date) > 0 ? differenceInDays(ticket.seance.date) : 'SHOW HAS BEEN DONE'}
+                                                </h3>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                    : showTickets &&
+                    <div className='error-404'>
+                        <h1 className='error-404__text'>You have not bought any tickets yet</h1>
+                    </div>
+
             }
             {
                 showUserData &&
