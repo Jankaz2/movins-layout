@@ -58,7 +58,7 @@ const Navigation = () => {
     })
 
     const goToMyAccount = e => {
-        history.replace("/my-account")
+        history.push("/my-account")
     }
 
     return (

@@ -10,7 +10,6 @@ import MyAccount from "./user/pages/user_account/components/myAccount";
 import UserActivation from "./utils/pages/components/userActivation";
 import EmailVerification from "./utils/pages/components/emailVerification";
 import Main from "./utils/pages/main";
-import {DataContext} from "./utils/store/appContext";
 
 function App() {
     return (

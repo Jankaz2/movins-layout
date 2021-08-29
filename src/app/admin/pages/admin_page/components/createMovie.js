@@ -21,7 +21,6 @@ const CreateMovie = (props) => {
     const [cinemaRooms, setCinemaRooms] = useState([])
     const [cinemaRoomData, setCinemaRoomData] = useState({name: '', id: null})
     const [ticketPrice, setTicketPrice] = useState({movieTile: '', price: '', finalObj: ''})
-    const [showLoader, hideLoader] = useLoadPage()
 
     const {change, setChange} = useContext(DataContext)
 

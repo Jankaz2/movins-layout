@@ -228,7 +228,7 @@ const LoginBox = (props) => {
                                     <form className='login__box--signup-box--form'
                                           onSubmit={e => {
                                               register(e)
-                                              isOkRegister && history.push("/user/verification")
+                                              isOkRegister && history.push("/users/verification")
                                           }}
                                     >
                                         {

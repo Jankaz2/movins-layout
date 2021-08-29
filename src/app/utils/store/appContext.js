@@ -38,12 +38,12 @@ export const AppContext = props => {
     const [user, setUser] = useState({})
     const [id, setId] = useState('')
     const [ticketPrices, setTicketPrices] = useState([])
-   // localStorage.setItem('prices', JSON.stringify(ticketPrices))
 
     let logoutTimer
 
     const logoutHandler = () => {
         setToken(null)
+        setRefreshToken(null)
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
         localStorage.removeItem('expirationTime')
@@ -56,6 +56,7 @@ export const AppContext = props => {
 
     const loginHandler = (token, expirationTime, refreshToken) => {
         setToken(token)
+        setRefreshToken(refreshToken)
 
         localStorage.setItem('token', token)
         localStorage.setItem('expirationTime', expirationTime)
