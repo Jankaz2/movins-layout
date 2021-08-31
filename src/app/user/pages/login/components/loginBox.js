@@ -133,7 +133,7 @@ const LoginBox = (props) => {
                 'Content-Type': 'application/json'
             }
         })
-        
+
         hideLoader()
 
         if (response.ok) {
@@ -168,13 +168,14 @@ const LoginBox = (props) => {
             }
         })
 
-        if (!response.ok) {
-            setIsOkRegister(false)
-            return false
+        if (response.ok) {
+            setIsOkRegister(true)
+            setChange(true)
+            history.push("/users/verification")
+            return await response.json();
         }
 
-        setChange(true)
-        return await response.json();
+        setIsOkRegister(false)
     }
 
     return (
@@ -226,11 +227,7 @@ const LoginBox = (props) => {
                                     className={`${width <= 900 && showCreateAccount ? 'show-div' : width <= 900 ? 'hide-div' : ''} 
                                     login__box--signup-box`}>
                                     <form className='login__box--signup-box--form'
-                                          onSubmit={e => {
-                                              register(e)
-                                              isOkRegister && history.push("/users/verification")
-                                          }}
-                                    >
+                                          onSubmit={register}>
                                         {
                                             errorRegister.username && userDataRegisterFocused.usernameFocused ?
                                                 <p className='error-message'>
@@ -334,12 +331,17 @@ const LoginBox = (props) => {
                         {
                             !isOkRegister &&
                             <div className='error-statement'>
-                                <h3 className='heading-tertiary'>Sorry, we cannot register you</h3>
-                                <button
-                                    onClick={() => setIsOkRegister(true)}
-                                    className='error-statement__btn'>
-                                    Try again
-                                </button>
+                                <div className='error-statement__top-section'>
+                                    <h3 className='heading-tertiary'>Something went wrong, we cannot register you</h3>
+                                    <span className='error-statement__icon'><ImSad/></span>
+                                </div>
+                                <div className='error-statement__bottom-section'>
+                                    <button
+                                        onClick={() => setIsOkRegister(true)}
+                                        className='error-statement__btn'>
+                                        Ok
+                                    </button>
+                                </div>
                             </div>
                         }
                     </div>
