@@ -8,15 +8,6 @@ function Cinema(props) {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
     const {cinemaId, change, setChange, loader, showLoader, hideLoader, authContextValue} = useContext(DataContext)
     const userId = authContextValue.id
-    const parsedPrices = []
-
-    JSON.parse(localStorage.getItem('prices'))
-        .forEach(price => {
-            const title = price.split(".")[0]
-            const ticketPrice = price.split(".")[1]
-            parsedPrices.push({title: title, ticketPrice: ticketPrice})
-        })
-
 
     const [showBuyTicketSection, setShowBuyTicketSection] = useState(false)
     const [cinema, setCinema] = useState({})
@@ -28,6 +19,7 @@ function Cinema(props) {
         seance: null,
         ticketPrice: 0
     })
+    const [price, setPrice] = useState(0)
 
     const showOnClick = () => setShowBuyTicketSection(true)
     const hideOnClick = () => setShowBuyTicketSection(false)
@@ -106,12 +98,6 @@ function Cinema(props) {
         return ((Math.random() * (max - min + 1)) + min).toFixed(2)
     }
 
-    let finalTicketPrice = 0
-    const getPriceOrGenerate = title => {
-        parsedPrices.filter(object => object.title === title ? finalTicketPrice = object.ticketPrice : finalTicketPrice = 0)
-        return finalTicketPrice !== 0 ? finalTicketPrice : generatePrice(20, 40)
-    }
-
     return (
         <div className='cinema__page'>
             <span className='cinema__page--back'
@@ -150,7 +136,7 @@ function Cinema(props) {
                                                         <h3 className='heading-tertiary__blue'>Places:</h3>
                                                         <h3 className='heading-tertiary u-margin-bottom-tiny'>{seance.cinemaRoom.places}</h3>
                                                         <h3 className='heading-tertiary__blue'>Price:</h3>
-                                                        <h3 className='heading-tertiary u-margin-bottom-tiny'>{getPriceOrGenerate(seance.movie.title)}</h3>
+                                                        <h3 className='heading-tertiary u-margin-bottom-tiny'>{generatePrice(10, 50)}</h3>
                                                         <button
                                                             className='buy__ticket--section__btn'
                                                             onClick={() => {
@@ -158,7 +144,7 @@ function Cinema(props) {
                                                                     rows: seance.cinemaRoom.rows,
                                                                     places: seance.cinemaRoom.places,
                                                                     seance: seance,
-                                                                    ticketPrice: finalTicketPrice
+                                                                   // ticketPrice: price
                                                                 })
                                                                 showOnClick()
                                                             }}>
@@ -171,7 +157,7 @@ function Cinema(props) {
                                                                         rows={transferData.rows}
                                                                         places={transferData.places}
                                                                         seance={transferData.seance}
-                                                                        ticketPrice={transferData.ticketPrice}
+                                                                        ticketPrice={0}
                                                                         array={generateArray(transferData.rows, transferData.places)}
                                                                         closePopup={hideOnClick}/>
                                                                     : null

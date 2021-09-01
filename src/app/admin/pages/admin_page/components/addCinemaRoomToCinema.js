@@ -64,7 +64,7 @@ const AddCinemaRoomToCinema = (props) => {
         const cinemaRooms = []
         cinemaRooms.push(cinemaRoom)
 
-        const response = await fetch(BASE_CINEMA_URL + `/${cinemaName}`,
+        const response = await fetch(BASE_CINEMA_URL + `/admin/${cinemaName}`,
             {
                 method: 'PATCH',
                 body: JSON.stringify(cinemaRooms),

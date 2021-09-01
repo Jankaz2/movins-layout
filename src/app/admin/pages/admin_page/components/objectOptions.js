@@ -14,7 +14,7 @@ const ObjectOptions = props => {
     console.log(props.showOptions)
     console.log(props.showUserOptions)
     const deleteCinema = async (cinemaId) => {
-        const response = await fetch(BASE_CINEMA_URL + `/${cinemaId}`,
+        const response = await fetch(BASE_CINEMA_URL + `/admin/${cinemaId}`,
             {method: 'DELETE'})
 
         if (!response.ok) {

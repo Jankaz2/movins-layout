@@ -24,7 +24,7 @@ const UpdateCinema = props => {
     })
 
     const updateCinema = async (name, cinema) => {
-        const response = await fetch(BASE_CINEMA_URL + `/${name}`, {
+        const response = await fetch(BASE_CINEMA_URL + `/admin/${name}`, {
             method: 'PUT',
             body: JSON.stringify(cinema),
             headers: {

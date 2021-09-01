@@ -7,8 +7,6 @@ import {ImHappy, ImSad} from "react-icons/im";
 const CreateMovie = (props) => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
-    const prices = JSON.parse(localStorage.getItem('prices'))
-
     const [createMovieResponse, setCreateMovieResponse] = useState({correct: false, error: false})
     const [movieData, setMovieData] = useState({
         title: '',
@@ -20,7 +18,6 @@ const CreateMovie = (props) => {
     const [seanceSingleObject, setSeanceSingleObject] = useState({date: ''})
     const [cinemaRooms, setCinemaRooms] = useState([])
     const [cinemaRoomData, setCinemaRoomData] = useState({name: '', id: null})
-    const [ticketPrice, setTicketPrice] = useState({movieTile: '', price: '', finalObj: ''})
 
     const {change, setChange} = useContext(DataContext)
 
@@ -60,8 +57,6 @@ const CreateMovie = (props) => {
             setCreateMovieResponse({correct: false, error: true})
             return
         }
-        prices.push(ticketPrice.finalObj)
-        localStorage.setItem('prices', JSON.stringify(prices))
         setCreateMovieResponse({correct: true, error: false})
         setChange(true)
         return await response.json();
@@ -100,14 +95,6 @@ const CreateMovie = (props) => {
 
         newSeance[e.target.id] = e.target.value
         setSeanceSingleObject(newSeance)
-    }
-
-    const handlePriceChange = e => {
-        setTicketPrice({
-            movieTitle: movieData.title,
-            price: e.target.value,
-            finalObj: movieData.title + '.' + e.target.value
-        })
     }
 
     const onSelectChange = (e) => {
@@ -177,13 +164,6 @@ const CreateMovie = (props) => {
                                        required={true}
                                 />
 
-                                <label htmlFor="name">Ticket price</label>
-                                <input className='primary-input popup__input'
-                                       type="text" id='price'
-                                       onChange={handlePriceChange}
-                                       value={ticketPrice.price}
-                                       required={true}
-                                />
                                 <input className='popup__input--submit'
                                        type="submit"
                                        id='submit'
