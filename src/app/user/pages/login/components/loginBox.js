@@ -232,7 +232,7 @@ const LoginBox = (props) => {
                                             errorRegister.username && userDataRegisterFocused.usernameFocused ?
                                                 <p className='error-message'>
                                                     Length must be greater than 3<br/>
-                                                    Syntax must be:/^[A-Za-z]+[0-9]{0 + ',' + 4}$/
+                                                    Only letters and numbers
                                                 </p> : null
                                         }
                                         <input className='signup-form-input primary-input' type="text"
