@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import HeaderCss from '../styles/header.scss'
 import MainScss from '../../../../../styles/scss/main.scss'
-import Select from "react-select";
 import {useHistory} from "react-router-dom";
 import {Link} from "react-scroll"
 import StepsSection from "../../steps_section/components/stepsSection";
@@ -150,89 +149,6 @@ const Navigation = () => {
                     </div>
                 }
             </nav>
-            {
-                window.scrollY <= 120 &&
-                <div className='sticky__display'>
-                    <div className='sticky__navigation'>
-                        <input type="checkbox" className="sticky__navigation__checkbox" id="navi-toggle"/>
-                        <label htmlFor="navi-toggle" className="sticky__navigation__button">
-                            <span className="sticky__navigation__icon">&nbsp;</span>
-                        </label>
-                        <div className="sticky__navigation__background">&nbsp;</div>
-
-                        <nav className="sticky__navigation__nav">
-                            <ul className="sticky__navigation__list">
-
-                                <li className="sticky__navigation__item">
-                                    <Link to="steps-section"
-                                          spy={true} smooth={true}
-                                          offset={-60}
-                                          duration={50}>
-                                        <a href="" className="sticky__navigation__link">How it works</a>
-                                    </Link>
-                                </li>
-
-                                {
-                                    !authContextValue.isLoggedIn ?
-                                        <li className="sticky__navigation__item">
-                                            <a href="" className="sticky__navigation__link">Log in</a>
-                                        </li>
-                                        :
-                                        <li className="sticky__navigation__item">
-                                            <a href="" className="sticky__navigation__link"
-                                               onClick={goToMyAccount}>My account</a>
-                                        </li>
-                                }
-                                <li className="sticky__navigation__item">
-                                    <Link to="about-us-section"
-                                          spy={true} smooth={true}
-                                          offset={-60}
-                                          duration={500}>
-                                        <a href="" className="sticky__navigation__link">About us</a>
-                                    </Link>
-                                </li>
-
-                                <li className="sticky__navigation__item">
-                                    <Link to="reviews-section"
-                                          spy={true} smooth={true}
-                                          offset={-60}
-                                          duration={500}>
-                                        <a href="" className="sticky__navigation__link">Reviews</a>
-                                    </Link>
-                                </li>
-
-                                <li className="sticky__navigation__item">
-                                    <li className="sticky__navigation__item">
-                                        <Link to="contact-us-section"
-                                              spy={true} smooth={true}
-                                              offset={-60}
-                                              duration={500}>
-                                            <a href="" className="sticky__navigation__link">Contact</a>
-                                        </Link>
-                                    </li>
-                                </li>
-
-                                {
-                                    authContextValue.isLoggedIn &&
-                                    <li className="sticky__navigation__item">
-                                        <li className="sticky__navigation__item">
-                                            <Link to="contact-us-section"
-                                                  spy={true} smooth={true}
-                                                  offset={-60}
-                                                  duration={500}>
-                                                <a href="" className="sticky__navigation__link"
-                                                   onClick={() => {
-                                                       authContextValue.logout()
-                                                   }}>Logout</a>
-                                            </Link>
-                                        </li>
-                                    </li>
-                                }
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            }
         </div>
     )
 }

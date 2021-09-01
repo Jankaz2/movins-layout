@@ -3,10 +3,12 @@ import {useHistory} from "react-router-dom";
 import StickyNavigationCss from "../styles/stickyNavigation.scss"
 import {Link} from "react-scroll";
 import {DataContext} from "../../../../../utils/store/appContext";
+import useWindowSize from "../../../../../utils/hooks/useWindowSize";
 
 const StickyNavigation = () => {
     const [isSticky, setIsSticky] = useState(false)
     const {authContextValue} = useContext(DataContext)
+    const size = useWindowSize()
 
     const handleScroll = () => {
         if (window.scrollY > 120) {
@@ -31,7 +33,7 @@ const StickyNavigation = () => {
     return (
         <div>
             {
-                isSticky &&
+                (isSticky || size.width <= 1050) &&
                 <div className='sticky__navigation'>
                     <input type="checkbox" className="sticky__navigation__checkbox" id="navi-toggle"/>
                     <label htmlFor="navi-toggle" className="sticky__navigation__button">
