@@ -1,7 +1,5 @@
 import React, {useContext, useEffect, useState} from "react"
-import {useHistory} from "react-router-dom";
 import BuyTicketSection from "./buyTicketPopup";
-import CinemaCss from "../styles/cinema.scss"
 import {DataContext} from "../../../../../utils/store/appContext";
 
 function Cinema(props) {
@@ -19,7 +17,6 @@ function Cinema(props) {
         seance: null,
         ticketPrice: 0
     })
-    const [price, setPrice] = useState(0)
 
     const showOnClick = () => setShowBuyTicketSection(true)
     const hideOnClick = () => setShowBuyTicketSection(false)
@@ -94,8 +91,10 @@ function Cinema(props) {
         return finalArray
     }
 
+    let ticketPrice
     const generatePrice = (min, max) => {
-        return ((Math.random() * (max - min + 1)) + min).toFixed(2)
+        ticketPrice = ((Math.random() * (max - min + 1)) + min).toFixed(2)
+        return ticketPrice
     }
 
     return (
@@ -144,7 +143,7 @@ function Cinema(props) {
                                                                     rows: seance.cinemaRoom.rows,
                                                                     places: seance.cinemaRoom.places,
                                                                     seance: seance,
-                                                                   // ticketPrice: price
+                                                                    ticketPrice: ticketPrice
                                                                 })
                                                                 showOnClick()
                                                             }}>
@@ -157,7 +156,7 @@ function Cinema(props) {
                                                                         rows={transferData.rows}
                                                                         places={transferData.places}
                                                                         seance={transferData.seance}
-                                                                        ticketPrice={0}
+                                                                        ticketPrice={ticketPrice}
                                                                         array={generateArray(transferData.rows, transferData.places)}
                                                                         closePopup={hideOnClick}/>
                                                                     : null
