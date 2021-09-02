@@ -1,21 +1,27 @@
 @import "../../../styles/scss/utils/variables";
 @import "../../../styles/scss/utils/mixins";
 
-.email-verification__check-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 15rem;
-  font-size: 10rem;
-  color: $color-green;
-  padding: 1rem 2rem;
+.email-verification {
+  position: relative;
+  height: 100vh;
+  text-align: center;
 
-  @include respond(tab-port) {
-    margin-top: 20rem;
-  }
+  &__check-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 15rem;
+    font-size: 10rem;
+    color: $color-green;
+    padding: 1rem 2rem;
 
-  @include respond(phone) {
-    margin-top: 23rem;
+    @include respond(tab-port) {
+      margin-top: 20rem;
+    }
+
+    @include respond(phone) {
+      margin-top: 23rem;
+    }
   }
 }
