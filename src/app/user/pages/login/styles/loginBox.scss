@@ -41,12 +41,24 @@
     }
   }
 
+  &--forgot-password-link {
+    margin-left: 18rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @include respond(tab-port) {
+      margin-left: 16rem;
+    }
+  }
+
   &--boxes {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 75%;
-    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    border: 1px solid $color-grey-dark;
 
     @include respond(tab-port-land) {
       width: 80%;
@@ -55,12 +67,12 @@
     @include respond(tab-port) {
       width: 100%;
       padding: 0;
-      box-shadow: none;
     }
 
     @include respond(phone) {
       width: 100%;
     }
+
 
     transform: translate(-50%, -50%);
     border-radius: .5rem;
@@ -92,11 +104,11 @@
 
         @include respond(tab-port) {
           opacity: 1;
-          margin-left: 11rem;
+          margin-left: 14rem;
         }
 
         @include respond(phone) {
-          margin-left: 11rem;
+          margin-left: 13rem;
         }
       }
     }
@@ -105,7 +117,7 @@
       display: block;
       font-size: 3.5rem !important;
       padding-left: 11rem;
-      padding-top: 4rem;
+      padding-top: 3.64rem;
 
       @include respond(tab-port) {
         padding-left: 11rem;
@@ -118,11 +130,6 @@
   }
 
   &--login-box {
-
-    @include respond(tab-port){
-      border: 1px solid $color-grey-light-3;
-    }
-
     .error-message {
       margin-left: 11rem;
     }
@@ -175,12 +182,11 @@
                     rgba($color-blue-light, 0.8),
                     rgba($color-blue-dark, 0.8)),
     url("../../../../assets/images/background-login.png");
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding: 10rem 0;
+    padding: 11rem 0;
 
     @include respond(tab-port) {
       display: none;
+      height: 100%;
     }
 
     @include respond(phone) {
@@ -203,11 +209,11 @@
         border: 1px solid $color-grey-light-2;
         border-radius: 10rem;
 
-        @include respond(tab-port){
+        @include respond(tab-port) {
           width: 60%;
         }
 
-        @include respond(phone){
+        @include respond(phone) {
           width: 85%;
         }
 
@@ -231,11 +237,11 @@
             cursor: pointer;
           }
 
-          @include respond(tab-port){
+          @include respond(tab-port) {
             width: 60%;
           }
 
-          @include respond(phone){
+          @include respond(phone) {
             width: 85%;
           }
         }

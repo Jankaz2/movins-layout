@@ -178,6 +178,10 @@ const LoginBox = (props) => {
         setIsOkRegister(false)
     }
 
+    const goToForgotPasswordPage = () => {
+        history.push('/forgot-password')
+    }
+
     return (
         <div>
             {
@@ -215,7 +219,11 @@ const LoginBox = (props) => {
                                                id='password'/>
                                         <input className='login-form-input-submit primary-input' type="submit"
                                                value="Login"/>
+                                        <span className='login__box--boxes__subtext--register-link login__box--forgot-password-link'
+                                              onClick={goToForgotPasswordPage}
+                                        >Forgot your password? &rarr;</span>
                                     </form>
+
                                     <p className='login__box--boxes__subtext--register'>New user?&nbsp;
                                         <span className='login__box--boxes__subtext--register-link'
                                               onClick={() => setShowCreateAccount(true)}
