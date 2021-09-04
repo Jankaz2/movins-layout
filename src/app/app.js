@@ -8,6 +8,7 @@ import AdminPage from "./admin/pages/admin_page/adminPage";
 import PageNotFound from "./utils/pages/components/pageNotFound";
 import MyAccount from "./user/pages/user_account/components/myAccount";
 import EmailVerification from "./utils/pages/components/emailVerification";
+import ForgotPassword from "./utils/pages/components/forgotPassword";
 import Main from "./utils/pages/main";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/cinema-list" exact component={CinemasList}/>
                 <Route path="/cinema-list/cinema/:id" exact component={Cinema}/>
                 <Route path="/users/verification" component={EmailVerification}/>
+                <Route path="/forgot-password" exact component={ForgotPassword}/>
                 <Route path="/" exact component={HomePage}/>
                 <Route path="/admin" exact component={AdminPage}/>
                 <Route path="/my-account" exact component={MyAccount}/>
