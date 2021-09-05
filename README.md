@@ -1,13 +1,13 @@
 # Movins
 
-## Table of contents
+## Table of contents :notebook:
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Installation](#installation)
 * [Graphical Representation](#pictures)
 ***
 
-## General info
+## General info :information_source:
 
 The aim of this application is to help the user find his favourite cinema 
 (if it exists in our database), check what seances this cinema currently shows and book 
@@ -19,7 +19,7 @@ I decided to create this application to better understand the concept of commerc
 programs and get better at `React` library. I also mastered `SASS` and `HTML`  
 
 ***
-## Technologies
+## Technologies :computer:
 
 - JavaScript
 - React 17.0.2
@@ -29,7 +29,7 @@ programs and get better at `React` library. I also mastered `SASS` and `HTML`
 
 ***
 
-## Installation
+## Installation :hammer:
 To run this project locally after you clone this `repository`, all you need to do is to follow these few steps
 ```angular2html
 $ npm install
@@ -37,7 +37,7 @@ $ npm run build
 $ npm start
 ```
 
-## Pictures
+## Pictures :framed_picture:
 
 It is graphical representation of some examples of use.
 
