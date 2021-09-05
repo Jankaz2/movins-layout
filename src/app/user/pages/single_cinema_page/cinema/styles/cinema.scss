@@ -68,24 +68,30 @@
 }
 
 .buy__ticket--section {
-
   &__places {
     text-align: center;
   }
 
   &__table {
+    position: relative;
+    display: flex;
     border-collapse: collapse;
     font-weight: 700;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2rem;
+    overflow-y: auto;
 
     @include respond(tab-port){
       display: flex;
-      overflow: scroll;
+      overflow-x: scroll;
+      overflow-y: scroll;
     }
 
     &__body {
+      max-height: 35rem;
+      display: block;
+      overflow-y: scroll;
       margin-left: auto;
       margin-right: auto;
     }
