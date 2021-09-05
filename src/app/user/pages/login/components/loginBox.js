@@ -3,10 +3,12 @@ import {useHistory} from 'react-router-dom'
 import {DataContext} from "../../../../utils/store/appContext";
 import LoginBoxScss from '../styles/loginBox.scss'
 import {ImSad} from "react-icons/im";
+import useWindowSize from "../../../../utils/hooks/useWindowSize";
 
 const LoginBox = (props) => {
     const BASE_URL = 'http://localhost:5000'
     const history = useHistory()
+    const size = useWindowSize()
 
     const {
         loginBox,
@@ -194,9 +196,9 @@ const LoginBox = (props) => {
                               onClick={() => setLoginBox(false)}
                         >&#10005;</span>
                         <div className="row login__box--boxes">
-                            <div className='col-1-of-2'>
+                            <div className={`col-1-of-2 ${width <= 900 && showCreateAccount ? 'hide-div' : 'show-div'}`}>
                                 <div
-                                    className={`${width <= 900 && showCreateAccount ? 'hide-div' : 'show-div'} login__box--login-box`}>
+                                    className={`login__box--login-box`}>
                                     <h3 className='login__box--boxes__text heading-tertiary__blue'>Movins</h3>
                                     <p className='login__box--boxes__subtext'>Book tickets and manage your account!</p>
 
