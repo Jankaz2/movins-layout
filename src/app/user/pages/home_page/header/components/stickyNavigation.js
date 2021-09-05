@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
-import {useHistory} from "react-router-dom";
 import StickyNavigationCss from "../styles/stickyNavigation.scss"
 import {Link} from "react-scroll";
+import {Link as LinkTo} from "react-router-dom"
 import {DataContext} from "../../../../../utils/store/appContext";
 import useWindowSize from "../../../../../utils/hooks/useWindowSize";
 
@@ -25,10 +25,6 @@ const StickyNavigation = () => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
     })
-
-    const goToMyAccount = e => {
-        history.replace("/my-account")
-    }
 
     return (
         <div>
@@ -62,11 +58,11 @@ const StickyNavigation = () => {
                                     </li>
                                     :
                                     <li className="sticky__navigation__item">
-                                        <a href="" className="sticky__navigation__link"
-                                           onClick={() => {
-                                               setIsSticky(!isSticky)
-                                               goToMyAccount()
-                                           }}>My account</a>
+                                        <LinkTo to="/my-account">
+                                            <a href="" className="sticky__navigation__link"
+                                               onClick={() => {setIsSticky(!isSticky)}}>My account
+                                            </a>
+                                        </LinkTo>
                                     </li>
 
                             }
