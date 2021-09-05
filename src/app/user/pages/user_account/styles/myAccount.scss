@@ -12,6 +12,10 @@
     float: left;
     padding-left: 6rem;
     text-transform: uppercase;
+
+    @include respond(phone) {
+      display: none;
+    }
   }
 
   &__person-icon {
@@ -26,6 +30,16 @@
     width: 100%;
     padding: 4rem 1.5rem;
     border-bottom: 1px solid $color-grey-light-2;
+
+    &--sticky {
+      background-color: $color-black;
+    }
+
+    @include respond(phone) {
+      position: fixed;
+      z-index: 1000;
+      padding: 1rem 1rem;
+    }
   }
 
   &__options {
@@ -33,6 +47,10 @@
     width: 100%;
     padding: 1rem 8rem;
     margin: auto;
+
+    @include respond(phone) {
+      padding: 0.3rem 4rem;
+    }
 
     &--item {
       display: inline-block;
@@ -43,9 +61,18 @@
       padding: .5rem 0;
       float: right;
 
-
-      &:not(:last-child){
+      &:not(:last-child) {
         margin-left: 2rem;
+      }
+
+      @include respond(phone) {
+        float: none;
+        text-align: center;
+        color: $color-white;
+
+        &:last-child {
+          margin-left: 2rem;
+        }
       }
 
       &:active,
@@ -65,7 +92,13 @@
       float: right;
       border: 2px solid $color-pink;
 
-      &:not(:last-child){
+      @include respond(phone) {
+        display: block;
+        float: left;
+        margin-left: 10rem;
+      }
+
+      &:not(:last-child) {
         margin-left: 2rem;
       }
 

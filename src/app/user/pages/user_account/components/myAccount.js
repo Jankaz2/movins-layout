@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import {DataContext} from "../../../../utils/store/appContext";
 import MyAccountScss from "../styles/myAccount.scss"
 import {MdPerson} from 'react-icons/md'
+import useWindowSize from "../../../../utils/hooks/useWindowSize";
 
 const MyAccount = () => {
     const BASE_TICKETS_URL = 'http://localhost:5000/tickets'
@@ -15,6 +16,7 @@ const MyAccount = () => {
     const [showEntryMessage, setShowEntryMessage] = useState(true)
     const [userData, setUserData] = useState({})
     const [purchasedTickets, setPurchasedTickets] = useState(null)
+    const size = useWindowSize()
 
     const bearer = 'Bearer ' + authContextValue.refreshToken
     const userId = localStorage.getItem('id')
@@ -114,7 +116,7 @@ const MyAccount = () => {
 
     return (
         <div className='my-account'>
-            <nav className='my-account__nav'>
+            <nav className={`my-account__nav ${size.width <= 600 ? 'my-account__nav--sticky' : ''}`}>
                 <h2 className='my-account__text heading-tertiary__blue'>My account <span
                     className='my-account__person-icon'><MdPerson/></span></h2>
                 <ul className='my-account__options'>
@@ -126,6 +128,7 @@ const MyAccount = () => {
                         }}
                     >My tickets
                     </li>
+
                     <li className='my-account__options--item'
                         onClick={() => {
                             setShowEntryMessage(false)
@@ -134,10 +137,12 @@ const MyAccount = () => {
                         }}
                     >My data
                     </li>
-                    <li className='my-account__options--item--home'
+
+                    <li className={`my-account__options--item${size.width > 600 ? '--home' : ''}`}
                         onClick={() => history.replace('/')}
                     >Home
                     </li>
+
                     {
                         userData.role === 'ROLE_ADMIN' &&
                         <li className='my-account__options--item'
