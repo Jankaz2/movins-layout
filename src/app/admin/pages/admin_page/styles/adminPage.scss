@@ -10,6 +10,10 @@
   &__welcome-heading {
     text-transform: uppercase;
     font-weight: 400;
+
+    @include respond(phone) {
+        padding-top: 3.5rem;
+    }
   }
 }
 
@@ -85,6 +89,10 @@
 
     @include respond(phone) {
       width: 15rem;
+    }
+
+    @include respond(small-phone) {
+      width: 10rem;
     }
   }
 }

@@ -16,13 +16,20 @@
     color: $color-black;
     font-size: 4rem;
     transition: all .2s;
+    z-index: 10000;
 
     &:hover {
       cursor: pointer;
       font-size: 4.2rem;
     }
 
+    @include respond(tab-port) {
+      top: 1rem;
+      left: 1rem;
+    }
+
     @include respond(phone) {
+      top: .1rem;
       left: 3rem;
     }
   }
@@ -82,7 +89,7 @@
     margin-top: 2rem;
     overflow-y: auto;
 
-    @include respond(tab-port){
+    @include respond(tab-port) {
       display: flex;
       overflow-x: scroll;
       overflow-y: scroll;
