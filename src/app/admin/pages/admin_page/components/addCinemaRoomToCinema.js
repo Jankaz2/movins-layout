@@ -3,9 +3,8 @@ import Select from "react-select";
 import React, {useState, useContext} from 'react'
 import {ImHappy, ImSad} from "react-icons/im";
 
-const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
-
 const AddCinemaRoomToCinema = (props) => {
+    const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
     const [addCinemaRoomResponse, setAddCinemaRoomResponse] = useState({correct: false, error: false})
     const [error, setError] = useState({

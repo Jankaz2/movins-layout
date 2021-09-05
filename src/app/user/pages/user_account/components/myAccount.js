@@ -8,7 +8,7 @@ const MyAccount = () => {
     const BASE_TICKETS_URL = 'http://localhost:5000/tickets'
     const BASE_USERS_URL = 'http://localhost:5000/users'
     const history = useHistory()
-    const {setChange} = useContext(DataContext)
+    const {setChange, authContextValue} = useContext(DataContext)
     const [tickets, setTickets] = useState([])
     const [showTickets, setShowTickets] = useState(false)
     const [showUserData, setShowUserData] = useState(false)
@@ -16,6 +16,7 @@ const MyAccount = () => {
     const [userData, setUserData] = useState({})
     const [purchasedTickets, setPurchasedTickets] = useState(null)
 
+    const bearer = 'Bearer ' + authContextValue.refreshToken
     const userId = localStorage.getItem('id')
     const date = new Date()
     const timeInMs = date.getTime()
@@ -28,7 +29,15 @@ const MyAccount = () => {
     }
 
     const loadUserById = async () => {
-        const response = await fetch(BASE_USERS_URL + `/${userId}`)
+        const response = await fetch(BASE_USERS_URL + `/${userId}`, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(user => {
                 setUserData(user.data)

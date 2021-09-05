@@ -13,7 +13,7 @@ const AddNewAdminAccountPopup = (props) => {
         email: '',
         password: '',
         passwordConfirmation: '',
-        role: 'ADMIN'
+        role: 'ROLE_ADMIN'
     })
 
     const handleChange = e => {

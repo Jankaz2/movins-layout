@@ -6,23 +6,23 @@ const Main = (props) => {
     const {authContextValue} = useContext(DataContext)
 
     const refreshTokens = async () => {
-          if (authContextValue.token !== null) {
-              const refreshToken = authContextValue.refreshToken
-              const response = await fetch(BASE_URL + '/security/refresh-tokens', {
-                  method: 'POST',
-                  body: JSON.stringify({token: refreshToken}),
-                  headers: {
-                      'Content-Type': 'application/json'
-                  }
-              }).catch(err => console.log(err))
+        if (authContextValue.token !== null) {
+            const refreshToken = authContextValue.refreshToken
+            const response = await fetch(BASE_URL + '/security/refresh-tokens', {
+                method: 'POST',
+                body: JSON.stringify({token: refreshToken}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).catch(err => console.log(err))
 
-              return await response.json()
-          }
+            return await response.json()
+        }
     }
 
     return (
         <>
-            <main  onClick={refreshTokens}>{props.children}</main>
+            <main onClick={refreshTokens}>{props.children}</main>
         </>
     )
 }

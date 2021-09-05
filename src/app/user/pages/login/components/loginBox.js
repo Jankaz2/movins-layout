@@ -29,7 +29,7 @@ const LoginBox = (props) => {
         age: '',
         password: '',
         passwordConfirmation: '',
-        role: 'USER'
+        role: 'ROLE_USER'
     })
 
     const [registerInputLength, setRegisterInputLength] = useState(false)
@@ -157,7 +157,7 @@ const LoginBox = (props) => {
             age: ageRef.current.value,
             password: passwordRegisterRef.current.value,
             passwordConfirmation: passwordConfirmationRef.current.value,
-            role: 'USER'
+            role: 'ROLE_USER'
         }
 
         const response = await fetch(BASE_URL + "/users/register", {
