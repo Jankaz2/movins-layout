@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {DataContext} from "../../../../utils/store/appContext";
 import MyAccountScss from "../styles/myAccount.scss"
-import {MdPerson} from 'react-icons/md'
+import {MdPerson, MdHome} from 'react-icons/md'
 import useWindowSize from "../../../../utils/hooks/useWindowSize";
 
 const MyAccount = () => {
@@ -120,13 +120,21 @@ const MyAccount = () => {
                 <h2 className='my-account__text heading-tertiary__blue'>My account <span
                     className='my-account__person-icon'><MdPerson/></span></h2>
                 <ul className='my-account__options'>
+                    {
+                        size.width <= 600 &&
+                        <li className=''
+                            onClick={() => history.replace('/')}
+                        ><span className='my-account__options--item--icon'><MdHome/></span>
+                        </li>
+                    }
+
                     <li className='my-account__options--item'
                         onClick={() => {
                             setShowEntryMessage(false)
                             setShowUserData(false)
                             setShowTickets(true)
                         }}
-                    >My tickets
+                    >{size.width > 600 ? 'My tickets' : 'Tickets'}
                     </li>
 
                     <li className='my-account__options--item'
@@ -135,19 +143,22 @@ const MyAccount = () => {
                             setShowTickets(false)
                             setShowUserData(true)
                         }}
-                    >My data
+                    >{size.width > 600 ? 'My Data' : 'Data'}
                     </li>
 
-                    <li className={`my-account__options--item${size.width > 600 ? '--home' : ''}`}
-                        onClick={() => history.replace('/')}
-                    >Home
-                    </li>
+                    {
+                        size.width > 600 &&
+                        <li className='my-account__options--item--home'
+                            onClick={() => history.replace('/')}
+                        >Home
+                        </li>
+                    }
 
                     {
                         userData.role === 'ROLE_ADMIN' &&
                         <li className='my-account__options--item'
                             onClick={() => history.push('/admin')}
-                        >Admin panel
+                        >Admin
                         </li>
                     }
                 </ul>

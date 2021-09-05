@@ -38,7 +38,7 @@
     @include respond(phone) {
       position: fixed;
       z-index: 1000;
-      padding: 1rem 1rem;
+      padding: .8rem 1rem;
     }
   }
 
@@ -79,6 +79,14 @@
       &:hover {
         cursor: pointer;
         border-bottom: 2px solid $color-pink;
+      }
+
+      &--icon {
+        color: $color-white;
+        transform: translateY(-.5rem);
+        display: block;
+        font-size: 3rem;
+        float: left;
       }
     }
 
