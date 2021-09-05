@@ -22,10 +22,19 @@ const AdminPage = (props) => {
     const [showCreateMovie, setShowCreateMovie] = useState(false)
     const [userData, setUserData] = useState({})
     const userId = localStorage.getItem('id')
-    const {setChange} = useContext(DataContext)
+    const {setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
 
     const loadUserById = async () => {
-        const response = await fetch(BASE_USERS_URL + `/${userId}`)
+        const response = await fetch(BASE_USERS_URL + `/${userId}`, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(user => {
                 setUserData(user.data)
@@ -49,7 +58,7 @@ const AdminPage = (props) => {
     }, [])
 
     return (
-        userData.role === 'ADMIN' ?
+        userData.role === 'ROLE_ADMIN' ?
             <div className='admin-page'>
               <span className='cinema__page--back'
                     onClick={() => props.history.goBack()}

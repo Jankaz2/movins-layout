@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Loading} from 'react-loading-dot'
 import LoadingPageScss from '../styles/loadingPage.scss'
 

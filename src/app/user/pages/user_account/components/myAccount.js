@@ -48,7 +48,15 @@ const MyAccount = () => {
     }
 
     const loadUserTickets = async () => {
-        const response = await fetch(BASE_TICKETS_URL + `/${userId}`)
+        const response = await fetch(BASE_TICKETS_URL + `/${userId}`, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(tickets => {
                 setTickets(tickets.data)
@@ -59,7 +67,15 @@ const MyAccount = () => {
     }
 
     const loadPurchasedTickets = async () => {
-        const response = await fetch(BASE_USERS_URL + `/purchase/${userId}`)
+        const response = await fetch(BASE_USERS_URL + `/purchase/${userId}`, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(number => {
                 setPurchasedTickets(number.data)
@@ -123,7 +139,7 @@ const MyAccount = () => {
                     >Home
                     </li>
                     {
-                        userData.role === 'ADMIN' &&
+                        userData.role === 'ROLE_ADMIN' &&
                         <li className='my-account__options--item'
                             onClick={() => history.push('/admin')}
                         >Admin panel

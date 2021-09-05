@@ -3,7 +3,8 @@ import ObjectOptions from './objectOptions'
 import React, {useState, useContext, useEffect} from 'react'
 
 const ShowAllCinemasPopup = (props) => {
-    const {cinemas, setCinemas, change, setChange} = useContext(DataContext)
+    const {cinemas, setChange} = useContext(DataContext)
+
     const [showOptions, setShowOptions] = useState(false)
     const [coordinates, setCoordinates] = useState({left: "", top: ""})
     const [cinemaInfoToDelete, setCinemaInfoToDelete] = useState({id: 0, name: "", city: ""})

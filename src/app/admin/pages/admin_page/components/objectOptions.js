@@ -10,12 +10,19 @@ const ObjectOptions = props => {
     const [deleteStatement, setDeleteStatement] = useState(false)
     const [deleteCinemaResponse, setDeleteCinemaResponse] = useState({correct: false, error: false})
     const [deleteUserResponse, setDeleteUserResponse] = useState({correct: false, error: false})
-    const {setChange} = useContext(DataContext)
-    console.log(props.showOptions)
-    console.log(props.showUserOptions)
+    const {setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
+
     const deleteCinema = async (cinemaId) => {
-        const response = await fetch(BASE_CINEMA_URL + `/admin/${cinemaId}`,
-            {method: 'DELETE'})
+        const response = await fetch(BASE_CINEMA_URL + `/admin/${cinemaId}`, {
+            method: 'DELETE',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
 
         if (!response.ok) {
             setDeleteCinemaResponse({error: true})
@@ -27,8 +34,15 @@ const ObjectOptions = props => {
     }
 
     const deleteUser = async (userId) => {
-        const response = await fetch(BASE_USERS_URL + `/admin/${userId}`,
-            {method: 'DELETE'})
+        const response = await fetch(BASE_USERS_URL + `/admin/${userId}`, {
+            method: 'DELETE',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
 
         if (!response.ok) {
             setDeleteUserResponse({error: true})

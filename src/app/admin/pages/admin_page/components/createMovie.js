@@ -19,10 +19,19 @@ const CreateMovie = (props) => {
     const [cinemaRooms, setCinemaRooms] = useState([])
     const [cinemaRoomData, setCinemaRoomData] = useState({name: '', id: null})
 
-    const {change, setChange} = useContext(DataContext)
+    const {change, setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
 
     const loadCinemaRooms = async () => {
-        await fetch(BASE_CINEMA_URL + '/rooms')
+        await fetch(BASE_CINEMA_URL + '/rooms', {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(cinemaRooms => {
                 setCinemaRooms(cinemaRooms.data)
@@ -47,8 +56,11 @@ const CreateMovie = (props) => {
     const addMovie = async (movie, cinemaRoomId) => {
         const response = await fetch(BASE_CINEMA_URL + `/movies/admin/${cinemaRoomId}`, {
             method: 'POST',
+            withCredentials: true,
+            credentials: 'include',
             body: JSON.stringify(movie),
             headers: {
+                'Authorization': bearer,
                 'Content-Type': 'application/json'
             }
         })

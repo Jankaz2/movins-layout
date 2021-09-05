@@ -30,13 +30,15 @@ const AddCinemaPopup = (props) => {
         nameFocused: false, rowsFocused: false, placesFocused: false
     })
 
-    const {setChange} = useContext(DataContext)
+    const {setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
 
     const addCinema = async (cinema) => {
         const response = await fetch(BASE_CINEMA_URL + '/admin', {
             method: 'POST',
             body: JSON.stringify(cinema),
             headers: {
+                'Authorization': bearer,
                 'Content-Type': 'application/json'
             }
         })

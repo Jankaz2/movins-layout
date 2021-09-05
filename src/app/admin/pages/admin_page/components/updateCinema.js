@@ -6,8 +6,10 @@ import {ImHappy, ImSad} from "react-icons/im";
 const UpdateCinema = props => {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
 
+    const {cinemas, setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
+
     const [updateCinemaResponse, setUpdateCinemaResponse] = useState({correct: false, error: false})
-    const {cinemas, setChange} = useContext(DataContext)
     const [cinemaName, setCinemaName] = useState({name: ""})
     const [selectCinemaName, setSelectCinemaName] = useState("")
     const [address, setAddress] = useState(
@@ -26,8 +28,11 @@ const UpdateCinema = props => {
     const updateCinema = async (name, cinema) => {
         const response = await fetch(BASE_CINEMA_URL + `/admin/${name}`, {
             method: 'PUT',
+            withCredentials: true,
+            credentials: 'include',
             body: JSON.stringify(cinema),
             headers: {
+                'Authorization': bearer,
                 'Content-Type': 'application/json'
             }
         })

@@ -30,8 +30,18 @@ const BuyTicketSection = (props) => {
     const {setChange, authContextValue} = useContext(DataContext)
     const userId = authContextValue.id
 
+    const bearer = 'Bearer ' + authContextValue.refreshToken
+
     const loadSeats = async () => {
-        await fetch(BASE_TICKET_URL)
+        await fetch(BASE_TICKET_URL, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(tickets => {
                 tickets.data.forEach(newSeat => setBookedSeats(old => [...old, newSeat]))
@@ -90,8 +100,11 @@ const BuyTicketSection = (props) => {
         for await (const ticket of tickets) {
             const response = await fetch(BASE_TICKET_URL, {
                 method: 'POST',
+                withCredentials: true,
+                credentials: 'include',
                 body: JSON.stringify(ticket),
                 headers: {
+                    'Authorization': bearer,
                     'Content-Type': 'application/json'
                 }
             })

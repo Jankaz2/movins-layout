@@ -12,7 +12,9 @@ const AddCinemaRoomToCinema = (props) => {
         rows: false,
         places: false
     })
-    const {cinemas, setChange} = useContext(DataContext)
+    const {cinemas, setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
+
     const [cinemaRoom, setCinemaRoom] = useState({
         name: "", rows: "", places: ""
     })
@@ -59,15 +61,17 @@ const AddCinemaRoomToCinema = (props) => {
     }
 
     const addCinemaRoom = async (cinemaRoom, cinemaName) => {
-        console.log(cinemaRoom)
         const cinemaRooms = []
         cinemaRooms.push(cinemaRoom)
 
         const response = await fetch(BASE_CINEMA_URL + `/admin/${cinemaName}`,
             {
                 method: 'PATCH',
+                withCredentials: true,
+                credentials: 'include',
                 body: JSON.stringify(cinemaRooms),
                 headers: {
+                    'Authorization': bearer,
                     'Content-Type': 'application/json; charset=UTF-8'
                 }
             })

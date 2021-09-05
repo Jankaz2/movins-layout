@@ -4,7 +4,10 @@ import ObjectOptions from "./objectOptions";
 
 const ShowAllUsersPopup = (props) => {
     const BASE_USERS_URL = 'http://localhost:5000/users'
-    const {change, setChange} = useContext(DataContext)
+
+    const {change, setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
+
     const [users, setUsers] = useState([])
     const [showUserOptions, setShowUserOptions] = useState(false)
     const [coordinates, setCoordinates] = useState({left: "", top: ""})
@@ -36,7 +39,15 @@ const ShowAllUsersPopup = (props) => {
     }
 
     const loadData = async () => {
-        await fetch(BASE_USERS_URL)
+        await fetch(BASE_USERS_URL, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(users => {
                 setUsers(users.data)

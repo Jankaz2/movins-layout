@@ -5,7 +5,9 @@ import {ImHappy, ImSad} from "react-icons/im";
 const AddNewAdminAccountPopup = (props) => {
     const BASE_USER_URL = 'http://localhost:5000/users'
 
-    const {setChange} = useContext(DataContext)
+    const {setChange, authContextValue} = useContext(DataContext)
+    const bearer = 'Bearer ' + authContextValue.refreshToken
+
     const [addAdminAccountResponse, setAddAdminAccountResponse] = useState({correct: false, error: false})
     const [userData, setUserData] = useState({
         username: '',
@@ -26,8 +28,11 @@ const AddNewAdminAccountPopup = (props) => {
     const createAdminAccount = async (user) => {
         const response = await fetch(BASE_USER_URL + '/register', {
             method: 'POST',
+            withCredentials: true,
+            credentials: 'include',
             body: JSON.stringify(user),
             headers: {
+                'Authorization': bearer,
                 'Content-Type': 'application/json'
             }
         })

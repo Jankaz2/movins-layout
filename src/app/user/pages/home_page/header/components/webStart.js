@@ -1,7 +1,6 @@
 import {useHistory} from "react-router-dom";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {DataContext} from "../../../../../utils/store/appContext";
-import {FaSearch} from "react-icons/fa";
 import Select from "react-select";
 import WebStartScss from '../styles/webstart.scss'
 
