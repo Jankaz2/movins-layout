@@ -1,10 +1,10 @@
 # Movins
 
 ## Table of contents :notebook:
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Installation](#installation)
-* [Graphical Representation](#pictures)
+* [General info](#general-info-information_source)
+* [Technologies](#technologies-computer)
+* [Installation](#installation-hammer)
+* [Graphical Representation](#pictures-framed_picture)
 ***
 
 ## General info :information_source:
