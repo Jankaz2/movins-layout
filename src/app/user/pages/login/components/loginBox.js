@@ -326,7 +326,7 @@ const LoginBox = (props) => {
                             !isOkLogin &&
                             <div className='error-statement'>
                                 <div className='error-statement__top-section'>
-                                    <h3 className='heading-tertiary'>Wrong email or login</h3>
+                                    <h3 className='heading-tertiary'>Wrong login or password</h3>
                                     <span className='error-statement__icon'><ImSad/></span>
                                 </div>
                                 <div className='error-statement__bottom-section'>
