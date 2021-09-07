@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react"
 import BuyTicketSection from "./buyTicketPopup";
 import {DataContext} from "../../../../../utils/store/appContext";
+import {ImSad} from "react-icons/im";
 
 function Cinema(props) {
     const BASE_CINEMA_URL = 'http://localhost:5000/cinema'
@@ -17,6 +18,7 @@ function Cinema(props) {
         seance: null,
         ticketPrice: 0
     })
+    const [isLoggedInError, setIsLoggedInError] = useState(false)
 
     const showOnClick = () => setShowBuyTicketSection(true)
     const hideOnClick = () => setShowBuyTicketSection(false)
@@ -139,13 +141,18 @@ function Cinema(props) {
                                                         <button
                                                             className='buy__ticket--section__btn'
                                                             onClick={() => {
-                                                                setTransferData({
-                                                                    rows: seance.cinemaRoom.rows,
-                                                                    places: seance.cinemaRoom.places,
-                                                                    seance: seance,
-                                                                    ticketPrice: ticketPrice
-                                                                })
-                                                                showOnClick()
+                                                                if (authContextValue.isLoggedIn) {
+                                                                    setTransferData({
+                                                                        rows: seance.cinemaRoom.rows,
+                                                                        places: seance.cinemaRoom.places,
+                                                                        seance: seance,
+                                                                        ticketPrice: ticketPrice
+                                                                    })
+
+                                                                    showOnClick()
+                                                                } else {
+                                                                    setIsLoggedInError(true)
+                                                                }
                                                             }}>
                                                             buy ticket
                                                         </button>
@@ -178,6 +185,22 @@ function Cinema(props) {
                     }
                 </ul>
                 {loader}
+                {
+                    isLoggedInError &&
+                    <div className='error-statement'>
+                        <div className='error-statement__top-section'>
+                            <h3 className='heading-tertiary'>You need to be logged in to buy the ticket</h3>
+                            <span className='error-statement__icon'><ImSad/></span>
+                        </div>
+                        <div className='error-statement__bottom-section'>
+                            <button
+                                onClick={() => setIsLoggedInError(false)}
+                                className='error-statement__btn'>
+                                Try again
+                            </button>
+                        </div>
+                    </div>
+                }
             </section>
         </div>
     )

@@ -249,10 +249,7 @@ const BuyTicketSection = (props) => {
                     buyingError &&
                     <div className='error-statement'>
                         <div className='error-statement__top-section'>
-                            <h3 className='heading-tertiary'>{`${
-                                authContextValue.isLoggedIn
-                                    ? 'Something went wrong'
-                                    : 'You need to be logged in to buy the ticket'}`}</h3>
+                            <h3 className='heading-tertiary'>Something went wrong</h3>
                             <span className='error-statement__icon'><ImSad/></span>
                         </div>
                         <div className='error-statement__bottom-section'>
