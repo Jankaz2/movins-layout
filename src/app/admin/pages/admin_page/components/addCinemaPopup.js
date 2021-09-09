@@ -34,7 +34,7 @@ const AddCinemaPopup = (props) => {
     const bearer = 'Bearer ' + authContextValue.refreshToken
 
     const addCinema = async (cinema) => {
-        const response = await fetch(BASE_CINEMA_URL + '/admin', {
+        const response = await fetch(BASE_CINEMA_URL + '/admin/create', {
             method: 'POST',
             body: JSON.stringify(cinema),
             headers: {
