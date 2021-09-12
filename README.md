@@ -2,6 +2,7 @@
 
 ## Table of contents :notebook:
 * [General info](#general-info-information_source)
+* [Usecases](#usecases-briefcase)
 * [Technologies](#technologies-computer)
 * [Installation](#installation-hammer)
 * [Graphical Representation](#pictures-framed_picture)
@@ -19,6 +20,24 @@ I decided to create this application to better understand the concept of commerc
 programs and get better at `React` library. I also mastered `SASS` and `HTML`  
 
 ***
+
+## Usecases :briefcase:
+As an **user** you are able to:
+ - reviewing cinemas list, their cinema rooms and seances,
+ - order ticket,
+ - access to history of tickets that you purchased.
+
+As an **admin** you are able to:
+ - do all of the normal user possibilities
+ - adding new cinemas,
+ - reviewing users list,
+ - cinema modification,
+ - creating new admin account,
+ - adding cinema room to existing cinema.
+ - delete cinema or user
+
+***
+
 ## Technologies :computer:
 
 - JavaScript
