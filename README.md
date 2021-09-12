@@ -25,7 +25,7 @@ programs and get better at `React` library. I also mastered `SASS` and `HTML`
 As an **user** you are able to:
  - reviewing cinemas list, their cinema rooms and seances,
  - order ticket,
- - access to history of tickets that you purchased.
+ - access to history of tickets that you bought.
 
 As an **admin** you are able to:
  - do all of the normal user possibilities
