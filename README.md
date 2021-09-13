@@ -90,7 +90,7 @@ that this cinema currently shows.
 ### Buy ticket
 
 The final step is to order your ticket by choosing one of free places
-(you need to be logged in to see which are already booked).  
+(you need to be logged in to see which seats are already booked).  
 
 ![buy-ticket](images-readme/buy-ticket.png)
 
