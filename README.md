@@ -45,6 +45,7 @@ As an **admin** you are able to:
 - Webpack 5.51.1
 - SASS 1.38.0
 - HTML (JSX)
+- AWS S3
 
 ***
 
